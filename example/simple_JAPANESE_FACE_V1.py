@@ -27,7 +27,7 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict =  Initialize('EFFICIENTNETV2_ARCFACE_MODEL', 'info').initialize()
+CONFIG: Dict =  Initialize('JAPANESE_FACE_V1_MODEL', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.

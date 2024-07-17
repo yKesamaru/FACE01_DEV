@@ -2,6 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
+⚡️ オープンソース
 ⚡️ 超高速認識
 ⚡️ 多くの便利なメソッド
 ⚡️ 豊富で包括的なドキュメント
@@ -9,7 +10,7 @@ FACE01 -- さあ、始めましょう！
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v2.2.02-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v3.0-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_SAMPLE)
 
 ![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
@@ -49,8 +50,9 @@ Audrey Hepburn
 
 ## About FACE01
 
-✨ FACE01 は、様々な機能を統合し、**Python** から呼び出すことができる **顔認証ライブラリ** です。
+✨ `FACE01`は、様々な機能を統合し、**Python**から呼び出すことができる**日本人の顔に最適化された顔学習モデルを含む、オープンソースの顔認証ライブラリ**です。
 
+- 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
   - `JAPANESE FACE V1` は日本人の顔認証に特化したモデルです。
 - **10,000人以上**の顔データからリアルタイムで顔認証が可能です
@@ -71,7 +73,7 @@ Audrey Hepburn
 > - 商用利用にあたっては別途ライセンスが必要です。
 > - YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
 >   - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](docs/YouTube_license.md)をご参照ください。
-> - このリポジトリには`UBUNTU 22.04`用の`FACE01`サンプルが含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
+> - このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
 
 ---
 
@@ -162,6 +164,9 @@ See [here](docs/example_doc.md).
 
 ## Update
 
+- 🔖 v3.0
+  - オープンソースとして公開しました。
+  - `LICENSE`を必ずご確認ください。
 - 🔖 v2.2.02
   - `pyproject.toml`を追加。
   - `./example/*.py`について修正の追加。
