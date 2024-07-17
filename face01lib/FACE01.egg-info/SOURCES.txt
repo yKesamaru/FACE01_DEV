@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+face01lib/FACE01.egg-info/PKG-INFO
+face01lib/FACE01.egg-info/SOURCES.txt
+face01lib/FACE01.egg-info/dependency_links.txt
+face01lib/FACE01.egg-info/requires.txt
+face01lib/FACE01.egg-info/top_level.txt
+face01lib/models/__init__.py

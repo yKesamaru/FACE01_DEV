@@ -1,0 +1,13 @@
+share
+lib*
+include
+bin
+.vscode
+dlib*
+output
+__pycache__
+pyvenv.cfg
+npKnown.npz
+biyouseikei.mp4
+qrcode.svg
+build
