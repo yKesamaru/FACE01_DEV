@@ -3,9 +3,13 @@
 <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
 
 ⚡️ オープンソース
-⚡️ 超高速認識
+
+⚡️ 日本人の顔に最適化された顔学習モデル
+
 ⚡️ 多くの便利なメソッド
+
 ⚡️ 豊富で包括的なドキュメント
+
 FACE01 -- さあ、始めましょう！
 
 ___
@@ -13,7 +17,7 @@ ___
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v3.0-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_SAMPLE)
 
-![](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
+![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
 </div>
 
@@ -38,12 +42,12 @@ Audrey Hepburn
   - [その他](#その他)
 - [Install](#install)
   - [INSTALL\_FACE01.sh](#install_face01sh)
-  - [Docker](#docker)
-- [モジュールのインストール](#モジュールのインストール)
+  - [Dockerを使用したい場合](#dockerを使用したい場合)
+  - [モジュールのインストールについて](#モジュールのインストールについて)
   - [Pythonのパスを設定する](#pythonのパスを設定する)
 - [Example](#example)
 - [Document](#document)
-- [Configuration](#configuration)
+- [設定ファイル: config.ini](#設定ファイル-configini)
 - [Update](#update)
 - [Acknowledgments](#acknowledgments)
 - [References](#references)
@@ -52,7 +56,7 @@ Audrey Hepburn
 
 ## About FACE01
 
-✨ `FACE01`は、様々な機能を統合し、**Python**から呼び出すことができる**日本人の顔に最適化された顔学習モデルを含む、オープンソースの顔認証ライブラリ**です。
+✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
 
 - 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
@@ -84,12 +88,13 @@ Audrey Hepburn
 - YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
   - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](docs/YouTube_license.md)をご参照ください。
 - このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
+- JAPANESE FACE（日本人に最適化された顔学習モデル）だけを使用したい場合は、[FACE01_trained_models](https://github.com/yKesamaru/FACE01_trained_models)リポジトリをご使用ください。
 
 ---
 
 ## Install
 
-Setting up your FACE01 develop environment is really easy !
+FACE01開発環境のセッティングは本当に簡単です！
 
 ### INSTALL_FACE01.sh
 現在の環境に直接`FACE01`をインストールするには、`INSTALL_FACE01.sh`スクリプトを実行します。
@@ -102,14 +107,18 @@ bash -c ./INSTALL_FACE01.sh
 
 See [here](docs/Installation.md).
 
-### Docker
-一番簡単で環境を汚さない方法は、`Docker`を使用することです。
-🐳 The easiest way to use Docker is to pull the image.
+これで開発環境が整いました！
+
+---
+
+### Dockerを使用したい場合
+🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
+
 See [here](docs/docker.md).
 
 If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
 
-## モジュールのインストール
+### モジュールのインストールについて
 `INSTALL_FACE01.sh`にはモジュールのインストールコマンドが記述されています。
 具体的には以下のコードです。
 ```bash
@@ -137,12 +146,14 @@ export PYTHONPATH=$PYTHONPATH:/path/to/your/project/FACE01_IOT_dev
 ```
 `/path/to/your/project/`部分は個々の環境で修正してください。
 
+---
 
 ## Example
 `example`フォルダには、様々なスクリプト例が収録されています。
 (全てのスクリプトが現在のバージョンに対応しているわけではないことに注意してください)
 
-Let's try *step-by-step* examples.
+ステップ・バイ・ステップでEXAMPLEを試してみましょう！
+
 See [here](docs/example_doc.md).
 
 <div>
@@ -156,19 +167,19 @@ See [here](docs/example_doc.md).
 
 ## Document
 
-- 🧑‍💻 [Step-by-step to use FACE01 library](https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/example_doc.md#step-by-step-to-use-face01-library)
-  - For beginner
+- 🧑‍💻 [Step-by-step to use FACE01 library](docs/example_doc.md#step-by-step-to-use-face01-library)
+  - 初心者向け
 
     <img src="docs/img/step-by-step.png" width="400px" >
 
 - 🧑‍💻 [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_SAMPLE/index.html)
-  - Comprehensive resource for intermediates
+  - 中級者以上向けの包括的なリソース
 
     <img src="docs/img/document.png" width="400px" >
 
-## Configuration
+## 設定ファイル: config.ini
 
-- Highly flexible, inheritable and easy-to-use configuration file: config.ini
+- 高い柔軟性を備えた使いやすい設定ファイル: config.ini
   See [here](docs/config_ini.md).
 
 
