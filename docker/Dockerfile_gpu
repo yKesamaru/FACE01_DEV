@@ -1,0 +1,97 @@
+FROM nvidia/cuda:11.0.3-base-ubuntu20.04
+LABEL maintainer="yKesamkaoninsho.com>"
+
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN sed -i "s@# deb http://archive.canonical.com/ubuntu focal partner@deb http://archive.canonical.com/ubuntu focal partner@" /etc/apt/sources.list
+RUN apt-get update \
+    && apt-get install -y \
+	software-properties-common \
+	apt-utils \
+	sudo \
+	supervisor \
+    build-essential \
+    cmake \
+    ffmpeg \
+    fonts-mplus \
+    git \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libx11-dev \
+    python3-dev \
+    python3-tk \
+    python3-pkg-resources \
+    python3-venv \
+    wget \
+	cuda \
+	libcublas-11-7 \
+	libcublas-dev-11-7 \
+	libcudnn8 \
+	libcudnn8-dev \
+	liblapack-dev \
+	libopenblas-dev \
+	nvidia-cuda-toolkit \
+    language-pack-ja \
+    fonts-noto-cjk \
+    vim \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+	&& rm -rf /var/lib/apt/lists/*
+
+# configure
+RUN locale-gen ja_JP.UTF-8
+ENV LANG=ja_JP.UTF-8
+ENV TZ=Asia/Tokyo
+# add user
+ARG DOCKER_UID=1000
+ARG DOCKER_USER=docker
+ARG DOCKER_PASSWORD=docker
+RUN useradd -m \
+  --uid ${DOCKER_UID} --groups sudo,video --shell /bin/bash ${DOCKER_USER} \
+  && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd
+
+WORKDIR /home/${DOCKER_USER}
+RUN chown -R ${DOCKER_USER} ./
+USER ${DOCKER_USER}
+
+# Install FACE01
+RUN mkdir /home/${DOCKER_USER}/FACE01_SAMPLE
+WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/
+
+COPY face01lib /home/${DOCKER_USER}/FACE01_SAMPLE/face01lib
+COPY output /home/${DOCKER_USER}/FACE01_SAMPLE/output
+COPY noFace /home/${DOCKER_USER}/FACE01_SAMPLE/noFace
+COPY images /home/${DOCKER_USER}/FACE01_SAMPLE/images
+COPY requirements.txt /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY config.ini /home/${DOCKER_USER}/FACE01_SAMPLE/
+
+## Folder newly prepared from v1.4.09
+COPY docs /home/${DOCKER_USER}/FACE01_SAMPLE/docs
+COPY example /home/${DOCKER_USER}/FACE01_SAMPLE/example
+COPY tests /home/${DOCKER_USER}/FACE01_SAMPLE/tests
+COPY assets /home/${DOCKER_USER}/FACE01_SAMPLE/assets
+
+## Folders and files obsolete from v1.4.09
+# COPY FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+# COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
+# COPY *.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
+
+COPY npKnown.npz /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
+RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
+COPY preset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/preset_face_images
+
+COPY docker/Docker_INSTALL_FACE01.sh /home/${DOCKER_USER}/FACE01_SAMPLE/
+WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
+RUN echo ${DOCKER_PASSWORD} | sudo -S chown ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
+    && chmod +x /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
+    && /bin/bash -c /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01.sh \
+
+# `--clean` see bellow
+# [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
