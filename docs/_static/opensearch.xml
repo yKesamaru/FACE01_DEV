@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>FACE01</ShortName>
+  <Description>Search FACE01 2.1.05 documentation</Description>
+  <InputEncoding>utf-8</InputEncoding>
+  <Url type="text/html" method="get"
+       template="https://github.com/yKesamaru/FACE01_SAMPLE/tree/master/search.html?q={searchTerms}"/>
+  <LongName>FACE01 2.1.05 documentation</LongName>
+  <Image height="16" width="16" type="image/x-icon">https://github.com/yKesamaru/FACE01_SAMPLE/tree/master/https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico</Image>
+  
+</OpenSearchDescription>
