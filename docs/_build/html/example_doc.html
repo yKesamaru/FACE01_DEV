@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step-by-step to use FACE01 library &mdash; FACE01_DEV 3.3.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=257749b6"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within FACE01_DEV 3.3.01 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Functions tutorial" href="functions.html" />
+    <link rel="prev" title="To install Docker" href="docker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01_DEV
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ユーザーガイド</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install_docker.html">Install Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YouTube_license.html">YouTube使用ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="academic.html">日本のAI教育を支援する、顔認識ライブラリ<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の提供について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark_CUI.html">Want to benchmark?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_docker_image.html">Build Docker image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch_telop.html">Setting ‘telop’ and ‘logo’ images which you’re company’s.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch_telop.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html">About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html#i-note">ℹ️: Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html#example-and-explain-each-items">Example and explain each items.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display_GUI_win.html">If you want to display GUI window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.DLIB_USE_CUDA.html">What to do when dlib.DLIB_USE_CUDA is False</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">To install Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html#pull-docker-image">Pull Docker image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html#build-docker-image">Build Docker image</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Step-by-step to use FACE01 library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#checks-you-must-pass">Checks you must pass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-face-images"><span class="xref myst">Register face images</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#activate-virtual-python-mode">activate virtual python mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-vim-installed">Check vim installed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#simple-flow-for-using-face01"><span class="xref myst">Simple flow for using FACE01</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#simple-face-recognition"><span class="xref myst">Simple face recognition</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#display-gui-window"><span class="xref myst">Display GUI window</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#display-telop-and-logo-images-which-you-re-company-s"><span class="xref myst">Display ‘telop’ and ‘logo’ images which you’re company’s.</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#want-to-benchmark"><span class="xref myst">Want to benchmark?</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#example-list">Example list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#troubleshooting-thinking">Troubleshooting:thinking:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cuda-not-working">CUDA not working</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-to-do-when-dlib-dlib-use-cuda-is-false">What to do when dlib.DLIB_USE_CUDA is False</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html">💥 This document is not used!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#more-functions-tutorial">More functions tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#preparation">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#dlib-api-class"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#core-class"><code class="docutils literal notranslate"><span class="pre">Core</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#load-preset-image"><code class="docutils literal notranslate"><span class="pre">load_preset_image</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#return-anti-spoof-experimental"><code class="docutils literal notranslate"><span class="pre">return_anti_spoof</span></code> (Experimental)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#vidcap-class"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="register_faces.html">Register face images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reinstall_gpu.html">Remove all cuda lib and re-install method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">If you want to get only face recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_flow.html">Simple flow for using FACE01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinxでのドキュメント作成手順</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FACE01_DEV</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Step-by-step to use FACE01 library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example_doc.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="step-by-step-to-use-face01-library">
+<h1>Step-by-step to use FACE01 library<a class="headerlink" href="#step-by-step-to-use-face01-library" title="Link to this heading"></a></h1>
+<p><strong>Welcome to FACE01 world!</strong></p>
+<p>In this article, I will introduce the necessary knowledge and techniques to create an application that uses face recognition using FACE01 with an example program.</p>
+<p>Are you ready?</p>
+<p>Let’s check the <strong>checks you must pass</strong> as step. 1.</p>
+<!-- TOC
+1. [Step-by-step to use FACE01 library](#step-by-step-to-use-face01-library)
+   1. [Checks you must pass](#checks-you-must-pass)
+   2. [Register face images](#register-face-images)
+   3. [activate virtual python mode](#activate-virtual-python-mode)
+   4. [Check vim installed](#check-vim-installed)
+2. [Simple flow for using FACE01](#simple-flow-for-using-face01)
+3. [Simple face recognition](#simple-face-recognition)
+4. [Display GUI window](#display-gui-window)
+5. [Display 'telop' and 'logo' images which you're company's.](#display-telop-and-logo-images-which-youre-companys)
+6. [Want to benchmark?](#want-to-benchmark)
+7. [Example list](#example-list)
+8. [Troubleshooting:thinking:](#troubleshootingthinking)
+   1. [CUDA not working](#cuda-not-working)
+   2. [What to do when dlib.DLIB\_USE\_CUDA is False](#what-to-do-when-dlibdlib_use_cuda-is-false) -->
+<section id="checks-you-must-pass">
+<h2>Checks you must pass<a class="headerlink" href="#checks-you-must-pass" title="Link to this heading"></a></h2>
+<p>✅</p>
+<ul class="simple">
+<li><p>[x] Basic operation of Python</p></li>
+<li><p>[x] Basic operation of Docker</p></li>
+<li><p>[x] Basic operation of Linux terminal</p></li>
+<li><p>[x] (If using Nvidia GPU) CUDA driver is already installed</p></li>
+</ul>
+<p>Have you checked everything?<br />
+OK! Let’s get started!</p>
+</section>
+<section id="register-face-images">
+<h2><a class="reference internal" href="register_faces.html"><span class="std std-doc">Register face images</span></a><a class="headerlink" href="#register-face-images" title="Link to this heading"></a></h2>
+<p>This article describes how to register face images.</p>
+<p>See <a class="reference internal" href="register_faces.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section id="activate-virtual-python-mode">
+<h2>activate virtual python mode<a class="headerlink" href="#activate-virtual-python-mode" title="Link to this heading"></a></h2>
+<p>Start the virtual environment using venv of the Python standard library.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># activate venv</span>
+.<span class="w"> </span>bin/activate
+</pre></div>
+</div>
+</section>
+<section id="check-vim-installed">
+<h2>Check vim installed<a class="headerlink" href="#check-vim-installed" title="Link to this heading"></a></h2>
+<p>The Docker Image comes with vim installed so you can edit <code class="docutils literal notranslate"><span class="pre">conf.ini</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check vim installed</span>
+which<span class="w"> </span>vim
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simple-flow-for-using-face01">
+<h1><a class="reference internal" href="simple_flow.html"><span class="std std-doc">Simple flow for using FACE01</span></a><a class="headerlink" href="#simple-flow-for-using-face01" title="Link to this heading"></a></h1>
+<p>It is an example of how to use FACE01, but let’s look at a simple flow.</p>
+<p>See <a class="reference internal" href="simple_flow.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simple-face-recognition">
+<h1><a class="reference internal" href="simple.html"><span class="std std-doc">Simple face recognition</span></a><a class="headerlink" href="#simple-face-recognition" title="Link to this heading"></a></h1>
+<p>Let’ try <code class="docutils literal notranslate"><span class="pre">simple.py</span></code>.
+simple.py is an example script for CUI behavior.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="simple.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="display-gui-window">
+<h1><a class="reference internal" href="display_GUI_win.html"><span class="std std-doc">Display GUI window</span></a><a class="headerlink" href="#display-gui-window" title="Link to this heading"></a></h1>
+<p>Want to display in a cool GUI window?<br />
+Try <code class="docutils literal notranslate"><span class="pre">example/display_GUI_window.py</span></code>.<br />
+See <a class="reference internal" href="display_GUI_win.html"><span class="std std-doc">here</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">display_GUI_window</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="simple.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="display-telop-and-logo-images-which-you-re-company-s">
+<h1><a class="reference internal" href="ch_telop.html"><span class="std std-doc">Display ‘telop’ and ‘logo’ images which you’re company’s.</span></a><a class="headerlink" href="#display-telop-and-logo-images-which-you-re-company-s" title="Link to this heading"></a></h1>
+<p>Do you want your window to display your company logo or something?<br />
+Of course you can!<br />
+See <a class="reference internal" href="ch_telop.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="want-to-benchmark">
+<h1><a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">Want to benchmark?</span></a><a class="headerlink" href="#want-to-benchmark" title="Link to this heading"></a></h1>
+<p>See <a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">here</span></a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-list">
+<h1>Example list<a class="headerlink" href="#example-list" title="Link to this heading"></a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Simple</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 2. Display GUI window</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">display_GUI_window</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 3. logging</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">example_logging</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 4. data structure</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">data_structure</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 5. Benchmark with CUI mode</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">benchmark_CUI</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 6. Benchmark with GUI mode</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">benchmark_GUI_window</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Other</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">aligned_crop_face</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">anti_spoof</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">distort_barrel</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">draw_datas</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">face_coordinates</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">get_encoded_data</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+<span class="o">...</span><span class="ow">and</span> <span class="n">others</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>For more information about FACE01 many Classes and methods, see <a class="reference external" href="https://ykesamaru.github.io/FACE01_SAMPLE/">FACE01 document</a>.</strong></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="troubleshooting-thinking">
+<h1>Troubleshooting:thinking:<a class="headerlink" href="#troubleshooting-thinking" title="Link to this heading"></a></h1>
+<section id="cuda-not-working">
+<h2>CUDA not working<a class="headerlink" href="#cuda-not-working" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="reinstall_gpu.html"><span class="std std-doc">Remove all cuda lib and re-install method</span></a></p>
+</section>
+<section id="what-to-do-when-dlib-dlib-use-cuda-is-false">
+<h2>What to do when dlib.DLIB_USE_CUDA is False<a class="headerlink" href="#what-to-do-when-dlib-dlib-use-cuda-is-false" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="dlib.DLIB_USE_CUDA.html"><span class="std std-doc">What to do when dlib.DLIB_USE_CUDA is False</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docker.html" class="btn btn-neutral float-left" title="To install Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functions.html" class="btn btn-neutral float-right" title="Functions tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

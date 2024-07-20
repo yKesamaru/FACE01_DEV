@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Docker image &mdash; FACE01_DEV 3.3.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=257749b6"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within FACE01_DEV 3.3.01 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setting ‘telop’ and ‘logo’ images which you’re company’s." href="ch_telop.html" />
+    <link rel="prev" title="Want to benchmark?" href="benchmark_CUI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01_DEV
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ユーザーガイド</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Install_docker.html">Install Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="YouTube_license.html">YouTube使用ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="academic.html">日本のAI教育を支援する、顔認識ライブラリ<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の提供について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark_CUI.html">Want to benchmark?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build Docker image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-face01-docker-image-with-nvidia-docker2-package">Build FACE01 docker image with nvidia-docker2 package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-face01-docker-image-without-nvidia-docker2-package">Build FACE01 docker image * <em><strong>without</strong></em> * nvidia-docker2 package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#if-you-want-to-upload-to-you-re-own-dockerhub">If you want to upload to you’re own DockerHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#check-the-completed-image">Check the completed image.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-face01-sample">Launch FACE01_SAMPLE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch_telop.html">Setting ‘telop’ and ‘logo’ images which you’re company’s.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch_telop.html#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html">About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html#i-note">ℹ️: Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_ini.html#example-and-explain-each-items">Example and explain each items.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display_GUI_win.html">If you want to display GUI window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dlib.DLIB_USE_CUDA.html">What to do when dlib.DLIB_USE_CUDA is False</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">To install Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html#pull-docker-image">Pull Docker image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker.html#build-docker-image">Build Docker image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html">Step-by-step to use FACE01 library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#simple-flow-for-using-face01"><span class="xref myst">Simple flow for using FACE01</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#simple-face-recognition"><span class="xref myst">Simple face recognition</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#display-gui-window"><span class="xref myst">Display GUI window</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#display-telop-and-logo-images-which-you-re-company-s"><span class="xref myst">Display ‘telop’ and ‘logo’ images which you’re company’s.</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#want-to-benchmark"><span class="xref myst">Want to benchmark?</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#example-list">Example list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_doc.html#troubleshooting-thinking">Troubleshooting:thinking:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html">💥 This document is not used!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#more-functions-tutorial">More functions tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#preparation">Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#dlib-api-class"><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#core-class"><code class="docutils literal notranslate"><span class="pre">Core</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#load-preset-image"><code class="docutils literal notranslate"><span class="pre">load_preset_image</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#return-anti-spoof-experimental"><code class="docutils literal notranslate"><span class="pre">return_anti_spoof</span></code> (Experimental)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_functions.html#vidcap-class"><code class="docutils literal notranslate"><span class="pre">VidCap</span></code> class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="register_faces.html">Register face images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reinstall_gpu.html">Remove all cuda lib and re-install method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">If you want to get only face recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_flow.html">Simple flow for using FACE01</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">sphinxでのドキュメント作成手順</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FACE01_DEV</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build Docker image</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/build_docker_image.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="build-docker-image">
+<h1>Build Docker image<a class="headerlink" href="#build-docker-image" title="Link to this heading"></a></h1>
+<p>If you want to build the Docker Image yourself, please refer to the article below.</p>
+<p>First, you have to clone FACE01_SAMPLE repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yKesamaru/FACE01_SAMPLE.git
+</pre></div>
+</div>
+<section id="build-face01-docker-image-with-nvidia-docker2-package">
+<h2>Build FACE01 docker image with nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-with-nvidia-docker2-package" title="Link to this heading"></a></h2>
+<p>To make image</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_SAMPLE
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
+</pre></div>
+</div>
+</section>
+<section id="build-face01-docker-image-without-nvidia-docker2-package">
+<h2>Build FACE01 docker image * <em><strong>without</strong></em> * nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-without-nvidia-docker2-package" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_SAMPLE
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_no_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_no_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
+</pre></div>
+</div>
+</section>
+<section id="if-you-want-to-upload-to-you-re-own-dockerhub">
+<h2>If you want to upload to you’re own DockerHub<a class="headerlink" href="#if-you-want-to-upload-to-you-re-own-dockerhub" title="Link to this heading"></a></h2>
+<p>Reference is <a class="reference external" href="https://docs.docker.com/docker-hub/repos/#pushing-a-docker-container-image-to-docker-hub">here</a>.
+Japanese is <a class="reference external" href="https://zenn.dev/katan/articles/1d5ff92fd809e7">here</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Built Docker Image</span>
+docker<span class="w"> </span>built<span class="w"> </span>...
+<span class="c1"># Run Docker Image</span>
+docker<span class="w"> </span>run<span class="w"> </span>...
+<span class="c1"># Confirm CONTAINER-ID</span>
+docker<span class="w"> </span>ps
+<span class="c1"># Confirm IMAGE-ID</span>
+docker<span class="w"> </span>images
+<span class="c1"># Commit container</span>
+docker<span class="w"> </span>container<span class="w"> </span>commit<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>&lt;hub-user&gt;/&lt;repo-name&gt;<span class="o">[</span>:&lt;tag&gt;<span class="o">]</span>
+<span class="c1"># Tag the Image with the repository name</span>
+docker<span class="w"> </span>tag<span class="w"> </span>&lt;image-id&gt;<span class="w"> </span>&lt;repo-name&gt;
+<span class="c1"># Docker loginr</span>
+docker<span class="w"> </span>login
+<span class="c1"># Docker push</span>
+docker<span class="w"> </span>push<span class="w"> </span>&lt;hub-user&gt;/&lt;repo-name&gt;<span class="o">[</span>:&lt;tag&gt;<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="check-the-completed-image">
+<h2>Check the completed image.<a class="headerlink" href="#check-the-completed-image" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
+REPOSITORY<span class="w">    </span>TAG<span class="w">                       </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">         </span>SIZE
+face01_gpu<span class="w">    </span><span class="m">1</span>.4.10<span class="w">                    </span>41b1d82ee908<span class="w">   </span><span class="m">7</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">   </span><span class="m">17</span>.5GB
+</pre></div>
+</div>
+</section>
+<section id="launch-face01-sample">
+<h2>Launch FACE01_SAMPLE<a class="headerlink" href="#launch-face01-sample" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>
+
+<span class="c1"># Check nvidia-smi</span>
+docker@ee44d08e933f:~/FACE01_SAMPLE$<span class="w"> </span>nvidia-smi
+Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">09</span>:07:03<span class="w"> </span><span class="m">2022</span><span class="w">       </span>
++-----------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">11</span>.7<span class="w">     </span><span class="p">|</span>
+<span class="p">|</span>-------------------------------+----------------------+----------------------+
+<span class="p">|</span><span class="w"> </span>GPU<span class="w">  </span>Name<span class="w">        </span>Persistence-M<span class="p">|</span><span class="w"> </span>Bus-Id<span class="w">        </span>Disp.A<span class="w"> </span><span class="p">|</span><span class="w"> </span>Volatile<span class="w"> </span>Uncorr.<span class="w"> </span>ECC<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Fan<span class="w">  </span>Temp<span class="w">  </span>Perf<span class="w">  </span>Pwr:Usage/Cap<span class="p">|</span><span class="w">         </span>Memory-Usage<span class="w"> </span><span class="p">|</span><span class="w"> </span>GPU-Util<span class="w">  </span>Compute<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">               </span>MIG<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="o">===============================</span>+<span class="o">======================</span>+<span class="o">======================</span><span class="p">|</span>
+<span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span>NVIDIA<span class="w"> </span>GeForce<span class="w"> </span>...<span class="w">  </span>On<span class="w">   </span><span class="p">|</span><span class="w"> </span><span class="m">00000000</span>:08:00.0<span class="w">  </span>On<span class="w"> </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span><span class="m">41</span>%<span class="w">   </span>37C<span class="w">    </span>P8<span class="w">    </span>16W<span class="w"> </span>/<span class="w"> </span>120W<span class="w"> </span><span class="p">|</span><span class="w">    </span>344MiB<span class="w"> </span>/<span class="w">  </span>6144MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">5</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
++-------------------------------+----------------------+----------------------+
+<span class="w">                                                                               </span>
++-----------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                  </span><span class="p">|</span>
+<span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                  </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">        </span>ID<span class="w">   </span>ID<span class="w">                                                   </span>Usage<span class="w">      </span><span class="p">|</span>
+<span class="p">|</span><span class="o">=============================================================================</span><span class="p">|</span>
++-----------------------------------------------------------------------------+
+
+<span class="c1"># Check files</span>
+docker@6ee18359bde8:~/FACE01_SAMPLE$<span class="w">  </span>ls
+CALL_FACE01.py<span class="w">            </span>SystemCheckLock<span class="w">  </span>dlib-19.24<span class="w">          </span>images<span class="w">   </span>lib64<span class="w">        </span>output<span class="w">              </span>requirements.txt<span class="w">  </span>test.mp4
+Docker_INSTALL_FACE01.sh<span class="w">  </span>bin<span class="w">              </span>dlib-19.24.tar.bz2<span class="w">  </span>include<span class="w">  </span>noFace<span class="w">       </span>priset_face_images<span class="w">  </span>share<span class="w">             </span>顔無し区間を含んだテスト動画.mp4
+FACE01.py<span class="w">                 </span>config.ini<span class="w">       </span>face01lib<span class="w">           </span>lib<span class="w">      </span>npKnown.npz<span class="w">  </span>pyvenv.cfg<span class="w">          </span>some_people.mp4
+
+<span class="c1"># Launch Python virtual environment (Important!)</span>
+docker@ee44d08e933f:~/FACE01_SAMPLE$<span class="w"> </span>.<span class="w"> </span>bin/activate
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="benchmark_CUI.html" class="btn btn-neutral float-left" title="Want to benchmark?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch_telop.html" class="btn btn-neutral float-right" title="Setting ‘telop’ and ‘logo’ images which you’re company’s." accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
