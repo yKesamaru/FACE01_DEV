@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.api &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.api</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.api のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1">#cython: language_level = 3</span>
+
+<span class="sd">&quot;&quot;&quot;License for the Code.</span>
+
+<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
+<span class="sd">Please refer to the separate license file for the license of the code.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">&quot;&quot;&quot;Summary.</span>
+
+<span class="sd">COPYRIGHT:</span>
+<span class="sd">    This code is based on &#39;face_recognition&#39; written by Adam Geitgey (ageitgey),</span>
+<span class="sd">    and modified by Yoshitsugu Kesamaru (yKesamaru).</span>
+
+<span class="sd">ORIGINAL AUTHOR:</span>
+<span class="sd">    - Dlib</span>
+<span class="sd">        - davisking</span>
+<span class="sd">    - face_recognition</span>
+<span class="sd">        - ageitgey</span>
+<span class="sd">    - FACE01, and api.py</span>
+<span class="sd">        - yKesamaru</span>
+
+<span class="sd">References:</span>
+<span class="sd">    - Dlib:</span>
+<span class="sd">        - https://github.com/davisking/dlib</span>
+<span class="sd">    - Dlib Python API:</span>
+<span class="sd">        - http://dlib.net/python/index.html</span>
+<span class="sd">    - dlib/python_example/face_recognition.py:</span>
+<span class="sd">        - https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</span>
+<span class="sd">    - Dlib Face Recognition Model:</span>
+<span class="sd">        - https://github.com/davisking/dlib-models</span>
+<span class="sd">    - Face Recognition:</span>
+<span class="sd">        - https://github.com/ageitgey/face_recognition</span>
+<span class="sd">    - Max-Margin Object Detection(MMOD):</span>
+<span class="sd">        - [Ja] https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83</span>
+<span class="sd">        - https://github.com/davisking/dlib-models</span>
+<span class="sd">    - Typing (numpy.typing):</span>
+<span class="sd">        - https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing</span>
+<span class="sd">    - EfficientNetV2:</span>
+<span class="sd">        - https://arxiv.org/pdf/2104.00298.pdf</span>
+<span class="sd">        - https://github.com/huggingface/pytorch-image-models</span>
+<span class="sd">    - ArcFace:</span>
+<span class="sd">        - https://arxiv.org/pdf/1801.07698.pdf</span>
+<span class="sd">    - MobileFaceNets:</span>
+<span class="sd">        - https://arxiv.org/ftp/arxiv/papers/1804/1804.07573.pdf</span>
+
+<span class="sd">NOTE:</span>
+<span class="sd">    About coordinate order...</span>
+
+<span class="sd">    - dlib: (Left, Top, Right, Bottom), called &#39;rect&#39;.</span>
+<span class="sd">    - face_recognition: (top, right, bottom, left), called &#39;css&#39;.</span>
+
+<span class="sd">    See bellow</span>
+
+<span class="sd">    https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">&quot;&quot;&quot;DEBUG: MEMORY LEAK</span>
+<span class="sd">from .memory_leak import Memory_leak</span>
+<span class="sd">m = Memory_leak(limit=2, key_type=&#39;traceback&#39;, nframe=20)</span>
+<span class="sd">m.memory_leak_analyze_start()</span>
+<span class="sd">See bellow:</span>
+<span class="sd">[Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">dlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.typing</span> <span class="k">as</span> <span class="nn">npt</span>  <span class="c1"># See [Typing (numpy.typing)](https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing)</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFile</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">ImageFile</span><span class="o">.</span><span class="n">LOAD_TRUNCATED_IMAGES</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">exit</span>
+<span class="kn">from</span> <span class="nn">traceback</span> <span class="kn">import</span> <span class="n">format_exc</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
+<span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
+<span class="kn">import</span> <span class="nn">onnx</span>
+<span class="kn">import</span> <span class="nn">onnxruntime</span> <span class="k">as</span> <span class="nn">ort</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<div class="viewcode-block" id="Dlib_api">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">Dlib_api</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dlib api.</span>
+
+<span class="sd">    Author: Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU</span>
+
+<span class="sd">    Email: y.kesamaru@tokai-kaoninsho.com</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            log_level (str, optional): Receive log level value. Defaults to &#39;info&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="c1"># Setup logger: common way</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
+        <span class="kn">import</span> <span class="nn">os.path</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="vm">__name__</span>
+        <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;COPYRIGHT: TOKAI-KAONINSHO, yKesamaru&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;FACE01: 商用利用にはライセンスが必要です&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Models</span>
+            <span class="n">Models_obj</span> <span class="o">=</span> <span class="n">Models</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to import dlib model&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">format_exc</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">get_frontal_face_detector</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_5_point_model</span> <span class="o">=</span> <span class="n">Models_obj</span><span class="o">.</span><span class="n">pose_predictor_five_point_model_location</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_predictor_5_point</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">shape_predictor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_5_point_model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cnn_face_detection_model</span> <span class="o">=</span> <span class="n">Models_obj</span><span class="o">.</span><span class="n">cnn_face_detector_model_location</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cnn_face_detector</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">cnn_face_detection_model_v1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cnn_face_detection_model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dlib_resnet_model</span> <span class="o">=</span> <span class="n">Models_obj</span><span class="o">.</span><span class="n">dlib_resnet_model_location</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dlib_resnet_face_encoder</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">face_recognition_model_v1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlib_resnet_model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1</span> <span class="o">=</span> <span class="n">Models_obj</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model_location</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model</span> <span class="o">=</span> <span class="n">onnx</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1</span><span class="p">)</span>
+        <span class="c1"># self.ort_session = ort.InferenceSession(self.JAPANESE_FACE_V1)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ort_session</span> <span class="o">=</span> <span class="n">ort</span><span class="o">.</span><span class="n">InferenceSession</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1</span><span class="p">,</span> <span class="n">providers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CUDAExecutionProvider&#39;</span><span class="p">,</span> <span class="s1">&#39;CPUExecutionProvider&#39;</span><span class="p">])</span>
+
+        
+        <span class="c1"># 署名表示</span>
+        <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model</span><span class="o">.</span><span class="n">metadata_props</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">prop</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;signature&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">prop</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Dlib_api.JAPANESE_FACE_V1_model_compute_face_descriptor">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.JAPANESE_FACE_V1_model_compute_face_descriptor">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">JAPANESE_FACE_V1_model_compute_face_descriptor</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+            <span class="n">raw_face_landmark</span><span class="p">,</span>  <span class="c1"># dlib.rectangle type.</span>
+            <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span>
+            <span class="n">_PADDING</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;EfficientNetV2とArcFaceモデルを使用して顔の特徴量を計算します。</span>
+
+<span class="sd">        この関数は、与えられた顔の画像データから、EfficientNetV2とArcFaceモデルを使用して顔の特徴量（embedding）を計算します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resized_frame (npt.NDArray[np.uint8]): リサイズされたフレームの画像データ。</span>
+<span class="sd">            raw_face_landmark (dlib.rectangle): 顔のランドマーク情報。</span>
+<span class="sd">            size (int, optional): 顔のチップのサイズ。デフォルトは224。</span>
+<span class="sd">            _PADDING (float, optional): 顔のチップを取得する際のパディング。デフォルトは0.1。</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            npt.NDArray[np.float32]: 顔の特徴量（embedding）。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_frame</span>
+        <span class="c1"># VidCap().frame_imshow_for_debug(self.resized_frame)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_face_landmark</span> <span class="o">=</span> <span class="n">raw_face_landmark</span>  <span class="c1"># dlib.rectangle type.</span>
+        <span class="c1"># print(self.raw_face_landmark)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_PADDING</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_PADDING</span>
+        
+        <span class="n">face_image_np</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">get_face_chip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_face_landmark</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_PADDING</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="c1"># face_imageをBGRからRGBに変換する</span>
+        <span class="n">face_image_rgb</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">face_image_np</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="c1"># VidCap().frame_imshow_for_debug(face_image_rgb)</span>
+
+        <span class="c1"># 入力名を取得</span>
+        <span class="n">input_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="c1"># 画像の前処理を定義</span>
+        <span class="n">mean_value</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">]</span>
+        <span class="n">std_value</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">]</span>
+        <span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span>
+                <span class="n">mean</span><span class="o">=</span><span class="n">mean_value</span><span class="p">,</span>
+                <span class="n">std</span><span class="o">=</span><span class="n">std_value</span>
+            <span class="p">)</span>
+        <span class="p">])</span>
+
+        <span class="c1"># numpy配列からPIL Imageに変換</span>
+        <span class="n">face_image_pil</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">Image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">face_image_rgb</span><span class="p">)</span>
+        
+        <span class="n">image</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">face_image_pil</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># バッチ次元を追加  # type: ignore</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">embedding</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ort_session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">{</span><span class="n">input_name</span><span class="p">:</span> <span class="n">image</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># &#39;input&#39;をinput_nameに変更</span>
+        <span class="k">return</span> <span class="n">embedding</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_rect_to_css</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a dlib &#39;rect&#39; object to a plain tuple in (top, right, bottom, left) order.</span>
+<span class="sd">        </span>
+<span class="sd">        This method used only &#39;use_pipe = False&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dlib.rectangle: dlib rect object  </span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[int,int,int,int]: Plain tuple representation of the rect in (top, right, bottom, left) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">:</span> <span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span> <span class="o">=</span> <span class="n">rect</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">top</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">right</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">bottom</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">_css_to_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">css</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">css</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a tuple in (top, right, bottom, left) order to a dlib &#39;rect&#39; object</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Tuple[int,int,int,int]: css</span>
+<span class="sd">            - Plain tuple representation of the rect in (top, right, bottom, left) order</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dlib.rectangle: &lt;class &#39;_dlib_pybind11.rectangle&#39;&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+
+
+    <span class="k">def</span> <span class="nf">_trim_css_to_bounds</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">css</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span>
+            <span class="n">image_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds_css</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">css</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_shape</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Trim &#39;css&#39; along with border.</span>
+
+<span class="sd">        Make sure a tuple in (top, right, bottom, left) order is within the bounds of the image.</span>
+<span class="sd">        This method used only &#39;use_pipe = False&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Tuple[int,int,int,int]: css</span>
+<span class="sd">            - Plain tuple representation of the rect in (top, right, bottom, left) order</span>
+
+<span class="sd">            Tuple[int,int,int]: image_shape</span>
+<span class="sd">            - numpy shape of the image array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[int,int,int,int]:  a trimmed plain tuple representation of the rect in (top, right, bottom, left) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds_css</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds_css</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">image_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds_css</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds_css</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Dlib_api.load_image_file">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.load_image_file">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">load_image_file</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;RGB&#39;</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads an image file (.jpg, .png, etc) into a numpy array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file (str): image file name or file object to load</span>
+<span class="sd">            mode (str): format to convert the image to. Only &#39;RGB&#39; (8-bit RGB, 3 channels) and &#39;L&#39; (black and white) are supported.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            npt.NDArray[np.uint8]: image contents as numpy array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_raw_face_locations</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+            <span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cnn&quot;</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an array of bounding boxes of human faces in a image.</span>
+<span class="sd">        </span>
+<span class="sd">        This method used only &#39;use_pipe = False&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            npt.NDArray[np.uint8]: resized_frame: An image</span>
+<span class="sd">            int: number_of_times_to_upsample</span>
+<span class="sd">            - How many times to upsample the image looking for faces. Higher numbers find smaller faces.</span>
+
+<span class="sd">            str: mode</span>
+<span class="sd">            - Which face detection mode to use. &quot;hog&quot; is less accurate but faster on CPUs. &quot;cnn&quot; is a more accurate deep-learning mode which is GPU/CUDA accelerated (if available). The default is &quot;hog&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[dlib.rectangle]: a list of dlib &#39;rect&#39; objects of found face locations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">number_of_times_to_upsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;cnn&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnn_face_detector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="Dlib_api.face_locations">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.face_locations">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">face_locations</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+        <span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hog&quot;</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an array of bounding boxes of human faces in a image.</span>
+<span class="sd">        </span>
+<span class="sd">        This method used only &#39;use_pipe = False&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resized_frame (npt.NDArray[np.uint8]): Resized image</span>
+<span class="sd">            number_of_times_to_upsample (int): How many times to upsample the image looking for faces. Higher numbers find smaller faces.</span>
+<span class="sd">            mode (str): Which face detection mode to use. &quot;hog&quot; is less accurate but faster on CPUs. &quot;cnn&quot; is a more accurate deep-learning mode which is GPU/CUDA accelerated (if available). The default is &quot;hog&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of tuples of found face locations in css (top, right, bottom, left) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">number_of_times_to_upsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="n">face_locations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;cnn&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_face_locations</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span>
+                <span class="p">):</span>
+                <span class="n">face_locations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_rect_to_css</span><span class="p">(</span><span class="n">face</span><span class="o">.</span><span class="n">rect</span><span class="p">),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="o">.</span><span class="n">shape</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_face_locations</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span>
+                <span class="p">):</span>
+                <span class="n">face_locations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_trim_css_to_bounds</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_rect_to_css</span><span class="p">(</span><span class="n">face</span><span class="p">),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="o">.</span><span class="n">shape</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">face_locations</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_return_raw_face_landmarks</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+        <span class="n">face_location_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;small&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">]:</span>  <span class="c1"># type: ignore</span>
+
+        <span class="n">new_face_location_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: ignore</span>
+        <span class="n">raw_face_location</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">raw_face_location</span> <span class="ow">in</span> <span class="n">face_location_list</span><span class="p">:</span>
+            <span class="n">new_face_location_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_css_to_rect</span><span class="p">(</span><span class="n">raw_face_location</span><span class="p">))</span>
+        
+        <span class="n">raw_face_landmarks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: ignore</span>
+        <span class="n">new_face_location</span><span class="p">:</span> <span class="n">dlib</span><span class="o">.</span><span class="n">rectangle</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]]</span>  <span class="c1"># type: ignore</span>
+
+        <span class="k">for</span> <span class="n">new_face_location</span> <span class="ow">in</span> <span class="n">new_face_location_list</span><span class="p">:</span>
+            <span class="n">raw_face_landmarks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pose_predictor_5_point</span><span class="p">(</span><span class="n">resized_frame</span><span class="p">,</span> <span class="n">new_face_location</span><span class="p">)</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">raw_face_landmarks</span>
+
+
+
+<div class="viewcode-block" id="Dlib_api.face_encodings">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.face_encodings">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">face_encodings</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+            <span class="n">face_location_list</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># Initial value of &#39;face_location_list&#39; is &#39;[]&#39;.</span>
+            <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;small&quot;</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given an image, return the 128-dimension face encoding for each face in the image.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resized_frame (npt.NDArray[np.uint8]): The image that contains one or more faces (=small_frame)</span>
+<span class="sd">            face_location_list (List): Optional - the bounding boxes of each face if you already know them. (=face_location_list)</span>
+<span class="sd">            num_jitters (int): How many times to re-sample the face when calculating encoding. Higher is more accurate, but slower (i.e. 100 is 100x slower)</span>
+<span class="sd">            model (str): Do not modify.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image). If deep_learning_model == 1, the size of the list is 512-dimensional face encodings, and the type is List[npt.NDArray[np.float32]]. See Issue # 19.</span>
+<span class="sd">            </span>
+<span class="sd">            Image size, it should be of size 150x150. Also cropping must be done as &#39;dlib.get_face_chip&#39; would do it.</span>
+<span class="sd">            That is, centered and scaled essentially the same way.</span>
+
+<span class="sd">        See also:</span>
+<span class="sd">            class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)</span>
+<span class="sd">                http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</span>
+<span class="sd">            compute_face_descriptor(*args, **kwargs)</span>
+<span class="sd">                http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_location_list</span><span class="p">:</span> <span class="n">List</span>  <span class="o">=</span> <span class="n">face_location_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span>  <span class="n">num_jitters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="n">_PADDING</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.25</span>  <span class="c1"># dlib学習モデル用</span>
+        <span class="n">face_encodings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">raw_face_landmarks</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_raw_face_landmarks</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_resized_frame</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">face_location_list</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_model</span>
+            <span class="p">)</span>
+
+            <span class="n">raw_face_landmark</span><span class="p">:</span> <span class="n">dlib</span><span class="o">.</span><span class="n">full_object_detection</span>  <span class="c1"># type: ignore</span>
+            <span class="n">face_landmark_ndarray</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">raw_face_landmark</span> <span class="ow">in</span> <span class="n">raw_face_landmarks</span><span class="p">:</span>
+                    <span class="c1"># face_landmark_ndarray: npt.NDArray[np.float64] = []</span>
+                    <span class="n">face_landmark_ndarray</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                        <span class="c1"># Make 128 dimensional vector</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dlib_resnet_face_encoder</span><span class="o">.</span><span class="n">compute_face_descriptor</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_resized_frame</span><span class="p">,</span>
+                            <span class="n">raw_face_landmark</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">num_jitters</span><span class="p">,</span>
+                            <span class="n">_PADDING</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="n">face_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_landmark_ndarray</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">raw_face_landmark</span> <span class="ow">in</span> <span class="n">raw_face_landmarks</span><span class="p">:</span>
+                    <span class="c1"># faces = dlib.full_object_detections()  # type: ignore</span>
+                    <span class="c1"># Make 512 dimensional vector</span>
+                    <span class="n">face_landmark_ndarray</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model_compute_face_descriptor</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_resized_frame</span><span class="p">,</span>
+                            <span class="n">raw_face_landmark</span><span class="p">,</span>
+                            <span class="n">size</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span>
+                            <span class="n">_PADDING</span><span class="o">=</span><span class="mf">0.1</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="n">face_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_landmark_ndarray</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">face_encodings</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&amp;commentPage=2)</span>
+<span class="sd">        Davis King said...</span>
+<span class="sd">        The landmarks are only used to align the face before the DNN extracts </span>
+<span class="sd">        the face descriptor. How many landmarks you use doesn&#39;t really matter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO: #27 Padding around faces, 0.25</span>
+        <span class="c1"># return [np.array(self.dlib_resnet_face_encoder.compute_face_descriptor(self.face_encodings_resized_frame, raw_landmark_set, self.num_jitters, 0.25)) for raw_landmark_set in raw_landmarks]</span>
+        <span class="c1"># 4th value (0.25) is padding around the face. If padding == 0 then the chip will</span>
+        <span class="c1"># be closely cropped around the face. Setting larger padding values will result a looser cropping.</span>
+        <span class="c1"># In particular, a padding of 0.5 would double the width of the cropped area, a value of 1.</span>
+        <span class="c1"># would triple it, and so forth.</span>
+        <span class="c1"># see bellow</span>
+        <span class="c1"># http://dlib.net/face_recognition.py.html</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;マルチスレッド化</span>
+<span class="sd">        pool = ThreadPoolExecutor()</span>
+<span class="sd">        # pool = ProcessPoolExecutor(max_workers=1)  # Error while calling cudaGetDevice(&amp;the_device_id) in file /tmp/pip-install-983gqknr/dlib_66282e4ffadf4aa6965801c6f7ff7671/dlib/cuda/gpu_data.cpp:204. code: 3, reason: initialization error</span>
+<span class="sd">        return [pool.submit(multithread, raw_landmark_set, self.face_encodings_resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+
+
+
+<div class="viewcode-block" id="Dlib_api.face_distance">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.face_distance">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">face_distance</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">face_encodings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span>
+            <span class="n">face_to_compare</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+            <span class="c1"># face_encodings: List[np.ndarray],</span>
+            <span class="c1"># face_to_compare: np.ndarray</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.</span>
+
+<span class="sd">        The distance tells you how similar the faces are.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            face_encodings (List[npt.NDArray[np.float64]]): List of face encodings to compare (=small_frame)</span>
+<span class="sd">            face_to_compare (npt.NDArray[np.float64]): A face encoding to compare against (=face_location_list)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            npt.NDArray[np.float64]: A numpy ndarray with the distance for each face in the same order as the &#39;faces&#39; array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># self.face_encodings = face_encodings</span>
+        <span class="c1"># self.face_to_compare = face_to_compare</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># return `dummy data`</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        
+        <span class="c1"># ord = None -&gt; Frobenius norm. norm for vectors is &#39;2-norm&#39;.</span>
+        <span class="c1"># See: </span>
+        <span class="c1"># document: https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html</span>
+        <span class="c1"># [全成分の二乗和のルートをフロベニウスノルムと言います。](https://manabitimes.jp/math/1284)</span>
+        <span class="c1"># &gt; フロベニウスノルムは，行列の全成分を一列に並べてベクトルとみなしたときのベクトルの長さ（2ノルム）と考えることもできます。</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">face_encodings</span> <span class="o">-</span> <span class="n">face_to_compare</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Dlib_api.cosine_similarity">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.cosine_similarity">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">cosine_similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding1</span><span class="p">,</span> <span class="n">embedding2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        cosine_similarity 特徴量ベクトルを受け取り、類似度を計算し、閾値を超えているかどうかを返す</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            embedding1 (npt.NDArray): feature vector</span>
+<span class="sd">            embedding2 (npt.NDArray): feature vector</span>
+<span class="sd">            threshold (float, optional): threshold. Defaults to 0.4.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[np.array, float]: Returns a tuple of a numpy array of booleans and the minimum cos_sim</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">max_cos_sim</span><span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">embedding2</span> <span class="o">=</span> <span class="n">embedding2</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">emb1</span> <span class="ow">in</span> <span class="n">embedding1</span><span class="p">:</span>
+            <span class="n">emb1</span> <span class="o">=</span> <span class="n">emb1</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">cos_sim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">emb1</span><span class="p">,</span> <span class="n">embedding2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">emb1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">embedding2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">cos_sim</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">True</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">False</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">))</span>
+            <span class="n">max_cos_sim</span><span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_cos_sim</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">max_cos_sim</span></div>
+
+        <span class="c1"># for emb1 in embedding1:</span>
+        <span class="c1">#     emb1 = emb1.flatten()</span>
+        <span class="c1">#     cos_sim = np.dot(emb1, embedding2) / (np.linalg.norm(emb1) * np.linalg.norm(embedding2))</span>
+        <span class="c1">#     results.append(cos_sim &gt;= threshold)</span>
+        <span class="c1">#     max_cos_sim= max(max_cos_sim, cos_sim)</span>
+        <span class="c1"># return np.array(results), max_cos_sim</span>
+
+
+
+    <span class="c1"># Percentage calculation</span>
+<div class="viewcode-block" id="Dlib_api.percentage">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.percentage">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cos_sim</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        percentage 与えられた cos_sim から類似度を計算する</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cos_sim (float): cosine similarity</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: percentage of similarity</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="c1"># BUG: Issue #25</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span> <span class="o">*</span> <span class="n">cos_sim</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">49.98</span> <span class="o">*</span> <span class="n">cos_sim</span> <span class="o">+</span> <span class="mf">73.69</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="Dlib_api.compare_faces">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.compare_faces">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">compare_faces</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">known_face_encodings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]],</span>
+            <span class="n">face_encoding_to_check</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+            <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare a list of face encodings against a candidate encoding to see if they match.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            deep_learning_model (int): 0: dlib cnn model, 1: JAPANESE_FACE_V1.onnx</span>
+<span class="sd">            known_face_encodings (List[npt.NDArray[np.float64]]): A list of known face encodings</span>
+<span class="sd">            face_encoding_to_check (npt.NDArray[np.float64]): A single face encoding to compare against the list</span>
+<span class="sd">            tolerance (float): How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A tuple of True/False values indicating which known_face_encodings match the face encoding to check, and the min distance between them.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">known_face_encodings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="n">known_face_encodings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">face_encoding_to_check</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">face_encoding_to_check</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">tolerance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">threshold</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">face_distance_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">face_distance</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">known_face_encodings</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">face_encoding_to_check</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">face_distance_list</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span>
+                <span class="c1"># All elements are &#39;False&#39; if &#39;self.min_distance&#39; is greater than &#39;self.tolerance&#39;.</span>
+                <span class="c1"># return [False] * len(face_distance_list)</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">face_distance_list</span><span class="p">),</span> <span class="kc">False</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bool_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">face_distance</span> <span class="ow">in</span> <span class="n">face_distance_list</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">&gt;=</span> <span class="n">face_distance</span><span class="p">:</span>
+                        <span class="n">bool_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">True</span><span class="p">,</span> <span class="n">face_distance</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">bool_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">False</span><span class="p">,</span> <span class="n">face_distance</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bool_list</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span>
+                <span class="c1"># bool_list: List[bool] = []</span>
+                <span class="c1">#     if self.tolerance &gt;= face_distance:</span>
+                <span class="c1">#         bool_list.append(True)</span>
+                <span class="c1">#     else:</span>
+                <span class="c1">#         bool_list.append(False)</span>
+                <span class="c1"># return np.array(bool_list), self.min_distance</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">results</span><span class="p">,</span> <span class="n">max_cos_sim</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">cosine_similarity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_encoding_to_check</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="n">max_cos_sim</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
