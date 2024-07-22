@@ -1,7 +1,6 @@
 GPUtil
 Pillow
 dlib==19.24.0
-faiss-gpu
 mediapipe
 memory-profiler
 mojimoji
@@ -16,11 +15,9 @@ pyqrcode
 qrcode
 requests
 scipy
-snakeviz
 torch
 torchvision
 tqdm
 ttkbootstrap
 typing_extensions
 urllib3
-watchdog

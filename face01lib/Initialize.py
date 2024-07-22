@@ -1,20 +1,24 @@
 #cython: language_level=3
 
-"""Load config.ini and return CONFIG dictionary data.
+"""config.ini を読み込み、CONFIG 辞書データを返します。
 
-Returns:
-    dict: CONFIG
+この関数は、ConfigParser モジュールを使用して 'config.ini' ファイルを読み込み、その内容を辞書として返します。
 
-NOTE:
-    Please read About config.ini file https://github.com/yKesamaru/FACE01_SAMPLE/blob/master/docs/config_ini.md#about-configini-file about config.ini.
-    (docs/config_ini.md)
-        | 'config.ini' is the configuration file of FACE01 using Python ConfigParser module.
-        | The [DEFAULT] section specifies standard default values, and this setting is example.
-        | Before to modify config.ini, you should be familiar with the ConfigParser module.
-        | To refer ConfigParser module, see bellow.
-        | https://docs.python.org/3/library/configparser.html
-        | Each section inherits from the [DEFAULT] section.
-        | Therefore, specify only items (key & value) that override [DEFAULT] in each section.
+戻り値:
+    dict: 設定データを含む CONFIG 辞書。
+
+注意:
+    config.ini ファイルについては以下を参照してください:
+    https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file
+
+    .. note::
+        詳細については `config_ini.md <docs/config_ini.md>`_ を参照してください。
+
+        'config.ini' は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。
+
+        'config.ini' を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては `ConfigParser module documentation <https://docs.python.org/3/library/configparser.html>`_ を参照してください。
+
+        各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。
 
     .. image:: ../docs/img/About_config_ini_file.png
         :scale: 50%
@@ -23,6 +27,7 @@ NOTE:
 Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.
 """
+
 import os
 from configparser import ConfigParser
 from datetime import datetime

@@ -22,27 +22,27 @@ ORIGINAL AUTHOR:
         - yKesamaru
 
 References:
-    - Dlib
+    - Dlib:
         - https://github.com/davisking/dlib
-    - Dlib Python API
+    - Dlib Python API:
         - http://dlib.net/python/index.html
-    - dlib/python_example/face_recognition.py
+    - dlib/python_example/face_recognition.py:
         - https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
-    - Dlib Face Recognition Model
+    - Dlib Face Recognition Model:
         - https://github.com/davisking/dlib-models
-    - Face Recognition
+    - Face Recognition:
         - https://github.com/ageitgey/face_recognition
-    - Max-Margin Object Detection(MMOD)
+    - Max-Margin Object Detection(MMOD):
         - [Ja] https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83
         - https://github.com/davisking/dlib-models
-    - Typing (numpy.typing)
+    - Typing (numpy.typing):
         - https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing
-    - EfficientNetV2
+    - EfficientNetV2:
         - https://arxiv.org/pdf/2104.00298.pdf
         - https://github.com/huggingface/pytorch-image-models
-    - ArcFace
+    - ArcFace:
         - https://arxiv.org/pdf/1801.07698.pdf
-    - MobileFaceNets
+    - MobileFaceNets:
         - https://arxiv.org/ftp/arxiv/papers/1804/1804.07573.pdf
 
 NOTE:

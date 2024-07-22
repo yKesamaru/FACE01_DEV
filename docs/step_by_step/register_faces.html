@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register face images &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Register face images</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-face-images">
+<h1>Register face images<a class="headerlink" href="#register-face-images" title="Link to this heading"></a></h1>
+<p>This article describes how to register face images.</p>
+<section id="basic-knowledge-of-facial-images">
+<h2>Basic knowledge of facial images<a class="headerlink" href="#basic-knowledge-of-facial-images" title="Link to this heading"></a></h2>
+<p>Just like your passport photo, it is important that the facial image you register is accurate.</p>
+<blockquote>
+<div><p><img alt="" src="step_by_step/img/passport.jpg" />
+quoted from <a class="reference external" href="https://visa.d2.r-cms.jp/">Russia Visa Center</a></p>
+</div></blockquote>
+<p>When using on FACE01, make the <em>height 200px and width 200px</em>.</p>
+<p>If you want to crop only the face part from the photo, it is very easy to use the <code class="docutils literal notranslate"><span class="pre">align_and_resize_maintain_aspect_ratio</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Utils</span></code> class in FACE01.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/aligned_crop_face.py<span class="w"> </span>docs/img/Elon_Musk_Colorado_2022.jpg
+</pre></div>
+</div>
+<ul>
+<li><p>Original image</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Elon_Musk_Colorado_2022.jpg">U.S. Air Force photo by Trevor cokley</a></p></li>
+</ul>
+<p><img alt="" src="docs/img/Elon_Musk_Colorado_2022.jpg" /></p>
+</li>
+<li><p>Output face image
+<img alt="" src="docs/img/Elon_Musk_Colorado_2022.jpg_align_resize.png" /></p></li>
+</ul>
+<p>If a directory name is given as an argument, all image files in that directory will be targeted.</p>
+</section>
+<section id="put-face-images-in-the-preset-images-folder">
+<h2>Put face images in the <code class="docutils literal notranslate"><span class="pre">preset_images</span></code> folder.<a class="headerlink" href="#put-face-images-in-the-preset-images-folder" title="Link to this heading"></a></h2>
+<p><img alt="" src="step_by_step/img/preset_face_images.png" /></p>
+<p>When you start the application, it automatically converts the face image into 128D ndarray data.</p>
+<p>ℹ️ <strong>NOTE</strong>
+If you want to delete other face image files in the <code class="docutils literal notranslate"><span class="pre">preset_images</span></code> folder, move them to the <code class="docutils literal notranslate"><span class="pre">debug</span></code> folder before starting the application.</p>
+<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2023-01-23-21-30-46.png" /></p>
+<p>Just Done!
+It's simple!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
