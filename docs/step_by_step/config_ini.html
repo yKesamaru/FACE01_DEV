@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About config.ini file. &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="about-config-ini-file">
+<h1>About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.<a class="headerlink" href="#about-config-ini-file" title="Link to this heading"></a></h1>
+<section id="config-ini-file-is-face01-configure-file">
+<h2><code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file is FACE01 configure file.<a class="headerlink" href="#config-ini-file-is-face01-configure-file" title="Link to this heading"></a></h2>
+<p>'config.ini' is the configuration file of FACE01 using Python ConfigParser module.</p>
+<p>The [DEFAULT] section specifies standard default values, and this setting is example.</p>
+</section>
+<section id="note-important">
+<h2>Note (Important!)<a class="headerlink" href="#note-important" title="Link to this heading"></a></h2>
+<p>Before to modify config.ini, you should be familiar with the ConfigParser module.<br />
+To refer ConfigParser module, see bellow.<br />
+https://docs.python.org/3/library/configparser.html</p>
+</section>
+<section id="inheritance">
+<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading"></a></h2>
+<p>Each section inherits from the [DEFAULT] section.</p>
+<p>Therefore, specify only items (key &amp; value) that override [DEFAULT] in each section.</p>
+</section>
+<section id="format">
+<h2>Format<a class="headerlink" href="#format" title="Link to this heading"></a></h2>
+<p>Format is <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=</span> <span class="pre">value</span></code>.</p>
+</section>
+<section id="edit">
+<h2>Edit<a class="headerlink" href="#edit" title="Link to this heading"></a></h2>
+<p>If you use docker Image, you can edit to modify the config.ini with <code class="docutils literal notranslate"><span class="pre">vim</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
+$<span class="w"> </span>vim<span class="w"> </span>./config.ini
+</pre></div>
+</div>
+</section>
+</section>
+<section id="i-note">
+<h1>ℹ️: Note<a class="headerlink" href="#i-note" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>がフォルダーに存在するとき、そのファイルが従来のdlibモデル(<code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>)で作成されたものなのか、新しいモデル(<code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>)で作成されたものなのかは重要な要素です。
+もし<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>で指定した学習モデルと<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>が作られた学習モデルが一致しない場合、エラーが発生します。
+その場合は<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>を手動で削除してください。新しい<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>が自動的に作成されます。</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> exists in the folder, which is it created by the old dlib model (<code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>) or by the new model (<code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>) is an important factor.
+If the deep learning model specified in <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> does not match one for which <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> was created, an error will occur.
+In that case, manually delete <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>. A new <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> will be created automatically.</p>
+</section>
+<section id="example-and-explain-each-items">
+<h1>Example and explain each items.<a class="headerlink" href="#example-and-explain-each-items" title="Link to this heading"></a></h1>
+<section id="default">
+<h2>[DEFAULT]<a class="headerlink" href="#default" title="Link to this heading"></a></h2>
+<p>[DEFAULT] section is for simple example.<br />
+This [DEFAULT] setting for only use CUI mode.</p>
+<p>Also, this setting is for user who's PC is *<strong>not</strong>* installed Nvidia GPU card or IOT devices.</p>
+<p>[DEFAULT] section is the inheritor of all sections.</p>
+</section>
+<section id="items">
+<h2>Items<a class="headerlink" href="#items" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>headless</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">headless</span></code> means 'works CUI mode'. If you want to display GUI window, turn on value to False but process speed get slowly.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: True</p></li>
+</ul>
+</li>
+<li><p>deep+learning_model</p>
+<ul>
+<li><p>従来のdlibモデル(<code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>)と日本人の顔認証に特化したモデル(<code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>)を切り替えることが出来ます。</p>
+<ul>
+<li><p>int: 0 or 1</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>: 0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>: 1</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>NOTE</strong></p>
+<ul>
+<li><p>各モデルが生成する<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は互いに互換性がありません。よって、<code class="docutils literal notranslate"><span class="pre">deep_learning_model</span></code>を変更した場合、既に作成されている<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は手動で削除する必要があります。モデル切り替え後の<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は新たに自動的に作成されます。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>anti_spoof</p>
+<ul>
+<li><p><strong>Experimental</strong></p></li>
+<li><p>Anti-spoof model is included with this sample, but please do <em><strong>not</strong></em> use this model as is for commercial use. Please contact tokai-kaoninsho for details.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>output_debug_log = False</p>
+<ul>
+<li><p>When True, will output debug log.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>log_level</p>
+<ul>
+<li><p>If you want to output debug log and message, modify this value to <code class="docutils literal notranslate"><span class="pre">debug</span></code>.</p></li>
+<li><p>Type: str</p></li>
+<li><p>Default: info</p></li>
+</ul>
+</li>
+<li><p>set_width</p>
+<ul>
+<li><p>Specify width of GUI window.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 750</p></li>
+</ul>
+</li>
+<li><p>similar_percentage</p>
+<ul>
+<li><p>Number of % which determine if the person on the screen is the person in the registered face information.</p></li>
+<li><p>Type: float</p></li>
+<li><p>Default: 99.1</p></li>
+</ul>
+</li>
+<li><p>jitters</p>
+<ul>
+<li><p>Number of value what means calculate jitters on running FACE01.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 0</p></li>
+</ul>
+</li>
+<li><p>priset_face_images_jitters</p>
+<ul>
+<li><p>Number of value what means calculate jitters for priset_face_images.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 100</p></li>
+</ul>
+</li>
+<li><p>upsampling</p>
+<ul>
+<li><p>Specifying the detected face area. ex. 0: 80x80px, 1: 40x40px</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 0</p></li>
+</ul>
+</li>
+<li><p>mode</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cnn</span></code> mode is use model what made from AI model. If you don't use CUDA, set <code class="docutils literal notranslate"><span class="pre">hog</span></code>.</p></li>
+<li><p>Type: Type: str</p></li>
+<li><p>Default: hog</p></li>
+</ul>
+</li>
+<li><p>frame_skip</p>
+<ul>
+<li><p>Specify the number to <code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">frame</span></code>. Do not make it less than 2 <em>if use HLS</em>.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</li>
+<li><p>number_of_people</p>
+<ul>
+<li><p>Do not 'analyze' (Encode and Recognize Process) more than the specified number of people.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 10</p></li>
+</ul>
+</li>
+<li><p>use_pipe</p>
+<ul>
+<li><p>Use mediapipe for face detection (coordinate calculation) instead of dlib face detection model.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: True</p></li>
+</ul>
+</li>
+<li><p>model_selection</p>
+<ul>
+<li><p>0 OR 1</p>
+<ul>
+<li><p>0: Within 2 meters from the camera,</p></li>
+<li><p>1: Within 5 meters.</p></li>
+</ul>
+</li>
+<li><p>NOTE: This value is set only when <code class="docutils literal notranslate"><span class="pre">use_pipe</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 1</p></li>
+</ul>
+</li>
+<li><p>min_detection_confidence</p></li>
+<li><p>The minimum confidence value from the face detection model for the detection to be considered successful. If wearing the mask, set it to about 0.3. The lower the number, the higher the possibility of erroneous recognition other than the face. The standard is 0.4 to 0.5.</p>
+<ul>
+<li><p>NOTE: You can set <code class="docutils literal notranslate"><span class="pre">person_frame_face_encoding</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> only if <code class="docutils literal notranslate"><span class="pre">use_pipe</span></code> is True.</p></li>
+<li><p>Type: float</p></li>
+<li><p>Default: 0.4</p></li>
+</ul>
+</li>
+<li><p>person_frame_face_encoding</p>
+<ul>
+<li><p>You can set person_frame_face_encoding to True only if <code class="docutils literal notranslate"><span class="pre">use_pipe</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>same_time_recognize</p>
+<ul>
+<li><p>Number of people to recognize at the same time. Default is 2. Valid only if <code class="docutils literal notranslate"><span class="pre">use_pipe</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 2</p></li>
+</ul>
+</li>
+<li><p>set_area</p>
+<ul>
+<li><p>Zoom.
+You can select from <code class="docutils literal notranslate"><span class="pre">NONE</span></code>, <code class="docutils literal notranslate"><span class="pre">TOP_LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">TOP_RIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">BOTTOM_LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">BOTTOM_RIGHT</span></code>, <code class="docutils literal notranslate"><span class="pre">CENTER</span></code>.</p></li>
+<li><p>Type: Type: str</p></li>
+<li><p>Default: NONE<br />
+set_area = 'NONE'<br />
+<img alt="set_area = 'NONE'" src="step_by_step/img/none-fs8.png" /><br />
+set_area = 'CENTER'<br />
+<img alt="set_area = 'CENTER'" src="step_by_step/img/setarea_center.png" /><br />
+set_area = 'TOP_LEFT'<br />
+<img alt="set_area = 'TOP_LEFT'" src="step_by_step/img/setarea_topleft.png" /></p></li>
+</ul>
+</li>
+<li><p>movie</p>
+<ul>
+<li><p>For test, you can select from bellow.</p>
+<ul>
+<li><p>usb (or USB)</p>
+<ul>
+<li><p>USB Cam</p></li>
+</ul>
+</li>
+<li><p>assets/test.mp4 (Only a person.)</p></li>
+<li><p>assets/顔無し区間を含んだテスト動画.mp4</p>
+<ul>
+<li><p>Movie file which contain no person frames.</p></li>
+</ul>
+</li>
+<li><p>rtsp://wowzaec2demo.Type: Type: streamlock.net/vod/mp4:BigBuckBunny_115k.mp4</p>
+<ul>
+<li><p>RTSP Type: Type: stream for test.</p></li>
+</ul>
+</li>
+<li><p>http://219.102.239.58/cgi-bin/camera?resolution=750</p>
+<ul>
+<li><p>Live Type: Type: stream using HTTP for test: Live cam at Tokyo.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Type: Type: str</p></li>
+<li><p>Default: assets/test.mp4</p></li>
+</ul>
+</li>
+<li><p>user</p>
+<ul>
+<li><p>User ID for RTSP.</p></li>
+<li><p>Type: str</p></li>
+<li><p>Default: None</p></li>
+</ul>
+</li>
+<li><p>passwd</p>
+<ul>
+<li><p>User password for RTSP.</p></li>
+<li><p>Type: str</p></li>
+<li><p>Default: None</p></li>
+</ul>
+</li>
+<li><p>rectangle</p>
+<ul>
+<li><p>Display a legacy face frame on the screen.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False
+<img alt="" src="step_by_step/img/FACE01-simple_rectangle.png" /></p></li>
+</ul>
+</li>
+<li><p>target_rectangle</p>
+<ul>
+<li><p>Display a modern face frame on the screen</p></li>
+<li><p>NOTE: You can select only one of <code class="docutils literal notranslate"><span class="pre">rectangle</span></code> or <code class="docutils literal notranslate"><span class="pre">target_rectangle</span></code>.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False
+<img alt="" src="step_by_step/img/FACE01-targetrectangle.png" /></p></li>
+</ul>
+</li>
+<li><p>draw_telop_and_logo</p>
+<ul>
+<li><p>Display of telop and log</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>default_face_image_draw</p>
+<ul>
+<li><p>Display the registered face image on the scree</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>show_overlay</p>
+<ul>
+<li><p>Make the information display on the screen semi-transparent</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>alpha</p>
+<ul>
+<li><p>Adjust the translucency of 'overlay</p></li>
+<li><p>Type: float</p></li>
+<li><p>Default: 0.3</p></li>
+</ul>
+</li>
+<li><p>show_percentage</p>
+<ul>
+<li><p>Draw similarity in window.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>show_name</p>
+<ul>
+<li><p>Draw name in window.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>crop_face_image</p>
+<ul>
+<li><p>Save face image.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: True</p></li>
+</ul>
+</li>
+<li><p>frequency_crop_image</p>
+<ul>
+<li><p>Save face images per frame to storage.</p></li>
+<li><p>Type: int</p></li>
+<li><p>Default: 5</p></li>
+</ul>
+</li>
+<li><p>crop_with_multithreading</p>
+<ul>
+<li><p>Save face images using multi-threading. If using slower storage, set 'True'.</p></li>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>Python_version</p>
+<ul>
+<li><p>Type: Type: str</p></li>
+<li><p>Default: 3.8.1</p></li>
+</ul>
+</li>
+<li><p>cpu_freq</p>
+<ul>
+<li><p>Type: float</p></li>
+<li><p>Default: 2.5</p></li>
+</ul>
+</li>
+<li><p>cpu_count</p>
+<ul>
+<li><p>Type: int</p></li>
+<li><p>Default:</p></li>
+</ul>
+</li>
+<li><p>memory</p>
+<ul>
+<li><p>Type: int</p></li>
+<li><p>Default: 4</p></li>
+<li><p>GByt</p></li>
+</ul>
+</li>
+<li><p>gpu_check</p>
+<ul>
+<li><p>Type: bool</p></li>
+<li><p>Default: True</p></li>
+</ul>
+</li>
+<li><p>calculate_time</p>
+<ul>
+<li><p>Type: bool</p></li>
+<li><p>Default: True</p></li>
+<li><p>time measurement</p></li>
+</ul>
+</li>
+<li><p>show_video</p>
+<ul>
+<li><p>Type: bool</p></li>
+<li><p>Default: False</p></li>
+</ul>
+</li>
+<li><p>number_of_crops</p>
+<ul>
+<li><p>Type: int</p></li>
+<li><p>Default: 0</p></li>
+<li><p>Do <em>not</em> override.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

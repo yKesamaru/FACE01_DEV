@@ -7,11 +7,12 @@ FACE01_DEV ドキュメント
 ========================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: ドキュメント:
 
    step_by_step
-
+   example
+   face01lib
 
    GitHub <https://github.com/yKesamaru/FACE01_DEV>
    Tokai-kaoninsho <https://tokai-kaoninsho.com/>
@@ -21,3 +22,4 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`search`
+
