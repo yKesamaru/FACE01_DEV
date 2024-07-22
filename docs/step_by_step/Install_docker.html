@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install Docker &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Install Docker</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="install-docker">
+<h1>Install Docker<a class="headerlink" href="#install-docker" title="Link to this heading"></a></h1>
+<p>For Ubuntu, you can choose some method to install Docker, and before to install, should choice <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Desktop</span></code> or <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Engine</span></code>. Official tutorial is <a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">here</a>.
+This section, we talk about install <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Engine</span></code> and <code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">ce</span></code>.</p>
+<!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
+<section id="note">
+<h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
+<p>You must meet the conditions listed below. See <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements">official site</a>.</p>
+<ol class="arabic simple">
+<li><p>GNU/Linux x86_64 with kernel version &gt; 3.10</p></li>
+<li><p>Docker &gt;= 19.03 (recommended, but some distributions may include older versions of Docker. The minimum supported version is 1.12)</p></li>
+<li><p>NVIDIA GPU with Architecture &gt;= Kepler (or compute capability 3.0)</p></li>
+<li><p>NVIDIA Linux drivers &gt;= 418.81.07 (Note that older driver releases or branches are unsupported.)</p></li>
+</ol>
+<p>Please refer to the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your kernel version.</span>
+uname<span class="w"> </span>-r
+
+<span class="c1"># Your docker version.</span>
+docker<span class="w"> </span>--version
+
+<span class="c1"># Your GPU architecture</span>
+lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-ie<span class="w"> </span>nvidia
+<span class="c1">## List of architecture is [here](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures) and [here](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units) and [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/).</span>
+
+<span class="c1"># Your NVIDIA linux driver version.</span>
+nvidia-smi
+</pre></div>
+</div>
+</section>
+<section id="use-convenient-script">
+<h2>Use convenient script<a class="headerlink" href="#use-convenient-script" title="Link to this heading"></a></h2>
+<p>You can install docker using convenient script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>--now<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
+</pre></div>
+</div>
+</section>
+<section id="manually-install">
+<h2>Manually install<a class="headerlink" href="#manually-install" title="Link to this heading"></a></h2>
+<p>Also, you can install docker manually.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uninstall old versions</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>docker<span class="w"> </span>docker-engine<span class="w"> </span>docker.io<span class="w"> </span>containerd<span class="w"> </span>runc
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+<span class="c1"># Set up the repository</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gnupg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>lsb-release
+<span class="c1"># Add Docker’s official GPG key:</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/apt/keyrings
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/etc/apt/keyrings/docker.gpg
+<span class="c1"># Use the following command to set up the repository:</span>
+<span class="nb">echo</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \</span>
+<span class="s2">  </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/docker.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="c1"># NOTE: If you get an error about apt/sources.list, you should comment out docker&#39;s line at sources.list.</span>
+<span class="c1"># Install Docker Engine</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span>docker-compose-plugin
+<span class="c1"># NOTE: If you receive a GPG error when running apt update, run the following command and then try to update your repo again.</span>
+<span class="c1"># sudo chmod a+r /etc/apt/keyrings/docker.gpg</span>
+<span class="c1"># See bellow</span>
+<span class="c1"># https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span>docker-compose-plugin
+</pre></div>
+</div>
+<p>If you want to confirm installed Docker, try the following command.
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">hello-world</span></code></p>
+</section>
+<section id="install-nvidia-docker2">
+<h2>Install nvidia-docker2<a class="headerlink" href="#install-nvidia-docker2" title="Link to this heading"></a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>, refer to <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit">NVIDIA official tutorial</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ID$VERSION_ID</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/libnvidia-container/<span class="nv">$distribution</span>/libnvidia-container.list<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>sed<span class="w"> </span><span class="s1">&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-docker2
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+</pre></div>
+</div>
+<p>If you want to test, seel bellow.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:11.0.3-base-ubuntu20.04<span class="w"> </span>nvidia-smi
+</pre></div>
+</div>
+<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2022-07-25-10-24-45.png" /></p>
+</section>
+<section id="post-installation">
+<h2>Post installation<a class="headerlink" href="#post-installation" title="Link to this heading"></a></h2>
+<p>If you don’t want to preface the docker command with sudo, create a Unix group called docker and add users to it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://docs.docker.com/engine/install/linux-postinstall/">here</a></p>
+</section>
+<section id="when-you-want-to-delete-all-at-once">
+<h2>When you want to delete all at once<a class="headerlink" href="#when-you-want-to-delete-all-at-once" title="Link to this heading"></a></h2>
+<p>See <a class="reference external" href="https://docs.docker.com/config/pruning/"><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">image</span> <span class="pre">prune</span></code></a>.
+Japanese is <a class="reference external" href="https://docs.docker.jp/config/pruning.html">here</a>.
+Also, you chose some manner as bellow.</p>
+<section id="stop-all-containers">
+<h3>Stop all containers<a class="headerlink" href="#stop-all-containers" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">stop</span> <span class="pre">$(docker</span> <span class="pre">ps</span> <span class="pre">-q)</span></code></p>
+</section>
+<section id="delete-all-containers">
+<h3>Delete all containers<a class="headerlink" href="#delete-all-containers" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span> <span class="pre">$(docker</span> <span class="pre">ps</span> <span class="pre">-q</span> <span class="pre">-a)</span></code></p>
+</section>
+<section id="delete-all-images">
+<h3>Delete all images<a class="headerlink" href="#delete-all-images" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rmi</span> <span class="pre">$(docker</span> <span class="pre">images</span> <span class="pre">-q)</span></code></p>
+</section>
+<section id="delete-all-except-specific-images">
+<h3>Delete all except specific images<a class="headerlink" href="#delete-all-except-specific-images" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span> <span class="pre">-aq</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">98c2341c70ce</span> <span class="pre">|</span> <span class="pre">xargs</span> <span class="pre">docker</span> <span class="pre">rmi</span></code></p>
+</section>
+</section>
+<section id="if-you-re-pc-is-not-installed-nvidia-gpu-card">
+<h2>If you're PC is not installed NVIDIA GPU card<a class="headerlink" href="#if-you-re-pc-is-not-installed-nvidia-gpu-card" title="Link to this heading"></a></h2>
+<p>The Dockerfile you build must be <code class="docutils literal notranslate"><span class="pre">Dockerfile_no_gpu</span></code>.
+The settings in config.ini are limited to bellow.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">headless</span> <span class="pre">=</span> <span class="pre">True</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_pipe</span> <span class="pre">=</span> <span class="pre">True</span></code></p></li>
+</ul>
+<p>See 'To build FACE01 docker image without nvidia-docker2 package' section described <a class="reference internal" href="docker.html"><span class="std std-doc">here</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

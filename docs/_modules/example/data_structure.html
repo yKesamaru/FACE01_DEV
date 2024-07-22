@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.data_structure &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.data_structure</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.data_structure のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data structure of FACE01.</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    In this example, you can learn data structure of FACE01.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    .. code-block:: bash</span>
+<span class="sd">    </span>
+<span class="sd">        python3 example data_structure.py</span>
+<span class="sd">    </span>
+<span class="sd">Config.ini setting:</span>
+<span class="sd">    Data structure of FACE01 is closely related to what you set in config.ini.</span>
+<span class="sd">    The contents of config.ini described below are the settings for face-detection and face-recognition. GUI windows are not displayed.</span>
+
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        [DEFAULT]</span>
+<span class="sd">        # [DEFAULT] section is for simple example.</span>
+<span class="sd">        # This [DEFAULT] setting for only use CUI mode.</span>
+<span class="sd">        # Also, This setting is for user who&#39;s PC is not installed Nvidia GPU card.</span>
+<span class="sd">        # [DEFAULT] section is the inheritor of all sections.</span>
+<span class="sd">        headless = True</span>
+<span class="sd">        anti_spoof = False</span>
+<span class="sd">        output_debug_log = False</span>
+<span class="sd">        log_level = info</span>
+<span class="sd">        set_width = 750</span>
+<span class="sd">        similar_percentage = 99.1</span>
+<span class="sd">        jitters = 0</span>
+<span class="sd">        preset_face_images_jitters = 10</span>
+<span class="sd">        upsampling = 0</span>
+<span class="sd">        mode = hog</span>
+<span class="sd">        frame_skip = 5</span>
+<span class="sd">        number_of_people = 10</span>
+<span class="sd">        use_pipe = True</span>
+<span class="sd">        model_selection = 0</span>
+<span class="sd">        min_detection_confidence = 0.6</span>
+<span class="sd">        person_frame_face_encoding = False</span>
+<span class="sd">        same_time_recognize = 2</span>
+<span class="sd">        set_area = NONE</span>
+<span class="sd">        movie = assets/test.mp4</span>
+<span class="sd">        user = </span>
+<span class="sd">        passwd = </span>
+<span class="sd">        rectangle = False</span>
+<span class="sd">        target_rectangle = False</span>
+<span class="sd">        draw_telop_and_logo = False</span>
+<span class="sd">        default_face_image_draw = False</span>
+<span class="sd">        show_overlay = False</span>
+<span class="sd">        alpha = 0.3</span>
+<span class="sd">        show_percentage = False</span>
+<span class="sd">        show_name = False</span>
+<span class="sd">        crop_face_image = True</span>
+<span class="sd">        frequency_crop_image = 5</span>
+<span class="sd">        crop_with_multithreading = False</span>
+<span class="sd">        Python_version = 3.8.10</span>
+<span class="sd">        cpu_freq = 2.5</span>
+<span class="sd">        cpu_count = 4</span>
+<span class="sd">        memory = 4</span>
+<span class="sd">        gpu_check = True</span>
+<span class="sd">        calculate_time = False</span>
+<span class="sd">        show_video = False</span>
+<span class="sd">        number_of_crops = 0</span>
+
+<span class="sd">Result:</span>
+<span class="sd">    Executing this example script will output the following contents.</span>
+<span class="sd">    (The output string has been formatted to make it easier to read.)</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        frame_datas: </span>
+<span class="sd">        {</span>
+<span class="sd">            &#39;img&#39;: array([[[0, 0, 0], [0, 0, 0], ..., [0, 0, 0], dtype=uint8), </span>
+<span class="sd">            &#39;face_location_list&#39;: [(165, 449, 287, 327), (240, 435, 391, 284)], </span>
+<span class="sd">            &#39;overlay&#39;: array([[[  0,   0,  70],  ..., [ 88, 169, 127]], dtype=uint8), </span>
+<span class="sd">            &#39;person_data_list&#39;: </span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &#39;name&#39;: &#39;安倍晋三&#39;, </span>
+<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;, </span>
+<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;, </span>
+<span class="sd">                    &#39;location&#39;: (165, 449, 287, 327), </span>
+<span class="sd">                    &#39;percentage_and_symbol&#39;: &#39;99.7%&#39;</span>
+<span class="sd">                }, </span>
+<span class="sd">                {</span>
+<span class="sd">                    &#39;name&#39;: &#39;Unknown&#39;, </span>
+<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;, </span>
+<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;, </span>
+<span class="sd">                    &#39;location&#39;: (240, 435, 391, 284), </span>
+<span class="sd">                    &#39;percentage_and_symbol&#39;: &#39;&#39;</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">        }</span>
+
+<span class="sd">Data structure:</span>
+<span class="sd">    The `frame_datas_array` variable is a dictionary-like variable that contains the variables described below.</span>
+<span class="sd">    </span>
+<span class="sd">    * Dictionary</span>
+
+<span class="sd">        * img: NDArray of a frame</span>
+<span class="sd">        * face_location_list: List of face-coordinates</span>
+<span class="sd">        * overlay: Shallow copy of img</span>
+<span class="sd">        * person_data_list: List of person-coordinate which is included in `face_location_list`</span>
+
+<span class="sd">    In addition, the `person_data_list` variable is an array that contains the variables described below.</span>
+<span class="sd">    </span>
+<span class="sd">    * List</span>
+
+<span class="sd">        * Dictionary</span>
+
+<span class="sd">            * name: name</span>
+<span class="sd">            * pict: Saved image&#39;s file name which is cropped by face-coordinate in a frame</span>
+<span class="sd">            * date: </span>
+<span class="sd">            * location: Face-coordinate</span>
+<span class="sd">            * percentage_and_symbol: xx%</span>
+<span class="sd">        </span>
+<span class="sd">Source code:</span>
+<span class="sd">    `data_structure.py &lt;../example/data_structure.py&gt;`_</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Operate directory: Common to all examples</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../example.html#example.data_structure.main">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output data structure.</span>
+
+<span class="sd">    Data structure of FACE01 can be get as frame_datas_array variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exec_times (int, optional): Number of frames for process. Defaults to 50 times.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Initialize</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+
+    <span class="c1"># Make generator</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+
+    <span class="c1"># Repeat &#39;exec_times&#39; times</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+
+        <span class="c1"># Call __next__() from the generator object</span>
+        <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;frame_datas: </span><span class="si">{</span><span class="n">frame_datas</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Call main function.</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

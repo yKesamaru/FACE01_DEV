@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.draw_datas &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.draw_datas</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.draw_datas のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Example of to draw datas using matplotlib.</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    In this example, you can learn how to draw datas.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    .. code-block:: bash</span>
+<span class="sd">    </span>
+<span class="sd">        python3 example/draw_datas.py</span>
+
+<span class="sd">Result:</span>
+<span class="sd">    .. image:: ../docs/img/4_times.png</span>
+<span class="sd">        :scale: 50%</span>
+<span class="sd">        :alt: 4 times</span>
+
+<span class="sd">    .. image:: ../docs/img/20_times.png</span>
+<span class="sd">        :scale: 50%</span>
+<span class="sd">        :alt: 20 times</span>
+
+<span class="sd">Source code:</span>
+<span class="sd">    `draw_datas.py &lt;../example/draw_datas.py&gt;`_</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Operate directory: Common to all examples</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">face01lib.api</span> <span class="kn">import</span> <span class="n">Dlib_api</span>
+<span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
+
+
+<div class="viewcode-block" id="f_norm">
+<a class="viewcode-back" href="../../example.html#example.draw_datas.f_norm">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">f_norm</span><span class="p">(</span><span class="n">face_encoded_list</span><span class="p">,</span> <span class="n">face_encoded_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return `Frobenius norm`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        face_encoded_list (List): Face encoded list</span>
+<span class="sd">        face_encoded_data (np.NDArray): Face encoded data as np.ndarray</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Any: Frobenius norm</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">face_encoded_list</span> <span class="o">-</span> <span class="n">face_encoded_data</span><span class="p">),</span> <span class="nb">ord</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../example.html#example.draw_datas.main">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple example.</span>
+
+<span class="sd">    This simple example script prints out results of face encoded datas.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exec_times (int, optional): Number of frames for process. Defaults to 50 times.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Initialize</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+    <span class="c1"># Make generator</span>
+    <span class="n">frame_generator_obj</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+    <span class="c1"># Make logger</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+
+    <span class="c1"># Make generator</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+
+    <span class="c1"># Make list</span>
+    <span class="n">face_encoded_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Make obj</span>
+    <span class="n">Dlib_api_obj</span> <span class="o">=</span> <span class="n">Dlib_api</span><span class="p">()</span>
+
+
+    <span class="c1"># Repeat &#39;exec_times&#39; times</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+
+        <span class="c1"># Call __next__() from the generator object</span>
+        <span class="n">resized_frame</span> <span class="o">=</span> <span class="n">frame_generator_obj</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+
+        <span class="c1"># If you want check `resized_frame`, comment out bellow.</span>
+        <span class="c1"># VidCap().frame_imshow_for_debug(resized_frame)</span>
+
+        <span class="c1"># Get `face_encoded_list`</span>
+        <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">resized_frame</span><span class="p">)</span>
+        <span class="n">face_encodings</span><span class="p">,</span> <span class="n">frame_datas_array</span> <span class="o">=</span> \
+            <span class="n">core</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">face_encoded_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Make sure this example must be applied for &#39;one person&#39;. Not more two persons in same input.&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+
+
+    <span class="c1"># Matplotlib configure</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="c1"># Arguments are row, column, location</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+    <span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">)</span>
+    <span class="c1"># Make `meshgrid`</span>
+    <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">face_encoded_list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+        <span class="n">z</span> <span class="o">=</span> <span class="n">face_encoded_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">zv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="n">exec_times</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">,</span> <span class="n">zv</span><span class="p">)</span>
+
+        <span class="n">ax3</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">,</span> <span class="n">zv</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">f_norm</span><span class="p">(</span><span class="n">face_encoded_list</span><span class="p">,</span> <span class="n">face_encoded_list</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="c1"># r = Dlib_api_obj.face_distance(face_encoded_list, face_encoded_list[j])  # Same above</span>
+
+        <span class="c1"># Delete item which is 0.0</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">y_minus_one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_minus_one</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Call main function.</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

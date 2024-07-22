@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.simple_file_browser &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.simple_file_browser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.simple_file_browser のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Example: 簡易ファイルラウザ実装例</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    ttkbootstrapを用いた簡易ファイルブラウザ実装例</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    .. code-blok:: bash</span>
+
+<span class="sd">        python3 example/simple_file_browser.py</span>
+
+<span class="sd">See also:</span>
+<span class="sd">    ttkbootstrap</span>
+<span class="sd">    https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html</span>
+
+<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
+<span class="sd">Please refer to the separate license file for the license of the code.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
+<span class="kn">from</span> <span class="nn">ttkbootstrap</span> <span class="kn">import</span> <span class="n">Style</span>  <span class="c1"># type: ignore</span>
+
+
+<div class="viewcode-block" id="Application">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.Application">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;preset_face_images&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;800x600&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">Style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&quot;minty&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;TButton&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="ImageBrowser">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.ImageBrowser">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">ImageBrowser</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">master</span> <span class="o">=</span> <span class="n">master</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">master</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_images</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas_frame</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas_frame</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">scrollbar</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">canvas_frame</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;vertical&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">yview</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scrollbar</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scrollbar</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;Configure&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_configure</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas_frame</span><span class="o">.</span><span class="n">bind_all</span><span class="p">(</span><span class="s1">&#39;&lt;MouseWheel&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_mousewheel</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">photos</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ImageBrowser.load_images">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.ImageBrowser.load_images">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">load_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ImageBrowser.on_configure">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.ImageBrowser.on_configure">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">on_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">photos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">thumbnail_width</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">thumbnail_height</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_list</span><span class="p">:</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">((</span><span class="n">thumbnail_width</span><span class="p">,</span> <span class="n">thumbnail_height</span><span class="p">))</span>
+            <span class="n">photo</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">photos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+
+            <span class="n">image_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">photo</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s1">&#39;nw&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">tag_bind</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span> <span class="s1">&#39;&lt;Double-Button-1&gt;&#39;</span><span class="p">,</span>
+                                 <span class="k">lambda</span> <span class="n">e</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">image_path</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+            <span class="n">x</span> <span class="o">+=</span> <span class="n">thumbnail_width</span> <span class="o">+</span> <span class="mi">10</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">event</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">thumbnail_width</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">thumbnail_height</span> <span class="o">+</span> <span class="mi">10</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">scrollregion</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ImageBrowser.on_mousewheel">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.ImageBrowser.on_mousewheel">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">on_mousewheel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">yview_scroll</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">delta</span><span class="o">/</span><span class="mi">120</span><span class="p">)),</span> <span class="s2">&quot;units&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ImageBrowser.show_image">
+<a class="viewcode-back" href="../../example.html#example.simple_file_browser.ImageBrowser.show_image">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">show_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_image_path</span> <span class="o">=</span> <span class="n">image_path</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">img</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">winfo_width</span><span class="p">(),</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">master</span><span class="o">.</span><span class="n">winfo_height</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="n">photo</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">photo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">photo</span>  <span class="c1"># type: ignore</span></div>
+</div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">()</span>
+    <span class="n">browser</span> <span class="o">=</span> <span class="n">ImageBrowser</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;preset_face_images&#39;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

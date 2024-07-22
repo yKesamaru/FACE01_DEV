@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.display_GUI_window &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.display_GUI_window</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.display_GUI_window のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Example of GUI display and face recognition data output.</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    In this example you can learn how to display GUI and output</span>
+<span class="sd">    face recognition.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        python3 example/display_GUI_window.py</span>
+
+<span class="sd">Source code:</span>
+<span class="sd">    `display_GUI_window.py &lt;../example/display_GUI_window.py&gt;`_</span>
+
+<span class="sd">See also:</span>
+<span class="sd">    ttkbootstrap</span>
+<span class="sd">    https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html</span>
+
+<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
+<span class="sd">Please refer to the separate license file for the license of the code.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Operate directory: Common to all examples</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
+<span class="kn">from</span> <span class="nn">ttkbootstrap</span> <span class="kn">import</span> <span class="n">Style</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
+
+
+<div class="viewcode-block" id="App">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window.App">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">App</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exec_times</span> <span class="o">=</span> <span class="n">exec_times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;FACE01 EXAMPLE&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;800x700&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">Style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s1">&#39;minty&#39;</span><span class="p">)</span>  <span class="c1"># ttkbootstrapでmintyテーマを使用する</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>  <span class="c1"># ttkbootstrapのスタイルインスタンスを使用</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminate_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;terminate&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">terminate</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminate_button</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># 横幅をウィンドウ全体に広げる</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gen</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;bug_DISPLAY_GUI&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+<div class="viewcode-block" id="App.start">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window.App.start">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_image</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="App.update_image">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window.App.update_image">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">update_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">person_data</span> <span class="ow">in</span> <span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;similarity</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;percentage_and_symbol&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinate</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;time</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;output</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+
+                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">],</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                <span class="n">img_tk</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img_tk</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">image_label</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">img_tk</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_image</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="App.terminate">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window.App.terminate">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window.main">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Display window.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exec_times (int, optional): Receive value of number which is processed. Defaults to 50 times.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

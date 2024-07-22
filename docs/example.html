@@ -1,31 +1,33 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="ja" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example package &mdash; FACE01 2.1.05 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+  <title>example package &mdash; FACE01 3.0.01 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=469069b1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=91613774"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within FACE01 2.1.05 documentation"
+          title="FACE01 3.0.01 ドキュメント 内を検索"
           href="_static/opensearch.xml"/>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
     <link rel="next" title="face01lib package" href="face01lib.html" />
-    <link rel="prev" title="FACE01 Document" href="index.html" /> 
+    <link rel="prev" title="Step-by-step to use FACE01 library" href="step_by_step/example_doc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,31 +35,27 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> FACE01
-            <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">example package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.CTKtest">example.CTKtest module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.CTKtest.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.change_appearance_mode_event"><code class="docutils literal notranslate"><span class="pre">App.change_appearance_mode_event()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.change_scaling_event"><code class="docutils literal notranslate"><span class="pre">App.change_scaling_event()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.open_input_dialog_event"><code class="docutils literal notranslate"><span class="pre">App.open_input_dialog_event()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.sidebar_button_event"><code class="docutils literal notranslate"><span class="pre">App.sidebar_button_event()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-ctktest-module">example.CTKtest module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example-aligned-crop-face-module">example.aligned_crop_face module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.anti_spoof">example.anti_spoof module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.average_face">example.average_face module</a><ul>
@@ -68,104 +66,64 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.benchmark_CUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.benchmark_GUI_window">example.benchmark_GUI_window module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-benchmark-gui-window-module">example.benchmark_GUI_window module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_counter">example.combination_counter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_similarity">example.combination_similarity module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.data_augmentation">example.data_augmentation module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.data_augmentation_mp">example.data_augmentation_mp module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.process_data"><code class="docutils literal notranslate"><span class="pre">process_data()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data-augmentation-module">example.data_augmentation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-data-augmentation-mp-module">example.data_augmentation_mp module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.data_structure">example.data_structure module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.data_structure.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.detect_eye_blink">example.detect_eye_blink module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.detect_eye_blink.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-detect-eye-blink-module">example.detect_eye_blink module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.start"><code class="docutils literal notranslate"><span class="pre">App.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.terminate"><code class="docutils literal notranslate"><span class="pre">App.terminate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.update_image"><code class="docutils literal notranslate"><span class="pre">App.update_image()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window_efficientnetv2_arcface">example.display_GUI_window_efficientnetv2_arcface module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_efficientnetv2_arcface.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-display-gui-window-japanese-face-v1-module">example.display_GUI_window_JAPANESE_FACE_V1 module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example-distort-barrel-module">example.distort_barrel module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.draw_datas">example.draw_datas module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.draw_datas.f_norm"><code class="docutils literal notranslate"><span class="pre">f_norm()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.draw_datas.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.example_logging">example.example_logging module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.example_logging.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.example_logging.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.face_coordinates">example.face_coordinates module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.face_coordinates.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.face_coordinates.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-example-logging-module">example.example_logging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-face-coordinates-module">example.face_coordinates module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.faiss_combination_similarity">example.faiss_combination_similarity module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data">example.get_encoded_data module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data_efficientnetv2_arcface">example.get_encoded_data_efficientnetv2_arcface module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.jitter">example.jitter module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.jitter.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.jitter.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.lightweight_GUI">example.lightweight_GUI module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.lightweight_GUI.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.lightweight_GUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-get-encoded-data-module">example.get_encoded_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data_JAPANESE_FACE_V1">example.get_encoded_data_JAPANESE_FACE_V1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-jitter-module">example.jitter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-lightweight-gui-module">example.lightweight_GUI module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.make_ID_card">example.make_ID_card module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_file">example.make_npKnown_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_file">example.make_npKnown_file module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_file.select_directory"><code class="docutils literal notranslate"><span class="pre">select_directory()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.similarity">example.similarity module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.simple">example.simple module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.simple.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.simple.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-simple-module">example.simple module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-simple-japanese-face-v1-module">example.simple_JAPANESE_FACE_V1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.simple_file_browser">example.simple_file_browser module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.simple_file_browser.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser"><code class="docutils literal notranslate"><span class="pre">ImageBrowser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser.load_images"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.load_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser.on_configure"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.on_configure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser.on_mousewheel"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.on_mousewheel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser.show_image"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.show_image()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-simple-efficientnetv2-arcface-module">example.simple_efficientnetv2_arcface module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.window1">example.window1 module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.window1.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.window1.ImageBrowser"><code class="docutils literal notranslate"><span class="pre">ImageBrowser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example.window1.ImageBrowser.load_images"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.load_images()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.window1.ImageBrowser.on_configure"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.on_configure()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.window1.ImageBrowser.on_mousewheel"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.on_mousewheel()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.window1.ImageBrowser.show_image"><code class="docutils literal notranslate"><span class="pre">ImageBrowser.show_image()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.window2">example.window2 module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.window2.DirectoryObserver"><code class="docutils literal notranslate"><span class="pre">DirectoryObserver</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.window2.ImageBrowser"><code class="docutils literal notranslate"><span class="pre">ImageBrowser</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.window2.load_images"><code class="docutils literal notranslate"><span class="pre">load_images()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="face01lib.html">face01lib package</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_SAMPLE">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
 </ul>
 
@@ -182,7 +140,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">example package</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -193,69 +151,41 @@
            <div itemprop="articleBody">
              
   <section id="example-package">
-<h1>example package<a class="headerlink" href="#example-package" title="Permalink to this heading"></a></h1>
+<h1>example package<a class="headerlink" href="#example-package" title="Link to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="module-example.CTKtest">
-<span id="example-ctktest-module"></span><h2>example.CTKtest module<a class="headerlink" href="#module-example.CTKtest" title="Permalink to this heading"></a></h2>
-<p>CustomTkinter test.</p>
-<p>This is test of CustomTkinter.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="example.CTKtest.App">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.CTKtest.</span></span><span class="sig-name descname"><span class="pre">App</span></span><a class="headerlink" href="#example.CTKtest.App" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CTk</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="example.CTKtest.App.change_appearance_mode_event">
-<span class="sig-name descname"><span class="pre">change_appearance_mode_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_appearance_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.CTKtest.App.change_appearance_mode_event" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="example.CTKtest.App.change_scaling_event">
-<span class="sig-name descname"><span class="pre">change_scaling_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_scaling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.CTKtest.App.change_scaling_event" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="example.CTKtest.App.open_input_dialog_event">
-<span class="sig-name descname"><span class="pre">open_input_dialog_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#example.CTKtest.App.open_input_dialog_event" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="example.CTKtest.App.sidebar_button_event">
-<span class="sig-name descname"><span class="pre">sidebar_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#example.CTKtest.App.sidebar_button_event" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<section id="example-ctktest-module">
+<h2>example.CTKtest module<a class="headerlink" href="#example-ctktest-module" title="Link to this heading"></a></h2>
 </section>
 <section id="example-aligned-crop-face-module">
-<h2>example.aligned_crop_face module<a class="headerlink" href="#example-aligned-crop-face-module" title="Permalink to this heading"></a></h2>
+<h2>example.aligned_crop_face module<a class="headerlink" href="#example-aligned-crop-face-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.anti_spoof">
-<span id="example-anti-spoof-module"></span><h2>example.anti_spoof module<a class="headerlink" href="#module-example.anti_spoof" title="Permalink to this heading"></a></h2>
+<span id="example-anti-spoof-module"></span><h2>example.anti_spoof module<a class="headerlink" href="#module-example.anti_spoof" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.average_face">
-<span id="example-average-face-module"></span><h2>example.average_face module<a class="headerlink" href="#module-example.average_face" title="Permalink to this heading"></a></h2>
+<span id="example-average-face-module"></span><h2>example.average_face module<a class="headerlink" href="#module-example.average_face" title="Link to this heading"></a></h2>
 <p>License for the Code.</p>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.average_face.align_face">
-<span class="sig-prename descclassname"><span class="pre">example.average_face.</span></span><span class="sig-name descname"><span class="pre">align_face</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.average_face.align_face" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">example.average_face.</span></span><span class="sig-name descname"><span class="pre">align_face</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/average_face.html#align_face"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.average_face.align_face" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-example.benchmark_CUI">
-<span id="example-benchmark-cui-module"></span><h2>example.benchmark_CUI module<a class="headerlink" href="#module-example.benchmark_CUI" title="Permalink to this heading"></a></h2>
+<span id="example-benchmark-cui-module"></span><h2>example.benchmark_CUI module<a class="headerlink" href="#module-example.benchmark_CUI" title="Link to this heading"></a></h2>
 <p>Example of benchmark for face recognition.</p>
 <dl>
 <dt>Summary:</dt><dd><p>In this example, you can test benchmark for CUI mode.</p>
 <p>After running, it will automatically display the benchmark in your browser.
-To quite, press “Cnt + c” in terminal(or console) where this example is running.</p>
+To quite, press &quot;Cnt + c&quot; in terminal(or console) where this example is running.</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>benchmark_CUI.py
 </pre></div>
 </div>
@@ -266,147 +196,46 @@ To quite, press “Cnt + c” in terminal(or console) where this example is runn
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.benchmark_CUI.main">
-<span class="sig-prename descclassname"><span class="pre">example.benchmark_CUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.benchmark_CUI.main" title="Permalink to this definition"></a></dt>
-<dd><p>Open automatically benchmark on you’re own browser.</p>
+<span class="sig-prename descclassname"><span class="pre">example.benchmark_CUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/benchmark_CUI.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.benchmark_CUI.main" title="Link to this definition"></a></dt>
+<dd><p>Open automatically benchmark on you're own browser.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
-<section id="module-example.benchmark_GUI_window">
-<span id="example-benchmark-gui-window-module"></span><h2>example.benchmark_GUI_window module<a class="headerlink" href="#module-example.benchmark_GUI_window" title="Permalink to this heading"></a></h2>
-<p>Example of benchmark for face recognition.</p>
-<dl>
-<dt>Summary:</dt><dd><p>In this example, you can test benchmark for create GUI window.</p>
-<p>After running, it will automatically display the benchmark in your browser.
-To quite, press “Cnt + c” in terminal(or console) where this example is running.</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" /></a>
-<a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
-</dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/benchmark_GUI_window.py">benchmark_GUI_window.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.benchmark_GUI_window.logger">
-<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/benchmark_GUI_window.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.benchmark_GUI_window.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.benchmark_GUI_window.main">
-<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.benchmark_GUI_window.main" title="Permalink to this definition"></a></dt>
-<dd><p>Make GUI window and benchmark on you’re own browser.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-benchmark-gui-window-module">
+<h2>example.benchmark_GUI_window module<a class="headerlink" href="#example-benchmark-gui-window-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.combination_counter">
-<span id="example-combination-counter-module"></span><h2>example.combination_counter module<a class="headerlink" href="#module-example.combination_counter" title="Permalink to this heading"></a></h2>
+<span id="example-combination-counter-module"></span><h2>example.combination_counter module<a class="headerlink" href="#module-example.combination_counter" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.combination_similarity">
-<span id="example-combination-similarity-module"></span><h2>example.combination_similarity module<a class="headerlink" href="#module-example.combination_similarity" title="Permalink to this heading"></a></h2>
+<span id="example-combination-similarity-module"></span><h2>example.combination_similarity module<a class="headerlink" href="#module-example.combination_similarity" title="Link to this heading"></a></h2>
 <p>License for the Code.</p>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
 </section>
-<section id="module-example.data_augmentation">
-<span id="example-data-augmentation-module"></span><h2>example.data_augmentation module<a class="headerlink" href="#module-example.data_augmentation" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.data_augmentation.logger">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/data_augmentation.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.data_augmentation.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.data_augmentation.main">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.data_augmentation.main" title="Permalink to this definition"></a></dt>
-<dd><p>Simple example.</p>
-<p>This simple example accepts a directory path and recursively loads
-the directories for data augmentation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dir_path</strong> (<em>str</em>) – target directory path.</p></li>
-<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – image size. Defaults to 224.</p></li>
-<li><p><strong>num_jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – number of jitters. Defaults to 10.</p></li>
-<li><p><strong>initial_value</strong> (<em>float</em><em>, </em><em>optional</em>) – initial value. Defaults to -0.1.</p></li>
-<li><p><strong>closing_value</strong> (<em>float</em><em>, </em><em>optional</em>) – closing value. Defaults to 0.1.</p></li>
-<li><p><strong>step_value</strong> (<em>float</em><em>, </em><em>optional</em>) – step value. Defaults to 0.01.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.jitter_image">dlib.jitter_image</a></p>
-</div>
-</dd></dl>
-
+<section id="example-data-augmentation-module">
+<h2>example.data_augmentation module<a class="headerlink" href="#example-data-augmentation-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-example.data_augmentation_mp">
-<span id="example-data-augmentation-mp-module"></span><h2>example.data_augmentation_mp module<a class="headerlink" href="#module-example.data_augmentation_mp" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.data_augmentation_mp.logger">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/data_augmentation_mp.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.data_augmentation_mp.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.data_augmentation_mp.main">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.data_augmentation_mp.main" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.data_augmentation_mp.process_data">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">process_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.data_augmentation_mp.process_data" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="example-data-augmentation-mp-module">
+<h2>example.data_augmentation_mp module<a class="headerlink" href="#example-data-augmentation-mp-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.data_structure">
-<span id="example-data-structure-module"></span><h2>example.data_structure module<a class="headerlink" href="#module-example.data_structure" title="Permalink to this heading"></a></h2>
+<span id="example-data-structure-module"></span><h2>example.data_structure module<a class="headerlink" href="#module-example.data_structure" title="Link to this heading"></a></h2>
 <p>Data structure of FACE01.</p>
 <dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn data structure of FACE01.</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example<span class="w"> </span>data_structure.py
 </pre></div>
 </div>
@@ -512,7 +341,7 @@ The contents of config.ini described below are the settings for face-detection a
 <blockquote>
 <div><ul class="simple">
 <li><p>name: name</p></li>
-<li><p>pict: Saved image’s file name which is cropped by face-coordinate in a frame</p></li>
+<li><p>pict: Saved image's file name which is cropped by face-coordinate in a frame</p></li>
 <li><p>date:</p></li>
 <li><p>location: Face-coordinate</p></li>
 <li><p>percentage_and_symbol: xx%</p></li>
@@ -529,92 +358,99 @@ The contents of config.ini described below are the settings for face-detection a
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.data_structure.main">
-<span class="sig-prename descclassname"><span class="pre">example.data_structure.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.data_structure.main" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">example.data_structure.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/data_structure.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.data_structure.main" title="Link to this definition"></a></dt>
 <dd><p>Output data structure.</p>
 <p>Data structure of FACE01 can be get as frame_datas_array variable.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
-<section id="module-example.detect_eye_blink">
-<span id="example-detect-eye-blink-module"></span><h2>example.detect_eye_blink module<a class="headerlink" href="#module-example.detect_eye_blink" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="example.detect_eye_blink.main">
-<span class="sig-prename descclassname"><span class="pre">example.detect_eye_blink.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.detect_eye_blink.main" title="Permalink to this definition"></a></dt>
-<dd><p>Display window.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-detect-eye-blink-module">
+<h2>example.detect_eye_blink module<a class="headerlink" href="#example-detect-eye-blink-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.display_GUI_window">
-<span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
+<span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Link to this heading"></a></h2>
+<p>Example of GUI display and face recognition data output.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>In this example you can learn how to display GUI and output
+face recognition.</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/display_GUI_window.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/display_GUI_window.py">display_GUI_window.py</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p>ttkbootstrap
+<a class="reference external" href="https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html">https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html</a></p>
+</div>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="example.display_GUI_window.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.display_GUI_window.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec_times</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/display_GUI_window.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window.App" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="example.display_GUI_window.App.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/display_GUI_window.html#App.start"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window.App.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.display_GUI_window.App.terminate">
+<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/display_GUI_window.html#App.terminate"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window.App.terminate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.display_GUI_window.App.update_image">
+<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/display_GUI_window.html#App.update_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window.App.update_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="example.display_GUI_window.main">
-<span class="sig-prename descclassname"><span class="pre">example.display_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.display_GUI_window.main" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">example.display_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/display_GUI_window.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window.main" title="Link to this definition"></a></dt>
 <dd><p>Display window.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50 times.</p>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Receive value of number which is processed. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
-<section id="module-example.display_GUI_window_efficientnetv2_arcface">
-<span id="example-display-gui-window-efficientnetv2-arcface-module"></span><h2>example.display_GUI_window_efficientnetv2_arcface module<a class="headerlink" href="#module-example.display_GUI_window_efficientnetv2_arcface" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="example.display_GUI_window_efficientnetv2_arcface.main">
-<span class="sig-prename descclassname"><span class="pre">example.display_GUI_window_efficientnetv2_arcface.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.display_GUI_window_efficientnetv2_arcface.main" title="Permalink to this definition"></a></dt>
-<dd><p>Display window.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-display-gui-window-japanese-face-v1-module">
+<h2>example.display_GUI_window_JAPANESE_FACE_V1 module<a class="headerlink" href="#example-display-gui-window-japanese-face-v1-module" title="Link to this heading"></a></h2>
 </section>
 <section id="example-distort-barrel-module">
-<h2>example.distort_barrel module<a class="headerlink" href="#example-distort-barrel-module" title="Permalink to this heading"></a></h2>
+<h2>example.distort_barrel module<a class="headerlink" href="#example-distort-barrel-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.draw_datas">
-<span id="example-draw-datas-module"></span><h2>example.draw_datas module<a class="headerlink" href="#module-example.draw_datas" title="Permalink to this heading"></a></h2>
+<span id="example-draw-datas-module"></span><h2>example.draw_datas module<a class="headerlink" href="#module-example.draw_datas" title="Link to this heading"></a></h2>
 <p>Example of to draw datas using matplotlib.</p>
 <dl class="simple">
 <dt>Summary:</dt><dd><p>In this example, you can learn how to draw datas.</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/draw_datas.py
 </pre></div>
 </div>
@@ -628,19 +464,19 @@ Please refer to the separate license file for the license of the code.</p>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.draw_datas.f_norm">
-<span class="sig-prename descclassname"><span class="pre">example.draw_datas.</span></span><span class="sig-name descname"><span class="pre">f_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_encoded_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoded_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.draw_datas.f_norm" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">example.draw_datas.</span></span><span class="sig-name descname"><span class="pre">f_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_encoded_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoded_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/draw_datas.html#f_norm"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.draw_datas.f_norm" title="Link to this definition"></a></dt>
 <dd><p>Return <cite>Frobenius norm</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>face_encoded_list</strong> (<em>List</em>) – Face encoded list</p></li>
-<li><p><strong>face_encoded_data</strong> (<em>np.NDArray</em>) – Face encoded data as np.ndarray</p></li>
+<li><p><strong>face_encoded_list</strong> (<em>List</em>) -- Face encoded list</p></li>
+<li><p><strong>face_encoded_data</strong> (<em>np.NDArray</em>) -- Face encoded data as np.ndarray</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>Frobenius norm</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Any</p>
 </dd>
 </dl>
@@ -648,159 +484,36 @@ Please refer to the separate license file for the license of the code.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="example.draw_datas.main">
-<span class="sig-prename descclassname"><span class="pre">example.draw_datas.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.draw_datas.main" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">example.draw_datas.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/draw_datas.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.draw_datas.main" title="Link to this definition"></a></dt>
 <dd><p>Simple example.</p>
 <p>This simple example script prints out results of face encoded datas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
-<section id="module-example.example_logging">
-<span id="example-example-logging-module"></span><h2>example.example_logging module<a class="headerlink" href="#module-example.example_logging" title="Permalink to this heading"></a></h2>
-<p>Example of benchmark for face recognition.</p>
-<dl>
-<dt>Summary:</dt><dd><p>In this example, you can learn about log functions.</p>
-<dl class="simple">
-<dt>You can choose from two types of <cite>log_level</cite>,</dt><dd><ul class="simple">
-<li><p>info</p></li>
-<li><p>debug</p></li>
-</ul>
-</dd>
-</dl>
-<p>in <cite>CONFIG: Dict =  Initialize(‘DEFAULT’, ‘log_level’).initialize()</cite>.</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="c1"># Set up logger</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/logging.py
-</pre></div>
-</div>
-</div>
-<dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/example_logging.py">example_logging.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.example_logging.logger">
-<span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/example_logging.py</span> <span class="pre">(DEBUG)&gt;</span></em><a class="headerlink" href="#example.example_logging.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.example_logging.main">
-<span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.example_logging.main" title="Permalink to this definition"></a></dt>
-<dd><p>Setup logger example.</p>
-<p>Output log with define log-level.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-example-logging-module">
+<h2>example.example_logging module<a class="headerlink" href="#example-example-logging-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-example.face_coordinates">
-<span id="example-face-coordinates-module"></span><h2>example.face_coordinates module<a class="headerlink" href="#module-example.face_coordinates" title="Permalink to this heading"></a></h2>
-<p>Get only face coordinates.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to get face coordinates and cropped face images.</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/face_coordinates.py
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>Config.ini setting:</dt><dd><p>Set config.ini as described below as an example to get face-coordinate and get cropped face images.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>FACE-COORDINATE<span class="o">]</span>
-<span class="nv">headless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
-<span class="nv">anti_spoof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
-<span class="nv">output_debug_log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
-<span class="nv">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>info
-<span class="nv">set_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">750</span>
-<span class="nv">similar_percentage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">99</span>.1
-<span class="nv">jitters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="nv">preset_face_images_jitters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
-<span class="nv">upsampling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="nv">frame_skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
-<span class="nv">number_of_people</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
-<span class="nv">use_pipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
-<span class="nv">model_selection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="nv">min_detection_confidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.4
-<span class="nv">person_frame_face_encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
-<span class="nv">same_time_recognize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
-<span class="nv">set_area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>NONE
-<span class="nv">movie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>assets/some_people.mp4
-<span class="nv">crop_face_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
-<span class="nv">frequency_crop_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
-<span class="nv">crop_with_multithreading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
-<span class="nv">number_of_crops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<span class="nv">show_overlay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
-</pre></div>
-</div>
-</dd>
-<dt>Result:</dt><dd><p>Executing this example script will output the following contents.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">face</span> <span class="n">coordinates</span><span class="p">:</span> <span class="p">[(</span><span class="mi">156</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">304</span><span class="p">,</span> <span class="mi">85</span><span class="p">),</span> <span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">593</span><span class="p">,</span> <span class="mi">276</span><span class="p">,</span> <span class="mi">431</span><span class="p">),</span> <span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">485</span><span class="p">),</span> <span class="p">(</span><span class="mi">319</span><span class="p">,</span> <span class="mi">334</span><span class="p">,</span> <span class="mi">449</span><span class="p">,</span> <span class="mi">204</span><span class="p">),</span> <span class="p">(</span><span class="mi">281</span><span class="p">,</span> <span class="mi">645</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">521</span><span class="p">),</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">810</span><span class="p">,</span> <span class="mi">313</span><span class="p">,</span> <span class="mi">520</span><span class="p">),</span> <span class="p">(</span><span class="mi">349</span><span class="p">,</span> <span class="mi">394</span><span class="p">,</span> <span class="mi">573</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span> <span class="p">(</span><span class="mi">244</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="mi">408</span><span class="p">,</span> <span class="mi">138</span><span class="p">),</span> <span class="p">(</span><span class="mi">344</span><span class="p">,</span> <span class="mi">692</span><span class="p">,</span> <span class="mi">514</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">62</span><span class="p">)]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/face_coordinates.py">face_coordinates.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.face_coordinates.logger">
-<span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/face_coordinates.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.face_coordinates.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.face_coordinates.main">
-<span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.face_coordinates.main" title="Permalink to this definition"></a></dt>
-<dd><p>Output face coordinates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-face-coordinates-module">
+<h2>example.face_coordinates module<a class="headerlink" href="#example-face-coordinates-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.faiss_combination_similarity">
-<span id="example-faiss-combination-similarity-module"></span><h2>example.faiss_combination_similarity module<a class="headerlink" href="#module-example.faiss_combination_similarity" title="Permalink to this heading"></a></h2>
-<p>An example of code that loads all npKnown.npz files in the specified directory, and detects specified combinations of cosine similarities using faiss.</p>
+<span id="example-faiss-combination-similarity-module"></span><h2>example.faiss_combination_similarity module<a class="headerlink" href="#module-example.faiss_combination_similarity" title="Link to this heading"></a></h2>
+<p>指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出するコードの例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>In this example, you can learn how to load all npKnown.npz files in the specified directory below and detect specified combinations of cosine similarities using faiss.</p>
+<dt>Summary:</dt><dd><p>この例では、指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。</p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/faiss_combination_similarity.py
+<dt>Usage:</dt><dd><p>この例では必要になるデータ（ディレクトリ）を予めダウンロードしておく必要があります。</p>
+<p>git clone <a class="reference external" href="https://github.com/yKesamaru/FACE01_IOT_dev_assets.git">https://github.com/yKesamaru/FACE01_IOT_dev_assets.git</a></p>
+<p>FACE01_IOT_devフォルダが作成されます。これを確認した後にこのエグザんプルコードを実行してください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/faiss_combination_similarity.py
 </pre></div>
 </div>
 </dd>
@@ -808,198 +521,48 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </dd>
 </dl>
 </section>
-<section id="module-example.get_encoded_data">
-<span id="example-get-encoded-data-module"></span><h2>example.get_encoded_data module<a class="headerlink" href="#module-example.get_encoded_data" title="Permalink to this heading"></a></h2>
-<p>Example of to get face encoded data.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to get face encoded datas.</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/get_encoded_data.py
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure this example must be applied for ‘one person’.
-Not more two persons in same input.</p>
-</div>
-<dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/get_encoded_data.py">get_encoded_data.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.get_encoded_data.logger">
-<span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/get_encoded_data.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.get_encoded_data.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.get_encoded_data.main">
-<span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.get_encoded_data.main" title="Permalink to this definition"></a></dt>
-<dd><p>Simple example.</p>
-<p>This simple example script prints out results of face encoded datas.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-get-encoded-data-module">
+<h2>example.get_encoded_data module<a class="headerlink" href="#example-get-encoded-data-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-example.get_encoded_data_efficientnetv2_arcface">
-<span id="example-get-encoded-data-efficientnetv2-arcface-module"></span><h2>example.get_encoded_data_efficientnetv2_arcface module<a class="headerlink" href="#module-example.get_encoded_data_efficientnetv2_arcface" title="Permalink to this heading"></a></h2>
-<p>Example of simple face encode script with EfficientNetV2 Arcface model.</p>
+<section id="module-example.get_encoded_data_JAPANESE_FACE_V1">
+<span id="example-get-encoded-data-japanese-face-v1-module"></span><h2>example.get_encoded_data_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.get_encoded_data_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
+<p>JAPANESE_FACE_V1学習モデルを使用して顔特徴ベクトルを取得するシンプルな例.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple to use “efficientnetv2_arcface.onnx” model.
+<dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple to use &quot;JAPANESE_FACE_V1.onnx&quot; model.
 This script loads a face image file and outputs the feature vector of the face image.
-The feature vector is 512-dimensional vector, which is from <cite>efficientnetv2_arcface.onnx</cite> model.</p>
+The feature vector is 512-dimensional vector, which is from <cite>JAPANESE_FACE_V1.onnx</cite> model.
+この例では、「JAPANESE_FACE_V1.onnx」モデルを使用して、シンプルに特徴ベクトルを取得する方法を学ぶことができます。
+このスクリプトは顔画像ファイルを読み込み、その顔画像の特徴ベクトルを標準出力に出力します。
+特徴ベクトルは「JAPANESE_FACE_V1.onnx」モデルから生成される512次元のベクトルです。</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/get_encoded_data_efficientnetv2_arcface.py
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/get_encoded_data_JAPANESE_FACE_V1.py
 </pre></div>
 </div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/get_encoded_data_efficientnetv2_arcface.py">get_encoded_data_efficientnetv2_arcface.py</a></p>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/get_encoded_data_JAPANESE_FACE_V1.py">get_encoded_data_JAPANESE_FACE_V1.py</a></p>
 </dd>
 </dl>
 </section>
-<section id="module-example.jitter">
-<span id="example-jitter-module"></span><h2>example.jitter module<a class="headerlink" href="#module-example.jitter" title="Permalink to this heading"></a></h2>
-<p>Example of to jitter images.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to get jittered images.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">param path</dt>
-<dd class="field-odd"><p>Directory path where images containing faces exist.
-num_jitters (int, optional): Number of jitters. Defaults to 5.
-size (int, optional): Resize the image to the specified size. Defaults to 200.
-disturb_color (bool, optional): Disturb the color. Defaults to True.</p>
-</dd>
-<dt class="field-even">type path</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-<dt class="field-odd">returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/jitter.py<span class="w"> </span>path<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>True
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/jitter.png"><img alt="jitter_image" src="_images/jitter.png" style="width: 990.0px; height: 503.0px;" /></a>
-</dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/jitter.py">jitter.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.jitter.logger">
-<span class="sig-prename descclassname"><span class="pre">example.jitter.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/jitter.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.jitter.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.jitter.main">
-<span class="sig-prename descclassname"><span class="pre">example.jitter.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disturb_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.jitter.main" title="Permalink to this definition"></a></dt>
-<dd><p>Simple example.</p>
-<p>This simple example script takes a path which contained png, jpg, jpeg files in the directory,
-jitter and saves them.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em>) – absolute path</p></li>
-<li><p><strong>num_jitters</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of jitters. Defaults to 5.</p></li>
-<li><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – Resize the image to the specified size. Defaults to 200.</p></li>
-<li><p><strong>disturb_color</strong> (<em>bool</em><em>, </em><em>optional</em>) – Disturb the color. Defaults to True.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-jitter-module">
+<h2>example.jitter module<a class="headerlink" href="#example-jitter-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-example.lightweight_GUI">
-<span id="example-lightweight-gui-module"></span><h2>example.lightweight_GUI module<a class="headerlink" href="#module-example.lightweight_GUI" title="Permalink to this heading"></a></h2>
-<p>Example of LIGHTWEIGHT GUI window.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to make LIGHTWEIGHT GUI application.
-PySimpleGUI is used for GUI display.
-See below for how to use <a class="reference external" href="https://www.pysimplegui.org/en/latest/">PySimpleGUI.</a></p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Face detection and face recognition processing are performed only when the capture button is pressed, so it is useful in situations where only the CPU can be used. (Assuming that the GPU cannot be used)</p>
-</div>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/lightweight_GUI.py
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/PASTE_IMAGE_2023-01-23-22-30-18.png"><img alt="config_ini.md" src="_images/PASTE_IMAGE_2023-01-23-22-30-18.png" style="width: 391.5px; height: 272.0px;" /></a>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2023</span>-01-23<span class="w"> </span><span class="m">22</span>:33:18,752<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>load_preset_image.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
-安倍晋三
-<span class="w">        </span>similarity<span class="w">              </span><span class="m">99</span>.7%
-<span class="w">        </span>coordinate<span class="w">              </span><span class="o">(</span><span class="m">134</span>,<span class="w"> </span><span class="m">431</span>,<span class="w"> </span><span class="m">248</span>,<span class="w"> </span><span class="m">317</span><span class="o">)</span>
-<span class="w">        </span><span class="nb">time</span><span class="w">                    </span><span class="m">2023</span>,01,23,22,33,23,445574
-<span class="w">        </span>output<span class="w">                  </span>output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png
--------
-</pre></div>
-</div>
-</dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/lightweight_GUI.py">lightweight_GUI.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.lightweight_GUI.logger">
-<span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/lightweight_GUI.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.lightweight_GUI.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.lightweight_GUI.main">
-<span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.lightweight_GUI.main" title="Permalink to this definition"></a></dt>
-<dd><p>LIGHTWEIGHT GUI application example.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Receive value of number which is processed. Defaults to 500.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-lightweight-gui-module">
+<h2>example.lightweight_GUI module<a class="headerlink" href="#example-lightweight-gui-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.make_ID_card">
-<span id="example-make-id-card-module"></span><h2>example.make_ID_card module<a class="headerlink" href="#module-example.make_ID_card" title="Permalink to this heading"></a></h2>
-<p>Example of simple face encode script with EfficientNetV2 Arcface model.</p>
+<span id="example-make-id-card-module"></span><h2>example.make_ID_card module<a class="headerlink" href="#module-example.make_ID_card" title="Link to this heading"></a></h2>
+<p>JAPANESE FACE V1モデルを使用したQR顔エンコードの例.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to make ID card sample with QR code for multimodal certification.</p>
+<dt>Summary:</dt><dd><p>この例では、マルチモーダル認証のためのQRコード付きIDカードサンプルの作成方法を学ぶことができます。
+作成された画像ファイルは'example/img/'ディレクトリに保存されます。</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/make_ID_card.py
 </pre></div>
 </div>
@@ -1012,120 +575,113 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </dl>
 </section>
 <section id="module-example.make_npKnown_file">
-<span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-</section>
-<section id="module-example.similarity">
-<span id="example-similarity-module"></span><h2>example.similarity module<a class="headerlink" href="#module-example.similarity" title="Permalink to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
-</section>
-<section id="module-example.simple">
-<span id="example-simple-module"></span><h2>example.simple module<a class="headerlink" href="#module-example.simple" title="Permalink to this heading"></a></h2>
-<p>Example of simple face recognition script.</p>
+<span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Link to this heading"></a></h2>
+<p>Example program to create npKnown.npz file.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple.</p>
+<dt>Summary:</dt><dd><p>In this example you can learn how to make npKnown.npz file.
+ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
+それ以外の場合はエラーが発生します。
+'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。</p>
 </dd>
 </dl>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/simple.py
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/make_npKnown_file.py
 </pre></div>
 </div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/simple.py">simple.py</a></p>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/make_npKnown_file.py">make_npKnown_file.py</a></p>
 </dd>
 </dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.simple.logger">
-<span class="sig-prename descclassname"><span class="pre">example.simple.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01/example/simple.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.simple.logger" title="Permalink to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="example.simple.main">
-<span class="sig-prename descclassname"><span class="pre">example.simple.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#example.simple.main" title="Permalink to this definition"></a></dt>
-<dd><p>Simple example.</p>
-<p>This simple example script prints out results of face recognition process.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="example.make_npKnown_file.select_directory">
+<span class="sig-prename descclassname"><span class="pre">example.make_npKnown_file.</span></span><span class="sig-name descname"><span class="pre">select_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_file.html#select_directory"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_file.select_directory" title="Link to this definition"></a></dt>
+<dd><p>ディレクトリ選択ダイアログを表示し、選択したディレクトリを返す</p>
 </dd></dl>
 
 </section>
-<section id="example-simple-efficientnetv2-arcface-module">
-<h2>example.simple_efficientnetv2_arcface module<a class="headerlink" href="#example-simple-efficientnetv2-arcface-module" title="Permalink to this heading"></a></h2>
+<section id="module-example.similarity">
+<span id="example-similarity-module"></span><h2>example.similarity module<a class="headerlink" href="#module-example.similarity" title="Link to this heading"></a></h2>
+<p>Example of calculating similarity from two photos with JAPANESE_FACE_V1.onnx model.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>This is a sample code that calculates the similarity between two given photos,
+using the JAPANESE_FACE_V1.onnx model, which is a Japanese-only learning model.</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/similarity.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/similarity.py">similarity.py</a></p>
+</dd>
+</dl>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 </section>
-<section id="module-example.window1">
-<span id="example-window1-module"></span><h2>example.window1 module<a class="headerlink" href="#module-example.window1" title="Permalink to this heading"></a></h2>
+<section id="example-simple-module">
+<h2>example.simple module<a class="headerlink" href="#example-simple-module" title="Link to this heading"></a></h2>
+</section>
+<section id="example-simple-japanese-face-v1-module">
+<h2>example.simple_JAPANESE_FACE_V1 module<a class="headerlink" href="#example-simple-japanese-face-v1-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-example.simple_file_browser">
+<span id="example-simple-file-browser-module"></span><h2>example.simple_file_browser module<a class="headerlink" href="#module-example.simple_file_browser" title="Link to this heading"></a></h2>
+<p>Example: 簡易ファイルラウザ実装例</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>ttkbootstrapを用いた簡易ファイルブラウザ実装例</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
 <p>ttkbootstrap
 <a class="reference external" href="https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html">https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html</a></p>
+</div>
+<p>Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="example.window1.Application">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.window1.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><a class="headerlink" href="#example.window1.Application" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tk</span></code></p>
+<dt class="sig sig-object py" id="example.simple_file_browser.Application">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.simple_file_browser.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><a class="reference internal" href="_modules/example/simple_file_browser.html#Application"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.Application" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/tkinter.html#tkinter.Tk" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tk</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="example.window1.ImageBrowser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.window1.</span></span><span class="sig-name descname"><span class="pre">ImageBrowser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window1.ImageBrowser" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dt class="sig sig-object py" id="example.simple_file_browser.ImageBrowser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.simple_file_browser.</span></span><span class="sig-name descname"><span class="pre">ImageBrowser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="example.window1.ImageBrowser.load_images">
-<span class="sig-name descname"><span class="pre">load_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window1.ImageBrowser.load_images" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="example.simple_file_browser.ImageBrowser.load_images">
+<span class="sig-name descname"><span class="pre">load_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser.load_images"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser.load_images" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="example.window1.ImageBrowser.on_configure">
-<span class="sig-name descname"><span class="pre">on_configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window1.ImageBrowser.on_configure" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="example.simple_file_browser.ImageBrowser.on_configure">
+<span class="sig-name descname"><span class="pre">on_configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser.on_configure"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser.on_configure" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="example.window1.ImageBrowser.on_mousewheel">
-<span class="sig-name descname"><span class="pre">on_mousewheel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window1.ImageBrowser.on_mousewheel" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="example.simple_file_browser.ImageBrowser.on_mousewheel">
+<span class="sig-name descname"><span class="pre">on_mousewheel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser.on_mousewheel"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser.on_mousewheel" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="example.window1.ImageBrowser.show_image">
-<span class="sig-name descname"><span class="pre">show_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window1.ImageBrowser.show_image" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="example.simple_file_browser.ImageBrowser.show_image">
+<span class="sig-name descname"><span class="pre">show_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser.show_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser.show_image" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
-
-</section>
-<section id="module-example.window2">
-<span id="example-window2-module"></span><h2>example.window2 module<a class="headerlink" href="#module-example.window2" title="Permalink to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="example.window2.DirectoryObserver">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.window2.</span></span><span class="sig-name descname"><span class="pre">DirectoryObserver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window2.DirectoryObserver" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="example.window2.ImageBrowser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.window2.</span></span><span class="sig-name descname"><span class="pre">ImageBrowser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window2.ImageBrowser" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.window2.load_images">
-<span class="sig-prename descclassname"><span class="pre">example.window2.</span></span><span class="sig-name descname"><span class="pre">load_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#example.window2.load_images" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
 
 </section>
 <section id="module-example">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-example" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-example" title="Link to this heading"></a></h2>
 </section>
 </section>
 
@@ -1133,14 +689,14 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="FACE01 Document" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="step_by_step/example_doc.html" class="btn btn-neutral float-left" title="Step-by-step to use FACE01 library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="face01lib.html" class="btn btn-neutral float-right" title="face01lib package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, yKesamaru.</p>
+    <p>&#169; Copyright 2024, yKesamaru.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
