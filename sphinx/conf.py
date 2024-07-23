@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath("../"))
 project = 'FACE01'
 copyright = '2024, yKesamaru'
 author = 'yKesamaru'
-release = '3.0.01'
+release = 'v3.0.01'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
