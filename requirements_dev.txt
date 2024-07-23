@@ -2,8 +2,8 @@ faiss-gpu
 snakeviz
 sphinx
 myst-parser
-# sphinx_rtd_theme
-sphinx-wagtail-theme
+sphinx_rtd_theme
+# sphinx-wagtail-theme
 sphinx_autodoc_typehints
 recommonmark
 watchdog
