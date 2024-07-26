@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/images/g1320.png" width="200px">
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_sample/master/images/g1320.png" width="200px">
 
 ⚡️ オープンソース
 
@@ -14,7 +14,10 @@ FACE01 -- さあ、始めましょう！
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV) ![](https://img.shields.io/badge/Release-v3.0-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_DEV/github-pages)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
+![](https://img.shields.io/badge/Release-v3.0-blue)
+![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue)
+![](https://img.shields.io/github/deployments/yKesamaru/FACE01_DEV/github-pages)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_DEV)
 
 ![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
