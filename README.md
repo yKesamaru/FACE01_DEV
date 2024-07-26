@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/g1320.png" width="200px">
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/images/g1320.png" width="200px">
 
 ⚡️ オープンソース
 
@@ -14,8 +14,8 @@ FACE01 -- さあ、始めましょう！
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_SAMPLE) ![](https://img.shields.io/badge/Release-v3.0-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_SAMPLE/github-pages)
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_SAMPLE)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV) ![](https://img.shields.io/badge/Release-v3.0-blue) ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue) ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_DEV/github-pages)
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_DEV)
 
 ![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -67,18 +67,18 @@ Audrey Hepburn
 - 出力フレーム画像を修正する設定が可能
 - 設定ファイルによる機能の集中管理
 - RTSP、HTTP、USBなどの入力プロトコルを選択可能
-- `顔認識` や `画像処理` のための多くの機能が利用可能です（詳細は[Useful FACE01 library](https://ykesamaru.github.io/FACE01_SAMPLE/)をご覧ください）
+- `顔認識` や `画像処理` のための多くの機能が利用可能です（詳細は[Useful FACE01 library](https://ykesamaru.github.io/FACE01_DEV/)をご覧ください）
 - ...and many others!
 
 ---
 
 ## ℹ️: Note
 ### リポジトリについて
-`FACE01_DEV`リポジトリは開発用リポジトリになっております。
+今後の開発は`FACE01_DEV`リポジトリ（このリポジトリ）で行われます。
 
-配布用リポジトリとして`FACE01_SAMPLE`をご用意しています。
+`FACE01_SAMPLE`リポジトリは旧バージョンのため閉鎖されました。
 
-最新版を試したい方は`FACE01_DEV`リポジトリをご使用ください。
+`FACE01_DEV`リポジトリをご使用ください。
 
 ### その他
 - このリポジトリが提供するファイルは、無料でお使いいただけます。
@@ -100,7 +100,7 @@ FACE01開発環境のセッティングは本当に簡単です！
 現在の環境に直接`FACE01`をインストールするには、`INSTALL_FACE01.sh`スクリプトを実行します。
 
 ```bash
-wget https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/INSTALL_FACE01.sh
+wget https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
 chmod +x INSTALL_FACE01.sh
 bash -c ./INSTALL_FACE01.sh
 ```
@@ -163,7 +163,7 @@ See [here](docs/example_doc.md).
 <img src="docs/img/20_times.png" width="300px" >
 </div>
 
-包括的なドキュメントは[こちら](https://ykesamaru.github.io/FACE01_SAMPLE/)をご参照ください。
+包括的なドキュメントは[こちら](https://ykesamaru.github.io/FACE01_DEV/)をご参照ください。
 
 ## Document
 
@@ -172,7 +172,7 @@ See [here](docs/example_doc.md).
 
     <img src="docs/img/step-by-step.png" width="400px" >
 
-- 🧑‍💻 [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_SAMPLE/index.html)
+- 🧑‍💻 [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_DEV/index.html)
   - 中級者以上向けの包括的なリソース
 
     <img src="docs/img/document.png" width="400px" >

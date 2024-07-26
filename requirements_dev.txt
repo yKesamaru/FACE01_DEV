@@ -1,9 +1,9 @@
+# sphinx-wagtail-theme
 faiss-gpu
+myst-parser
+recommonmark
 snakeviz
 sphinx
-myst-parser
-sphinx_rtd_theme
-# sphinx-wagtail-theme
 sphinx_autodoc_typehints
-recommonmark
+sphinx_rtd_theme
 watchdog
