@@ -18,7 +18,6 @@ ___
 ![](https://img.shields.io/badge/Release-v3.0-blue)
 ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue)
 ![](https://img.shields.io/github/deployments/yKesamaru/FACE01_DEV/github-pages)
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/yKesamaru/FACE01_DEV)
 
 ![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -87,7 +86,7 @@ Audrey Hepburn
 - このリポジトリが提供するファイルは、無料でお使いいただけます。
 教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
   詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](docs/academic.md)をご覧ください。
-- 商用利用にあたっては別途ライセンスが必要です。
+- 商用利用にあたっては別途ライセンスが必要です。（LICENSEファイルをご参照ください。）
 - YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
   - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](docs/YouTube_license.md)をご参照ください。
 - このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
@@ -115,9 +114,11 @@ See [here](docs/Installation.md).
 ---
 
 ### Dockerを使用したい場合
-🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
+v3.0以降の`Docker Image`はまだ作成されておりません。お待ちください。
 
-See [here](docs/docker.md).
+~~🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。~~
+
+~~See [here](docs/docker.md).~~
 
 If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
 
