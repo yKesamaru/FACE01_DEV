@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-LABEL maintainer="yKesamkaoninsho.com>"
+LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
 # ########################################################
 # GPU **CANNOT** be used for the docker image 
