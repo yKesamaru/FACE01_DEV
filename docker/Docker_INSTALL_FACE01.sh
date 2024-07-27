@@ -2,7 +2,9 @@
 set -x
 
 # -----------------------------------------------------------------
-# FACE01 SETUP INSTALLER
+# サマリー:
+# このスクリプトは、Dockerコンテナ内でのFACE01環境のセットアップを行います。
+# CUDAの環境変数設定、Python仮想環境の作成、dlibやその他の必要なパッケージのインストールを行います。
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
@@ -22,7 +24,8 @@ pip cache remove dlib
 pip install -U pip
 pip install -U wheel
 pip install -U setuptools
-pip install -r requirements.txt
+pip install .
+pip install -r requirements_dev.txt
 
 tar -jxvf dlib-19.24.tar.bz2
 cd dlib-19.24

@@ -13,7 +13,8 @@ pip cache remove dlib
 pip install -U pip
 pip install -U wheel
 pip install -U setuptools
-pip install -r requirements.txt
+pip install .
+pip install -r requirements_dev.txt
 pip install dlib
 
 cd ../

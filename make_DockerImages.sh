@@ -12,20 +12,16 @@ IFS=$'\n\t'
 
 # TODO: face01_gpuとface01_no_gpuをfor loopでまわすこと
 
-#######################################
-# __SUMMARY__
-# Globals:
-#   BACKUP_DIR
-#   ORACLE_SID
-# Arguments:
-#   None
-# Returns:
-#   None
-#######################################
+# -----------------------------------------------------------------
+# サマリー:
+# このスクリプトは、DockerイメージのビルドおよびDocker Hubへのプッシュを自動化します。
+# face01_gpuとface01_no_gpuの2種類のイメージを作成し、それぞれをDocker Hubにプッシュします。
+# -----------------------------------------------------------------
+
 function my_command() {
 
-# cd: DIST/
-cd ~/bin/DIST
+# cd: FACE01_DEV/
+cd ~/bin/FACE01_DEV
 
 
 # ////////////////////////////////////////
@@ -35,21 +31,21 @@ cd ~/bin/DIST
 # ////////////////////////////////////////
 
 # docker build: CPU100%になるので他の作業との兼ね合いに注意すること
-docker build -t tokaikaoninsho/face01_gpu:2.2.02 -f docker/Dockerfile_gpu . --network host
+docker build -t tokaikaoninsho/face01_gpu:3.0.03 -f docker/Dockerfile_gpu . --network host
 # dockerを起動
-# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:2.2.02
+# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:3.0.03
 # # get `container-id`
-# face01_gpu_container-id = docker ps -a | grep face01_gpu:2.2.02 | awk '{print $1}'
+# face01_gpu_container-id = docker ps -a | grep face01_gpu:3.0.03 | awk '{print $1}'
 # # commit
-# # docker container commit "${face01_gpu_container-id}" tokaikaoninsho/face01_gpu:2.2.02
+# # docker container commit "${face01_gpu_container-id}" tokaikaoninsho/face01_gpu:3.0.03
 # # get `image-id`
-# face01_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_gpu\s+2.2.02.*" | awk '{print $3}'
+# face01_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_gpu\s+3.0.03.*" | awk '{print $3}'
 # # add tag
 # docker tag "${face01_gpu_image-id}" face01_gpu
 # # login
 docker login
 # docker push
-docker push tokaikaoninsho/face01_gpu:2.2.02
+docker push tokaikaoninsho/face01_gpu:3.0.03
 
 
 # ////////////////////////////////////////
@@ -59,21 +55,21 @@ docker push tokaikaoninsho/face01_gpu:2.2.02
 # ////////////////////////////////////////
 
 # docker build: CPU100%になるので他の作業との兼ね合いに注意すること
-docker build -t tokaikaoninsho/face01_no_gpu:2.2.02 -f docker/Dockerfile_no_gpu . --network host
+docker build -t tokaikaoninsho/face01_no_gpu:3.0.03 -f docker/Dockerfile_no_gpu . --network host
 # # dockerを起動
-# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:2.2.02
+# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:3.0.03
 # # get `container-id`
-# face01_no_gpu-container-id = docker ps -a | grep face01_no_gpu:2.2.02 | awk '{print $1}'
+# face01_no_gpu-container-id = docker ps -a | grep face01_no_gpu:3.0.03 | awk '{print $1}'
 # # commit
-# docker container commit "${face01_no_gpu_container-id}" tokaikaoninsho/face01_no_gpu:2.2.02
+# docker container commit "${face01_no_gpu_container-id}" tokaikaoninsho/face01_no_gpu:3.0.03
 # # get `image-id`
-# face01_no_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_no_gpu\s+2.2.02.*" | awk '{print $3}'
+# face01_no_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_no_gpu\s+3.0.03.*" | awk '{print $3}'
 # # add tag
 # docker tag "${face01_no_gpu_image-id}" face01_no_gpu
 # login
 docker login
 # docker push
-docker push tokaikaoninsho/face01_no_gpu:2.2.02
+docker push tokaikaoninsho/face01_no_gpu:3.0.03
 
 
     return 0

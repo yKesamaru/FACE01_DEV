@@ -114,11 +114,10 @@ See [here](docs/Installation.md).
 ---
 
 ### Dockerを使用したい場合
-v3.0以降の`Docker Image`はまだ作成されておりません。お待ちください。
 
-~~🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。~~
+🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
 
-~~See [here](docs/docker.md).~~
+See [here](docs/docker.md).
 
 If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
 
