@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-LABEL maintainer="yKesamkaoninsho.com>"
+LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
 # ########################################################
 # GPU **CANNOT** be used for the docker image 
@@ -54,38 +54,38 @@ RUN chown -R ${DOCKER_USER} ./
 USER ${DOCKER_USER}
 
 # Install FACE01
-RUN mkdir /home/${DOCKER_USER}/FACE01_SAMPLE
-WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE/
+RUN mkdir /home/${DOCKER_USER}/FACE01_DEV
+WORKDIR /home/${DOCKER_USER}/FACE01_DEV/
 
-COPY face01lib /home/${DOCKER_USER}/FACE01_SAMPLE/face01lib
-COPY output /home/${DOCKER_USER}/FACE01_SAMPLE/output
-COPY noFace /home/${DOCKER_USER}/FACE01_SAMPLE/noFace
-COPY images /home/${DOCKER_USER}/FACE01_SAMPLE/images
-COPY requirements.txt /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY config.ini /home/${DOCKER_USER}/FACE01_SAMPLE/
+COPY face01lib /home/${DOCKER_USER}/FACE01_DEV/face01lib
+COPY output /home/${DOCKER_USER}/FACE01_DEV/output
+COPY noFace /home/${DOCKER_USER}/FACE01_DEV/noFace
+# COPY images /home/${DOCKER_USER}/FACE01_DEV/images
+COPY pyproject.toml /home/${DOCKER_USER}/FACE01_DEV/
+COPY requirements_dev.txt /home/${DOCKER_USER}/FACE01_DEV/
+COPY config.ini /home/${DOCKER_USER}/FACE01_DEV/
 
 ## Folder newly prepared from v1.4.09
-COPY docs /home/${DOCKER_USER}/FACE01_SAMPLE/docs
-COPY example /home/${DOCKER_USER}/FACE01_SAMPLE/example
-COPY tests /home/${DOCKER_USER}/FACE01_SAMPLE/tests
-COPY assets /home/${DOCKER_USER}/FACE01_SAMPLE/assets
+COPY docs /home/${DOCKER_USER}/FACE01_DEV/docs
+COPY example /home/${DOCKER_USER}/FACE01_DEV/example
+# COPY tests /home/${DOCKER_USER}/FACE01_DEV/tests
+COPY assets /home/${DOCKER_USER}/FACE01_DEV/assets
 
 ## Folders and files obsolete from v1.4.09
-# COPY FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
-# COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_SAMPLE/
-# COPY *.mp4 /home/${DOCKER_USER}/FACE01_SAMPLE/
+# COPY FACE01.py /home/${DOCKER_USER}/FACE01_DEV/
+# COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_DEV/
+# COPY *.mp4 /home/${DOCKER_USER}/FACE01_DEV/
 
-COPY npKnown.npz /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_SAMPLE/
-COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_SAMPLE/
-RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE
-COPY preset_face_images /home/${DOCKER_USER}/FACE01_SAMPLE/preset_face_images
+# COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_DEV/
+COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_DEV/
+RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_DEV
+COPY preset_face_images /home/${DOCKER_USER}/FACE01_DEV/preset_face_images
 
-COPY docker/Docker_INSTALL_FACE01_CPU.sh /home/${DOCKER_USER}/FACE01_SAMPLE/
-WORKDIR /home/${DOCKER_USER}/FACE01_SAMPLE
-RUN echo ${DOCKER_PASSWORD} | sudo -S chown ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01_CPU.sh \
-    && chmod +x /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01_CPU.sh \
-    && /bin/bash -c /home/${DOCKER_USER}/FACE01_SAMPLE/Docker_INSTALL_FACE01_CPU.sh
+COPY docker/Docker_INSTALL_FACE01_CPU.sh /home/${DOCKER_USER}/FACE01_DEV/
+WORKDIR /home/${DOCKER_USER}/FACE01_DEV
+RUN echo ${DOCKER_PASSWORD} | sudo -S chown ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_DEV/Docker_INSTALL_FACE01_CPU.sh \
+    && chmod +x /home/${DOCKER_USER}/FACE01_DEV/Docker_INSTALL_FACE01_CPU.sh \
+    && /bin/bash -c /home/${DOCKER_USER}/FACE01_DEV/Docker_INSTALL_FACE01_CPU.sh
 
 # `--clean` see bellow
 # [Have you done sudo python3 setup.py install --clean yet?](https://github.com/davisking/dlib/issues/1686#issuecomment-471509357)
