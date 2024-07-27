@@ -20,8 +20,8 @@ IFS=$'\n\t'
 
 function my_command() {
 
-# cd: DIST/
-cd ~/bin/DIST
+# cd: FACE01_DEV/
+cd ~/bin/FACE01_DEV
 
 
 # ////////////////////////////////////////
