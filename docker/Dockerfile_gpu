@@ -73,14 +73,15 @@ WORKDIR /home/${DOCKER_USER}/FACE01_DEV/
 COPY face01lib /home/${DOCKER_USER}/FACE01_DEV/face01lib
 COPY output /home/${DOCKER_USER}/FACE01_DEV/output
 COPY noFace /home/${DOCKER_USER}/FACE01_DEV/noFace
-COPY images /home/${DOCKER_USER}/FACE01_DEV/images
-COPY requirements.txt /home/${DOCKER_USER}/FACE01_DEV/
+# COPY images /home/${DOCKER_USER}/FACE01_DEV/images
+COPY pyproject.toml /home/${DOCKER_USER}/FACE01_DEV/
+COPY requirements_dev.txt /home/${DOCKER_USER}/FACE01_DEV/
 COPY config.ini /home/${DOCKER_USER}/FACE01_DEV/
 
 ## Folder newly prepared from v1.4.09
 COPY docs /home/${DOCKER_USER}/FACE01_DEV/docs
 COPY example /home/${DOCKER_USER}/FACE01_DEV/example
-COPY tests /home/${DOCKER_USER}/FACE01_DEV/tests
+# COPY tests /home/${DOCKER_USER}/FACE01_DEV/tests
 COPY assets /home/${DOCKER_USER}/FACE01_DEV/assets
 
 ## Folders and files obsolete from v1.4.09
@@ -88,8 +89,7 @@ COPY assets /home/${DOCKER_USER}/FACE01_DEV/assets
 # COPY CALL_FACE01.py /home/${DOCKER_USER}/FACE01_DEV/
 # COPY *.mp4 /home/${DOCKER_USER}/FACE01_DEV/
 
-COPY npKnown.npz /home/${DOCKER_USER}/FACE01_DEV/
-COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_DEV/
+# COPY dlib-19.24.tar.bz2 /home/${DOCKER_USER}/FACE01_DEV/
 COPY SystemCheckLock /home/${DOCKER_USER}/FACE01_DEV/
 RUN echo ${DOCKER_PASSWORD} | sudo -S chown -R ${DOCKER_USER} /home/${DOCKER_USER}/FACE01_DEV
 COPY preset_face_images /home/${DOCKER_USER}/FACE01_DEV/preset_face_images
