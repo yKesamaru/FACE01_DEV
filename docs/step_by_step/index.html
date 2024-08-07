@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>概念や使い方 &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>FACE01ライブラリのステップバイステップガイド &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -16,17 +16,17 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Step-by-step to use FACE01 library" href="example_doc.html" />
+    <link rel="next" title="example package" href="../example.html" />
     <link rel="prev" title="ステップ・バイ・ステップ" href="../step_by_step.html" /> 
 </head>
 
@@ -53,15 +53,26 @@
               <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">概念や使い方</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html">Step-by-step to use FACE01 library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#simple-flow-for-using-face01"><span class="xref myst">Simple flow for using FACE01</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#simple-face-recognition"><span class="xref myst">Simple face recognition</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#display-gui-window"><span class="xref myst">Display GUI window</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#display-telop-and-logo-images-which-you-re-company-s"><span class="xref myst">Display 'telop' and 'logo' images which you're company's.</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#want-to-benchmark"><span class="xref myst">Want to benchmark?</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#example-list">Example list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example_doc.html#troubleshooting-thinking">Troubleshooting:thinking:</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FACE01ライブラリのステップバイステップガイド</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">チェック項目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><span class="xref myst">FACE01のインストール</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker"><span class="xref myst">Dockerのインストール</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><span class="xref myst">顔画像の登録</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python">仮想Python環境の有効化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vim">vimのインストール確認</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><span class="xref myst">設定ファイルの編集</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><span class="xref myst">FACE01の簡単な使用フロー</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6"><span class="xref myst">ファンクションについて</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7"><span class="xref myst">簡単な顔認識</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gui"><span class="xref myst">GUIウィンドウの表示</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8"><span class="xref myst">会社の「テロップ」や「ロゴ」画像を表示</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9"><span class="xref myst">ベンチマークを取りたい？</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">エグザンプルリスト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thinking">トラブルシューティング:thinking:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cuda">CUDAが動作しない</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dlib-dlib-use-cudafalse">dlib.DLIB_USE_CUDAがFalseの場合の対処法</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -87,7 +98,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../step_by_step.html">ステップ・バイ・ステップ</a></li>
-      <li class="breadcrumb-item active">概念や使い方</li>
+      <li class="breadcrumb-item active">FACE01ライブラリのステップバイステップガイド</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -96,21 +107,157 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="id1">
-<h1>概念や使い方<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<p>ここではFACE01を使う前に知っておきたい概念や使い方をステップ・バイ・ステップで学びます。</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html">Step-by-step to use FACE01 library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#simple-flow-for-using-face01"><span class="xref myst">Simple flow for using FACE01</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#simple-face-recognition"><span class="xref myst">Simple face recognition</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#display-gui-window"><span class="xref myst">Display GUI window</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#display-telop-and-logo-images-which-you-re-company-s"><span class="xref myst">Display 'telop' and 'logo' images which you're company's.</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#want-to-benchmark"><span class="xref myst">Want to benchmark?</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#example-list">Example list</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example_doc.html#troubleshooting-thinking">Troubleshooting:thinking:</a></li>
+  <section id="face01">
+<h1>FACE01ライブラリのステップバイステップガイド<a class="headerlink" href="#face01" title="Link to this heading"></a></h1>
+<p><strong>FACE01の世界へようこそ！</strong></p>
+<p>この記事では、エグザンプルプログラムを使用して、FACE01を用いた顔認識アプリケーションを作成するために必要な知識と技術を紹介します。</p>
+<p>準備はいいですか？</p>
+<p>まずは、<strong>チェック項目を確認</strong>しましょう。</p>
+<!-- TOC
+1. [FACE01ライブラリのステップバイステップガイド](#face01ライブラリのステップバイステップガイド)
+   1. [チェック項目](#チェック項目)
+   2. [顔画像の登録](#顔画像の登録)
+   3. [仮想Python環境の有効化](#仮想python環境の有効化)
+   4. [vimのインストール確認](#vimのインストール確認)
+2. [FACE01の簡単な使用フロー](#face01の簡単な使用フロー)
+3. [簡単な顔認識](#簡単な顔認識)
+4. [GUIウィンドウの表示](#guiウィンドウの表示)
+5. [会社の「テロップ」や「ロゴ」画像を表示](#会社の「テロップ」や「ロゴ」画像を表示)
+6. [ベンチマークを取りたい？](#ベンチマークを取りたい)
+7. [例リスト](#例リスト)
+8. [トラブルシューティング:thinking:](#トラブルシューティングthinking)
+   1. [CUDAが動作しない](#cudaが動作しない)
+   2. [dlib.DLIB\_USE\_CUDAがFalseの場合の対処法](#dlibdlib_use_cudaがfalseの場合の対処法) -->
+<section id="id1">
+<h2>チェック項目<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>✅</p>
+<ul class="simple">
+<li><p>[x] Pythonの基本操作</p></li>
+<li><p>[x] Dockerの基本操作</p></li>
+<li><p>[x] Linuxターミナルの基本操作</p></li>
+<li><p>[x] (Nvidia GPUを使用する場合) CUDAドライバがすでにインストールされていること</p></li>
 </ul>
+<p>すべての項目を確認しましたか？
+OK！では始めましょう！</p>
+</section>
+<section id="id2">
+<h2><a class="reference internal" href="Installation.html"><span class="std std-doc">FACE01のインストール</span></a><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>ここでは、FACE01のインストール方法について解説します。
+<a class="reference internal" href="Installation.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="docker">
+<h2><a class="reference internal" href="#install_docker.md"><span class="xref myst">Dockerのインストール</span></a><a class="headerlink" href="#docker" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使用する方法は<a class="reference internal" href="#install_docker.md"><span class="xref myst">こちら</span></a>をご覧ください。
+また具体的な<code class="docutils literal notranslate"><span class="pre">Docker</span></code>の使用法について<a class="reference internal" href="docker.html"><span class="std std-doc">こちら</span></a>で解説しています。</p>
+</section>
+<section id="id3">
+<h2><a class="reference internal" href="register_faces.html"><span class="std std-doc">顔画像の登録</span></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>この記事では、顔画像の登録方法について説明します。
+詳細は<a class="reference internal" href="register_faces.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="python">
+<h2>仮想Python環境の有効化<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>Python標準ライブラリの<code class="docutils literal notranslate"><span class="pre">venv</span></code>を使用して仮想環境を開始します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 仮想環境の有効化</span>
+.<span class="w"> </span>bin/activate
+</pre></div>
 </div>
+</section>
+<section id="vim">
+<h2>vimのインストール確認<a class="headerlink" href="#vim" title="Link to this heading"></a></h2>
+<p>Dockerイメージにはvimがインストールされているので、<code class="docutils literal notranslate"><span class="pre">conf.ini</span></code>を編集できます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># vimのインストール確認</span>
+which<span class="w"> </span>vim
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2><a class="reference internal" href="config_ini.html"><span class="std std-doc">設定ファイルの編集</span></a><a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>設定は<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルで行います。
+<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルについては<a class="reference internal" href="config_ini.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id5">
+<h2><a class="reference internal" href="simple_flow.html"><span class="std std-doc">FACE01の簡単な使用フロー</span></a><a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>FACE01の使い方の一例ですが、簡単なフローを見てみましょう。
+詳細は<a class="reference internal" href="simple_flow.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id6">
+<h2><a class="reference internal" href="functions.html"><span class="std std-doc">ファンクションについて</span></a><a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を試用する上での基本的なファンクションについて<a class="reference internal" href="functions.html"><span class="std std-doc">こちら</span></a>で確認しましょう。</p>
+</section>
+<section id="id7">
+<h2><a class="reference internal" href="simple.html"><span class="std std-doc">簡単な顔認識</span></a><a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">simple.py</span></code>を試してみましょう。
+simple.pyはCUI動作のためのエグザンプルのスクリプトです。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>詳細は<a class="reference internal" href="simple.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="gui">
+<h2><a class="reference internal" href="display_GUI_win.html"><span class="std std-doc">GUIウィンドウの表示</span></a><a class="headerlink" href="#gui" title="Link to this heading"></a></h2>
+<p>かっこいいGUIウィンドウに表示したいですか？<br />
+<code class="docutils literal notranslate"><span class="pre">example/display_GUI_window.py</span></code>を試してみてください。<br />
+詳細は<a class="reference internal" href="display_GUI_win.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">display_GUI_window</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>詳細は<a class="reference internal" href="simple.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id8">
+<h2><a class="reference internal" href="ch_telop.html"><span class="std std-doc">会社の「テロップ」や「ロゴ」画像を表示</span></a><a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>ウィンドウに会社のロゴなどを表示したいですか？<br />
+もちろん可能です！<br />
+詳細は<a class="reference internal" href="ch_telop.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id9">
+<h2><a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">ベンチマークを取りたい？</span></a><a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>詳細は<a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id10">
+<h2>エグザンプルリスト<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Simple</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 2. Display GUI window</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">display_GUI_window</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 3. logging</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">example_logging</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 4. data structure</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">data_structure</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 5. Benchmark with CUI mode</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">benchmark_CUI</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># 6. Benchmark with GUI mode</span>
+<span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">benchmark_GUI_window</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Other</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">aligned_crop_face</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">anti_spoof</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">distort_barrel</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">draw_datas</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">face_coordinates</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">get_encoded_data</span><span class="o">.</span><span class="n">py</span>
+<span class="o">-</span> <span class="n">example</span><span class="o">/</span><span class="n">lightweight_GUI</span><span class="o">.</span><span class="n">py</span>
+<span class="o">...</span><span class="ow">and</span> <span class="n">others</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>FACE01の多くのクラスとメソッドの詳細については、<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/">FACE01ドキュメント</a>をご覧ください。</strong></p>
+</section>
+<section id="thinking">
+<h2>トラブルシューティング:thinking:<a class="headerlink" href="#thinking" title="Link to this heading"></a></h2>
+<section id="cuda">
+<h3>CUDAが動作しない<a class="headerlink" href="#cuda" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="reinstall_gpu.html"><span class="std std-doc">CUDAライブラリをすべて削除して再インストールする方法</span></a>をご覧ください。</p>
+</section>
+<section id="dlib-dlib-use-cudafalse">
+<h3>dlib.DLIB_USE_CUDAがFalseの場合の対処法<a class="headerlink" href="#dlib-dlib-use-cudafalse" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="dlib.DLIB_USE_CUDA.html"><span class="std std-doc">dlib.DLIB_USE_CUDAがFalseの場合の対処法</span></a>をご覧ください。</p>
+</section>
+</section>
 </section>
 
 
@@ -118,7 +265,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../step_by_step.html" class="btn btn-neutral float-left" title="ステップ・バイ・ステップ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="example_doc.html" class="btn btn-neutral float-right" title="Step-by-step to use FACE01 library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../example.html" class="btn btn-neutral float-right" title="example package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

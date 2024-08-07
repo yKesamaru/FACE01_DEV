@@ -1,6 +1,6 @@
 # Installation
 ```bash
-wget https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/INSTALL_FACE01.sh
+wget https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
 chmod +x INSTALL_FACE01.sh
 bash -c ./INSTALL_FACE01.sh
 ```
