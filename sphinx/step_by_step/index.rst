@@ -7,4 +7,4 @@
 .. toctree::
     :maxdepth: 1
 
-    example_doc.md
+    index.md

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build Docker image &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>Build Docker image &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -16,13 +16,13 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" /> 
@@ -83,21 +83,21 @@
   <section id="build-docker-image">
 <h1>Build Docker image<a class="headerlink" href="#build-docker-image" title="Link to this heading"></a></h1>
 <p>If you want to build the Docker Image yourself, please refer to the article below.</p>
-<p>First, you have to clone FACE01_SAMPLE repository.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yKesamaru/FACE01_SAMPLE.git
+<p>First, you have to clone FACE01_DEV repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yKesamaru/FACE01_DEV.git
 </pre></div>
 </div>
 <section id="build-face01-docker-image-with-nvidia-docker2-package">
 <h2>Build FACE01 docker image with nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-with-nvidia-docker2-package" title="Link to this heading"></a></h2>
 <p>To make image</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_SAMPLE
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_DEV
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
 </pre></div>
 </div>
 </section>
 <section id="build-face01-docker-image-without-nvidia-docker2-package">
 <h2>Build FACE01 docker image * <em><strong>without</strong></em> * nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-without-nvidia-docker2-package" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_SAMPLE
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_DEV
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_no_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_no_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
 </pre></div>
 </div>
@@ -133,15 +133,15 @@ face01_gpu<span class="w">    </span><span class="m">1</span>.4.10<span class="w
 </pre></div>
 </div>
 </section>
-<section id="launch-face01-sample">
-<h2>Launch FACE01_SAMPLE<a class="headerlink" href="#launch-face01-sample" title="Link to this heading"></a></h2>
+<section id="launch-face01-dev">
+<h2>Launch FACE01_DEV<a class="headerlink" href="#launch-face01-dev" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>
 
 <span class="c1"># Check nvidia-smi</span>
-docker@ee44d08e933f:~/FACE01_SAMPLE$<span class="w"> </span>nvidia-smi
+docker@ee44d08e933f:~/FACE01_DEV$<span class="w"> </span>nvidia-smi
 Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">09</span>:07:03<span class="w"> </span><span class="m">2022</span><span class="w">       </span>
 +-----------------------------------------------------------------------------+
 <span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">11</span>.7<span class="w">     </span><span class="p">|</span>
@@ -163,13 +163,13 @@ Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><
 +-----------------------------------------------------------------------------+
 
 <span class="c1"># Check files</span>
-docker@6ee18359bde8:~/FACE01_SAMPLE$<span class="w">  </span>ls
+docker@6ee18359bde8:~/FACE01_DEV$<span class="w">  </span>ls
 CALL_FACE01.py<span class="w">            </span>SystemCheckLock<span class="w">  </span>dlib-19.24<span class="w">          </span>images<span class="w">   </span>lib64<span class="w">        </span>output<span class="w">              </span>requirements.txt<span class="w">  </span>test.mp4
 Docker_INSTALL_FACE01.sh<span class="w">  </span>bin<span class="w">              </span>dlib-19.24.tar.bz2<span class="w">  </span>include<span class="w">  </span>noFace<span class="w">       </span>priset_face_images<span class="w">  </span>share<span class="w">             </span>顔無し区間を含んだテスト動画.mp4
 FACE01.py<span class="w">                 </span>config.ini<span class="w">       </span>face01lib<span class="w">           </span>lib<span class="w">      </span>npKnown.npz<span class="w">  </span>pyvenv.cfg<span class="w">          </span>some_people.mp4
 
 <span class="c1"># Launch Python virtual environment (Important!)</span>
-docker@ee44d08e933f:~/FACE01_SAMPLE$<span class="w"> </span>.<span class="w"> </span>bin/activate
+docker@ee44d08e933f:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </span>bin/activate
 </pre></div>
 </div>
 </section>
