@@ -132,10 +132,60 @@ python example/benchmark_GUI_window.py
 
 **FACE01の多くのクラスとメソッドの詳細については、[FACE01ドキュメント](https://ykesamaru.github.io/FACE01_DEV/)をご覧ください。**
 
-## トラブルシューティング:thinking:
+## :thinking:トラブルシューティング
 ### CUDAが動作しない
 [CUDAライブラリをすべて削除して再インストールする方法](reinstall_gpu.md)をご覧ください。
 
 ### dlib.DLIB_USE_CUDAがFalseの場合の対処法
 [dlib.DLIB_USE_CUDAがFalseの場合の対処法](dlib.DLIB_USE_CUDA.md)をご覧ください。
 
+### `libcudart.so.11.0`などが見つからないエラーが出力される
+#### `nvidia-cuda-toolkit`をインストールする
+`libcudart.so.11.0`は`CUDA`ランタイムライブラリです。まず`CUDA`がシステムに正しくインストールサれているか確認してください。
+```bash
+sudo apt update
+sudo apt install -y nvidia-cuda-toolkit
+```
+#### `ONNX Runtime`と`CUDA`のバージョンの互換性を確認する
+`ONNX Runtime`と`CUDA`のバージョンの互換性は以下のサイトから確認できます。
+[CUDA Execution Provider: Requirements ](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements)
+
+![](assets/2024-08-07-18-43-08.png)
+
+#### `シンボリックリンク`の作成
+`libonnxruntime_providers_cuda.so`などが必要とする（依存する）ライブラリがすべて正しい場所に存在することを確認します。
+```bash
+ldd /home/user/bin/FACE01/lib/python3.10/site-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so
+```
+上記の出力結果から、たとえば以下のようにシンボリックリンクを作成します。
+```bash
+# libcufft.so.10 のシンボリックリンク作成
+sudo ln -s /usr/lib/x86_64-linux-gnu/libcufft.so.10 /usr/local/cuda-11.8/lib64/libcufft.so.10
+
+# libcublas.so.11 のシンボリックリンク作成
+sudo ln -s /usr/lib/x86_64-linux-gnu/libcublas.so.11 /usr/local/cuda-11.8/lib64/libcublas.so.11
+
+# libcublasLt.so.11 のシンボリックリンク作成
+sudo ln -s /usr/lib/x86_64-linux-gnu/libcublasLt.so.11 /usr/local/cuda-11.8/lib64/libcublasLt.so.11
+```
+#### `環境変数`に正しいパスを記述して永続化させる
+`CUDA`ライブラリが正しいパスに設定されているか確認します。
+`~/.bashrc`に以下の記述を行います。
+```bash
+export PATH=/usr/local/cuda-11.8/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda-11.8
+```
+`.bashrc`を再読込してください。
+```bash
+source ~/.bashrc
+```
+#### `ONNX Runtime`を再インストール
+```bash
+pip uninstall onnxruntime-gpu
+pip install onnxruntime-gpu==1.18.1
+```
+以上で必要な`CUDAライブラリ`が正しくロードされるはずです。
+
+> ![HINT]
+> `Docker`を利用すると簡単に環境構築ができます。
