@@ -2,32 +2,32 @@
 
 Summary:
     In this example, you can learn how to make LIGHTWEIGHT GUI application.
-    PySimpleGUI is used for GUI display. 
-    See below for how to use `PySimpleGUI. <https://www.pysimplegui.org/en/latest/>`_ 
-    
+    PySimpleGUI is used for GUI display.
+    See below for how to use `PySimpleGUI. <https://www.pysimplegui.org/en/latest/>`_
+
 .. note::
     Face detection and face recognition processing are performed only when the capture button is pressed, so it is useful in situations where only the CPU can be used. (Assuming that the GPU cannot be used)
-    
+
 Example:
     .. code-block:: bash
-    
+
         python3 example/lightweight_GUI.py
 
 Results:
     .. image:: ../example/img/PASTE_IMAGE_2023-01-23-22-30-18.png
         :scale: 50%
         :alt: config_ini.md
-    
+
     .. code-block:: bash
-    
+
         [2023-01-23 22:33:18,752] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz
-        安倍晋三 
-                similarity              99.7% 
-                coordinate              (134, 431, 248, 317) 
-                time                    2023,01,23,22,33,23,445574 
-                output                  output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png 
+        安倍晋三
+                similarity              99.7%
+                coordinate              (134, 431, 248, 317)
+                time                    2023,01,23,22,33,23,445574
+                output                  output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png
         -------
-        
+
 Source code:
     `lightweight_GUI.py <../example/lightweight_GUI.py>`_
 """
@@ -98,13 +98,13 @@ def main(exec_times: int = 500) -> None:
             if event == sg.WIN_CLOSED:
                 logger.info("The window was closed manually")
                 exit(0)
-            
+
             if event=='terminate':
                 exit(0)
-            
+
             imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()
             window["display"].update(data = imgbytes)
-            
+
             if event=='capture_button':
                 for person_data in frame_datas['person_data_list']:
                     if not person_data['name'] == 'Unknown':

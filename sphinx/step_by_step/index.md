@@ -132,7 +132,7 @@ python example/benchmark_GUI_window.py
 
 **FACE01の多くのクラスとメソッドの詳細については、[FACE01ドキュメント](https://ykesamaru.github.io/FACE01_DEV/)をご覧ください。**
 
-## :thinking:トラブルシューティング
+## トラブルシューティング
 ### CUDAが動作しない
 [CUDAライブラリをすべて削除して再インストールする方法](reinstall_gpu.md)をご覧ください。
 

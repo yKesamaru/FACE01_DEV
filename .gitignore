@@ -4,7 +4,7 @@ include
 bin
 .vscode
 dlib*
-output
+output/*
 __pycache__
 pyvenv.cfg
 npKnown.npz

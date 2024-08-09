@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.utils &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>face01lib.utils &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -37,7 +37,7 @@
           
           <a href="../../index.html" class="icon icon-home">
             FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -47,8 +47,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
@@ -80,23 +81,19 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.utils のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="c1">#cython: language_level = 3</span>
-
-<span class="sd">&quot;&quot;&quot;License for the Code.</span>
+<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
 
 <span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
 <span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
 
-
-<span class="sd">&quot;&quot;&quot;The utils class.</span>
+<span class="sd">The utils class.</span>
 
 <span class="sd">When creating a deep learning model, we usually perform data augmentation processing to increase the base data.</span>
 <span class="sd">In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</span>
 
 <span class="sd">    .. image:: ../docs/img/face_distortion.gif</span>
 <span class="sd">        :scale: 50%</span>
-<span class="sd">        :alt: Face distortion. </span>
+<span class="sd">        :alt: Face distortion.</span>
 <span class="sd">    Image taken from https://imgur.com/VdKIQqF</span>
 
 <span class="sd">    .. image:: ../docs/img/face_distort_and_model.png</span>
@@ -112,7 +109,7 @@
 <span class="sd">    .. image:: ../docs/img/distort_barrel.png</span>
 <span class="sd">        :scale: 50%</span>
 <span class="sd">        :alt: Image taken from https://tokai-kaoninsho.com</span>
-<span class="sd">        </span>
+
 
 <span class="sd">Note:</span>
 <span class="sd">    **ImageMagick must be installed on your system.**</span>
@@ -159,8 +156,8 @@
 <span class="k">class</span> <span class="nc">Utils</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Utils class.</span>
 
-<span class="sd">    contains convenience methods </span>
-<span class="sd">    &quot;&quot;&quot;</span>    
+<span class="sd">    contains convenience methods</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
 
@@ -169,7 +166,7 @@
 
 <span class="sd">        Return:</span>
 <span class="sd">                None</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Setup logger: common way</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
         <span class="kn">import</span> <span class="nn">os.path</span>
@@ -180,7 +177,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
 
         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
-
 
         <span class="c1"># Dlib</span>
         <span class="k">try</span><span class="p">:</span>
@@ -196,10 +192,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">predictor_5_point_model</span> <span class="o">=</span> <span class="n">models_obj</span><span class="o">.</span><span class="n">pose_predictor_five_point_model_location</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pose_predictor_5_point</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">shape_predictor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_5_point_model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
-
 <div class="viewcode-block" id="Utils.get_files_from_path">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.utils.Utils.get_files_from_path">[ドキュメント]</a>
-    <span class="k">def</span> <span class="nf">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">contain</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;resize&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">contain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;resize&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive path, return files.</span>
 
 <span class="sd">        Args:</span>
@@ -208,61 +203,62 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            list: Files in received path (absolute path)</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">contain</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        
+
         <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">files_png</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">files_jpg</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">files_jpeg</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">files_png</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="s2">&quot;*.png&quot;</span><span class="p">))</span>
         <span class="n">files_jpg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="s2">&quot;*.jpg&quot;</span><span class="p">))</span>
-        <span class="n">files_jpeg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span>  <span class="s2">&quot;/*&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="s2">&quot;*.jpeg&quot;</span><span class="p">))</span>
+        <span class="n">files_jpeg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="s2">&quot;*.jpeg&quot;</span><span class="p">))</span>
         <span class="n">files</span> <span class="o">=</span> <span class="n">files_png</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">files_jpg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">files_jpeg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">files</span></div>
-
 
 
     <span class="c1"># Resize to specified size while maintaining aspect ratio</span>
 <div class="viewcode-block" id="Utils.align_and_resize_maintain_aspect_ratio">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">align_and_resize_maintain_aspect_ratio</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">upper_limit_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
-            <span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
-            <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">,</span>
-            <span class="n">contain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Align and resize input image with maintain aspect ratio.</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">upper_limit_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">,</span>
+        <span class="n">contain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;入力画像をアラインメントしてリサイズ（アスペクト比を維持）.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            path (str): file path which contain file name. (&#39;.jpg&#39; or &#39;.jpeg&#39; or &#39;.png&#39;. These must be lower case.) If path is `directory`, All files contained in this directory are targeted.</span>
-<span class="sd">            upper_limit_length (int, optional): Upper limit length of width. Defaults to 1024.</span>
-<span class="sd">            padding (float, optional): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25, tiny = 0.1. Default = 0.4</span>
-<span class="sd">            size (int, optional): Resized size of image data. Default is 224.</span>
-<span class="sd">            contain (str, optional): Contain word in the directory</span>
+<span class="sd">            path (str): ファイル名を含むファイルパス。(&#39;.jpg&#39; または &#39;.jpeg&#39; または &#39;.png&#39;。これらは小文字でなければなりません。) パスがディレクトリの場合、そのディレクトリに含まれるすべてのファイルが対象です。</span>
+<span class="sd">            upper_limit_length (int, optional): 幅の上限長さ。デフォルトは1024。</span>
+<span class="sd">            padding (float, optional): 顔の周りのパディング。大 = 0.8、中 = 0.4、小 = 0.25、非常に小さい = 0.1。デフォルトは0.4。</span>
+<span class="sd">            size (int, optional): 画像データのリサイズ後のサイズ。デフォルトは224。</span>
+<span class="sd">            contain (str, optional): ディレクトリ内のファイル名に含まれる単語。</span>
 
 <span class="sd">        Return:</span>
-<span class="sd">            error_files (list): List of files that failed to align and resize.</span>
-<span class="sd">        </span>
+<span class="sd">            error_files (list): アラインメントとリサイズに失敗したファイルのリスト。</span>
+
 <span class="sd">        Result:</span>
 <span class="sd">            .. image:: ../docs/img/face_alignment.png</span>
 <span class="sd">                :scale: 50%</span>
 <span class="sd">                :alt: Image taken from https://tokai-kaoninsho.com</span>
 
 <span class="sd">        Note:</span>
-<span class="sd">            If the width of the input image file exceeds &#39;1024px&#39;, it will be resized to &#39;1024px&#39; while maintaining the aspect ratio.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">            入力画像ファイルの幅が&#39;1024px&#39;を超える場合、アスペクト比を維持しながら&#39;1024px&#39;にリサイズされます。</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">upper_limit_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">upper_limit_length</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">contain</span>
-        
+
         <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">error_files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="s1">&#39;.jpg&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
@@ -272,18 +268,18 @@
         <span class="k">elif</span> <span class="s1">&#39;.png&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
             <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span><span class="p">)</span>
+            <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">contain</span><span class="p">)</span>
 
-        
         <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="c1"># file_name = file_path.split(&#39;/&#39;)[-1]</span>
+            <span class="c1"># file_name = file_path.split(&#39;/&#39;)[-1]</span>
             <span class="c1"># count faces</span>
             <span class="n">face_cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-        
+
             <span class="c1"># Load image</span>
             <span class="c1"># img: npt.NDArray[np.uint8] = Dlib_api().load_image_file(file_path, mode=&#39;RGB&#39;)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">img</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">load_rgb_image</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="n">img</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">load_rgb_image</span><span class="p">(</span>
+                    <span class="n">file_path</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot;: cannot load image&quot;</span><span class="p">)</span>
                 <span class="n">error_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
@@ -295,12 +291,12 @@
             <span class="c1"># DEBUG</span>
             <span class="c1"># VidCap_obj.frame_imshow_for_debug(img)</span>
 
-            <span class="n">dets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span> <span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">dets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">num_faces</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dets</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">num_faces</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="c1"># Flip image horizontally</span>
-                <span class="n">horizontal_flip_img</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span> <span class="p">(</span><span class="n">horizontal_flip_img</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">horizontal_flip_img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span><span class="p">(</span><span class="n">horizontal_flip_img</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot;: no face&quot;</span><span class="p">)</span>
                     <span class="n">error_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
                     <span class="c1"># DEBUG</span>
@@ -308,25 +304,25 @@
                     <span class="k">continue</span>
 
             <span class="n">faces</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">full_object_detections</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
-            
+
             <span class="k">for</span> <span class="n">detection</span> <span class="ow">in</span> <span class="n">dets</span><span class="p">:</span>
                 <span class="n">landmark</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_predictor_5_point</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
                 <span class="n">faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">landmark</span><span class="p">)</span>
-            
+
             <span class="c1"># Get a calibrated image</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">images</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">get_face_chips</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
                 <span class="c1"># [get_face_chip](http://dlib.net/python/index.html#dlib_pybind11.get_face_chip) about padding.</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">continue</span>
-            
+
             <span class="c1"># img = images[0]</span>
             <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
                 <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># bgr to rgb</span>
-                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">file_path</span> <span class="o">+</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">face_cnt</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_align_resize.png&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">file_path</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">face_cnt</span><span class="p">)</span> <span class="o">+</span>
+                            <span class="s2">&quot;_align_resize.png&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
                 <span class="n">face_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">error_files</span></div>
-
 
 
 <div class="viewcode-block" id="Utils.create_concat_images">
@@ -335,35 +331,35 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">img</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create tile images.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            img (str): absolute file path</span>
 <span class="sd">            size (int): image size. Default is 224.</span>
-<span class="sd">            </span>
+
 <span class="sd">        Result:</span>
 <span class="sd">            .. image:: ../docs/img/make_concat_image.png</span>
 <span class="sd">                    :scale: 50%</span>
 <span class="sd">                    :alt: Image taken from https://tokai-kaoninsho.com</span>
-<span class="sd">                    </span>
+
 <span class="sd">            .. image:: ../docs/img/distort_concat_images.png</span>
 <span class="sd">                    :scale: 50%</span>
 <span class="sd">                    :alt: Image taken from https://tokai-kaoninsho.com</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">img</span>
-        
+
         <span class="n">path</span><span class="p">,</span> <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">)</span>
-        
+
         <span class="n">p_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert +append&quot;</span>
         <span class="n">m_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert -append&quot;</span>
         <span class="n">sp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-        <span class="n">bk_png</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/home/terms/bin/FACE01/images/224x224.png&quot;</span>
+        <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/home/terms/bin/FACE01/images/224x224.png&quot;</span>
         <span class="n">concat_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;concat.png&quot;</span>
         <span class="n">bb_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bb.png&quot;</span>
-        
+
         <span class="c1"># pwd = os.getcwd()</span>
-        
+
         <span class="c1"># top-left</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -372,21 +368,20 @@
         <span class="c1"># top_right</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span>  <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_top_right.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_top_right.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># bottom_left</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span>  <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_bottom_left.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_bottom_left.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># bottom_right</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span>  <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_bottom_right.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">m_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/concat_images/&quot;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_bottom_right.png&quot;</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># remove</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;rm&quot;</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bb_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
 
 
 <div class="viewcode-block" id="Utils.distort_barrel">
@@ -400,10 +395,10 @@
         <span class="n">initial_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span>
         <span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
         <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Distort barrel.</span>
-<span class="sd">        </span>
-<span class="sd">        Takes a path which contained png, jpg, jpeg files in the directory, </span>
+
+<span class="sd">        Takes a path which contained png, jpg, jpeg files in the directory,</span>
 <span class="sd">        distort barrel and saves them.</span>
 
 <span class="sd">        Args:</span>
@@ -421,12 +416,12 @@
 <span class="sd">        Note:</span>
 <span class="sd">            **ImageMagick must be installed on your system.**</span>
 <span class="sd">            - See ImageMagick https://imagemagick.org/script/download.php</span>
-<span class="sd">        </span>
+
 <span class="sd">        Result:</span>
 <span class="sd">            .. image:: ../docs/img/distort_barrel.png</span>
 <span class="sd">                :scale: 50%</span>
 <span class="sd">                :alt: Image taken from https://tokai-kaoninsho.com</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">dir_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_bool</span> <span class="o">=</span> <span class="n">align_and_resize_bool</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">size</span>
@@ -434,20 +429,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">initial_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">closing_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">step_value</span>
-        
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_bool</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_maintain_aspect_ratio</span><span class="p">(</span>
                 <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
                 <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
                 <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
-                <span class="p">)</span>
-        
+            <span class="p">)</span>
+
         <span class="c1"># Create tile images</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>  <span class="s2">&quot;concat_images&quot;</span><span class="p">))</span>
-        
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;concat_images&quot;</span><span class="p">))</span>
+
         <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">contain</span><span class="o">=</span><span class="s1">&#39;resize&#39;</span><span class="p">)</span>
-        
+
         <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_concat_images</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
@@ -461,38 +456,39 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">closing_value</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="n">value_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_value</span><span class="p">)</span>
-        
+
         <span class="c1"># Make barrel images</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="n">files</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>  <span class="s2">&quot;concat_images&quot;</span><span class="p">))</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">files</span> <span class="o">+</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;concat_images&quot;</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">value_list</span><span class="p">:</span>
                 <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;convert </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; -rotate -0&#39;</span>
                 <span class="n">barrel_value</span> <span class="o">=</span> <span class="s2">&quot; -distort barrel &#39;0.0 0.0 </span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">output_image</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">file_path</span> <span class="o">+</span><span class="s2">&quot;_lensD_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
+                <span class="n">output_image</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">file_path</span> <span class="o">+</span> \
+                    <span class="s2">&quot;_lensD_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span>
                 <span class="n">cmd</span> <span class="o">=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="n">barrel_value</span> <span class="o">+</span> <span class="n">output_image</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">cmd</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        
         <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_maintain_aspect_ratio</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
             <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
             <span class="n">contain</span><span class="o">=</span><span class="s1">&#39;_top_&#39;</span>
-            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_maintain_aspect_ratio</span><span class="p">(</span>
             <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
             <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
             <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
             <span class="n">contain</span><span class="o">=</span><span class="s1">&#39;_bottom_&#39;</span>
-            <span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="n">cwp</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">cwp</span><span class="o">.</span><span class="n">parent</span>
         <span class="n">face_images</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/*_lensD_*.png_align_resize.png&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">face_image</span> <span class="ow">in</span> <span class="n">face_images</span><span class="p">:</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-            
+
         <span class="c1"># Remove trash files</span>
         <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
@@ -508,7 +504,7 @@
         <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">,</span>
         <span class="n">disturb_color</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="p">):</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Jitter images at the specified path.</span>
 
 <span class="sd">        Args:</span>
@@ -520,7 +516,7 @@
 <span class="sd">        Note:</span>
 <span class="sd">        This method is based on davisking/dlib/python_example/face_jitter.py.</span>
 <span class="sd">        https://github.com/davisking/dlib/blob/master/python_examples/face_jitter.py</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">dir_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_jitters</span> <span class="o">=</span> <span class="n">num_jitters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
@@ -559,21 +555,20 @@
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">file_name</span> <span class="o">+</span> <span class="s2">&quot;_jitter_</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">jittered_image</span><span class="p">)</span></div>
 
 
-
 <div class="viewcode-block" id="Utils.get_face_encoding">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.utils.Utils.get_face_encoding">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">get_face_encoding</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;cnn&#39;</span><span class="p">,</span>
-            <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;small&#39;</span>
-        <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;cnn&#39;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;small&#39;</span>
+    <span class="p">):</span>
         <span class="c1"># ) -&gt; npt.NDArray[np.float32] or None:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;get_face_encoding : get face encoding from image file.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            deep_learning_model (int): dli model: 0, efficientnetv2_arcface model: 1</span>
 <span class="sd">            image_path (str): image file path.</span>
@@ -584,23 +579,23 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            NDArray data (npt.NDArray[np.float32]): face encoding data or None if not detected face.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
-        <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">image_path</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="n">image_path</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_jitters</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">num_jitters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="n">number_of_times_to_upsample</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="n">mode</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="n">model</span>
-        
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">image_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">num_jitters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">number_of_times_to_upsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">model</span>
+
         <span class="n">Dlib_api_obj</span> <span class="o">=</span> <span class="n">Dlib_api</span><span class="p">()</span>
-        
+
         <span class="n">dir_file_ndarray</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_path</span><span class="p">)</span>
-        <span class="n">face_locations</span><span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span>
+        <span class="n">face_locations</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span>
             <span class="n">resized_frame</span><span class="o">=</span><span class="n">dir_file_ndarray</span><span class="p">,</span>
             <span class="n">number_of_times_to_upsample</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_times_to_upsample</span><span class="p">,</span>
             <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span>  <span class="c1"># default is cnn.</span>
         <span class="p">)</span>
-        <span class="n">default_file_data_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span>
+        <span class="n">default_file_data_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span>
             <span class="n">deep_learning_model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">,</span>
             <span class="n">resized_frame</span><span class="o">=</span><span class="n">dir_file_ndarray</span><span class="p">,</span>
             <span class="n">face_location_list</span><span class="o">=</span><span class="n">face_locations</span><span class="p">,</span>
@@ -613,13 +608,12 @@
         <span class="k">return</span> <span class="n">default_file_data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
-
     <span class="k">def</span> <span class="nf">_get_cpu_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get cpu temperature.</span>
-<span class="sd">        </span>
+
 <span class="sd">        This method tries to get the temperature of the CPU by running the command &#39;sensors -u&#39; and using regular expressions to extract the value of &#39;temp1_input&#39;.</span>
 <span class="sd">        If it is successful, the temperature is returned, otherwise 0.0 is returned and an error message is output to the log.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">temperature</span><span class="p">:</span> <span class="nb">str</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sensors&#39;</span><span class="p">,</span> <span class="s1">&#39;-u&#39;</span><span class="p">]</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
@@ -638,26 +632,25 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mf">0.0</span>
 
-
 <div class="viewcode-block" id="Utils.temp_sleep">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.utils.Utils.temp_sleep">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">temp_sleep</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">temp</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">80.0</span><span class="p">,</span>
-            <span class="n">sleep_time</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">60</span>
-        <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">temp</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">80.0</span><span class="p">,</span>
+        <span class="n">sleep_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;temp_sleep : sleep time for cpu temperature.</span>
-<span class="sd">        </span>
+
 <span class="sd">        If the CPU temperature exceeds the value specified by the argument `temp`, it sleeps for the time specified by `sleep_time`.</span>
 <span class="sd">        If the `sensors` command fails to get the CPU temperature, it will try to execute it 3 times at 1 second intervals. If it still can&#39;t get it, exit the program.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            temp (float, optional): cpu temperature. Defaults to 80.0.</span>
 <span class="sd">            sleep_time (int, optional): sleep time. Defaults to 60.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
-<span class="sd">        </span>
+
 <span class="sd">        Note:</span>
 <span class="sd">            The `sensors` and `notify-send` commands are required to use this method.</span>
 <span class="sd">            The `sensors` command is included in the `lm-sensors` package.</span>
@@ -680,39 +673,38 @@
             <span class="n">temperature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cpu_temp</span><span class="p">()</span></div>
 
 
-
 <div class="viewcode-block" id="Utils.resize_image">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.utils.Utils.resize_image">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">resize_image</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">img</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-            <span class="n">upper_limit_length</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">upper_limit_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;resize_image : resize image.</span>
 
 <span class="sd">        The input `np.ndarray` format image data is resized to fit the specified width or height. In this process, the aspect ratio is maintained by resizing based on the longer side of the width and height. The default maximum values for width and height are 1024px.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            img (np.ndarray): image data.</span>
 <span class="sd">            upper_limit_length (int, optional): upper limit length. Defaults to 1024.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            np.ndarray: resized image data.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">img</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">upper_limit_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">upper_limit_length</span>
         <span class="n">height</span><span class="p">:</span> <span class="nb">int</span>
         <span class="n">width</span><span class="p">:</span> <span class="nb">int</span>
         <span class="n">resized_height</span><span class="p">:</span> <span class="nb">int</span>
         <span class="n">resized_width</span><span class="p">:</span> <span class="nb">int</span>
-        
+
         <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">gcd</span>
-        
+
         <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="n">upper_limit_length</span> <span class="ow">and</span> <span class="n">width</span> <span class="o">&lt;</span> <span class="n">upper_limit_length</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span>
-        
+
         <span class="n">gcd_value</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
         <span class="n">aspect_ratio_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">height</span> <span class="o">//</span> <span class="n">gcd_value</span>
         <span class="n">aspect_ratio_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="n">gcd_value</span>
@@ -727,7 +719,6 @@
                 <span class="n">resized_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resized_width</span> <span class="o">*</span> <span class="n">aspect_ratio_height</span> <span class="o">/</span> <span class="n">aspect_ratio_width</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">resized_width</span><span class="p">,</span> <span class="n">resized_height</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span></div>
-
 
 
     <span class="c1"># def data_augmentation(</span>

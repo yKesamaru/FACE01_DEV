@@ -1,13 +1,18 @@
-"""Example of simple face recognition script.
+"""License for the Code.
+
+Copyright Owner: Yoshitsugu Kesamaru
+Please refer to the separate license file for the license of the code.
+
+シンプルな顔認識のコード例.
 
 Summary:
-    In this example, you can learn how to execute FACE01 as simple.
+    このコード例では、FACE01がどれほど簡単に実行できるのかを学びます。
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/simple.py
-        
+
 Source code:
     `simple.py <../example/simple.py>`_
 """
@@ -27,16 +32,18 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
+CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
+"""初期化とロガーの設定.
+
+FACE01を使ったコードでは、まず`initialize`と`logger`をコードしなくてはいけません。
+これらは`config.ini`設定ファイルを読み込んだり`log`の設定を行います。
 """
 
 # Make generator
 gen = Core().common_process(CONFIG)
+
 
 def main(exec_times: int = 50) -> None:
     """Simple example.
@@ -49,7 +56,7 @@ def main(exec_times: int = 50) -> None:
     Returns:
         None
 
-    """    
+    """
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
 
@@ -57,7 +64,7 @@ def main(exec_times: int = 50) -> None:
         frame_datas_array = gen.__next__()
 
         for frame_datas in frame_datas_array:
-            
+
             for person_data in frame_datas['person_data_list']:
                 if not person_data['name'] == 'Unknown':
                     print(
@@ -72,4 +79,4 @@ def main(exec_times: int = 50) -> None:
 
 if __name__ == '__main__':
     # Call main function. Pass 5.
-    main(exec_times = 1)
+    main(exec_times=100)

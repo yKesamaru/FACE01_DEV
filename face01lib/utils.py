@@ -1,20 +1,16 @@
-#cython: language_level = 3
-
 """License for the Code.
 
 Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.
-"""
 
-
-"""The utils class.
+The utils class.
 
 When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
 In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is "common way" that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.
 
     .. image:: ../docs/img/face_distortion.gif
         :scale: 50%
-        :alt: Face distortion. 
+        :alt: Face distortion.
     Image taken from https://imgur.com/VdKIQqF
 
     .. image:: ../docs/img/face_distort_and_model.png
@@ -30,7 +26,7 @@ By using the utils.distort_barrel() method, we believe that we can greatly ensur
     .. image:: ../docs/img/distort_barrel.png
         :scale: 50%
         :alt: Image taken from https://tokai-kaoninsho.com
-        
+
 
 Note:
     **ImageMagick must be installed on your system.**
@@ -75,8 +71,8 @@ environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 class Utils:
     """Utils class.
 
-    contains convenience methods 
-    """    
+    contains convenience methods
+    """
     def __init__(self, log_level: str = 'info') -> None:
         """init.
 
@@ -85,7 +81,7 @@ class Utils:
 
         Return:
                 None
-        """        
+        """
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -96,7 +92,6 @@ class Utils:
         self.logger = Logger(self.log_level).logger(name, parent_dir)
 
         Cal().cal_specify_date(self.logger)
-
 
         # Dlib
         try:
@@ -112,8 +107,7 @@ class Utils:
         self.predictor_5_point_model = models_obj.pose_predictor_five_point_model_location()
         self.pose_predictor_5_point = dlib.shape_predictor(self.predictor_5_point_model)  # type: ignore
 
-
-    def get_files_from_path(self, path: str, contain:str = "resize") -> list:
+    def get_files_from_path(self, path: str, contain: str = "resize") -> list:
         """Receive path, return files.
 
         Args:
@@ -122,58 +116,59 @@ class Utils:
 
         Returns:
             list: Files in received path (absolute path)
-        """        
+        """
         self.path: str = path
         self.contain: str = contain
         if self.contain == '*':
             self.contain = ''
-        
+
         files: list = []
         files_png: list = []
         files_jpg: list = []
         files_jpeg: list = []
         files_png.append(glob(self.path + "/*" + self.contain + "*" + "*.png"))
         files_jpg.append(glob(self.path + "/*" + self.contain + "*" + "*.jpg"))
-        files_jpeg.append(glob(self.path +  "/*" + self.contain + "*" + "*.jpeg"))
+        files_jpeg.append(
+            glob(self.path + "/*" + self.contain + "*" + "*.jpeg"))
         files = files_png[0] + files_jpg[0] + files_jpeg[0]
         return files
 
-
     # Resize to specified size while maintaining aspect ratio
     def align_and_resize_maintain_aspect_ratio(
-            self,
-            path: str,
-            upper_limit_length: int = 1024,
-            padding: float = 0.4,
-            size: int = 224,
-            contain: str = ''
-        ) -> List[str]:
-        """Align and resize input image with maintain aspect ratio.
+        self,
+        path: str,
+        upper_limit_length: int = 1024,
+        padding: float = 0.4,
+        size: int = 224,
+        contain: str = ''
+    ) -> List[str]:
+        """入力画像をアラインメントしてリサイズ（アスペクト比を維持）.
 
         Args:
-            path (str): file path which contain file name. ('.jpg' or '.jpeg' or '.png'. These must be lower case.) If path is `directory`, All files contained in this directory are targeted.
-            upper_limit_length (int, optional): Upper limit length of width. Defaults to 1024.
-            padding (float, optional): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25, tiny = 0.1. Default = 0.4
-            size (int, optional): Resized size of image data. Default is 224.
-            contain (str, optional): Contain word in the directory
+            path (str): ファイル名を含むファイルパス。('.jpg' または '.jpeg' または '.png'。これらは小文字でなければなりません。) パスがディレクトリの場合、そのディレクトリに含まれるすべてのファイルが対象です。
+            upper_limit_length (int, optional): 幅の上限長さ。デフォルトは1024。
+            padding (float, optional): 顔の周りのパディング。大 = 0.8、中 = 0.4、小 = 0.25、非常に小さい = 0.1。デフォルトは0.4。
+            size (int, optional): 画像データのリサイズ後のサイズ。デフォルトは224。
+            contain (str, optional): ディレクトリ内のファイル名に含まれる単語。
 
         Return:
-            error_files (list): List of files that failed to align and resize.
-        
+            error_files (list): アラインメントとリサイズに失敗したファイルのリスト。
+
         Result:
             .. image:: ../docs/img/face_alignment.png
                 :scale: 50%
                 :alt: Image taken from https://tokai-kaoninsho.com
 
         Note:
-            If the width of the input image file exceeds '1024px', it will be resized to '1024px' while maintaining the aspect ratio.
-        """        
+            入力画像ファイルの幅が'1024px'を超える場合、アスペクト比を維持しながら'1024px'にリサイズされます。
+
+        """
         self.path: str = path
         self.upper_limit_length: int = upper_limit_length
         self.padding: float = padding
         self.size: int = size
         self.contain: str = contain
-        
+
         files: list = []
         error_files: list = []
         if '.jpg' in self.path:
@@ -183,18 +178,18 @@ class Utils:
         elif '.png' in self.path:
             files.append(self.path)
         else:
-            files: list =self.get_files_from_path(self.path, self.contain)
+            files: list = self.get_files_from_path(self.path, self.contain)
 
-        
         for file_path in files:
-        # file_name = file_path.split('/')[-1]
+            # file_name = file_path.split('/')[-1]
             # count faces
             face_cnt: int = 0
-        
+
             # Load image
             # img: npt.NDArray[np.uint8] = Dlib_api().load_image_file(file_path, mode='RGB')
             try:
-                img: npt.NDArray[np.uint8] = dlib.load_rgb_image(file_path)  # type: ignore
+                img: npt.NDArray[np.uint8] = dlib.load_rgb_image(
+                    file_path)  # type: ignore
             except:
                 self.logger.error(file_path + ": cannot load image")
                 error_files.append(file_path)
@@ -206,12 +201,12 @@ class Utils:
             # DEBUG
             # VidCap_obj.frame_imshow_for_debug(img)
 
-            dets = self.face_detector (img, 1)
+            dets = self.face_detector(img, 1)
             num_faces = len(dets)
             if num_faces == 0:
                 # Flip image horizontally
-                horizontal_flip_img:np.ndarray = cv2.flip(img, 1)
-                if len(self.face_detector (horizontal_flip_img, 1)) == 0:
+                horizontal_flip_img: np.ndarray = cv2.flip(img, 1)
+                if len(self.face_detector(horizontal_flip_img, 1)) == 0:
                     self.logger.error(file_path + ": no face")
                     error_files.append(file_path)
                     # DEBUG
@@ -219,59 +214,59 @@ class Utils:
                     continue
 
             faces = dlib.full_object_detections()  # type: ignore
-            
+
             for detection in dets:
                 landmark = self.pose_predictor_5_point(img, detection)
                 faces.append(landmark)
-            
+
             # Get a calibrated image
             try:
                 images = dlib.get_face_chips(img, faces, self.size, self.padding)  # type: ignore
                 # [get_face_chip](http://dlib.net/python/index.html#dlib_pybind11.get_face_chip) about padding.
             except:
                 continue
-            
+
             # img = images[0]
             for img in images:
                 img = img[:, :, ::-1]  # bgr to rgb
-                cv2.imwrite(file_path +"_" + str(face_cnt) + "_align_resize.png", img)
+                cv2.imwrite(file_path + "_" + str(face_cnt) +
+                            "_align_resize.png", img)
                 face_cnt += 1
         return error_files
-
 
     def create_concat_images(
         self,
         img: str,
         size: int = 224
-        ) -> None:
+    ) -> None:
         """Create tile images.
 
         Args:
             img (str): absolute file path
             size (int): image size. Default is 224.
-            
+
         Result:
             .. image:: ../docs/img/make_concat_image.png
                     :scale: 50%
                     :alt: Image taken from https://tokai-kaoninsho.com
-                    
+
             .. image:: ../docs/img/distort_concat_images.png
                     :scale: 50%
                     :alt: Image taken from https://tokai-kaoninsho.com
-        """        
+        """
         self.img: str = img
-        
+
         path, file_name = os.path.split(self.img)
-        
+
         p_append: str = "convert +append"
         m_append: str = "convert -append"
         sp: str = " "
-        bk_png:str = "/home/terms/bin/FACE01/images/224x224.png"
+        bk_png: str = "/home/terms/bin/FACE01/images/224x224.png"
         concat_png: str = "concat.png"
         bb_png: str = "bb.png"
-        
+
         # pwd = os.getcwd()
-        
+
         # top-left
         subprocess.run([p_append + sp + self.img + sp + bk_png + sp + concat_png], shell=True)
         subprocess.run([p_append + sp + bk_png + sp + bk_png + sp + bb_png], shell=True)
@@ -280,21 +275,20 @@ class Utils:
         # top_right
         subprocess.run([p_append + sp + bk_png + sp + self.img + sp + concat_png], shell=True)
         subprocess.run([p_append + sp + bk_png + sp + bk_png + sp + bb_png], shell=True)
-        subprocess.run([m_append + sp + concat_png + sp + bb_png + sp +  path + "/concat_images/" + file_name + "_top_right.png"], shell=True)
+        subprocess.run([m_append + sp + concat_png + sp + bb_png + sp + path + "/concat_images/" + file_name + "_top_right.png"], shell=True)
 
         # bottom_left
         subprocess.run([p_append + sp + bk_png + sp + bk_png + sp + bb_png], shell=True)
         subprocess.run([p_append + sp + self.img + sp + bk_png + sp + concat_png], shell=True)
-        subprocess.run([m_append + sp + bb_png + sp + concat_png + sp +  path + "/concat_images/" + file_name + "_bottom_left.png"], shell=True)
+        subprocess.run([m_append + sp + bb_png + sp + concat_png + sp + path + "/concat_images/" + file_name + "_bottom_left.png"], shell=True)
 
         # bottom_right
         subprocess.run([p_append + sp + bk_png + sp + bk_png + sp + bb_png], shell=True)
         subprocess.run([p_append + sp + bk_png + sp + self.img + sp + concat_png], shell=True)
-        subprocess.run([m_append + sp + bb_png + sp + concat_png + sp +  path + "/concat_images/" + file_name + "_bottom_right.png"], shell=True)
+        subprocess.run([m_append + sp + bb_png + sp + concat_png + sp + path + "/concat_images/" + file_name + "_bottom_right.png"], shell=True)
 
         # remove
         subprocess.run(["rm" + sp + concat_png + sp + bb_png], shell=True)
-
 
     def distort_barrel(
         self,
@@ -305,10 +299,10 @@ class Utils:
         initial_value: float = -0.1,
         closing_value: float = 0.1,
         step_value: float = 0.1
-        ) -> List[str]:
+    ) -> List[str]:
         """Distort barrel.
-        
-        Takes a path which contained png, jpg, jpeg files in the directory, 
+
+        Takes a path which contained png, jpg, jpeg files in the directory,
         distort barrel and saves them.
 
         Args:
@@ -326,12 +320,12 @@ class Utils:
         Note:
             **ImageMagick must be installed on your system.**
             - See ImageMagick https://imagemagick.org/script/download.php
-        
+
         Result:
             .. image:: ../docs/img/distort_barrel.png
                 :scale: 50%
                 :alt: Image taken from https://tokai-kaoninsho.com
-        """        
+        """
         self.path: str = dir_path
         self.align_and_resize_bool = align_and_resize_bool
         self.size: int = size
@@ -339,20 +333,20 @@ class Utils:
         self.initial_value: float = initial_value
         self.closing_value: float = closing_value
         self.step_value: float = step_value
-        
+
         if self.align_and_resize_bool == True:
             self.align_and_resize_maintain_aspect_ratio(
                 path=self.path,
                 padding=self.padding,
                 size=self.size,
-                )
-        
+            )
+
         # Create tile images
-        os.mkdir(os.path.join(self.path,  "concat_images"))
-        
+        os.mkdir(os.path.join(self.path, "concat_images"))
+
         files: list = []
         files = self.get_files_from_path(self.path, contain='resize')
-        
+
         for file_path in tqdm(files):
             self.create_concat_images(file_path)
 
@@ -366,38 +360,39 @@ class Utils:
             if self.initial_value > self.closing_value:
                 break
             value_list.append(self.initial_value)
-        
+
         # Make barrel images
-        files = files + self.get_files_from_path(os.path.join(self.path,  "concat_images"))
+        files = files + \
+            self.get_files_from_path(os.path.join(self.path, "concat_images"))
 
         for file_path in tqdm(files):
             for value in value_list:
                 cmd = "convert {} ".format(file_path) + ' -rotate -0'
                 barrel_value = " -distort barrel '0.0 0.0 {}'".format(value)
-                output_image = ' ' + file_path +"_lensD_{}".format(value) + ".png"
+                output_image = ' ' + file_path + \
+                    "_lensD_{}".format(value) + ".png"
                 cmd = cmd + barrel_value + output_image
                 res = subprocess.run([cmd], shell=True)
 
-        
         self.align_and_resize_maintain_aspect_ratio(
             path=self.path,
             padding=self.padding,
             size=self.size,
             contain='_top_'
-            )
+        )
         self.align_and_resize_maintain_aspect_ratio(
             path=self.path,
             padding=self.padding,
             size=self.size,
             contain='_bottom_'
-            )
+        )
 
         cwp = pathlib.Path(self.path)
         parent_dir = cwp.parent
         face_images: list = glob(self.path + "/*_lensD_*.png_align_resize.png")
         for face_image in face_images:
             shutil.move(face_image, parent_dir)
-            
+
         # Remove trash files
         shutil.rmtree(self.path)
 
@@ -410,7 +405,7 @@ class Utils:
         num_jitters: int = 10,
         size: int = 224,
         disturb_color: bool = True
-        ):
+    ):
         """Jitter images at the specified path.
 
         Args:
@@ -422,7 +417,7 @@ class Utils:
         Note:
         This method is based on davisking/dlib/python_example/face_jitter.py.
         https://github.com/davisking/dlib/blob/master/python_examples/face_jitter.py
-        """        
+        """
         self.path = dir_path
         self.num_jitters = num_jitters
         self.size = size
@@ -460,19 +455,18 @@ class Utils:
                 # save image
                 cv2.imwrite(file_name + "_jitter_{}.png".format(i), jittered_image)
 
-
     def get_face_encoding(
-            self,
-            deep_learning_model: int,
-            image_path: str,
-            num_jitters: int=0,
-            number_of_times_to_upsample: int=0,
-            mode: str='cnn',
-            model: str='small'
-        ):
+        self,
+        deep_learning_model: int,
+        image_path: str,
+        num_jitters: int = 0,
+        number_of_times_to_upsample: int = 0,
+        mode: str = 'cnn',
+        model: str = 'small'
+    ):
         # ) -> npt.NDArray[np.float32] or None:
         """get_face_encoding : get face encoding from image file.
-        
+
         Args:
             deep_learning_model (int): dli model: 0, efficientnetv2_arcface model: 1
             image_path (str): image file path.
@@ -483,23 +477,23 @@ class Utils:
 
         Returns:
             NDArray data (npt.NDArray[np.float32]): face encoding data or None if not detected face.
-        """        
-        self.deep_learning_model:int = deep_learning_model
-        self.image_path:str = image_path
-        self.num_jitters:int = num_jitters
-        self.number_of_times_to_upsample:int = number_of_times_to_upsample
-        self.mode: str=mode
-        self.model: str=model
-        
+        """
+        self.deep_learning_model: int = deep_learning_model
+        self.image_path: str = image_path
+        self.num_jitters: int = num_jitters
+        self.number_of_times_to_upsample: int = number_of_times_to_upsample
+        self.mode: str = mode
+        self.model: str = model
+
         Dlib_api_obj = Dlib_api()
-        
+
         dir_file_ndarray = Dlib_api_obj.load_image_file(self.image_path)
-        face_locations= Dlib_api_obj.face_locations(
+        face_locations = Dlib_api_obj.face_locations(
             resized_frame=dir_file_ndarray,
             number_of_times_to_upsample=self.number_of_times_to_upsample,
             mode=self.mode  # default is cnn.
         )
-        default_file_data_list:List[npt.NDArray[np.float64]] = Dlib_api_obj.face_encodings(
+        default_file_data_list: List[npt.NDArray[np.float64]] = Dlib_api_obj.face_encodings(
             deep_learning_model=self.deep_learning_model,
             resized_frame=dir_file_ndarray,
             face_location_list=face_locations,
@@ -511,13 +505,12 @@ class Utils:
             return None
         return default_file_data_list[0]
 
-
     def _get_cpu_temp(self) -> float:
         """Get cpu temperature.
-        
+
         This method tries to get the temperature of the CPU by running the command 'sensors -u' and using regular expressions to extract the value of 'temp1_input'.
         If it is successful, the temperature is returned, otherwise 0.0 is returned and an error message is output to the log.
-        """        
+        """
         temperature: str
         cmd = ['sensors', '-u']
         result = subprocess.run(cmd, stdout=subprocess.PIPE)
@@ -536,24 +529,23 @@ class Utils:
             else:
                 return 0.0
 
-
     def temp_sleep(
-            self,
-            temp:float=80.0,
-            sleep_time:int=60
-        ):
+        self,
+        temp: float = 80.0,
+        sleep_time: int = 60
+    ):
         """temp_sleep : sleep time for cpu temperature.
-        
+
         If the CPU temperature exceeds the value specified by the argument `temp`, it sleeps for the time specified by `sleep_time`.
         If the `sensors` command fails to get the CPU temperature, it will try to execute it 3 times at 1 second intervals. If it still can't get it, exit the program.
-        
+
         Args:
             temp (float, optional): cpu temperature. Defaults to 80.0.
             sleep_time (int, optional): sleep time. Defaults to 60.
-        
+
         Returns:
             None
-        
+
         Note:
             The `sensors` and `notify-send` commands are required to use this method.
             The `sensors` command is included in the `lm-sensors` package.
@@ -575,37 +567,36 @@ class Utils:
             time.sleep(self.sleep_time)
             temperature = self._get_cpu_temp()
 
-
     def resize_image(
-            self,
-            img:np.ndarray,
-            upper_limit_length:int=1024,
-        ) -> np.ndarray:
+        self,
+        img: np.ndarray,
+        upper_limit_length: int = 1024,
+    ) -> np.ndarray:
         """resize_image : resize image.
 
         The input `np.ndarray` format image data is resized to fit the specified width or height. In this process, the aspect ratio is maintained by resizing based on the longer side of the width and height. The default maximum values for width and height are 1024px.
-        
+
         Args:
             img (np.ndarray): image data.
             upper_limit_length (int, optional): upper limit length. Defaults to 1024.
-        
+
         Returns:
             np.ndarray: resized image data.
-        """        
+        """
         self.img: np.ndarray = img
         self.upper_limit_length: int = upper_limit_length
         height: int
         width: int
         resized_height: int
         resized_width: int
-        
+
         from math import gcd
-        
+
         height, width = self.img.shape[:2]
 
         if height < upper_limit_length and width < upper_limit_length:
             return self.img
-        
+
         gcd_value = gcd(height, width)
         aspect_ratio_height: int = height // gcd_value
         aspect_ratio_width: int = width // gcd_value
@@ -620,7 +611,6 @@ class Utils:
                 resized_height = int(resized_width * aspect_ratio_height / aspect_ratio_width)
 
         return cv2.resize(self.img, (resized_width, resized_height), interpolation=cv2.INTER_AREA)
-
 
     # def data_augmentation(
     #         self,
