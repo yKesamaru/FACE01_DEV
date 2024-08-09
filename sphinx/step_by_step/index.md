@@ -82,8 +82,8 @@ python example/simple.py
 詳細は[こちら](simple.md)をご覧ください。
 
 ## [GUIウィンドウの表示](display_GUI_win.md)
-かっこいいGUIウィンドウに表示したいですか？  
-`example/display_GUI_window.py`を試してみてください。  
+かっこいいGUIウィンドウに表示したいですか？
+`example/display_GUI_window.py`を試してみてください。
 詳細は[こちら](display_GUI_win.md)をご覧ください。
 
 ```python
@@ -92,8 +92,8 @@ python example/display_GUI_window.py
 詳細は[こちら](simple.md)をご覧ください。
 
 ## [会社の「テロップ」や「ロゴ」画像を表示](ch_telop.md)
-ウィンドウに会社のロゴなどを表示したいですか？  
-もちろん可能です！  
+ウィンドウに会社のロゴなどを表示したいですか？
+もちろん可能です！
 詳細は[こちら](ch_telop.md)をご覧ください。
 
 ## [ベンチマークを取りたい？](benchmark_CUI.md)

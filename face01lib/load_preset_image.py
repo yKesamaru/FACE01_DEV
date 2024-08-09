@@ -1,5 +1,3 @@
-#cython: language_level = 3
-
 """License for the Code.
 
 Copyright Owner: Yoshitsugu Kesamaru

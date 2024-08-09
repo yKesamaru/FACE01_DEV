@@ -51,7 +51,7 @@ while True:
             if "face_location_list" in frame_datas:
                 img = frame_datas['img']
                 person_data_list = frame_datas['person_data_list']
-                
+
                 for person_data in person_data_list:
                     if person_data == {}:
                         continue
@@ -129,20 +129,20 @@ for person_data in person_data_list:
             "-------\n"
         )
 ```
-will result 
+will result
 ```bash
-菅義偉 
-         similarity      99.3% 
-         coordinate      (127, 182, 276, 33) 
-         time    2022,07,22,11,05,01,426742 
-         output  output/菅義偉_2022,07,22,11,05,01,459014_0.34.png 
+菅義偉
+         similarity      99.3%
+         coordinate      (127, 182, 276, 33)
+         time    2022,07,22,11,05,01,426742
+         output  output/菅義偉_2022,07,22,11,05,01,459014_0.34.png
  -------
 
-麻生太郎 
-         similarity      99.4% 
-         coordinate      (122, 535, 281, 376) 
-         time    2022,07,22,11,05,01,426742 
-         output  output/菅義偉_2022,07,22,11,05,01,459014_0.34.png 
+麻生太郎
+         similarity      99.4%
+         coordinate      (122, 535, 281, 376)
+         time    2022,07,22,11,05,01,426742
+         output  output/菅義偉_2022,07,22,11,05,01,459014_0.34.png
  -------
 ```
 Whole code is described `CALL_FACE01.py`.

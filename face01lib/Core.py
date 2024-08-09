@@ -126,22 +126,22 @@ class Core:
         model_selection: int = 0,
         min_detection_confidence: float = 0.4
     ):
-        """RGBイメージを処理し、`mediapipe`を使って算出した`face location`データを返します.
+        """RGBイメージを処理し、mediapipeを使って算出したface locationデータを返します.
 
         Args:
             resized_frame (npt.NDArray[np.uint8]): Resized image frame
-            model_selection (int, optional): Value set in 'config.ini'.  Defaults to 0.
-            min_detection_confidence (float, optional): Value set in 'config.ini'. Defaults to 0.4.
+            model_selection (int, optional): Value set in config.ini.  Defaults to 0.
+            min_detection_confidence (float, optional): Value set in config.ini. Defaults to 0.4.
 
         Returns:
             A NamedTuple object with a "detections" field that contains a list of the
-            detected face location data.'
+            detected face location data.
 
         Refer:
             https://solutions.mediapipe.dev/face_detection#python-solution-api
 
         Note:
-            `number_of_people` and `same_time_recognize` in config.ini are disabled when using `mp_face_detection_func`.
+            number_of_people and same_time_recognize in config.ini are disabled when using mp_face_detection_func.
         """
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.model_selection: Tuple[int] = model_selection,

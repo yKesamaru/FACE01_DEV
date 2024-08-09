@@ -1,5 +1,3 @@
-#cython: language_level=3
-
 """config.ini を読み込み、CONFIG 辞書データを返します。
 
 この関数は、ConfigParser モジュールを使用して 'config.ini' ファイルを読み込み、その内容を辞書として返します。

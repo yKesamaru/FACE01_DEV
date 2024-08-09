@@ -1,8 +1,9 @@
 ステップ・バイ・ステップ
 ==================================
 
-.. toctree:: 
-   :maxdepth: 2
+.. toctree::
+   :maxdepth: 1
    :caption: step by step
 
    step_by_step/index
+

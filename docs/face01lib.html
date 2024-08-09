@@ -138,7 +138,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#face01lib-compile-module">face01lib.compile module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.load_preset_image">face01lib.load_preset_image module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#face01lib.load_preset_image.LoadPresetImage"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.load_preset_image.LoadPresetImage.load_preset_image"><code class="docutils literal notranslate"><span class="pre">LoadPresetImage.load_preset_image()</span></code></a></li>
@@ -966,18 +965,18 @@ Please refer to the separate license file for the license of the code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.mp_face_detection_func">
 <span class="sig-name descname"><span class="pre">mp_face_detection_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_detection_confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Core.html#Core.mp_face_detection_func"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Core.Core.mp_face_detection_func" title="Link to this definition"></a></dt>
-<dd><p>RGBイメージを処理し、<a href="#id1"><span class="problematic" id="id2">`</span></a>mediapipe`を使って算出した`face location`データを返します.</p>
+<dd><p>RGBイメージを処理し、mediapipeを使って算出したface locationデータを返します.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>resized_frame</strong> (<em>npt.NDArray</em><em>[</em><em>np.uint8</em><em>]</em>) -- Resized image frame</p></li>
-<li><p><strong>model_selection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Value set in 'config.ini'.  Defaults to 0.</p></li>
-<li><p><strong>min_detection_confidence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- Value set in 'config.ini'. Defaults to 0.4.</p></li>
+<li><p><strong>model_selection</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Value set in config.ini.  Defaults to 0.</p></li>
+<li><p><strong>min_detection_confidence</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- Value set in config.ini. Defaults to 0.4.</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>A NamedTuple object with a &quot;detections&quot; field that contains a list of the
-detected face location data.'</p>
+detected face location data.</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -986,7 +985,7 @@ detected face location data.'</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p><cite>number_of_people</cite> and <cite>same_time_recognize</cite> in config.ini are disabled when using <cite>mp_face_detection_func</cite>.</p>
+<p>number_of_people and same_time_recognize in config.ini are disabled when using mp_face_detection_func.</p>
 </div>
 </dd></dl>
 
@@ -1233,6 +1232,121 @@ Please refer to the separate license file for the license of the code.</p>
 <p>License for the Code.</p>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
+<p>Summary.</p>
+<dl class="simple">
+<dt>COPYRIGHT:</dt><dd><p>This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
+and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
+</dd>
+<dt>ORIGINAL AUTHOR:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Dlib</dt><dd><ul>
+<li><p>davisking</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>face_recognition</dt><dd><ul>
+<li><p>ageitgey</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>FACE01, and api.py</dt><dd><ul>
+<li><p>yKesamaru</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">参照</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Dlib:</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/davisking/dlib">https://github.com/davisking/dlib</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dlib Python API:</dt><dd><ul>
+<li><p><a class="reference external" href="http://dlib.net/python/index.html">http://dlib.net/python/index.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>dlib/python_example/face_recognition.py:</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dlib Face Recognition Model:</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/davisking/dlib-models">https://github.com/davisking/dlib-models</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Face Recognition:</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/ageitgey/face_recognition">https://github.com/ageitgey/face_recognition</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Max-Margin Object Detection(MMOD):</dt><dd><ul>
+<li><p>[Ja] <a class="reference external" href="https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83">https://blog.chowagiken.co.jp/entry/2019/06/28/OpenCV%E3%81%A8dlib%E3%81%AE%E9%A1%94%E6%A4%9C%E5%87%BA%E6%A9%9F%E8%83%BD%E3%81%AE%E6%AF%94%E8%BC%83</a></p></li>
+<li><p><a class="reference external" href="https://github.com/davisking/dlib-models">https://github.com/davisking/dlib-models</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Typing (numpy.typing):</dt><dd><ul>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing">https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>EfficientNetV2:</dt><dd><ul>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/2104.00298.pdf">https://arxiv.org/pdf/2104.00298.pdf</a></p></li>
+<li><p><a class="reference external" href="https://github.com/huggingface/pytorch-image-models">https://github.com/huggingface/pytorch-image-models</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ArcFace:</dt><dd><ul>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1801.07698.pdf">https://arxiv.org/pdf/1801.07698.pdf</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MobileFaceNets:</dt><dd><ul>
+<li><p><a class="reference external" href="https://arxiv.org/ftp/arxiv/papers/1804/1804.07573.pdf">https://arxiv.org/ftp/arxiv/papers/1804/1804.07573.pdf</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>About coordinate order...</p>
+<ul class="simple">
+<li><p>dlib: (Left, Top, Right, Bottom), called 'rect'.</p></li>
+<li><p>face_recognition: (top, right, bottom, left), called 'css'.</p></li>
+</ul>
+<p>See bellow</p>
+<p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api" title="Link to this definition"></a></dt>
@@ -1338,8 +1452,10 @@ Please refer to the separate license file for the license of the code.</p>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image). If deep_learning_model == 1, the size of the list is 512-dimensional face encodings, and the type is List[npt.NDArray[np.float32]]. See Issue # 19.</p>
-<p>Image size, it should be of size 150x150. Also cropping must be done as 'dlib.get_face_chip' would do it.
+<dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image).</p>
+<p>If <cite>deep_learning_model == 1</cite>, the returned list contains 512-dimensional face encodings, with the type
+<cite>List[npt.NDArray[np.float32]]</cite>.</p>
+<p>Image size: The image should be of size 150x150. Also, cropping must be done as <cite>dlib.get_face_chip</cite> would do it.
 That is, centered and scaled essentially the same way.</p>
 </p>
 </dd>
@@ -1349,12 +1465,10 @@ That is, centered and scaled essentially the same way.</p>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
-<dl class="simple">
-<dt>class dlib.face_recognition_model_v1: compute_face_descriptor(<a href="#id3"><span class="problematic" id="id4">*</span></a>args, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</a></p>
-</dd>
-<dt>compute_face_descriptor(<a href="#id7"><span class="problematic" id="id8">*</span></a>args, <a href="#id9"><span class="problematic" id="id10">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</a></p>
-</dd>
-</dl>
+<p><cite>class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)</cite>:
+<a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</a></p>
+<p><cite>compute_face_descriptor(*args, **kwargs)</cite>:
+<a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</a></p>
 </div>
 </dd></dl>
 
@@ -1433,9 +1547,6 @@ Please refer to the separate license file for the license of the code.</p>
 
 </dd></dl>
 
-</section>
-<section id="face01lib-compile-module">
-<h2>face01lib.compile module<a class="headerlink" href="#face01lib-compile-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-face01lib.load_preset_image">
 <span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Link to this heading"></a></h2>
@@ -1694,8 +1805,7 @@ Please refer to the separate license file for the license of the code.</p>
 <p>When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
 In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion." src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" /></a>
-<p>Image taken from <a class="reference external" href="https://imgur.com/VdKIQqF">https://imgur.com/VdKIQqF</a></p>
+<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion. Image taken from https://imgur.com/VdKIQqF" src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" /></a>
 <a class="reference internal image-reference" href="_images/face_distort_and_model.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_distort_and_model.png" style="width: 223.5px; height: 303.0px;" /></a>
 </div></blockquote>
 <p>By using the utils.distort_barrel() method, we believe that we can greatly ensure the robustness of distortion caused by the camera lens.</p>

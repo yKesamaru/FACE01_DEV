@@ -16,19 +16,19 @@ sudo apt autoclean
 ```
 
 ## Uncheck nvidia repository
-![](img/PASTE_IMAGE_2023-02-12-07-48-18.png)
+![](../../docs/img/PASTE_IMAGE_2023-02-12-07-48-18.png)
 
 `sudo apt update`
 
 ## Remove cuda files
-![](img/PASTE_IMAGE_2023-02-12-07-54-23.png)
+![](../../docs/img/PASTE_IMAGE_2023-02-12-07-54-23.png)
 
 `sudo rm -rf /usr/local/cuda*`
 
 `sudo apt update && sudo apt upgrade -y`
 
 Make sure the driver is the Nouveau display driver.
-![](img/PASTE_IMAGE_2023-02-12-07-57-51.png)
+![](../../docs/img/PASTE_IMAGE_2023-02-12-07-57-51.png)
 
 ## Delete docker images
 Check the current docker image.
@@ -82,7 +82,7 @@ sudo dpkg -i cuda-keyring_1.0-1_all.deb
 ```
 ## Re-install lib
 Tick nvidia repository.
-![](img/PASTE_IMAGE_2023-02-12-08-59-18.png)
+![](../../docs/img/PASTE_IMAGE_2023-02-12-08-59-18.png)
 
 ```bash
 sudo apt update
@@ -123,7 +123,7 @@ Re-install driver.
 ```bash
 sudo apt install nvidia-driver-515
 パッケージリストを読み込んでいます... 完了
-依存関係ツリーを作成しています                
+依存関係ツリーを作成しています
 状態情報を読み取っています... 完了
 以下の追加パッケージがインストールされます:
   dctrl-tools dkms libegl-mesa0:i386 libegl1:i386 libgbm1:i386 libgles2:i386 libnvidia-cfg1-515
@@ -158,7 +158,7 @@ Reload `~/.bashrc`.
 sudo apt-get update && sudo apt-get upgrade -y \
   && curl https://get.docker.com | sh \
   && sudo systemctl --now enable docker
-  
+
 sudo usermod -aG docker <user_name>
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -173,11 +173,11 @@ sudo systemctl restart docker
 ```
 
 ## Check with `nvidia-smi` command.
-![](img/PASTE_IMAGE_2023-02-12-09-29-15.png)
+![](../../docs/img/PASTE_IMAGE_2023-02-12-09-29-15.png)
 
 ```bash
-nvidia-smi 
-Sun Feb 12 09:28:15 2023       
+nvidia-smi
+Sun Feb 12 09:28:15 2023
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 515.86.01    Driver Version: 515.86.01    CUDA Version: 11.7     |
 |-------------------------------+----------------------+----------------------+
@@ -189,7 +189,7 @@ Sun Feb 12 09:28:15 2023
 | 41%   27C    P8    11W / 120W |    757MiB /  6144MiB |      1%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
-                                                                               
+
 +-----------------------------------------------------------------------------+
 | Processes:                                                                  |
 |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
