@@ -6,8 +6,8 @@
 The [DEFAULT] section specifies standard default values, and this setting is example.
 
 ## Note (Important!)
-Before to modify config.ini, you should be familiar with the ConfigParser module.  
-To refer ConfigParser module, see bellow.  
+Before to modify config.ini, you should be familiar with the ConfigParser module.
+To refer ConfigParser module, see bellow.
 https://docs.python.org/3/library/configparser.html
 
 ## Inheritance
@@ -38,7 +38,7 @@ In that case, manually delete `npKnown.npz`. A new `npKnown.npz` will be created
 
 ## [DEFAULT]
 
-[DEFAULT] section is for simple example.  
+[DEFAULT] section is for simple example.
 This [DEFAULT] setting for only use CUI mode.
 
 Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card or IOT devices.
@@ -137,7 +137,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 - model_selection
   - 0 OR 1
     - 0: Within 2 meters from the camera,
-    - 1: Within 5 meters. 
+    - 1: Within 5 meters.
   - NOTE: This value is set only when `use_pipe` is `True`.
   - Type: int
   - Default: 1
@@ -166,14 +166,14 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Zoom.
      You can select from `NONE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `CENTER`.
   - Type: Type: str
-  - Default: NONE  
-  set_area = 'NONE'  
-  ![set_area = 'NONE'](img/none-fs8.png)  
-  set_area = 'CENTER'  
-  ![set_area = 'CENTER'](img/setarea_center.png)  
-  set_area = 'TOP_LEFT'  
-  ![set_area = 'TOP_LEFT'](img/setarea_topleft.png)  
-  
+  - Default: NONE
+  set_area = 'NONE'
+  ![set_area = 'NONE'](../../docs/img/none-fs8.png)
+  set_area = 'CENTER'
+  ![set_area = 'CENTER'](../../docs/img/setarea_center.png)
+  set_area = 'TOP_LEFT'
+  ![set_area = 'TOP_LEFT'](../../docs/img/setarea_topleft.png)
+
 - movie
   - For test, you can select from bellow.
     - usb (or USB)
@@ -204,7 +204,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Display a legacy face frame on the screen.
   - Type: bool
   - Default: False
-  ![](img/FACE01-simple_rectangle.png)
+  ![](../../docs/img/FACE01-simple_rectangle.png)
 
 
 - target_rectangle
@@ -212,7 +212,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - NOTE: You can select only one of `rectangle` or `target_rectangle`.
   - Type: bool
   - Default: False
-  ![](img/FACE01-targetrectangle.png)
+  ![](../../docs/img/FACE01-targetrectangle.png)
 
 
 - draw_telop_and_logo
@@ -281,7 +281,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 - cpu_count
   - Type: int
-  - Default: 
+  - Default:
 
 
 - memory

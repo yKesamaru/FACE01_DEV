@@ -86,7 +86,7 @@ If you want to test, seel bellow.
 ```bash
 sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
-![](img/PASTE_IMAGE_2022-07-25-10-24-45.png)
+![](../../docs/img/PASTE_IMAGE_2022-07-25-10-24-45.png)
 
 ## Post installation
 If you don’t want to preface the docker command with sudo, create a Unix group called docker and add users to it.

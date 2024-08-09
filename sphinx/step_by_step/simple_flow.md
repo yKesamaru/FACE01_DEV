@@ -1,8 +1,8 @@
 # Simple flow for using FACE01
 
-When coding a program that uses FACE01, code `initialize` and `logger` first.  
-This will read the configuration file `config.ini` and log errors etc.  
-Choose a section of config.ini according to your usage, or inherit DEFAULT and add a new one.  
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
+Choose a section of config.ini according to your usage, or inherit DEFAULT and add a new one.
 
 ```python
 # Import Initialize class

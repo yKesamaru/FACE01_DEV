@@ -1,13 +1,9 @@
-#cython: language_level = 3
-
 """License for the Code.
 
 Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.
-"""
 
-
-"""Summary.
+Summary.
 
 COPYRIGHT:
     This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
@@ -88,6 +84,7 @@ import onnxruntime as ort
 import torchvision.transforms as transforms
 import torch
 
+
 class Dlib_api:
     """Dlib api.
 
@@ -96,16 +93,15 @@ class Dlib_api:
     Email: y.kesamaru@tokai-kaoninsho.com
     """
 
-
     def __init__(
-            self,
-            log_level: str = 'info'
-        ) -> None:
+        self,
+        log_level: str = 'info'
+    ) -> None:
         """init.
 
         Args:
             log_level (str, optional): Receive log level value. Defaults to 'info'.
-        """        
+        """
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -129,37 +125,38 @@ class Dlib_api:
 
         Cal().cal_specify_date(self.logger)
 
-
         self.face_detector = dlib.get_frontal_face_detector()  # type: ignore
 
         self.predictor_5_point_model = Models_obj.pose_predictor_five_point_model_location()
-        self.pose_predictor_5_point = dlib.shape_predictor(self.predictor_5_point_model)  # type: ignore
+        self.pose_predictor_5_point = dlib.shape_predictor(
+            self.predictor_5_point_model)  # type: ignore
 
         self.cnn_face_detection_model = Models_obj.cnn_face_detector_model_location()
-        self.cnn_face_detector = dlib.cnn_face_detection_model_v1(self.cnn_face_detection_model)  # type: ignore
+        self.cnn_face_detector = dlib.cnn_face_detection_model_v1(
+            self.cnn_face_detection_model)  # type: ignore
 
         self.dlib_resnet_model = Models_obj.dlib_resnet_model_location()
-        self.dlib_resnet_face_encoder = dlib.face_recognition_model_v1(self.dlib_resnet_model)  # type: ignore
+        self.dlib_resnet_face_encoder = dlib.face_recognition_model_v1(
+            self.dlib_resnet_model)  # type: ignore
 
         self.JAPANESE_FACE_V1 = Models_obj.JAPANESE_FACE_V1_model_location()
         self.JAPANESE_FACE_V1_model = onnx.load(self.JAPANESE_FACE_V1)
         # self.ort_session = ort.InferenceSession(self.JAPANESE_FACE_V1)
-        self.ort_session = ort.InferenceSession(self.JAPANESE_FACE_V1, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
+        self.ort_session = ort.InferenceSession(self.JAPANESE_FACE_V1, providers=[
+                                                'CUDAExecutionProvider', 'CPUExecutionProvider'])
 
-        
         # 署名表示
         for prop in self.JAPANESE_FACE_V1_model.metadata_props:
             if prop.key == "signature":
                 print(prop.value)
 
-
     def JAPANESE_FACE_V1_model_compute_face_descriptor(
-            self,
-            resized_frame: npt.NDArray[np.uint8],
-            raw_face_landmark,  # dlib.rectangle type.
-            size: int=224,
-            _PADDING: float = 0.1
-        ) -> npt.NDArray[np.float32]:
+        self,
+        resized_frame: npt.NDArray[np.uint8],
+        raw_face_landmark,  # dlib.rectangle type.
+        size: int = 224,
+        _PADDING: float = 0.1
+    ) -> npt.NDArray[np.float32]:
         """EfficientNetV2とArcFaceモデルを使用して顔の特徴量を計算します。
 
         この関数は、与えられた顔の画像データから、EfficientNetV2とArcFaceモデルを使用して顔の特徴量（embedding）を計算します。
@@ -175,16 +172,18 @@ class Dlib_api:
         """
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         # VidCap().frame_imshow_for_debug(self.resized_frame)
-        
+
         self.raw_face_landmark = raw_face_landmark  # dlib.rectangle type.
         # print(self.raw_face_landmark)
-        
+
         self.size: int = size
         self._PADDING: float = _PADDING
-        
-        face_image_np: npt.NDArray = dlib.get_face_chip(self.resized_frame, self.raw_face_landmark, size=self.size, padding=self._PADDING)  # type: ignore
+
+        face_image_np: npt.NDArray = dlib.get_face_chip(
+            self.resized_frame, self.raw_face_landmark, size=self.size, padding=self._PADDING)  # type: ignore
         # face_imageをBGRからRGBに変換する
-        face_image_rgb = cv2.cvtColor(face_image_np, cv2.COLOR_BGR2RGB)  # type: ignore
+        face_image_rgb = cv2.cvtColor(
+            face_image_np, cv2.COLOR_BGR2RGB)  # type: ignore
         # VidCap().frame_imshow_for_debug(face_image_rgb)
 
         # 入力名を取得
@@ -204,49 +203,49 @@ class Dlib_api:
 
         # numpy配列からPIL Imageに変換
         face_image_pil: Image.Image = Image.fromarray(face_image_rgb)
-        
+
         image = transform(face_image_pil)
         image = image.unsqueeze(0)  # バッチ次元を追加  # type: ignore
         image = image.numpy()
-        embedding: npt.NDArray[np.float32] = self.ort_session.run(None, {input_name: image})[0]  # 'input'をinput_nameに変更
+        embedding: npt.NDArray[np.float32] = self.ort_session.run(
+            None, {input_name: image})[0]  # 'input'をinput_nameに変更
         return embedding
 
-
-    def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int,int,int,int]:  # type: ignore
+    # type: ignore
+    def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int, int, int, int]:
         """Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
-        
+
         This method used only 'use_pipe = False'.
 
         Args:
-            dlib.rectangle: dlib rect object  
-            
+            dlib.rectangle: dlib rect object
+
         Returns:
             Tuple[int,int,int,int]: Plain tuple representation of the rect in (top, right, bottom, left) order
         """
         self.rect: dlib.rectangle = rect  # type: ignore
         return self.rect.top(), self.rect.right(), self.rect.bottom(), self.rect.left()
 
-
-    def _css_to_rect(self, css: Tuple[int,int,int,int]) -> dlib.rectangle:  # type: ignore
-        self.css: Tuple[int,int,int,int] = css
+    # type: ignore
+    def _css_to_rect(self, css: Tuple[int, int, int, int]) -> dlib.rectangle:
+        self.css: Tuple[int, int, int, int] = css
         """Convert a tuple in (top, right, bottom, left) order to a dlib 'rect' object
 
         Args:
             Tuple[int,int,int,int]: css
             - Plain tuple representation of the rect in (top, right, bottom, left) order
-        
+
         Returns:
             dlib.rectangle: <class '_dlib_pybind11.rectangle'>
         """
         return dlib.rectangle(self.css[3], self.css[0], self.css[1], self.css[2])  # type: ignore
 
-
     def _trim_css_to_bounds(
-            self,
-            css: Tuple[int,int,int,int],
-            image_shape: Tuple[int,int,int]
-        ) -> Tuple[int,int,int,int]:
-        self._trim_css_to_bounds_css: Tuple[int,int,int,int] = css
+        self,
+        css: Tuple[int, int, int, int],
+        image_shape: Tuple[int, int, int]
+    ) -> Tuple[int, int, int, int]:
+        self._trim_css_to_bounds_css: Tuple[int, int, int, int] = css
         self.image_shape: Tuple[int, int, int] = image_shape
         """Trim 'css' along with border.
 
@@ -265,17 +264,16 @@ class Dlib_api:
         """
         return (
             max(self._trim_css_to_bounds_css[0], 0),
-            min(self._trim_css_to_bounds_css[1],self.image_shape[1]),
+            min(self._trim_css_to_bounds_css[1], self.image_shape[1]),
             min(self._trim_css_to_bounds_css[2], self.image_shape[0]),
             max(self._trim_css_to_bounds_css[3], 0)
         )
 
-
     def load_image_file(
-            self,
-            file: str,
-            mode: str = 'RGB'
-        ) -> npt.NDArray[np.uint8]:
+        self,
+        file: str,
+        mode: str = 'RGB'
+    ) -> npt.NDArray[np.uint8]:
         """Loads an image file (.jpg, .png, etc) into a numpy array.
 
         Args:
@@ -294,15 +292,14 @@ class Dlib_api:
 
         return np.array(im)
 
-
     def _raw_face_locations(
-            self,
-            resized_frame: npt.NDArray[np.uint8],
-            number_of_times_to_upsample: int = 0,
-            mode: str = "cnn"
-        ) -> List[dlib.rectangle]:  # type: ignore
+        self,
+        resized_frame: npt.NDArray[np.uint8],
+        number_of_times_to_upsample: int = 0,
+        mode: str = "cnn"
+    ) -> List[dlib.rectangle]:  # type: ignore
         """Returns an array of bounding boxes of human faces in a image.
-        
+
         This method used only 'use_pipe = False'.
 
         Args:
@@ -324,16 +321,14 @@ class Dlib_api:
         else:
             return self.face_detector(self.resized_frame, self.number_of_times_to_upsample)
 
-
-
     def face_locations(
         self,
         resized_frame: npt.NDArray[np.uint8],
         number_of_times_to_upsample: int = 0,
         mode: str = "hog"
-        ) -> List[Tuple[int,int,int,int]]:
+    ) -> List[Tuple[int, int, int, int]]:
         """Returns an array of bounding boxes of human faces in a image.
-        
+
         This method used only 'use_pipe = False'.
 
         Args:
@@ -347,69 +342,72 @@ class Dlib_api:
         self.resized_frame: npt.NDArray[np.uint8] = resized_frame
         self.number_of_times_to_upsample: int = number_of_times_to_upsample
         self.mode: str = mode
-        face_locations: List[Tuple[int,int,int,int]] = []
+        face_locations: List[Tuple[int, int, int, int]] = []
 
         if self.mode == 'cnn':
             for face in self._raw_face_locations(
-                    self.resized_frame,
-                    self.number_of_times_to_upsample,
-                    self.mode
-                ):
-                face_locations.append(
-                        self._trim_css_to_bounds(
-                            self._rect_to_css(face.rect),
-                            self.resized_frame.shape
-                        )
-                    )
-        else:
-            for face in self._raw_face_locations(
-                    self.resized_frame,
-                    self.number_of_times_to_upsample,
-                    self.mode
-                ):
+                self.resized_frame,
+                self.number_of_times_to_upsample,
+                self.mode
+            ):
                 face_locations.append(
                     self._trim_css_to_bounds(
-                            self._rect_to_css(face),
-                            self.resized_frame.shape
-                        )
+                        self._rect_to_css(face.rect),
+                        self.resized_frame.shape
                     )
+                )
+        else:
+            for face in self._raw_face_locations(
+                self.resized_frame,
+                self.number_of_times_to_upsample,
+                self.mode
+            ):
+                face_locations.append(
+                    self._trim_css_to_bounds(
+                        self._rect_to_css(face),
+                        self.resized_frame.shape
+                    )
+                )
 
         return face_locations
-
 
     def _return_raw_face_landmarks(
         self,
         resized_frame: npt.NDArray[np.uint8],
-        face_location_list: List[Tuple[int,int,int,int]],
+        face_location_list: List[Tuple[int, int, int, int]],
         model: str = "small"
     ) -> List[dlib.rectangle]:  # type: ignore
 
-        new_face_location_list: List[dlib.rectangle[Tuple[int,int,int,int]]] = []  # type: ignore
-        raw_face_location: Tuple[int,int,int,int]
+        # type: ignore
+        new_face_location_list: List[dlib.rectangle[Tuple[int, int, int, int]]] = [
+        ]
+        raw_face_location: Tuple[int, int, int, int]
 
         for raw_face_location in face_location_list:
             new_face_location_list.append(self._css_to_rect(raw_face_location))
-        
-        raw_face_landmarks: List[dlib.rectangle[Tuple[int,int,int,int]]] = []  # type: ignore
-        new_face_location: dlib.rectangle[Tuple[int,int,int,int]]  # type: ignore
+
+        # type: ignore
+        raw_face_landmarks: List[dlib.rectangle[Tuple[int, int, int, int]]] = [
+        ]
+        # type: ignore
+        new_face_location: dlib.rectangle[Tuple[int, int, int, int]]
 
         for new_face_location in new_face_location_list:
             raw_face_landmarks.append(
                 self.pose_predictor_5_point(resized_frame, new_face_location)
             )
-        
+
         return raw_face_landmarks
 
-
-
     def face_encodings(
-            self,
-            deep_learning_model: int,
-            resized_frame: npt.NDArray[np.uint8],
-            face_location_list: List = [],  # Initial value of 'face_location_list' is '[]'.
-            num_jitters: int = 0,
-            model: str = "small"
-        ) -> List[np.ndarray]:
+        self,
+        deep_learning_model: int,
+        resized_frame: npt.NDArray[np.uint8],
+        # Initial value of 'face_location_list' is '[]'.
+        face_location_list: List = [],
+        num_jitters: int = 0,
+        model: str = "small"
+    ) -> List[np.ndarray]:
         """Given an image, return the 128-dimension face encoding for each face in the image.
 
         Args:
@@ -419,21 +417,25 @@ class Dlib_api:
             model (str): Do not modify.
 
         Returns:
-            List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image). If deep_learning_model == 1, the size of the list is 512-dimensional face encodings, and the type is List[npt.NDArray[np.float32]]. See Issue # 19.
-            
-            Image size, it should be of size 150x150. Also cropping must be done as 'dlib.get_face_chip' would do it.
+            List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image).
+
+            If `deep_learning_model == 1`, the returned list contains 512-dimensional face encodings, with the type
+            `List[npt.NDArray[np.float32]]`.
+
+            Image size: The image should be of size 150x150. Also, cropping must be done as `dlib.get_face_chip` would do it.
             That is, centered and scaled essentially the same way.
 
         See also:
-            class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)
-                http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1
-            compute_face_descriptor(*args, **kwargs)
-                http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor
+            `class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)`:
+            http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1
+
+            `compute_face_descriptor(*args, **kwargs)`:
+            http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor
         """
         self.deep_learning_model: int = deep_learning_model
         self.face_encodings_resized_frame: npt.NDArray[np.uint8] = resized_frame
-        self.face_location_list: List  = face_location_list
-        self.num_jitters: int =  num_jitters
+        self.face_location_list: List = face_location_list
+        self.num_jitters: int = num_jitters
         self.face_encodings_model: str = model
         _PADDING: float = 0.25  # dlib学習モデル用
         face_encodings: List[npt.NDArray[np.float64]] = []
@@ -478,7 +480,7 @@ class Dlib_api:
         """
         [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&commentPage=2)
         Davis King said...
-        The landmarks are only used to align the face before the DNN extracts 
+        The landmarks are only used to align the face before the DNN extracts
         the face descriptor. How many landmarks you use doesn't really matter.
         """
 
@@ -496,15 +498,13 @@ class Dlib_api:
         return [pool.submit(multithread, raw_landmark_set, self.face_encodings_resized_frame, self.num_jitters).result() for raw_landmark_set in raw_landmarks]
         """
 
-
-
     def face_distance(
-            self,
-            face_encodings: List[npt.NDArray[np.float64]],
-            face_to_compare: npt.NDArray[np.float64]
-            # face_encodings: List[np.ndarray],
-            # face_to_compare: np.ndarray
-        ) -> npt.NDArray[np.float64]:
+        self,
+        face_encodings: List[npt.NDArray[np.float64]],
+        face_to_compare: npt.NDArray[np.float64]
+        # face_encodings: List[np.ndarray],
+        # face_to_compare: np.ndarray
+    ) -> npt.NDArray[np.float64]:
         """Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.
 
         The distance tells you how similar the faces are.
@@ -521,15 +521,14 @@ class Dlib_api:
 
         if len(face_encodings) == 0:
             # return `dummy data`
-            return np.empty((2,2,3), dtype=np.float64)
-        
+            return np.empty((2, 2, 3), dtype=np.float64)
+
         # ord = None -> Frobenius norm. norm for vectors is '2-norm'.
-        # See: 
+        # See:
         # document: https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html
         # [全成分の二乗和のルートをフロベニウスノルムと言います。](https://manabitimes.jp/math/1284)
         # > フロベニウスノルムは，行列の全成分を一列に並べてベクトルとみなしたときのベクトルの長さ（2ノルム）と考えることもできます。
         return np.linalg.norm(x=(face_encodings - face_to_compare), axis=1)
-
 
     def cosine_similarity(self, embedding1, embedding2, threshold=0.4):
         """
@@ -542,18 +541,19 @@ class Dlib_api:
 
         Returns:
             Tuple[np.array, float]: Returns a tuple of a numpy array of booleans and the minimum cos_sim
-        """        
+        """
         results: List[Tuple[bool, float]] = []
-        max_cos_sim= float(0.0)
+        max_cos_sim = float(0.0)
         embedding2 = embedding2.flatten()
         for emb1 in embedding1:
             emb1 = emb1.flatten()
-            cos_sim: float = np.dot(emb1, embedding2) / (np.linalg.norm(emb1) * np.linalg.norm(embedding2))
+            cos_sim: float = np.dot(
+                emb1, embedding2) / (np.linalg.norm(emb1) * np.linalg.norm(embedding2))
             if cos_sim >= threshold:
                 results.append((True, cos_sim))
             else:
                 results.append((False, cos_sim))
-            max_cos_sim= max(max_cos_sim, cos_sim)
+            max_cos_sim = max(max_cos_sim, cos_sim)
         return results, max_cos_sim
         # for emb1 in embedding1:
         #     emb1 = emb1.flatten()
@@ -562,9 +562,8 @@ class Dlib_api:
         #     max_cos_sim= max(max_cos_sim, cos_sim)
         # return np.array(results), max_cos_sim
 
-
-
     # Percentage calculation
+
     def percentage(self, cos_sim):
         """
         percentage 与えられた cos_sim から類似度を計算する
@@ -574,20 +573,18 @@ class Dlib_api:
 
         Returns:
             float: percentage of similarity
-        """        
+        """
         # BUG: Issue #25
         return round(-23.71 * cos_sim ** 2 + 49.98 * cos_sim + 73.69, 2)
 
-
-
     def compare_faces(
-            self,
-            deep_learning_model: int,
-            known_face_encodings: List[npt.NDArray[np.float64]],
-            face_encoding_to_check: npt.NDArray[np.float64],
-            tolerance: float = 0.6,
-            threshold: float = 0.4
-        ) -> Tuple[np.ndarray, float]:
+        self,
+        deep_learning_model: int,
+        known_face_encodings: List[npt.NDArray[np.float64]],
+        face_encoding_to_check: npt.NDArray[np.float64],
+        tolerance: float = 0.6,
+        threshold: float = 0.4
+    ) -> Tuple[np.ndarray, float]:
         """Compare a list of face encodings against a candidate encoding to see if they match.
 
         Args:
@@ -600,7 +597,8 @@ class Dlib_api:
             A tuple of True/False values indicating which known_face_encodings match the face encoding to check, and the min distance between them.
         """
         self.deep_learning_model: int = deep_learning_model
-        self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
+        self.known_face_encodings: List[npt.NDArray[np.float64]
+                                        ] = known_face_encodings
         self.face_encoding_to_check: npt.NDArray[np.float64] = face_encoding_to_check
         self.tolerance: float = tolerance
         self.threshold: float = threshold
@@ -608,10 +606,10 @@ class Dlib_api:
         if self.deep_learning_model == 0:
             face_distance_list: List[float] = list(
                 self.face_distance(
-                        self.known_face_encodings,
-                        self.face_encoding_to_check
-                    )
+                    self.known_face_encodings,
+                    self.face_encoding_to_check
                 )
+            )
 
             self.min_distance: float = min(face_distance_list)
 
@@ -637,5 +635,6 @@ class Dlib_api:
         elif self.deep_learning_model == 1:
             results: List[Tuple[bool, float]] = []
             results, max_cos_sim = \
-                self.cosine_similarity(self.known_face_encodings, self.face_encoding_to_check, self.threshold)
+                self.cosine_similarity(
+                    self.known_face_encodings, self.face_encoding_to_check, self.threshold)
             return np.array(results), max_cos_sim

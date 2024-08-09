@@ -1,7 +1,7 @@
 # 💥 This document is not used!
 
 # More functions tutorial
-FACE01 have many functions inner `face01lib/'.  
+FACE01 have many functions inner `face01lib/'.
 This section, we will talk about how to use useable functions in FACE01.
 
 **Note**
@@ -9,8 +9,8 @@ To refer exhaustive document of all public class and method in FACE01, see [here
 
 # Preparation
 ## Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.  
-This will read the configuration file `config.ini` and log errors etc.  
+When coding a program that uses FACE01, code `initialize` and `logger` first.
+This will read the configuration file `config.ini` and log errors etc.
 ```python
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
@@ -32,7 +32,7 @@ Dlib_api_obj = Dlib_api()
 Returns an array of bounding boxes of faces in a frame.
 ```python
 face_list = Dlib_api_obj.face_locations(img, number_of_times_to_upsample, model)
-``` 
+```
 ### example
 ```python
 for i in range(exec_times):
@@ -73,7 +73,7 @@ face coordinates: [(161, 443, 311, 294)]
 
 face coordinates: [(162, 438, 286, 314)]
 ```
-Whole example code is [here](../example/face_coordinates.py).
+Whole example code is [here](../../example/face_coordinates.py).
 
 # `load_preset_image`
 This function loads face images in `preset_face_images` folder, and make npKnown.npz file.
@@ -113,7 +113,7 @@ Return numpy array of resized image.
 ```python
 resized_frame = VidCap().resize_frame(set_width, set_height, original_frame)
 ```
-Whole code is [here](../example/resize_frame.py).
+Whole code is [here](../../example/resize_frame.py).
 
 ## `return_movie_property`
 Return property fps, height and width of input movie data.
@@ -123,7 +123,7 @@ set_width,fps,height,width,set_height = VidCap().return_movie_property(set_width
 result
 ```bash
 ...
-set_width:  750 
- set_height: 421 
- fps:  30 
+set_width:  750
+ set_height: 421
+ fps:  30
 ```

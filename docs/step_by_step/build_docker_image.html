@@ -138,11 +138,11 @@ face01_gpu<span class="w">    </span><span class="m">1</span>.4.10<span class="w
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>
+<span class="w">        </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>face01_gpu:1.4.10
 
 <span class="c1"># Check nvidia-smi</span>
 docker@ee44d08e933f:~/FACE01_DEV$<span class="w"> </span>nvidia-smi
-Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">09</span>:07:03<span class="w"> </span><span class="m">2022</span><span class="w">       </span>
+Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">09</span>:07:03<span class="w"> </span><span class="m">2022</span>
 +-----------------------------------------------------------------------------+
 <span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">11</span>.7<span class="w">     </span><span class="p">|</span>
 <span class="p">|</span>-------------------------------+----------------------+----------------------+
@@ -154,7 +154,7 @@ Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><
 <span class="p">|</span><span class="w"> </span><span class="m">41</span>%<span class="w">   </span>37C<span class="w">    </span>P8<span class="w">    </span>16W<span class="w"> </span>/<span class="w"> </span>120W<span class="w"> </span><span class="p">|</span><span class="w">    </span>344MiB<span class="w"> </span>/<span class="w">  </span>6144MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">5</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
 <span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
 +-------------------------------+----------------------+----------------------+
-<span class="w">                                                                               </span>
+
 +-----------------------------------------------------------------------------+
 <span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                  </span><span class="p">|</span>
 <span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                  </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>

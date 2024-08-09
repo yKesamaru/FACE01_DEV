@@ -60,14 +60,6 @@ face01lib.combine module
    :undoc-members:
    :show-inheritance:
 
-face01lib.compile module
-------------------------
-
-.. automodule:: face01lib.compile
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 face01lib.load\_preset\_image module
 ------------------------------------
 

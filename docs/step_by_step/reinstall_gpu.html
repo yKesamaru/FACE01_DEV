@@ -99,16 +99,16 @@ sudo<span class="w"> </span>apt<span class="w"> </span>autoclean
 </section>
 <section id="uncheck-nvidia-repository">
 <h2>Uncheck nvidia repository<a class="headerlink" href="#uncheck-nvidia-repository" title="Link to this heading"></a></h2>
-<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2023-02-12-07-48-18.png" /></p>
+<p><img alt="" src="../_images/PASTE_IMAGE_2023-02-12-07-48-18.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span></code></p>
 </section>
 <section id="remove-cuda-files">
 <h2>Remove cuda files<a class="headerlink" href="#remove-cuda-files" title="Link to this heading"></a></h2>
-<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2023-02-12-07-54-23.png" /></p>
+<p><img alt="" src="../_images/PASTE_IMAGE_2023-02-12-07-54-23.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">/usr/local/cuda*</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">update</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">upgrade</span> <span class="pre">-y</span></code></p>
 <p>Make sure the driver is the Nouveau display driver.
-<img alt="" src="step_by_step/img/PASTE_IMAGE_2023-02-12-07-57-51.png" /></p>
+<img alt="" src="../_images/PASTE_IMAGE_2023-02-12-07-57-51.png" /></p>
 </section>
 <section id="delete-docker-images">
 <h2>Delete docker images<a class="headerlink" href="#delete-docker-images" title="Link to this heading"></a></h2>
@@ -164,7 +164,7 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 <section id="re-install-lib">
 <h2>Re-install lib<a class="headerlink" href="#re-install-lib" title="Link to this heading"></a></h2>
 <p>Tick nvidia repository.
-<img alt="" src="step_by_step/img/PASTE_IMAGE_2023-02-12-08-59-18.png" /></p>
+<img alt="" src="../_images/PASTE_IMAGE_2023-02-12-08-59-18.png" /></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 &lt;!--<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cuda<span class="w"> </span>--&gt;
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-cuda-toolkit
@@ -205,7 +205,7 @@ driver<span class="w">   </span>:<span class="w"> </span>xserver-xorg-video-nouv
 <p>Re-install driver.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nvidia-driver-515
 パッケージリストを読み込んでいます...<span class="w"> </span>完了
-依存関係ツリーを作成しています<span class="w">                </span>
+依存関係ツリーを作成しています
 状態情報を読み取っています...<span class="w"> </span>完了
 以下の追加パッケージがインストールされます:
 <span class="w">  </span>dctrl-tools<span class="w"> </span>dkms<span class="w"> </span>libegl-mesa0:i386<span class="w"> </span>libegl1:i386<span class="w"> </span>libgbm1:i386<span class="w"> </span>libgles2:i386<span class="w"> </span>libnvidia-cfg1-515
@@ -241,7 +241,7 @@ driver<span class="w">   </span>:<span class="w"> </span>xserver-xorg-video-nouv
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>--now<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
-<span class="w">  </span>
+
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>&lt;user_name&gt;
 <span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ID$VERSION_ID</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="se">\</span>
@@ -258,9 +258,9 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </section>
 <section id="check-with-nvidia-smi-command">
 <h2>Check with <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> command.<a class="headerlink" href="#check-with-nvidia-smi-command" title="Link to this heading"></a></h2>
-<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2023-02-12-09-29-15.png" /></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvidia-smi<span class="w"> </span>
-Sun<span class="w"> </span>Feb<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">09</span>:28:15<span class="w"> </span><span class="m">2023</span><span class="w">       </span>
+<p><img alt="" src="../_images/PASTE_IMAGE_2023-02-12-09-29-15.png" /></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvidia-smi
+Sun<span class="w"> </span>Feb<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">09</span>:28:15<span class="w"> </span><span class="m">2023</span>
 +-----------------------------------------------------------------------------+
 <span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">515</span>.86.01<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">515</span>.86.01<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">11</span>.7<span class="w">     </span><span class="p">|</span>
 <span class="p">|</span>-------------------------------+----------------------+----------------------+
@@ -272,7 +272,7 @@ Sun<span class="w"> </span>Feb<span class="w"> </span><span class="m">12</span><
 <span class="p">|</span><span class="w"> </span><span class="m">41</span>%<span class="w">   </span>27C<span class="w">    </span>P8<span class="w">    </span>11W<span class="w"> </span>/<span class="w"> </span>120W<span class="w"> </span><span class="p">|</span><span class="w">    </span>757MiB<span class="w"> </span>/<span class="w">  </span>6144MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">1</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
 <span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
 +-------------------------------+----------------------+----------------------+
-<span class="w">                                                                               </span>
+
 +-----------------------------------------------------------------------------+
 <span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                  </span><span class="p">|</span>
 <span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                  </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>

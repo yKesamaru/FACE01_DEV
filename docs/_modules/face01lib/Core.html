@@ -213,22 +213,22 @@
         <span class="n">model_selection</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">min_detection_confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;RGBイメージを処理し、`mediapipe`を使って算出した`face location`データを返します.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;RGBイメージを処理し、mediapipeを使って算出したface locationデータを返します.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            resized_frame (npt.NDArray[np.uint8]): Resized image frame</span>
-<span class="sd">            model_selection (int, optional): Value set in &#39;config.ini&#39;.  Defaults to 0.</span>
-<span class="sd">            min_detection_confidence (float, optional): Value set in &#39;config.ini&#39;. Defaults to 0.4.</span>
+<span class="sd">            model_selection (int, optional): Value set in config.ini.  Defaults to 0.</span>
+<span class="sd">            min_detection_confidence (float, optional): Value set in config.ini. Defaults to 0.4.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A NamedTuple object with a &quot;detections&quot; field that contains a list of the</span>
-<span class="sd">            detected face location data.&#39;</span>
+<span class="sd">            detected face location data.</span>
 
 <span class="sd">        Refer:</span>
 <span class="sd">            https://solutions.mediapipe.dev/face_detection#python-solution-api</span>
 
 <span class="sd">        Note:</span>
-<span class="sd">            `number_of_people` and `same_time_recognize` in config.ini are disabled when using `mp_face_detection_func`.</span>
+<span class="sd">            number_of_people and same_time_recognize in config.ini are disabled when using mp_face_detection_func.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_frame</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_selection</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_selection</span><span class="p">,</span>

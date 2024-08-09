@@ -59,11 +59,11 @@ face01_gpu    1.4.10                    41b1d82ee908   7 seconds ago   17.5GB
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.10 
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.10
 
 # Check nvidia-smi
 docker@ee44d08e933f:~/FACE01_DEV$ nvidia-smi
-Fri Jul 29 09:07:03 2022       
+Fri Jul 29 09:07:03 2022
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 515.48.07    Driver Version: 515.48.07    CUDA Version: 11.7     |
 |-------------------------------+----------------------+----------------------+
@@ -75,7 +75,7 @@ Fri Jul 29 09:07:03 2022
 | 41%   37C    P8    16W / 120W |    344MiB /  6144MiB |      5%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
-                                                                               
+
 +-----------------------------------------------------------------------------+
 | Processes:                                                                  |
 |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |

@@ -10,8 +10,7 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 
     .. image:: ../docs/img/face_distortion.gif
         :scale: 50%
-        :alt: Face distortion.
-    Image taken from https://imgur.com/VdKIQqF
+        :alt: Face distortion. Image taken from https://imgur.com/VdKIQqF
 
     .. image:: ../docs/img/face_distort_and_model.png
         :scale: 50%
@@ -26,7 +25,6 @@ By using the utils.distort_barrel() method, we believe that we can greatly ensur
     .. image:: ../docs/img/distort_barrel.png
         :scale: 50%
         :alt: Image taken from https://tokai-kaoninsho.com
-
 
 Note:
     **ImageMagick must be installed on your system.**

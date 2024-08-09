@@ -87,9 +87,9 @@
 <section id="pull-docker-image">
 <h1>Pull Docker image<a class="headerlink" href="#pull-docker-image" title="Link to this heading"></a></h1>
 <p>*<em><strong>The easiest way to use Docker is to pull the image.</strong></em>*</p>
-<p><img alt="" src="step_by_step/img/PASTE_IMAGE_2022-08-29-07-43-12.png" /></p>
+<p><img alt="" src="../_images/PASTE_IMAGE_2022-08-29-07-43-12.png" /></p>
 <p><em><strong>NOTE</strong></em> (IMPORTANT!)
-If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code>.<br />
+If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code>.
 If not, the Docker Image you should pull is <code class="docutils literal notranslate"><span class="pre">face01_no_gpu:1.4.10</span></code>.</p>
 <section id="when-using-face01-gpu-1-4-10">
 <h2>When using <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code><a class="headerlink" href="#when-using-face01-gpu-1-4-10" title="Link to this heading"></a></h2>
@@ -124,7 +124,7 @@ docker<span class="w"> </span>images
 <span class="c1"># Run Docker</span>
 docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10<span class="w"> </span>
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10
 </pre></div>
 </div>
 <section id="note">
@@ -133,7 +133,7 @@ docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10<span class="w"> </span>
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10
 </pre></div>
 </div>
 <p><em><strong>Don't forget activate</strong></em> the Python virtual environment (activate venv).</p>
@@ -156,7 +156,7 @@ docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_
 docker<span class="w"> </span>images
 
 <span class="c1"># Run Docker</span>
-docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10<span class="w"> </span>
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10
 </pre></div>
 </div>
 <section id="id1">
@@ -165,7 +165,7 @@ docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10<span class="w"> </span>
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10
 </pre></div>
 </div>
 <p><em><strong>Don't forget activate</strong></em> the Python virtual environment (activate venv).</p>
