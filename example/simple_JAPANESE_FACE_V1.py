@@ -5,9 +5,9 @@ Summary:
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/simple_efficientnetv2_arcface.py
-        
+
 Source code:
     `simple_efficientnetv2_arcface.py <../example/simple_efficientnetv2_arcface.py>`_
 """
@@ -27,7 +27,7 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict =  Initialize('JAPANESE_FACE_V1_MODEL', 'info').initialize()
+CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
@@ -37,6 +37,7 @@ This will read the configuration file `config.ini` and log errors etc.
 
 # Make generator
 gen = Core().common_process(CONFIG)
+
 
 def main(exec_times: int = 50) -> None:
     """Simple example.
@@ -49,7 +50,7 @@ def main(exec_times: int = 50) -> None:
     Returns:
         None
 
-    """    
+    """
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
 
@@ -57,7 +58,7 @@ def main(exec_times: int = 50) -> None:
         frame_datas_array = gen.__next__()
 
         for frame_datas in frame_datas_array:
-            
+
             for person_data in frame_datas['person_data_list']:
                 if not person_data['name'] == 'Unknown':
                     print(
@@ -71,4 +72,4 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    main(exec_times = 100)
+    main(exec_times=100)

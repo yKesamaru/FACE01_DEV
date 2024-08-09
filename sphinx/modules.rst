@@ -1,7 +1,7 @@
-example
-=======
+face01lib
+=========
 
 .. toctree::
    :maxdepth: 4
 
-   example
+   face01lib

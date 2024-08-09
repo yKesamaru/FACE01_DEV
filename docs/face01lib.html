@@ -557,12 +557,122 @@ Please refer to the separate license file for the license of the code.</p>
 <p>License for the Code.</p>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
+<p>Reference.</p>
+<ul>
+<li><dl>
+<dt>Data structure:</dt><dd><ul>
+<li><dl>
+<dt>Definition of person_data_list and frame_datas_array:</dt><dd><ul class="simple">
+<li><p>overlay (npt.NDArray[np.uint8]): Copy of frame</p></li>
+<li><p>face_location_list (List[Tuple[int,int,int,int]]): List of face_location</p></li>
+<li><p>name (str): Each of person's name</p></li>
+<li><p>filename (str): File name</p></li>
+<li><p>percentage_and_symbol (str): Concatenate of digit of percentage and '%' symbol</p></li>
+<li><p>person_data_list (List): List of person_data</p></li>
+<li><p>frame_datas_array (List[Dict]): Array of frame_datas</p></li>
+<li><p>resized_frame (npt.NDArray[np.uint8]): Numpy array of frame</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">person_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;name&#39;: name,</span>
+<span class="go">        &#39;pict&#39;:filename,</span>
+<span class="go">        &#39;date&#39;: date,</span>
+<span class="go">        &#39;location&#39;: (top,right,bottom,left),</span>
+<span class="go">        &#39;percentage_and_symbol&#39;: percentage_and_symbol</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">person_data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;img&#39;: resized_frame,</span>
+<span class="go">        &#39;face_location_list&#39;: face_location_list,</span>
+<span class="go">        &#39;overlay&#39;: overlay,</span>
+<span class="go">        &#39;person_data_list&#39;: person_data_list</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frame_datas_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>About coordinate order:</dt><dd><ul class="simple">
+<li><p>dlib: (Left, Top, Right, Bottom,)</p></li>
+<li><p>Dlib_api(): (top, right, bottom, left)</p></li>
+<li><dl class="simple">
+<dt>see bellow</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py">https://github.com/davisking/dlib/blob/master/python_examples/faceapi.py</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>References:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>About usage of 'cython':</dt><dd><ul>
+<li><dl class="simple">
+<dt>see bellow</dt><dd><ul>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?app=desktop&amp;v=sGggkVaRMzY">https://www.youtube.com/watch?app=desktop&amp;v=sGggkVaRMzY</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>About mediapipe for python:</dt><dd><ul>
+<li><dl class="simple">
+<dt>see bellow</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/google/mediapipe/tree/master/mediapipe/python">https://github.com/google/mediapipe/tree/master/mediapipe/python</a></p></li>
+<li><p><a class="reference external" href="https://solutions.mediapipe.dev/face_detection#python-solution-api">https://solutions.mediapipe.dev/face_detection#python-solution-api</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>About anti spoof function:</dt><dd><ul>
+<li><dl class="simple">
+<dt>model</dt><dd><ul>
+<li><p>Original model create by Prokofev Kirill, modified by PINT</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>URL</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3">https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Core.Core">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Core.</span></span><span class="sig-name descname"><span class="pre">Core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Core.html#Core"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Core.Core" title="Link to this definition"></a></dt>
 <dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Core class.</p>
-<p>This class include many useful methods.</p>
+<p>Coreクラス.</p>
+<p>このクラスは多くの有用なメソッドを含みます。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.common_process">
 <span class="sig-name descname"><span class="pre">common_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CONFIG</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><span class="pre">Dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.12)"><span class="pre">Generator</span></a></span></span><a class="reference internal" href="_modules/face01lib/Core.html#Core.common_process"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Core.Core.common_process" title="Link to this definition"></a></dt>
@@ -721,7 +831,7 @@ Please refer to the separate license file for the license of the code.</p>
 <dl>
 <dt>Processing:</dt><dd><ul class="simple">
 <li><dl class="simple">
-<dt>If CONFIG[&quot;headless&quot;] == False</dt><dd><ul>
+<dt>If CONFIG[&quot;headless&quot;] is False</dt><dd><ul>
 <li><p>copy frame data for <cite>overlay</cite></p></li>
 <li><p>composite <cite>telop</cite> and <cite>logo</cite></p></li>
 </ul>
@@ -736,7 +846,7 @@ Please refer to the separate license file for the license of the code.</p>
 <li><dl class="simple">
 <dt><cite>overlay</cite></dt><dd><ul>
 <li><dl class="simple">
-<dt>If <cite>CONFIG[&quot;headless&quot;] == True</cite>, insert <cite>dummy data</cite></dt><dd><ul>
+<dt>If <cite>CONFIG[&quot;headless&quot;] is True</cite>, insert <cite>dummy data</cite></dt><dd><ul>
 <li><p>np.empty((2,2,3), dtype=np.uint8)</p></li>
 </ul>
 </dd>
@@ -856,7 +966,7 @@ Please refer to the separate license file for the license of the code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Core.Core.mp_face_detection_func">
 <span class="sig-name descname"><span class="pre">mp_face_detection_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resized_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_selection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_detection_confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Core.html#Core.mp_face_detection_func"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Core.Core.mp_face_detection_func" title="Link to this definition"></a></dt>
-<dd><p>Processes an RGB image and returns a list of the detected face location data.</p>
+<dd><p>RGBイメージを処理し、<a href="#id1"><span class="problematic" id="id2">`</span></a>mediapipe`を使って算出した`face location`データを返します.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1240,9 +1350,9 @@ That is, centered and scaled essentially the same way.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
 <dl class="simple">
-<dt>class dlib.face_recognition_model_v1: compute_face_descriptor(<a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</a></p>
+<dt>class dlib.face_recognition_model_v1: compute_face_descriptor(<a href="#id3"><span class="problematic" id="id4">*</span></a>args, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</a></p>
 </dd>
-<dt>compute_face_descriptor(<a href="#id5"><span class="problematic" id="id6">*</span></a>args, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</a></p>
+<dt>compute_face_descriptor(<a href="#id7"><span class="problematic" id="id8">*</span></a>args, <a href="#id9"><span class="problematic" id="id10">**</span></a>kwargs)</dt><dd><p><a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</a></p>
 </dd>
 </dl>
 </div>
@@ -1580,6 +1690,24 @@ Please refer to the separate license file for the license of the code.</p>
 <p>License for the Code.</p>
 <p>Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.</p>
+<p>The utils class.</p>
+<p>When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
+In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion." src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" /></a>
+<p>Image taken from <a class="reference external" href="https://imgur.com/VdKIQqF">https://imgur.com/VdKIQqF</a></p>
+<a class="reference internal image-reference" href="_images/face_distort_and_model.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_distort_and_model.png" style="width: 223.5px; height: 303.0px;" /></a>
+</div></blockquote>
+<p>By using the utils.distort_barrel() method, we believe that we can greatly ensure the robustness of distortion caused by the camera lens.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/woman-1.gif"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/woman-1.gif" style="width: 251.0px; height: 267.5px;" /></a>
+<a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p><strong>ImageMagick must be installed on your system.</strong>
+- See ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.utils.Utils">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.utils.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/utils.html#Utils"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.utils.Utils" title="Link to this definition"></a></dt>
@@ -1589,19 +1717,19 @@ Please refer to the separate license file for the license of the code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio">
 <span class="sig-name descname"><span class="pre">align_and_resize_maintain_aspect_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_limit_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/face01lib/utils.html#Utils.align_and_resize_maintain_aspect_ratio"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.utils.Utils.align_and_resize_maintain_aspect_ratio" title="Link to this definition"></a></dt>
-<dd><p>Align and resize input image with maintain aspect ratio.</p>
+<dd><p>入力画像をアラインメントしてリサイズ（アスペクト比を維持）.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- file path which contain file name. ('.jpg' or '.jpeg' or '.png'. These must be lower case.) If path is <cite>directory</cite>, All files contained in this directory are targeted.</p></li>
-<li><p><strong>upper_limit_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Upper limit length of width. Defaults to 1024.</p></li>
-<li><p><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25, tiny = 0.1. Default = 0.4</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Resized size of image data. Default is 224.</p></li>
-<li><p><strong>contain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) -- Contain word in the directory</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- ファイル名を含むファイルパス。('.jpg' または '.jpeg' または '.png'。これらは小文字でなければなりません。) パスがディレクトリの場合、そのディレクトリに含まれるすべてのファイルが対象です。</p></li>
+<li><p><strong>upper_limit_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- 幅の上限長さ。デフォルトは1024。</p></li>
+<li><p><strong>padding</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- 顔の周りのパディング。大 = 0.8、中 = 0.4、小 = 0.25、非常に小さい = 0.1。デフォルトは0.4。</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- 画像データのリサイズ後のサイズ。デフォルトは224。</p></li>
+<li><p><strong>contain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) -- ディレクトリ内のファイル名に含まれる単語。</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of files that failed to align and resize.</p>
+<dd class="field-even"><p>アラインメントとリサイズに失敗したファイルのリスト。</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>error_files (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>)</p>
@@ -1613,7 +1741,7 @@ Please refer to the separate license file for the license of the code.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>If the width of the input image file exceeds '1024px', it will be resized to '1024px' while maintaining the aspect ratio.</p>
+<p>入力画像ファイルの幅が'1024px'を超える場合、アスペクト比を維持しながら'1024px'にリサイズされます。</p>
 </div>
 </dd></dl>
 
