@@ -292,13 +292,19 @@ extracts the face, aligns, crops and saves them.</p>
 </section>
 <section id="module-example.benchmark_CUI">
 <span id="example-benchmark-cui-module"></span><h2>example.benchmark_CUI module<a class="headerlink" href="#module-example.benchmark_CUI" title="Link to this heading"></a></h2>
-<p>Example of benchmark for face recognition.</p>
+<p>顔認識のベンチマークをとるエグザンプルコード例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>In this example, you can test benchmark for CUI mode.</p>
-<p>After running, it will automatically display the benchmark in your browser.
-To quite, press &quot;Cnt + c&quot; in terminal(or console) where this example is running.</p>
+<dt>Summary:</dt><dd><p>このコード例では、CUIモードでのベンチマークテストを行う方法を示します。
+このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。
+具体的にはrequirements_dev.txtをインストールしてください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
+</pre></div>
+</div>
+<p>実行後、ベンチマークが自動的にブラウザで表示されます。
+終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</p>
 </dd>
 </dl>
+<a class="reference internal image-reference" href="_images/benchmark_CUI_restats.png"><img alt="SnakeVizによるベンチマークテスト画像" src="_images/benchmark_CUI_restats.png" style="width: 608.5px; height: 646.5px;" /></a>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>benchmark_CUI.py
