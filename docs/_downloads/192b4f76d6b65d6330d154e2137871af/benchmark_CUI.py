@@ -1,10 +1,20 @@
-"""Example of benchmark for face recognition.
+"""顔認識のベンチマークをとるエグザンプルコード例.
 
 Summary:
-    In this example, you can test benchmark for CUI mode.
+    このコード例では、CUIモードでのベンチマークテストを行う方法を示します。
+    このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。
+    具体的にはrequirements_dev.txtをインストールしてください。
 
-    After running, it will automatically display the benchmark in your browser.
-    To quite, press "Cnt + c" in terminal(or console) where this example is running.
+    .. code-block:: bash
+
+        pip install -r requirements_dev.txt
+
+    実行後、ベンチマークが自動的にブラウザで表示されます。
+    終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。
+
+.. image:: ../docs/img/benchmark_CUI_restats.png
+    :alt: SnakeVizによるベンチマークテスト画像
+    :scale: 50%
 
 Example:
     .. code-block:: bash
@@ -17,6 +27,7 @@ Source code:
 # Operate directory: Common to all examples
 import os.path
 import sys
+
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
@@ -26,9 +37,9 @@ import cProfile as pr
 import subprocess
 from typing import Dict
 
+from face01lib.Calc import Cal
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
-from face01lib.Calc import Cal
 
 
 def main(exec_times: int = 50) -> None:
@@ -41,15 +52,12 @@ def main(exec_times: int = 50) -> None:
         None
     """
     # Initialize
-    CONFIG: Dict =  Initialize().initialize()
-
+    CONFIG: Dict = Initialize().initialize()
 
     gen = Core().common_process(CONFIG)
 
-
     # Specify START point
     START: float = Cal.Measure_processing_time_forward()
-
 
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
@@ -70,7 +78,6 @@ def main(exec_times: int = 50) -> None:
                         "\t", "output\t\t\t", person_data['pict'], "\n",
                         "-------\n"
                     )
-
 
     END = Cal.Measure_processing_time_backward()
 

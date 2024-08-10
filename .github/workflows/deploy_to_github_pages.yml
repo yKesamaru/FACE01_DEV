@@ -34,7 +34,6 @@ jobs:
 
       - name: Generate Sphinx documentation
         run: |
-          sphinx-apidoc -f -o sphinx/ ./
           sphinx-apidoc -f -o sphinx/ example/
           sphinx-apidoc -f -o sphinx/ face01lib/
           sphinx-build -a -b html -E ./sphinx ./docs

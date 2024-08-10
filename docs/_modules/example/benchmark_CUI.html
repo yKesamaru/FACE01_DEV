@@ -81,13 +81,23 @@
            <div itemprop="articleBody">
              
   <h1>example.benchmark_CUI のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Example of benchmark for face recognition.</span>
+<span></span><span class="sd">&quot;&quot;&quot;顔認識のベンチマークをとるエグザンプルコード例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    In this example, you can test benchmark for CUI mode.</span>
+<span class="sd">    このコード例では、CUIモードでのベンチマークテストを行う方法を示します。</span>
+<span class="sd">    このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。</span>
+<span class="sd">    具体的にはrequirements_dev.txtをインストールしてください。</span>
 
-<span class="sd">    After running, it will automatically display the benchmark in your browser.</span>
-<span class="sd">    To quite, press &quot;Cnt + c&quot; in terminal(or console) where this example is running.</span>
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        pip install -r requirements_dev.txt</span>
+
+<span class="sd">    実行後、ベンチマークが自動的にブラウザで表示されます。</span>
+<span class="sd">    終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</span>
+
+<span class="sd">.. image:: ../docs/img/benchmark_CUI_restats.png</span>
+<span class="sd">    :alt: SnakeVizによるベンチマークテスト画像</span>
+<span class="sd">    :scale: 50%</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
@@ -100,6 +110,7 @@
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">sys</span>
+
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
@@ -109,9 +120,9 @@
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
+<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
 <span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
-<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
 
 
 <div class="viewcode-block" id="main">
@@ -126,15 +137,12 @@
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialize</span>
-    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">()</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
     <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
 
-
     <span class="c1"># Specify START point</span>
     <span class="n">START</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time_forward</span><span class="p">()</span>
-
 
     <span class="c1"># Repeat &#39;exec_times&#39; times</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
@@ -155,7 +163,6 @@
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;output</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="p">)</span>
-
 
     <span class="n">END</span> <span class="o">=</span> <span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time_backward</span><span class="p">()</span>
 
