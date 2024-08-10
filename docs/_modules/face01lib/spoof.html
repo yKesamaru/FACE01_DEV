@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.spoof &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>face01lib.spoof &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -37,7 +37,7 @@
           
           <a href="../../index.html" class="icon icon-home">
             FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -47,8 +47,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
@@ -144,7 +145,6 @@
 <span class="n">mp_objectron</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">objectron</span>
 
 
-
 <div class="viewcode-block" id="Spoof">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof">[ドキュメント]</a>
 <span class="k">class</span> <span class="nc">Spoof</span><span class="p">():</span>
@@ -162,7 +162,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            log_level (str, optional): Receive log level value. Defaults to &#39;info&#39;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Setup logger: common way</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
         <span class="kn">import</span> <span class="nn">os.path</span>
@@ -185,7 +185,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">first_frame_processed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blink_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># この変数で瞬きの回数をカウント</span>
 
-
     <span class="c1"># 眼のアスペクト比を計算するプライベート関数</span>
     <span class="k">def</span> <span class="nf">_calculate_eye_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">face_landmarks</span><span class="p">,</span> <span class="n">eye_landmarks</span><span class="p">):</span>
         <span class="n">eye_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">face_landmarks</span><span class="o">.</span><span class="n">landmark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">face_landmarks</span><span class="o">.</span><span class="n">landmark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eye_landmarks</span><span class="p">])</span>
@@ -199,18 +198,18 @@
 <div class="viewcode-block" id="Spoof.detect_eye_blinks">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.detect_eye_blinks">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">detect_eye_blinks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if eye blink is detected.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;まばたきを検知したときにTrueを返します.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            frame_datas_array (array[Dict]): frame_datas_array</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: If eye blink is detected, return True. Otherwise, return False.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">frame_datas_array</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">CONFIG</span>
-        
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;detect_eye_blinks&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;detect_eye_blinks&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># EARの閾値</span>
@@ -249,8 +248,6 @@
         <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># それ以外の場合はFalseを返す</span></div>
 
 
-
-    
 <div class="viewcode-block" id="Spoof.obj_detect">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.obj_detect">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">obj_detect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -290,31 +287,28 @@
         <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
 
 
-
 <div class="viewcode-block" id="Spoof.make_qr_code">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.make_qr_code">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">make_qr_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Get CONFIG</span>
         <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;MAKE_QR_CODE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-        
+
         <span class="c1"># Make generator</span>
         <span class="n">gen</span> <span class="o">=</span> <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
-        
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
             <span class="n">resized_frame</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
             <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_imshow_for_debug</span><span class="p">(</span><span class="n">resized_frame</span><span class="p">)</span>
             <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">resized_frame</span><span class="p">)</span>
             <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
             <span class="n">datas_list</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;datas_list:&#39;</span><span class="p">,</span> <span class="n">datas_list</span><span class="p">)</span>
             <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_imshow_for_debug</span><span class="p">(</span><span class="n">datas_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;img&quot;</span><span class="p">])</span>
         <span class="k">pass</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">pyqrcode</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;http://uca.edu&#39;</span><span class="p">)</span>
         <span class="n">url</span><span class="o">.</span><span class="n">svg</span><span class="p">(</span><span class="s1">&#39;uca-url.svg&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">terminal</span><span class="p">(</span><span class="n">quiet_zone</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
 </div>
-
-
-
 
 
 

@@ -81,14 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.LoadImage のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-
-<span class="sd">&quot;&quot;&quot;Load image class.&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Load image class.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFile</span>
@@ -105,7 +98,7 @@
 <div class="viewcode-block" id="LoadImage">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.LoadImage.LoadImage">[ドキュメント]</a>
 <span class="k">class</span> <span class="nc">LoadImage</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class include method to load images.&quot;&quot;&quot;</span>    
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class include method to load images.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headless</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">conf_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize.</span>
 
@@ -115,14 +108,14 @@
 
 <span class="sd">        Return:</span>
 <span class="sd">            None</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headless</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">headless</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">conf_dict</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">headless</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">headless</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="c1"># それぞれの画像が1度だけしか読み込まれない仕組み</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_telop_image</span><span class="p">:</span> <span class="nb">bool</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">load_logo_image</span><span class="p">:</span> <span class="nb">bool</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_logo_image</span><span class="p">:</span> <span class="nb">bool</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_unregistered_face_image</span><span class="p">:</span> <span class="nb">bool</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">load_telop_image</span> <span class="o">=</span> <span class="kc">False</span>
@@ -132,7 +125,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">load_telop_image</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_logo_image</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_unregistered_face_image</span> <span class="o">=</span> <span class="kc">True</span>
-
 
 <div class="viewcode-block" id="LoadImage.LI">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.LoadImage.LoadImage.LI">[ドキュメント]</a>
@@ -153,26 +145,26 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple.</span>
-<span class="sd">            </span>
+
 <span class="sd">            - rect01_png (cv2.Mat): Loaded image data as ndarray</span>
 <span class="sd">            - rect01_NG_png (cv2.Mat): Loaded image data as ndarray</span>
 <span class="sd">            - rect01_REAL_png (cv2.Mat): Loaded image data as ndarray</span>
 <span class="sd">            - rect01_SPOOF_png (cv2.Mat): Loaded image data as ndarray</span>
 <span class="sd">            - rect01_CANNOT_DISTINCTION_png (cv2.Mat): Loaded image data as ndarray</span>
 <span class="sd">            - resized_telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray</span>
-<span class="sd">            - cal_resized_telop_nums : Return Tuple or None </span>
+<span class="sd">            - cal_resized_telop_nums : Return Tuple or None</span>
 <span class="sd">            - resized_logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</span>
-<span class="sd">            - cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]): </span>
+<span class="sd">            - cal_resized_logo_nums (Union[Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]], None]):</span>
 <span class="sd">            - load_unregistered_face_image (bool): Bool</span>
 <span class="sd">            - telop_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</span>
 <span class="sd">            - logo_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</span>
 <span class="sd">            - unregistered_face_image (Union[cv2.Mat, None]): Loaded image data as ndarray or None</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
-        <span class="n">rect01_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/rect01.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
-        <span class="n">rect01_NG_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/rect01_NG.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
-        <span class="n">rect01_REAL_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/rect01_REAL.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
-        <span class="n">rect01_SPOOF_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/rect01_SPOOF.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
-        <span class="n">rect01_CANNOT_DISTINCTION_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/rect01_CANNOT_DISTINCTION.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rect01_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/images/rect01.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+        <span class="n">rect01_NG_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/images/rect01_NG.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+        <span class="n">rect01_REAL_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/images/rect01_REAL.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+        <span class="n">rect01_SPOOF_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/images/rect01_SPOOF.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+        <span class="n">rect01_CANNOT_DISTINCTION_png</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;assets/images/rect01_CANNOT_DISTINCTION.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
 
         <span class="c1"># Load Telop image</span>
         <span class="n">telop_image</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
@@ -186,37 +178,40 @@
         <span class="n">unregistered_face_image</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_telop_image</span><span class="p">:</span>
-            <span class="n">telop_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/telop.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+            <span class="n">telop_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span>
+                <span class="s2">&quot;assets/images/telop.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
 
             <span class="n">_</span><span class="p">,</span> <span class="n">orgWidth</span> <span class="o">=</span> <span class="n">telop_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">orgWidth</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1">## テロップ幅は横幅を分母として設定</span>
-            
+            <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">]</span> <span class="o">/</span> \
+                <span class="n">orgWidth</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># テロップ幅は横幅を分母として設定</span>
+
             <span class="n">resized_telop_image</span> <span class="o">=</span> \
-                <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">telop_image</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">ratio</span><span class="p">)</span>
-            
+                <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">telop_image</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">ratio</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">ratio</span><span class="p">)</span>
+
             <span class="n">cal_resized_telop_nums</span> <span class="o">=</span> \
                 <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_telop_image</span><span class="p">(</span><span class="n">resized_telop_image</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">resized_telop_image</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">cal_resized_telop_nums</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">telop_image</span> <span class="o">=</span> <span class="kc">None</span>
-        
+
         <span class="c1"># Load Logo image</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_logo_image</span><span class="p">:</span>
-            <span class="n">logo_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;images/Logo.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+            <span class="n">logo_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span>
+                <span class="s2">&quot;assets/images/Logo.png&quot;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
             <span class="n">load_logo_image</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">logoWidth</span> <span class="o">=</span> <span class="n">logo_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">logoRatio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">logoWidth</span> <span class="o">/</span> <span class="mi">15</span>
 
             <span class="n">resized_logo_image</span> <span class="o">=</span> \
-                <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">logo_image</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">logoRatio</span><span class="p">,</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">logoRatio</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">logo_image</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">logoRatio</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">logoRatio</span><span class="p">)</span>
 
             <span class="n">cal_resized_logo_nums</span> <span class="o">=</span> \
                 <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_resized_logo_image</span><span class="p">(</span>
-                        <span class="n">resized_logo_image</span><span class="p">,</span>
-                        <span class="n">set_height</span><span class="p">,</span>
-                        <span class="n">set_width</span>
-                    <span class="p">)</span>
+                    <span class="n">resized_logo_image</span><span class="p">,</span>
+                    <span class="n">set_height</span><span class="p">,</span>
+                    <span class="n">set_width</span>
+                <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">resized_logo_image</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">cal_resized_logo_nums</span> <span class="o">=</span> <span class="kc">None</span>
@@ -224,7 +219,7 @@
 
         <span class="c1"># Load unregistered_face_image</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_unregistered_face_image</span><span class="p">:</span>
-            <span class="n">unregistered_face_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./images/顔画像未登録.png&#39;</span><span class="p">))</span>
+            <span class="n">unregistered_face_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;assets/images/顔画像未登録.png&#39;</span><span class="p">))</span>
             <span class="n">unregistered_face_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">unregistered_face_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGBA</span><span class="p">)</span>
             <span class="n">load_unregistered_face_image</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>

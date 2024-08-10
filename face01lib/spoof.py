@@ -62,7 +62,6 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_objectron = mp.solutions.objectron
 
 
-
 class Spoof():
     # 目の状態を表す列挙型
     class EyeState(Enum):
@@ -75,7 +74,7 @@ class Spoof():
 
         Args:
             log_level (str, optional): Receive log level value. Defaults to 'info'.
-        """        
+        """
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -98,7 +97,6 @@ class Spoof():
         self.first_frame_processed = False
         self.blink_counter = 0  # この変数で瞬きの回数をカウント
 
-
     # 眼のアスペクト比を計算するプライベート関数
     def _calculate_eye_ratio(self, face_landmarks, eye_landmarks):
         eye_points = np.array([[face_landmarks.landmark[i].x, face_landmarks.landmark[i].y] for i in eye_landmarks])
@@ -110,18 +108,18 @@ class Spoof():
         return eye_ratio
 
     def detect_eye_blinks(self, frame_datas_array, CONFIG) -> bool:
-        """Return True if eye blink is detected.
+        """まばたきを検知したときにTrueを返します.
 
         Args:
             frame_datas_array (array[Dict]): frame_datas_array
 
         Returns:
             bool: If eye blink is detected, return True. Otherwise, return False.
-        """        
+        """
         self.frame_datas_array = frame_datas_array
         self.CONFIG = CONFIG
-        
-        if self.CONFIG["detect_eye_blinks"] == False:
+
+        if self.CONFIG["detect_eye_blinks"] is False:
             return False
 
         # EARの閾値
@@ -159,8 +157,6 @@ class Spoof():
 
         return False  # それ以外の場合はFalseを返す
 
-
-    
     def obj_detect(self):
         # For webcam input:
         cap = cv2.VideoCapture(0)
@@ -197,28 +193,25 @@ class Spoof():
                     break
         cap.release()
 
-
     def make_qr_code(self):
         # Get CONFIG
         CONFIG = Initialize("MAKE_QR_CODE").initialize()
-        
+
         # Make generator
         gen = VidCap_obj.frame_generator(CONFIG)
-        
-        for _ in range(0, 50):
+
+        for _ in range(0, 2):
             resized_frame = VidCap().frame_generator(CONFIG).__next__()
             VidCap_obj.frame_imshow_for_debug(resized_frame)
             frame_datas_array = Core_obj.frame_pre_processing(self.logger, CONFIG, resized_frame)
             encoded_list, frame_datas_array = Core_obj.face_encoding_process(self.logger, CONFIG, frame_datas_array)
             datas_list = Core_obj.frame_post_processing(self.logger, CONFIG, encoded_list, frame_datas_array)
+            print('datas_list:', datas_list)
             VidCap_obj.frame_imshow_for_debug(datas_list[0]["img"])
         pass
         url = pyqrcode.create('http://uca.edu')
         url.svg('uca-url.svg', scale=8)
         print(url.terminal(quiet_zone=1))
-
-
-
 
 
 if __name__ == '__main__':

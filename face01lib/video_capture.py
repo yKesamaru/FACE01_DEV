@@ -1,10 +1,3 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
-
 """The VidCap class."""
 
 import inspect
@@ -34,13 +27,13 @@ class VidCap:
     """VidCap class.
 
     contains methods that initially process the input video data
-    """    
+    """
     def __init__(self, log_level: str = 'info') -> None:
         """init.
 
         Args:
             log_level (str, optional): Receive log level value. Defaults to 'info'.
-        """        
+        """
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -52,12 +45,11 @@ class VidCap:
 
         Cal().cal_specify_date(self.logger)
 
-
     # デバッグ用imshow()
     def frame_imshow_for_debug(
-            self,
-            frame: npt.NDArray[np.uint8]
-        ) -> None:
+        self,
+        frame: npt.NDArray[np.uint8]
+    ) -> None:
         """Used for debugging.
 
         Display the given frame data in a GUI window for 3 seconds.
@@ -67,7 +59,7 @@ class VidCap:
 
         Return:
             None
-        """        
+        """
         self.frame_maybe: npt.NDArray[np.uint8] = frame
 
         if isinstance(self.frame_maybe, np.ndarray):
@@ -87,14 +79,12 @@ class VidCap:
                 cv2.waitKey(3000)
                 cv2.destroyAllWindows()
 
-
-    # cpdef
     def resize_frame(
-            self,
-            set_width: int,
-            set_height: int,
-            frame: npt.NDArray[np.uint8]
-        ) -> npt.NDArray[np.uint8]:
+        self,
+        set_width: int,
+        set_height: int,
+        frame: npt.NDArray[np.uint8]
+    ) -> npt.NDArray[np.uint8]:
         """Return resized frame data.
 
         Args:
@@ -104,22 +94,20 @@ class VidCap:
 
         Returns:
             npt.NDArray[np.uint8]: small_frame
-        """        
+        """
         self.set_width: int = set_width
         self.set_height: int = set_height
         self.frame: npt.NDArray[np.uint8] = frame
-        
+
         small_frame: npt.NDArray[np.uint8] = \
             cv2.resize(self.frame, (self.set_width, self.set_height))  # cv2.Mat
         return small_frame
 
-
-    # not cdef
     def return_movie_property(
-            self,
-            set_width: int,
-            vcap
-        ) -> Tuple[int,...]:
+        self,
+        set_width: int,
+        vcap
+    ) -> Tuple[int, ...]:
         """Return input movie file's property.
 
         Args:
@@ -128,21 +116,21 @@ class VidCap:
 
         Returns:
             Tuple[int,...]: self.set_width, fps, height, width, set_height
-        """        
-        self.set_width : int= set_width
+        """
+        self.set_width: int = set_width
         self.vcap = vcap
         # # debug
         # if vcap.isOpened():
         #     print("VideoCaptureオブジェクトが正しく開かれています。")
         # else:
         #     print("VideoCaptureオブジェクトが開かれていません。")
-        
-        fps: int  = self.vcap.get(cv2.CAP_PROP_FPS)
+
+        fps: int = self.vcap.get(cv2.CAP_PROP_FPS)
         height: int = self.vcap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-        width: int  = self.vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        width: int = self.vcap.get(cv2.CAP_PROP_FRAME_WIDTH)
 
         fps: int = int(fps)
-        height: int= int(height)
+        height: int = int(height)
         width: int = int(width)
 
         if width <= 0:
@@ -152,7 +140,7 @@ class VidCap:
             self.logger.warning("-" * 20)
             self.logger.warning("exit")
             exit(0)
-        
+
         # BUGFIX: vcapを閉じておく
         self.finalize(self.vcap)
         # # debug
@@ -163,7 +151,6 @@ class VidCap:
         set_height: int = int((self.set_width * height) / width)
 
         return self.set_width,fps,height,width,set_height
-
 
     # cdef, python版
     def _cal_angle_coordinate(self, height: int, width: int) -> Tuple[Tuple[int,int,int,int], ...]:
@@ -179,24 +166,23 @@ class VidCap:
             Tuple[int,int,int,int]: TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
         """
         # order: (top, bottom, left, right)
-        TOP_LEFT: Tuple[int,int,int,int] = (0,int(self.height/2),0,int(self.width/2))
+        TOP_LEFT: Tuple[int,int,int,int] = (0,int(self.height/2), 0, int(self.width/2))
         TOP_RIGHT: Tuple[int,int,int,int] = (0,int( self.height/2),int(self.width/2),self.width)
         BOTTOM_LEFT: Tuple[int,int,int,int] = (int(self.height/2),self.height,0,int(self.width/2))
         BOTTOM_RIGHT: Tuple[int,int,int,int] = (int(self.height/2),self.height,int(self.width/2),self.width)
         CENTER: Tuple[int,int,int,int] = (int(self.height/4),int(self.height/4)*3,int(self.width/4),int(self.width/4)*3)
         return TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER
 
-
     def _angle_of_view_specification(
-            self,
-            set_area: str,
-            frame: npt.NDArray[np.uint8],
-            TOP_LEFT: Tuple[int,int,int,int],
-            TOP_RIGHT: Tuple[int,int,int,int],
-            BOTTOM_LEFT: Tuple[int,int,int,int],
-            BOTTOM_RIGHT: Tuple[int,int,int,int],
-            CENTER: Tuple[int,int,int,int]
-        ) -> npt.NDArray[np.uint8]:
+        self,
+        set_area: str,
+        frame: npt.NDArray[np.uint8],
+        TOP_LEFT: Tuple[int, int, int, int],
+        TOP_RIGHT: Tuple[int, int, int, int],
+        BOTTOM_LEFT: Tuple[int, int, int, int],
+        BOTTOM_RIGHT: Tuple[int, int, int, int],
+        CENTER: Tuple[int, int, int, int]
+    ) -> npt.NDArray[np.uint8]:
         """Return ndarray data which area specification coordinates for frame.
 
         Args:
@@ -215,14 +201,14 @@ class VidCap:
             Face_location order: top, right, bottom, left
             TOP_LEFT order: (top, bottom, left, right)
             How to slice: img[top: bottom, left: right]
-        """        
+        """
         self.set_area: str = set_area
         self.frame: npt.NDArray[np.uint8] = frame
-        self.TOP_LEFT: Tuple[int,int,int,int] = TOP_LEFT
-        self.TOP_RIGHT: Tuple[int,int,int,int] = TOP_RIGHT
-        self.BOTTOM_LEFT: Tuple[int,int,int,int] = BOTTOM_LEFT
-        self.BOTTOM_RIGHT: Tuple[int,int,int,int] = BOTTOM_RIGHT
-        self.CENTER: Tuple[int,int,int,int] = CENTER
+        self.TOP_LEFT: Tuple[int, int, int, int] = TOP_LEFT
+        self.TOP_RIGHT: Tuple[int, int, int, int] = TOP_RIGHT
+        self.BOTTOM_LEFT: Tuple[int, int, int, int] = BOTTOM_LEFT
+        self.BOTTOM_RIGHT: Tuple[int, int, int, int] = BOTTOM_RIGHT
+        self.CENTER: Tuple[int, int, int, int] = CENTER
 
         # VidCap().frame_imshow_for_debug(self.frame)
 
@@ -241,7 +227,6 @@ class VidCap:
         # VidCap().frame_imshow_for_debug(self.frame)
         return self.frame
 
-
     def return_vcap(self, movie: str) -> cv2.VideoCapture:
         """Return vcap object.
 
@@ -253,7 +238,7 @@ class VidCap:
         """
         self.movie: str = movie
         # movie=movie
-        if self.movie=='usb' or self.movie == 'USB':   # USB カメラ読み込み時使用
+        if self.movie == 'usb' or self.movie == 'USB':   # USB カメラ読み込み時使用
             live_camera_number: int = 0
             for camera_number in range(0, 5):
                 vcap = cv2.VideoCapture(camera_number)
@@ -296,23 +281,21 @@ class VidCap:
             # print("現在の作業ディレクトリ:", current_directory)
             return vcap
 
-
     def finalize(self, vcap) -> None:
         """Release vcap and Destroy window.
 
         Args:
             vcap (cv2.VideoCapture): vcap which is handle of input video process
-        """        
+        """
         self.vcap = vcap
         self.vcap.release()
         cv2.destroyAllWindows()
 
-
     # @lru_cache(maxsize=None)
     def frame_generator(
-            self,
-            CONFIG: Dict
-        ) -> Generator:
+        self,
+        CONFIG: Dict
+    ) -> Generator:
         """Generator: Return resized frame data.
 
         Args:
@@ -323,7 +306,7 @@ class VidCap:
 
         Yields:
             Generator: Resized frame data (npt.NDArray[np.uint8])
-        """        
+        """
         self.CONFIG: Dict = CONFIG
 
         """Initial values"""
@@ -332,7 +315,7 @@ class VidCap:
         set_height: int = self.CONFIG["set_height"]
         movie: str = self.CONFIG["movie"]
         set_area: str = self.CONFIG["set_area"]
-        
+
         ret: bool
         # vcap
         frame: npt.NDArray[np.uint8]
@@ -341,17 +324,17 @@ class VidCap:
         # chdir(RootDir)  # Not use
 
         # Calculate coordinates of corners: Tuple[int,int,int,int] for 'angle of view'.
-        TOP_LEFT: Tuple[int,int,int,int]
-        TOP_RIGHT: Tuple[int,int,int,int]
-        BOTTOM_LEFT: Tuple[int,int,int,int]
-        BOTTOM_RIGHT: Tuple[int,int,int,int]
-        CENTER: Tuple[int,int,int,int]
+        TOP_LEFT: Tuple[int, int, int, int]
+        TOP_RIGHT: Tuple[int, int, int, int]
+        BOTTOM_LEFT: Tuple[int, int, int, int]
+        BOTTOM_RIGHT: Tuple[int, int, int, int]
+        CENTER: Tuple[int, int, int, int]
 
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, CENTER = \
             self._cal_angle_coordinate(
-                    self.CONFIG["height"],
-                    self.CONFIG["width"]
-                )
+                self.CONFIG["height"],
+                self.CONFIG["width"]
+            )
 
         if (movie == 'usb' or movie == 'USB'):   # USB カメラ読み込み時使用
             camera_number: int = 0
@@ -364,7 +347,7 @@ class VidCap:
                     break
             # TODO: #39 変数camera_numberの挙動が奇妙。-1は本当か、なぜログ出力が5行もでる？
             self.logger.info(f'CAMERA DEVICE NUMBER: {camera_number}')
-            while vcap.isOpened(): 
+            while vcap.isOpened():
                 # frame_skipの数値に満たない場合は処理をスキップ
                 for frame_skip_counter in range(1, self.CONFIG["frame_skip"]):
                     ret, frame = vcap.read()
@@ -455,19 +438,19 @@ class VidCap:
                 self.logger.warning("-" * 20)
                 self.logger.warning("終了します")
                 exit(0)
-        
+
         else:  # RTSPの場合は通常のテスト動画と同じ
             vcap = cv2.VideoCapture(movie)
             # vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)
 
             cnt: int = 1
             debug_num:int = 1
-            while vcap.isOpened(): 
+            while vcap.isOpened():
 
                 ret, frame = vcap.read()
                 """DEBUG"""
                 # self.frame_imshow_for_debug(frame)
-                
+
                 # frame_skipの数値に満たない場合は処理をスキップ
                 if cnt < self.CONFIG["frame_skip"]:
                     cnt += 1
@@ -504,9 +487,9 @@ class VidCap:
                     resized_frame = self.resize_frame(set_width, set_height, angle_frame)
                     """DEBUG"""
                     # self.frame_imshow_for_debug(resized_frame)
-                    
+
                     yield resized_frame
-                
+
                 elif ret == False:
                     self.finalize(vcap)
 
@@ -521,7 +504,7 @@ class VidCap:
     > [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．
     > (画像において0行0列目は，左上)
     > よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである
-    
+
     > imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)
     > だけを取り出すことで，切り取ることができた．
 

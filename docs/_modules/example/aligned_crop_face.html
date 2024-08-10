@@ -81,18 +81,18 @@
            <div itemprop="articleBody">
              
   <h1>example.aligned_crop_face のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Example of to detect, rotate and crop face images.</span>
+<span></span><span class="sd">&quot;&quot;&quot;顔画像を検出、回転、クロップするコード例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    In this example, you can learn how to get aligned face images.</span>
-<span class="sd">    </span>
+<span class="sd">    このエグザンプルコードでは、整列された(aligned)顔画像を取得する例を示します。</span>
+
 <span class="sd">Args:</span>
-<span class="sd">    path (str): Directory path where images containing faces exist</span>
-<span class="sd">    size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200.</span>
+<span class="sd">    path (str): 顔画像が存在するディレクトリパス</span>
+<span class="sd">    size (int, optional): 抽出する顔画像のピクセル数を整数で指定します。デフォルトは400です。</span>
 
 <span class="sd">Usage:</span>
 <span class="sd">    .. code-block:: bash</span>
-<span class="sd">    </span>
+
 <span class="sd">        python3 example/aligned_crop_face.py path size</span>
 
 <span class="sd">Result:</span>
@@ -102,7 +102,7 @@
 
 <span class="sd">Image:</span>
 <span class="sd">    `Pakutaso &lt;https://www.pakutaso.com/20230104005post-42856.html&gt;`_</span>
-<span class="sd">        </span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `aligned_crop_face.py &lt;../example/aligned_crop_face.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -122,11 +122,13 @@
 <span class="kn">from</span> <span class="nn">face01lib.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
 <span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
-<span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
+<span class="sd">&quot;&quot;&quot;初期化とloggerのセットアップ.</span>
+<span class="sd">FACE01を使用してコーディングするときは、`initialize`と`logger`を最初にコードします。</span>
 <span class="sd">When coding a program that uses FACE01, code `initialize` and `logger` first.</span>
+<span class="sd">これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。</span>
 <span class="sd">This will read the configuration file `config.ini` and log errors etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -136,11 +138,12 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../example.html#example.aligned_crop_face.main">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple example.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;簡単な例.</span>
 
-<span class="sd">    This simple example script takes a path which contained png, jpg, jpeg files in the directory, </span>
+<span class="sd">    このシンプルなコード例では、png, jpg, jpegの拡張子を持つ複数のファイルが存在するディレクトリのパスをとります。</span>
+<span class="sd">    This simple example script takes a path which contained png, jpg, jpeg files in the directory,</span>
 <span class="sd">    extracts the face, aligns, crops and saves them.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        path (str): Directory path where images containing faces exist</span>
 <span class="sd">        padding (float): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</span>
@@ -154,7 +157,7 @@
         <span class="n">upper_limit_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
         <span class="n">padding</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
         <span class="n">size</span><span class="o">=</span><span class="mi">200</span>
-        <span class="p">)</span></div>
+    <span class="p">)</span></div>
 
 
 

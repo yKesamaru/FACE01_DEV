@@ -81,14 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.video_capture のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-
-<span class="sd">&quot;&quot;&quot;The VidCap class.&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;The VidCap class.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
@@ -119,13 +112,13 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;VidCap class.</span>
 
 <span class="sd">    contains methods that initially process the input video data</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            log_level (str, optional): Receive log level value. Defaults to &#39;info&#39;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Setup logger: common way</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
         <span class="kn">import</span> <span class="nn">os.path</span>
@@ -137,14 +130,13 @@
 
         <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
 
-
     <span class="c1"># デバッグ用imshow()</span>
 <div class="viewcode-block" id="VidCap.frame_imshow_for_debug">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.frame_imshow_for_debug">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">frame_imshow_for_debug</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used for debugging.</span>
 
 <span class="sd">        Display the given frame data in a GUI window for 3 seconds.</span>
@@ -154,7 +146,7 @@
 
 <span class="sd">        Return:</span>
 <span class="sd">            None</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_maybe</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_maybe</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -175,16 +167,14 @@
                 <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span></div>
 
 
-
-    <span class="c1"># cpdef</span>
 <div class="viewcode-block" id="VidCap.resize_frame">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.resize_frame">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">resize_frame</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return resized frame data.</span>
 
 <span class="sd">        Args:</span>
@@ -194,25 +184,23 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            npt.NDArray[np.uint8]: small_frame</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">set_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">set_height</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
-        
+
         <span class="n">small_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> \
             <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_height</span><span class="p">))</span>  <span class="c1"># cv2.Mat</span>
         <span class="k">return</span> <span class="n">small_frame</span></div>
 
 
-
-    <span class="c1"># not cdef</span>
 <div class="viewcode-block" id="VidCap.return_movie_property">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.return_movie_property">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">return_movie_property</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">vcap</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="o">...</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">vcap</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return input movie file&#39;s property.</span>
 
 <span class="sd">        Args:</span>
@@ -221,21 +209,21 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple[int,...]: self.set_width, fps, height, width, set_height</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span> <span class="p">:</span> <span class="nb">int</span><span class="o">=</span> <span class="n">set_width</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">set_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span> <span class="o">=</span> <span class="n">vcap</span>
         <span class="c1"># # debug</span>
         <span class="c1"># if vcap.isOpened():</span>
         <span class="c1">#     print(&quot;VideoCaptureオブジェクトが正しく開かれています。&quot;)</span>
         <span class="c1"># else:</span>
         <span class="c1">#     print(&quot;VideoCaptureオブジェクトが開かれていません。&quot;)</span>
-        
-        <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
+
+        <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
         <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_HEIGHT</span><span class="p">)</span>
-        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)</span>
 
         <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
-        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
         <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -245,7 +233,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">)</span>
             <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        
+
         <span class="c1"># BUGFIX: vcapを閉じておく</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="p">)</span>
         <span class="c1"># # debug</span>
@@ -256,7 +244,6 @@
         <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">set_width</span> <span class="o">*</span> <span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">width</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">,</span><span class="n">fps</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">set_height</span></div>
-
 
 
     <span class="c1"># cdef, python版</span>
@@ -273,24 +260,23 @@
 <span class="sd">            Tuple[int,int,int,int]: TOP_LEFT,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,CENTER</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># order: (top, bottom, left, right)</span>
-        <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
         <span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
         <span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
         <span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
         <span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">TOP_LEFT</span><span class="p">,</span><span class="n">TOP_RIGHT</span><span class="p">,</span><span class="n">BOTTOM_LEFT</span><span class="p">,</span><span class="n">BOTTOM_RIGHT</span><span class="p">,</span><span class="n">CENTER</span>
 
-
     <span class="k">def</span> <span class="nf">_angle_of_view_specification</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">set_area</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
-            <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span>
-            <span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">set_area</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+        <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ndarray data which area specification coordinates for frame.</span>
 
 <span class="sd">        Args:</span>
@@ -309,14 +295,14 @@
 <span class="sd">            Face_location order: top, right, bottom, left</span>
 <span class="sd">            TOP_LEFT order: (top, bottom, left, right)</span>
 <span class="sd">            How to slice: img[top: bottom, left: right]</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_area</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">set_area</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">TOP_LEFT</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">TOP_RIGHT</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">BOTTOM_LEFT</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">BOTTOM_RIGHT</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">CENTER</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">TOP_LEFT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">TOP_RIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">BOTTOM_LEFT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">BOTTOM_RIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">CENTER</span>
 
         <span class="c1"># VidCap().frame_imshow_for_debug(self.frame)</span>
 
@@ -335,7 +321,6 @@
         <span class="c1"># VidCap().frame_imshow_for_debug(self.frame)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span>
 
-
 <div class="viewcode-block" id="VidCap.return_vcap">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.return_vcap">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">return_vcap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">:</span>
@@ -349,7 +334,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">movie</span>
         <span class="c1"># movie=movie</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span><span class="o">==</span><span class="s1">&#39;usb&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span> <span class="o">==</span> <span class="s1">&#39;USB&#39;</span><span class="p">:</span>   <span class="c1"># USB カメラ読み込み時使用</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span> <span class="o">==</span> <span class="s1">&#39;usb&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">movie</span> <span class="o">==</span> <span class="s1">&#39;USB&#39;</span><span class="p">:</span>   <span class="c1"># USB カメラ読み込み時使用</span>
             <span class="n">live_camera_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">camera_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
                 <span class="n">vcap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">camera_number</span><span class="p">)</span>
@@ -393,7 +378,6 @@
             <span class="k">return</span> <span class="n">vcap</span></div>
 
 
-
 <div class="viewcode-block" id="VidCap.finalize">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.finalize">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vcap</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -401,20 +385,19 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            vcap (cv2.VideoCapture): vcap which is handle of input video process</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span> <span class="o">=</span> <span class="n">vcap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vcap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span></div>
-
 
 
     <span class="c1"># @lru_cache(maxsize=None)</span>
 <div class="viewcode-block" id="VidCap.frame_generator">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.video_capture.VidCap.frame_generator">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">frame_generator</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generator: Return resized frame data.</span>
 
 <span class="sd">        Args:</span>
@@ -425,7 +408,7 @@
 
 <span class="sd">        Yields:</span>
 <span class="sd">            Generator: Resized frame data (npt.NDArray[np.uint8])</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">CONFIG</span>
 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initial values&quot;&quot;&quot;</span>
@@ -434,7 +417,7 @@
         <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;set_height&quot;</span><span class="p">]</span>
         <span class="n">movie</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;movie&quot;</span><span class="p">]</span>
         <span class="n">set_area</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;set_area&quot;</span><span class="p">]</span>
-        
+
         <span class="n">ret</span><span class="p">:</span> <span class="nb">bool</span>
         <span class="c1"># vcap</span>
         <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
@@ -443,17 +426,17 @@
         <span class="c1"># chdir(RootDir)  # Not use</span>
 
         <span class="c1"># Calculate coordinates of corners: Tuple[int,int,int,int] for &#39;angle of view&#39;.</span>
-        <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
-        <span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
-        <span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
-        <span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
-        <span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">]</span>
+        <span class="n">TOP_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="n">TOP_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="n">BOTTOM_LEFT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="n">BOTTOM_RIGHT</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="n">CENTER</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 
         <span class="n">TOP_LEFT</span><span class="p">,</span> <span class="n">TOP_RIGHT</span><span class="p">,</span> <span class="n">BOTTOM_LEFT</span><span class="p">,</span> <span class="n">BOTTOM_RIGHT</span><span class="p">,</span> <span class="n">CENTER</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_angle_coordinate</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span>
-                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">movie</span> <span class="o">==</span> <span class="s1">&#39;usb&#39;</span> <span class="ow">or</span> <span class="n">movie</span> <span class="o">==</span> <span class="s1">&#39;USB&#39;</span><span class="p">):</span>   <span class="c1"># USB カメラ読み込み時使用</span>
             <span class="n">camera_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
@@ -466,7 +449,7 @@
                     <span class="k">break</span>
             <span class="c1"># TODO: #39 変数camera_numberの挙動が奇妙。-1は本当か、なぜログ出力が5行もでる？</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CAMERA DEVICE NUMBER: </span><span class="si">{</span><span class="n">camera_number</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">while</span> <span class="n">vcap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span> 
+            <span class="k">while</span> <span class="n">vcap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
                 <span class="c1"># frame_skipの数値に満たない場合は処理をスキップ</span>
                 <span class="k">for</span> <span class="n">frame_skip_counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;frame_skip&quot;</span><span class="p">]):</span>
                     <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">vcap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -557,19 +540,19 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;終了します&quot;</span><span class="p">)</span>
                 <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        
+
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># RTSPの場合は通常のテスト動画と同じ</span>
             <span class="n">vcap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">movie</span><span class="p">)</span>
             <span class="c1"># vcap = cv2.VideoCapture(movie, cv2.CAP_FFMPEG)</span>
 
             <span class="n">cnt</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">debug_num</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="n">vcap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span> 
+            <span class="k">while</span> <span class="n">vcap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
 
                 <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">vcap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="w">                </span><span class="sd">&quot;&quot;&quot;DEBUG&quot;&quot;&quot;</span>
                 <span class="c1"># self.frame_imshow_for_debug(frame)</span>
-                
+
                 <span class="c1"># frame_skipの数値に満たない場合は処理をスキップ</span>
                 <span class="k">if</span> <span class="n">cnt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;frame_skip&quot;</span><span class="p">]:</span>
                     <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -606,9 +589,9 @@
                     <span class="n">resized_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resize_frame</span><span class="p">(</span><span class="n">set_width</span><span class="p">,</span> <span class="n">set_height</span><span class="p">,</span> <span class="n">angle_frame</span><span class="p">)</span>
 <span class="w">                    </span><span class="sd">&quot;&quot;&quot;DEBUG&quot;&quot;&quot;</span>
                     <span class="c1"># self.frame_imshow_for_debug(resized_frame)</span>
-                    
+
                     <span class="k">yield</span> <span class="n">resized_frame</span>
-                
+
                 <span class="k">elif</span> <span class="n">ret</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">vcap</span><span class="p">)</span></div>
 </div>
@@ -625,7 +608,7 @@
 <span class="sd">    &gt; [[[0行0列目の輝度]~[0行B列目の輝度]]~[[A行0列目の輝度]~[A行B列目の輝度]]]の順に並んでいる．</span>
 <span class="sd">    &gt; (画像において0行0列目は，左上)</span>
 <span class="sd">    &gt; よって，imreadで返される配列とは，画素の輝度を行列の順に格納したものである</span>
-<span class="sd">    </span>
+
 <span class="sd">    &gt; imreadで返された配列の顔画像の部分(顔画像の左上の行列から，右下の行列までの**区分行列**（ブロック行列）の輝度)</span>
 <span class="sd">    &gt; だけを取り出すことで，切り取ることができた．</span>
 

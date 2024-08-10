@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.average_face &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>example.average_face &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -37,7 +37,7 @@
           
           <a href="../../index.html" class="icon icon-home">
             FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -47,8 +47,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
@@ -80,28 +81,24 @@
            <div itemprop="articleBody">
              
   <h1>example.average_face のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">&quot;&quot;&quot;Example of calculating similarity from two photos with efficientnetv2_arcface.onnx model.</span>
+<span></span><span class="sd">&quot;&quot;&quot;平均顔を作成するコード例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    An example of loading face images with file names listed in </span>
-<span class="sd">    average_face.txt and creating an average face from those images.</span>
+<span class="sd">    このエグザンプルコードでは、average_face.txtにリストされたファイル名を持つ顔画像を読み込み、</span>
+<span class="sd">    それらの画像から平均顔を作成する手順を学びます。</span>
+
+<span class="sd">.. image:: ../docs/img/average_face.png</span>
+<span class="sd">    :alt: 平均顔の画像</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
-<span class="sd">    </span>
-<span class="sd">        python3 example/similarity.py</span>
-<span class="sd">        </span>
+
+<span class="sd">        python3 example/average_face.py</span>
+
 <span class="sd">Source code:</span>
-<span class="sd">    `similarity.py &lt;../example/similarity.py&gt;`_</span>
+<span class="sd">    `average_face.py &lt;../example/average_face.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -112,12 +109,9 @@
 <span class="n">mp_face_mesh</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">face_mesh</span>  <span class="c1"># type: ignore</span>
 <span class="n">face_mesh</span> <span class="o">=</span> <span class="n">mp_face_mesh</span><span class="o">.</span><span class="n">FaceMesh</span><span class="p">()</span>
 
-<span class="c1"># Change directory where average_face.txt exists</span>
-<span class="n">root_dir</span> <span class="o">=</span> <span class="s1">&#39;/home/terms/ドキュメント/find_similar_faces/assets/average_face/高橋一生&#39;</span>
-<span class="c1"># root_dir = &#39;/home/terms/ドキュメント/similarity_of_two_persons/tmp/mix&#39;</span>
-<span class="c1"># root_dir = &#39;/home/terms/ドキュメント/similarity_of_two_persons/tmp/eguchi&#39;</span>
-<span class="c1"># root_dir = &#39;/home/terms/ドキュメント/similarity_of_two_persons/tmp/hokuto&#39;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+<span class="c1"># images_dir = &#39;assets/mix&#39;</span>
+<span class="n">images_dir</span> <span class="o">=</span> <span class="s1">&#39;assets/data/c&#39;</span>
+
 
 <div class="viewcode-block" id="align_face">
 <a class="viewcode-back" href="../../example.html#example.average_face.align_face">[ドキュメント]</a>
@@ -146,8 +140,9 @@
             <span class="k">return</span> <span class="n">aligned</span></div>
 
 
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">png_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">root_dir</span><span class="si">}</span><span class="s1">/*.png&#39;</span><span class="p">)</span>
+    <span class="n">png_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">images_dir</span><span class="si">}</span><span class="s1">/*.png&#39;</span><span class="p">)</span>
 
     <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">png_file</span> <span class="ow">in</span> <span class="n">png_list</span><span class="p">:</span>
@@ -168,7 +163,6 @@
     <span class="c1"># Displaying the average face</span>
     <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Average Face&quot;</span><span class="p">,</span> <span class="n">average_face</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-
 </pre></div>
 
            </div>

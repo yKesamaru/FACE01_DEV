@@ -110,8 +110,8 @@ class Dlib_api:
         parent_dir, _ = os.path.split(dir)
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
-        self.logger.info("COPYRIGHT: TOKAI-KAONINSHO, yKesamaru")
-        self.logger.info("FACE01: 商用利用にはライセンスが必要です")
+        # self.logger.info("COPYRIGHT: TOKAI-KAONINSHO, yKesamaru")
+        # self.logger.info("FACE01: 商用利用にはライセンスが必要です")
 
         try:
             from .models import Models
