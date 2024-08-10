@@ -1,12 +1,7 @@
-"""Example of LIGHTWEIGHT GUI window.
+"""シンプルで軽量なGUIアプリケーションの作成例.
 
 Summary:
-    In this example, you can learn how to make LIGHTWEIGHT GUI application.
-    PySimpleGUI is used for GUI display.
-    See below for how to use `PySimpleGUI. <https://www.pysimplegui.org/en/latest/>`_
-
-.. note::
-    Face detection and face recognition processing are performed only when the capture button is pressed, so it is useful in situations where only the CPU can be used. (Assuming that the GPU cannot be used)
+    この例では、シンプルで軽量なGUIアプリケーションの作成方法を学びます。
 
 Example:
     .. code-block:: bash
@@ -14,11 +9,15 @@ Example:
         python3 example/lightweight_GUI.py
 
 Results:
-    .. image:: ../example/img/PASTE_IMAGE_2023-01-23-22-30-18.png
-        :scale: 50%
-        :alt: config_ini.md
+    スクリーンショットは作成されるウィンドウを示しています。
 
-    .. code-block:: bash
+    .. image:: ../example/img/lightweight_GUI.png
+        :scale: 50%
+        :alt: Screenshot of the lightweight GUI output
+
+    コンソール出力は以下のようになります。
+
+    .. code-block:: console
 
         [2023-01-23 22:33:18,752] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz
         安倍晋三
@@ -39,85 +38,65 @@ dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
 
-
-import os
-from configparser import ConfigParser
-from datetime import datetime
+import tkinter as tk
+from tkinter import Button, Label
 from typing import Dict
 
 import cv2
-import PySimpleGUI as sg
+from PIL import Image, ImageTk  # Pillowライブラリをインポート
 
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict =  Initialize('LIGHTWEIGHT_GUI', 'info').initialize()
+CONFIG: Dict = Initialize('LIGHTWEIGHT_GUI', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
-"""
 
 
-def main(exec_times: int = 500) -> None:
-    """LIGHTWEIGHT GUI application example.
+class App:
+    def __init__(self, root, exec_times=500):
+        self.root = root
+        self.exec_times = exec_times
+        self.root.title('LIGHTWEIGHT GUI APP')
 
-    Args:
-        exec_times (int, optional): Receive value of number which is processed. Defaults to 500.
+        # ラベルとボタンを配置
+        self.label = Label(root, text='LIGHTWEIGHT GUI app sample')
+        self.label.pack()
 
-    Returns:
-        None
+        self.display = Label(root)
+        self.display.pack()
 
-    """
-    # Make PySimpleGUI layout
-    sg.theme('LightGray')
-    layout = [
-        [sg.Text('LIGHTWEIGHT GUI app sample')],
-        [sg.Image(key='display')],
-        [sg.Button('CAPTURE', key='capture_button', expand_x = True)],
-        [sg.Button('TERMINATE', key='terminate', button_color='red', expand_x = True)]
-    ]
+        self.terminate_button = Button(root, text='TERMINATE', command=self.terminate, width=50, bg='red')
+        self.terminate_button.pack()
 
-    window = sg.Window('LIGHTWEIGHT GUI APP', layout)
+        # 画像表示用のインスタンス変数
+        self.img_tk = None
+        self.current_frame_datas_array = None  # 現在のフレームデータを保持するための変数
 
-    # Make generator
-    gen = Core().common_process(CONFIG)
+        # ジェネレータを作成
+        self.gen = Core().common_process(CONFIG)
 
-    # Repeat 'exec_times' times
-    for i in range(0, exec_times):
+        # GUIを更新する
+        self.update_image()
 
-        # Call __next__() from the generator object
-        frame_datas_array = gen.__next__()
+    def update_image(self):
+        self.current_frame_datas_array = self.gen.__next__()
 
-        event, _ = window.read(timeout = 1)  # type: ignore
+        for frame_datas in self.current_frame_datas_array:
+            img = Image.fromarray(cv2.cvtColor(frame_datas['img'], cv2.COLOR_BGR2RGB))
+            self.img_tk = ImageTk.PhotoImage(image=img)  # 画像をインスタンス変数に保持
+            self.display.config(image=self.img_tk)
 
-        for frame_datas in frame_datas_array:
-            if event == sg.WIN_CLOSED:
-                logger.info("The window was closed manually")
-                exit(0)
+        # 100ミリ秒ごとにウィンドウを更新
+        self.root.after(100, self.update_image)
 
-            if event=='terminate':
-                exit(0)
-
-            imgbytes = cv2.imencode(".png", frame_datas['img'])[1].tobytes()
-            window["display"].update(data = imgbytes)
-
-            if event=='capture_button':
-                for person_data in frame_datas['person_data_list']:
-                    if not person_data['name'] == 'Unknown':
-                        print(
-                            person_data['name'], "\n",
-                            "\t", "similarity\t\t", person_data['percentage_and_symbol'], "\n",
-                            "\t", "coordinate\t\t", person_data['location'], "\n",
-                            "\t", "time\t\t\t", person_data['date'], "\n",
-                            "\t", "output\t\t\t", person_data['pict'], "\n",
-                            "-------\n"
-                        )
+    def terminate(self):
+        self.root.quit()
 
 
 if __name__ == '__main__':
-    # Call main function.
-    main(exec_times = 500)
+    root = tk.Tk()
+    app = App(root, exec_times=500)
+    root.mainloop()

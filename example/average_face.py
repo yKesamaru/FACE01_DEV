@@ -1,25 +1,21 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
-"""Example of calculating similarity from two photos with efficientnetv2_arcface.onnx model.
+"""平均顔を作成するコード例.
 
 Summary:
-    An example of loading face images with file names listed in 
-    average_face.txt and creating an average face from those images.
+    このエグザンプルコードでは、average_face.txtにリストされたファイル名を持つ顔画像を読み込み、
+    それらの画像から平均顔を作成する手順を学びます。
+
+.. image:: ../docs/img/average_face.png
+    :alt: 平均顔の画像
 
 Example:
     .. code-block:: bash
-    
-        python3 example/similarity.py
-        
+
+        python3 example/average_face.py
+
 Source code:
-    `similarity.py <../example/similarity.py>`_
+    `average_face.py <../example/average_face.py>`_
 """
 import glob
-import os
 
 # Operate directory: Common to all examples
 import cv2
@@ -30,12 +26,9 @@ import numpy as np
 mp_face_mesh = mp.solutions.face_mesh  # type: ignore
 face_mesh = mp_face_mesh.FaceMesh()
 
-# Change directory where average_face.txt exists
-root_dir = '/home/terms/ドキュメント/find_similar_faces/assets/average_face/高橋一生'
-# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/mix'
-# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/eguchi'
-# root_dir = '/home/terms/ドキュメント/similarity_of_two_persons/tmp/hokuto'
-os.chdir(root_dir)
+# images_dir = 'assets/mix'
+images_dir = 'assets/data/c'
+
 
 def align_face(image):
     # Detecting face landmarks
@@ -61,8 +54,9 @@ def align_face(image):
 
             return aligned
 
+
 if __name__ == '__main__':
-    png_list = glob.glob(f'{root_dir}/*.png')
+    png_list = glob.glob(f'{images_dir}/*.png')
 
     images = []
     for png_file in png_list:
@@ -83,4 +77,3 @@ if __name__ == '__main__':
     # Displaying the average face
     cv2.imshow("Average Face", average_face)  # type: ignore
     cv2.waitKey(0)  # type: ignore
-

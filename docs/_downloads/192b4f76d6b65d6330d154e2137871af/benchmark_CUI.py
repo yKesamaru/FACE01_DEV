@@ -8,9 +8,9 @@ Summary:
 
 Example:
     .. code-block:: bash
-    
+
         python3 benchmark_CUI.py
-        
+
 Source code:
     `benchmark_CUI.py <../example/benchmark_CUI.py>`_
 """
@@ -45,7 +45,7 @@ def main(exec_times: int = 50) -> None:
 
 
     gen = Core().common_process(CONFIG)
-    
+
 
     # Specify START point
     START: float = Cal.Measure_processing_time_forward()
@@ -58,7 +58,7 @@ def main(exec_times: int = 50) -> None:
         frame_datas_array = gen.__next__()
 
         for frame_datas in frame_datas_array:
-            
+
             for person_data in frame_datas['person_data_list']:
                 if not person_data['name'] == 'Unknown':
                     # pass
@@ -70,8 +70,8 @@ def main(exec_times: int = 50) -> None:
                         "\t", "output\t\t\t", person_data['pict'], "\n",
                         "-------\n"
                     )
-            
-    
+
+
     END = Cal.Measure_processing_time_backward()
 
     print(f'Total processing time: {round(Cal.Measure_processing_time(START, END) , 3)}[seconds]')
