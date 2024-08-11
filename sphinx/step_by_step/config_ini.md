@@ -1,42 +1,69 @@
-# About `config.ini` file.
+# `config.ini`ファイルについて
 
-## `config.ini` file is FACE01 configure file.
-'config.ini' is the configuration file of FACE01 using Python ConfigParser module.
+## `config.iniファイルとは
+`FACE01`の設定ファイルです。Pythonの`ConfigParser`モジュールを使って、`FACE01`の様々な設定を管理します。
 
-The [DEFAULT] section specifies standard default values, and this setting is example.
+**[DEFAULT]セクション**は、標準的な初期設定値を定義するセクションです。このセクションの設定はあくまで例であり、必要に応じて変更できます。
 
-## Note (Important!)
-Before to modify config.ini, you should be familiar with the ConfigParser module.
-To refer ConfigParser module, see bellow.
+## 注意（重要！）
+`config.ini`ファイルを編集する前に、`ConfigParser`モジュールについて理解しておく必要があります。
+`ConfigParser`モジュールに関する詳細な情報は、以下のリンクを参照してください。
 https://docs.python.org/3/library/configparser.html
 
-## Inheritance
-Each section inherits from the [DEFAULT] section.
+## 継承
+各セクションは、**[DEFAULT]セクション**の設定を継承します。
+そのため、各セクションでは、**[DEFAULT]セクション**の設定を上書きしたい項目（キーと値）のみを記述すればよいです。
 
-Therefore, specify only items (key & value) that override [DEFAULT] in each section.
+## 書式
+設定項目の記述形式は、`key=value`です。
 
-## Format
-Format is `key = value`.
-
-## Edit
-If you use docker Image, you can edit to modify the config.ini with `vim`.
+## 編集方法
+`Docker`イメージを使用している場合は、`vim`エディタを使って`config.ini`ファイルを直接編集できます。
 ```bash
 # Example
 $ vim ./config.ini
 ```
 
-# ℹ️: Note
+## ℹ️: Note
+### `npKnown.npz`について
 `npKnown.npz`がフォルダーに存在するとき、そのファイルが従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)で作成されたものなのか、新しいモデル(`efficientnetv2_arcface.onnx`)で作成されたものなのかは重要な要素です。
-もし`config.ini`で指定した学習モデルと`npKnown.npz`が作られた学習モデルが一致しない場合、エラーが発生します。
-その場合は`npKnown.npz`を手動で削除してください。新しい`npKnown.npz`が自動的に作成されます。
+  もし`config.ini`で指定した学習モデルと`npKnown.npz`が作られた学習モデルが一致しない場合、エラーが発生します。
+  その場合は`npKnown.npz`を手動で削除してください。新しい`npKnown.npz`が自動的に作成されます。
 
-When `npKnown.npz` exists in the folder, which is it created by the old dlib model (`dlib_face_recognition_resnet_model_v1.dat`) or by the new model (`efficientnetv2_arcface.onnx`) is an important factor.
-If the deep learning model specified in `config.ini` does not match one for which `npKnown.npz` was created, an error will occur.
-In that case, manually delete `npKnown.npz`. A new `npKnown.npz` will be created automatically.
+### デバッグログの異常出力について
+`mediapipe`を使用する時(`use_pipe = True`)、大量にデバッグログが標準出力される場合があります。繰り返し出力されるデバッグログには以下のようなものがあります。
+  ```bash
+  I0000 00:00:1723362224.558539   40707 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+  I0000 00:00:1723362224.680348   40865 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 555.42.06), renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2
+  W0000 00:00:1723362224.681858   40860 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+  ```
+  この現象は`mediapipe`が最新バージョンである場合でも起こりえます。また、このデバッグログを抑制する効果的な方法は見つかっていません。
+  もしこの現象が現れる場合、`use_pipe = False`を検討してください。
 
-# Example and explain each items.
+### 補足
+  環境によっては以下の対策でデバッグログを抑制する可能性があります。
+  - `.bashrc`に以下を記述し、`source`コマンドで`.bashrc`をリロードする。
+    ```bash
+    # mediapipeのデバッグログを抑制する
+    export MEDIPIPE_TRACE=0
+    export GLOG_logtostderr=0
+    ```
+    ```bash
+    # ~/.bashrcのリロード
+    $ . .bashrc
+    ```
+  この現象は`FACE01_DEV/lib/python3.10/site-packages/mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so`が原因です。
+  ```bash
+  user@user:~/bin/FACE01_DEV/lib/python3.10/site-packages$ grep -r "Successfully initialized EGL" ./*
+  grep: ./mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so: binary file matches
+  user@user:~/bin/FACE01_DEV/lib/python3.10/site-packages$ grep -r "inference_feedback_manager" ./*
+  grep: ./mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so: binary file matches
+  ```
+  `mediapipe`をソースコードからビルドする必要があるかも知れません。（未検証）
 
-## [DEFAULT]
+## Example and explain each items.
+
+### [DEFAULT]
 
 [DEFAULT] section is for simple example.
 This [DEFAULT] setting for only use CUI mode.
@@ -45,7 +72,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 [DEFAULT] section is the inheritor of all sections.
 
-## Items
+### Items
 
 - headless
   - `headless` means 'works CUI mode'. If you want to display GUI window, turn on value to False but process speed get slowly.

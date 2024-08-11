@@ -1,4 +1,5 @@
 # sphinx-wagtail-theme
+customtkinter
 faiss-gpu
 myst-parser
 recommonmark
@@ -6,4 +7,5 @@ snakeviz
 sphinx
 sphinx_autodoc_typehints
 sphinx_rtd_theme
+ttkbootstrap
 watchdog

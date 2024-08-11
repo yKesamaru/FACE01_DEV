@@ -1,9 +1,3 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
 """A module that performs various calculations.
 
 Calculation results are output to log
@@ -33,13 +27,12 @@ class Cal:
     x2: int
     y2: int
 
-
     def __init__(self, log_level: str = 'info') -> None:
         """init.
 
         Args:
             log_level (str, optional): Receive log level value. Defaults to 'info'.
-        """        
+        """
         # Setup logger: common way
         self.log_level: str = log_level
         import os.path
@@ -48,22 +41,21 @@ class Cal:
         parent_dir, _ = os.path.split(dir)
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
-    
 
     @staticmethod
     def Measure_processing_time(
-            HANDLING_FRAME_TIME_FRONT,
-            HANDLING_FRAME_TIME_REAR
-        ) -> float:
+        HANDLING_FRAME_TIME_FRONT,
+        HANDLING_FRAME_TIME_REAR
+    ) -> float:
         """Measurement of processing time (calculation) and output to log.
 
         Args:
             HANDLING_FRAME_TIME_FRONT (float): First half point
             HANDLING_FRAME_TIME_REAR (float): Second half point
-        """        
+        """
         HANDLING_FRAME_TIME = \
-            (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  ## 小数点以下がミリ秒
-        
+            (HANDLING_FRAME_TIME_REAR - HANDLING_FRAME_TIME_FRONT)  # 小数点以下がミリ秒
+
         # logger.info(f'Processing time: {round(HANDLING_FRAME_TIME, 3)}[Sec]')
 
         return HANDLING_FRAME_TIME
@@ -74,11 +66,10 @@ class Cal:
 
         Returns:
             float: First half point
-        """        
+        """
         HANDLING_FRAME_TIME_FRONT = perf_counter()
-        
-        return HANDLING_FRAME_TIME_FRONT
 
+        return HANDLING_FRAME_TIME_FRONT
 
     @staticmethod
     def Measure_processing_time_backward() -> float:
@@ -86,27 +77,25 @@ class Cal:
 
         Returns:
             float: Second half point
-        """        
+        """
         HANDLING_FRAME_TIME_REAR: float = perf_counter()
 
         return HANDLING_FRAME_TIME_REAR
 
-    
-    def Measure_func(self, func) :
+    def Measure_func(self, func):
         """Used as a decorator to time a function."""
         self.func = func
 
         @wraps(self.func)
-        def wrapper(*args, **kargs) :
+        def wrapper(*args, **kargs):
             start: float = perf_counter()
-            result = func(*args,**kargs)
-            elapsed_time: float =  round((perf_counter() - start) * 1000, 2)
+            result = func(*args, **kargs)
+            elapsed_time: float = round((perf_counter() - start) * 1000, 2)
 
             print(f"{func.__name__}.............{elapsed_time}[mSec]")
 
             return result
         return wrapper
-
 
     def cal_specify_date(self, logger) -> None:
         """Run evaluation version only."""
@@ -122,15 +111,15 @@ class Cal:
         elif today < limit_date:
             remaining_days = limit_date - today
             if remaining_days.days < 30:
-                self.logger.info("Remaining days of use: ",  str(remaining_days.days))
-                self.logger.warning("If you wish to continue using FACE01, please contact us.")
+                self.logger.info("Remaining days of use: ", str(remaining_days.days))
+                self.logger.warning(
+                    "If you wish to continue using FACE01, please contact us.")
                 self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
 
-
     def cal_resized_telop_image(
-            self,
-            resized_telop_image: npt.NDArray[np.float64]
-        ) -> Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]:
+        self,
+        resized_telop_image: npt.NDArray[np.float64]
+    ) -> Tuple[int, int, int, int, npt.NDArray[np.float64], npt.NDArray[np.float64]]:
         """Calculate telop image data.
 
         Args:
@@ -138,26 +127,26 @@ class Cal:
 
         Returns:
             Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]: Tuple
-        
+
         Example:
             >>> cal_resized_telop_nums = Cal().cal_resized_telop_image(resized_telop_image)
-        """        
+        """
         self.resized_telop_image = resized_telop_image
 
         x1, y1, x2, y2 = 0, 0, resized_telop_image.shape[1], resized_telop_image.shape[0]
-        a = (1 - resized_telop_image[:,:,3:] / 255)
-        b = resized_telop_image[:,:,:3] * (resized_telop_image[:,:,3:] / 255)
+        a = (1 - resized_telop_image[:, :, 3:] / 255)
+        b = resized_telop_image[:, :, :3] * \
+            (resized_telop_image[:, :, 3:] / 255)
         cal_resized_telop_nums = (x1, y1, x2, y2, a, b)
-        
+
         return cal_resized_telop_nums
 
-
     def cal_resized_logo_image(
-            self,
-            resized_logo_image: npt.NDArray[np.float64],
-            set_height: int,
-            set_width: int
-        ) -> Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]:
+        self,
+        resized_logo_image: npt.NDArray[np.float64],
+        set_height: int,
+        set_width: int
+    ) -> Tuple[int, int, int, int, npt.NDArray[np.float64], npt.NDArray[np.float64]]:
         """Calculate logo image data.
 
         Args:
@@ -174,32 +163,33 @@ class Cal:
                     set_height,
                     set_width
                 )
-        """        
+        """
         self.resized_logo_image: npt.NDArray[np.float64] = resized_logo_image
         self.set_height: int = set_height
         self.set_width: int = set_width
 
-        x1, y1, x2, y2 = set_width - resized_logo_image.shape[1], set_height - resized_logo_image.shape[0], set_width, set_height
-        a = (1 - resized_logo_image[:,:,3:] / 255)
-        b = resized_logo_image[:,:,:3] * (resized_logo_image[:,:,3:] / 255)
-        
+        x1, y1, x2, y2 = set_width - \
+            resized_logo_image.shape[1], set_height - \
+            resized_logo_image.shape[0], set_width, set_height
+        a = (1 - resized_logo_image[:, :, 3:] / 255)
+        b = resized_logo_image[:, :, :3] * (resized_logo_image[:, :, 3:] / 255)
+
         cal_resized_logo_nums: Tuple[int, int, int, int, npt.NDArray[np.float64], npt.NDArray[np.float64]] = \
             (x1, y1, x2, y2, a, b)
-        
+
         return cal_resized_logo_nums
 
-
     def to_tolerance(
-            self,
-            similar_percentage: float,
-            deep_learning_model: int,
-        ) -> float:
+        self,
+        similar_percentage: float,
+        deep_learning_model: int,
+    ) -> float:
         """Receive similar_percentage and return tolerance.
 
         Args:
             similar_percentage (float): 'Probability of similarity' described in config.ini
             deep_learning_model (int): Deep learning model.
-        
+
         Returns:
             float: tolerance
 
@@ -214,7 +204,7 @@ class Cal:
                     self.CONFIG["similar_percentage"],
                     self.CONFIG["deep_learning_model"]
                 )
-        """        
+        """
         # Dlib
             ## 算出式
             ## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100
@@ -226,11 +216,11 @@ class Cal:
 
         # EfficientNetV2_arcface
             ## 算出式
-            ## y=−23.71x2+49.98x+73.69 
+            ## y=−23.71x2+49.98x+73.69
             ## See: https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87
             ## percentage = -23.71*(p*p)+49.98*p+73.69
             ## 0 = -23.71*(p*p)+49.98*p+(73.69-similar_percentage)
-        
+
         self.similar_percentage: float = similar_percentage
         tolerance: float = 0.0
 
@@ -248,23 +238,22 @@ class Cal:
 
             tolerance_solution = fsolve(equation, 0.5)
             return tolerance_solution[0]
-        
+
         elif deep_learning_model == 1:
             tolerance_plus: float = (-1*49.98 + np.sqrt(49.98*49.98-4*(-23.71)*(73.69-self.similar_percentage))) / (2*(-23.71))
             tolerance_minus: float = (-1*49.98-np.sqrt(49.98*49.98-4*(-23.71)*(73.69-self.similar_percentage))) / (2*(-23.71))
             if 0 < tolerance_plus < 1:
-                tolerance= tolerance_plus
+                tolerance = tolerance_plus
             elif 0 < tolerance_minus < 1:
-                tolerance= tolerance_minus
-        
+                tolerance = tolerance_minus
+
         return tolerance
 
-
     def to_percentage(
-            self,
-            tolerance: float,
-            deep_learning_model: int,
-        ) -> float:
+        self,
+        tolerance: float,
+        deep_learning_model: int,
+    ) -> float:
         """Receive 'tolerance' and return 'percentage'.
 
         Args:
@@ -272,25 +261,24 @@ class Cal:
 
         Returns:
             float: percentage
-        """        
+        """
         percentage: float = 0.0
         self.tolerance: float = tolerance
         if deep_learning_model == 0:
             percentage: float = -4.76190475*(self.tolerance ** 2)+(-0.380952375) * self.tolerance +100
         elif deep_learning_model == 1:
             percentage: float = -23.71*(self.tolerance ** 2)+49.98*self.tolerance+73.69
-        
+
         return percentage
 
-
     def decide_text_position(
-            self,
-            error_messg_rectangle_bottom,
-            error_messg_rectangle_left,
-            error_messg_rectangle_right,
-            error_messg_rectangle_fontsize,
-            error_messg_rectangle_messg
-        ):
+        self,
+        error_messg_rectangle_bottom,
+        error_messg_rectangle_left,
+        error_messg_rectangle_right,
+        error_messg_rectangle_fontsize,
+        error_messg_rectangle_messg
+    ):
         """Not use."""
         self.error_messg_rectangle_bottom = error_messg_rectangle_bottom
         self.error_messg_rectangle_left = error_messg_rectangle_left
@@ -301,30 +289,29 @@ class Cal:
         error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))
-        
+
         return error_messg_rectangle_position
 
-
     def make_error_messg_rectangle_font(
-            self,
-            fontpath: str,
-            error_messg_rectangle_fontsize: str,
-            encoding = 'utf-8'
-        ):
+        self,
+        fontpath: str,
+        error_messg_rectangle_fontsize: str,
+        encoding='utf-8'
+    ):
         """Not use."""
         self.fontpath = fontpath
         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
-        
-        error_messg_rectangle_font = ImageFont.truetype(self.fontpath, self.error_messg_rectangle_fontsize, encoding = 'utf-8')
-        
+
+        error_messg_rectangle_font = ImageFont.truetype(
+            self.fontpath, self.error_messg_rectangle_fontsize, encoding='utf-8')
+
         return error_messg_rectangle_font
 
-
     def return_percentage(
-            self,
-            distance: float,
-            deep_learning_model: int
-        ) -> float:  # python版
+        self,
+        distance: float,
+        deep_learning_model: int
+    ) -> float:  # python版
         """Receive 'distance' and return percentage.
 
         Args:
@@ -342,21 +329,20 @@ class Cal:
 
         Example:
             >>> percentage = Cal().return_percentage(distance, deep_learning_model)
-        """        
+        """
         percentage: float = 0.0
         self.distance: float = distance
         if deep_learning_model == 0:
             percentage: float = -4.76190475 *(self.distance**2)-(0.380952375*self.distance)+100
         elif deep_learning_model == 1:
             percentage: float = -23.71*(self.distance**2)+(49.98*self.distance)+73.69
-        
+
         return percentage
 
-
     def pil_img_instance(
-            self,
-            frame: npt.NDArray[np.uint8]
-        ) :
+        self,
+        frame: npt.NDArray[np.uint8]
+    ):
         """Generate pil_img object.
 
         Args:
@@ -364,18 +350,17 @@ class Cal:
 
         Returns:
             object: PIL object
-        """        
+        """
         self.frame: npt.NDArray[np.uint8] = frame
 
         pil_img_obj = Image.fromarray(self.frame)
 
         return pil_img_obj
 
-
-    def  make_draw_rgb_object(
-            self,
-            pil_img_obj_rgb
-        ):
+    def make_draw_rgb_object(
+        self,
+        pil_img_obj_rgb
+    ):
         """Generate object.
 
         Args:
@@ -383,9 +368,9 @@ class Cal:
 
         Returns:
             object: object
-        """        
+        """
         self.pil_img_obj_rgb = pil_img_obj_rgb
 
         draw_rgb = ImageDraw.Draw(self.pil_img_obj_rgb)
-        
+
         return draw_rgb

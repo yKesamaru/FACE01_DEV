@@ -1,10 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
-"""Example of calculating of all combinations of face image files.
+"""顔画像ファイルの全組み合わせを計算する例.
 
 Summary:
     This is a sample code that calculates the similarity of all combinations of face image files,
@@ -12,9 +6,9 @@ Summary:
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/combination_similarity.py
-        
+
 Source code:
     `combination_similarity.py <../example/combination_similarity.py>`_
 """
@@ -37,8 +31,8 @@ root_dir: str = "/media/terms/2TB_Movie/face_data_backup/data"
 if __name__ == '__main__':
     # ディレクトリのみを対象としたサブディレクトリの絶対パスのリストを取得
     sub_dir_path_list: list = [
-        os.path.join(root_dir, sub_dir) 
-        for sub_dir in os.listdir(root_dir) 
+        os.path.join(root_dir, sub_dir)
+        for sub_dir in os.listdir(root_dir)
         if os.path.isdir(os.path.join(root_dir, sub_dir))
     ]
 

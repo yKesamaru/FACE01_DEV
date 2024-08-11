@@ -55,7 +55,16 @@
 <li class="toctree-l1"><a class="reference internal" href="step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">example package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-ctktest-module">example.CTKtest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.CTKtest">example.CTKtest module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.CTKtest.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.change_appearance_mode_event"><code class="docutils literal notranslate"><span class="pre">App.change_appearance_mode_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.change_scaling_event"><code class="docutils literal notranslate"><span class="pre">App.change_scaling_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.open_input_dialog_event"><code class="docutils literal notranslate"><span class="pre">App.open_input_dialog_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.CTKtest.App.sidebar_button_event"><code class="docutils literal notranslate"><span class="pre">App.sidebar_button_event()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.aligned_crop_face">example.aligned_crop_face module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
@@ -70,7 +79,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.benchmark_CUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-benchmark-gui-window-module">example.benchmark_GUI_window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.benchmark_GUI_window">example.benchmark_GUI_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_counter">example.combination_counter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_similarity">example.combination_similarity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.data_augmentation">example.data_augmentation module</a><ul>
@@ -194,8 +207,57 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="example-ctktest-module">
-<h2>example.CTKtest module<a class="headerlink" href="#example-ctktest-module" title="Link to this heading"></a></h2>
+<section id="module-example.CTKtest">
+<span id="example-ctktest-module"></span><h2>example.CTKtest module<a class="headerlink" href="#module-example.CTKtest" title="Link to this heading"></a></h2>
+<p>CustomTkinterの使用例.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このエグザンプルコードは`CustomTkinter`を使用してGUIアプリケーションを構築する際の例になります。<a href="#id1"><span class="problematic" id="id2">`</span></a>CustomTkinter`で紹介されているコードをそのまま掲載しています。
+<a href="#id3"><span class="problematic" id="id4">`</span></a>Tkinter`よりリッチなGUIを使用したい場合に検討してください。
+このコードを実行するには開発用パッケージを追加インストールする必要があります。
+具体的にはrequirements_dev.txtをインストールしてください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/CTKtest.py
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/ctktest.png"><img alt="ctktest" src="_images/ctktest.png" style="width: 560.0px; height: 317.5px;" /></a>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/CTKtest.py">CTKtest.py</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="example.CTKtest.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.CTKtest.</span></span><span class="sig-name descname"><span class="pre">App</span></span><a class="reference internal" href="_modules/example/CTKtest.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.CTKtest.App" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">CTk</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="example.CTKtest.App.change_appearance_mode_event">
+<span class="sig-name descname"><span class="pre">change_appearance_mode_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_appearance_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/CTKtest.html#App.change_appearance_mode_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.CTKtest.App.change_appearance_mode_event" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.CTKtest.App.change_scaling_event">
+<span class="sig-name descname"><span class="pre">change_scaling_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_scaling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/CTKtest.html#App.change_scaling_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.CTKtest.App.change_scaling_event" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.CTKtest.App.open_input_dialog_event">
+<span class="sig-name descname"><span class="pre">open_input_dialog_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/CTKtest.html#App.open_input_dialog_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.CTKtest.App.open_input_dialog_event" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.CTKtest.App.sidebar_button_event">
+<span class="sig-name descname"><span class="pre">sidebar_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/CTKtest.html#App.sidebar_button_event"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.CTKtest.App.sidebar_button_event" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-example.aligned_crop_face">
 <span id="example-aligned-crop-face-module"></span><h2>example.aligned_crop_face module<a class="headerlink" href="#module-example.aligned_crop_face" title="Link to this heading"></a></h2>
@@ -330,17 +392,96 @@ extracts the face, aligns, crops and saves them.</p>
 </dd></dl>
 
 </section>
-<section id="example-benchmark-gui-window-module">
-<h2>example.benchmark_GUI_window module<a class="headerlink" href="#example-benchmark-gui-window-module" title="Link to this heading"></a></h2>
+<section id="module-example.benchmark_GUI_window">
+<span id="example-benchmark-gui-window-module"></span><h2>example.benchmark_GUI_window module<a class="headerlink" href="#module-example.benchmark_GUI_window" title="Link to this heading"></a></h2>
+<p>顔認証におけるベンチマークコード例.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このエグザンプルコードでは、GUIウィンドウを作成したときの顔認証ベンチマークを取得する方法を学びます。
+このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。
+具体的にはrequirements_dev.txtをインストールしてください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
+</pre></div>
+</div>
+<p>起動後、自動的にベンチマーク結果がブラウザ表示されます。
+終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" /></a>
+<a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/benchmark_GUI_window.py">benchmark_GUI_window.py</a></p>
+</dd>
+</dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.benchmark_GUI_window.logger">
+<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/benchmark_GUI_window.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.benchmark_GUI_window.logger" title="Link to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.benchmark_GUI_window.main">
+<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/benchmark_GUI_window.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.benchmark_GUI_window.main" title="Link to this definition"></a></dt>
+<dd><p>Make GUI window and benchmark on your own browser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-example.combination_counter">
 <span id="example-combination-counter-module"></span><h2>example.combination_counter module<a class="headerlink" href="#module-example.combination_counter" title="Link to this heading"></a></h2>
+<p>組み合わせ計算の例.</p>
+<dl>
+<dt>Summary:</dt><dd><p><a href="#id5"><span class="problematic" id="id6">`</span></a>Zenn`の記事のコード例です。</p>
+<p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/4e40e0285b0b66">【faiss】なにこれすごい。顔データセットの間違い探し 成功編③</a></p>
+<p>ここでは簡単でシンプルなコードを紹介しています。</p>
+<p><a href="#id7"><span class="problematic" id="id8">`</span></a>npKnown.npz`ファイルが見つからない場合、そのまま終了します。
+詳しくは上記記事をご参照ください。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>combination_counter.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/combination_counter.py">combination_counter.py</a></p>
+</dd>
+</dl>
 </section>
 <section id="module-example.combination_similarity">
 <span id="example-combination-similarity-module"></span><h2>example.combination_similarity module<a class="headerlink" href="#module-example.combination_similarity" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>顔画像ファイルの全組み合わせを計算する例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>This is a sample code that calculates the similarity of all combinations of face image files,
+using the efficientnetv2_arcface.onnx model, which is a Japanese-only learning model.</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/combination_similarity.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/combination_similarity.py">combination_similarity.py</a></p>
+</dd>
+</dl>
 </section>
 <section id="module-example.data_augmentation">
 <span id="example-data-augmentation-module"></span><h2>example.data_augmentation module<a class="headerlink" href="#module-example.data_augmentation" title="Link to this heading"></a></h2>
@@ -954,12 +1095,17 @@ jitter and saves them.</p>
 </section>
 <section id="module-example.make_npKnown_file">
 <span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Link to this heading"></a></h2>
-<p>Example program to create npKnown.npz file.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example you can learn how to make npKnown.npz file.
-ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
-それ以外の場合はエラーが発生します。
-'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。</p>
+<p><a href="#id10"><span class="problematic" id="id11">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id12"><span class="problematic" id="id13">`</span></a>npKnown.npz`ファイルの作成手順を学びます。</p>
+<p>ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
+それ以外の場合はエラーが発生します。</p>
+<p>'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。</p>
+<p>このコードを実行するには開発用パッケージを追加インストールする必要があります。
+具体的にはrequirements_dev.txtをインストールしてください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
+</pre></div>
+</div>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -967,13 +1113,12 @@ jitter and saves them.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/make_npKnown_file.py
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="_images/make_noKnown_file.png"><img alt="make_noKnown_file" src="_images/make_noKnown_file.png" style="width: 598.0px; height: 325.0px;" /></a>
 </div>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="../example/make_npKnown_file.py">make_npKnown_file.py</a></p>
 </dd>
 </dl>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.make_npKnown_file.select_directory">
 <span class="sig-prename descclassname"><span class="pre">example.make_npKnown_file.</span></span><span class="sig-name descname"><span class="pre">select_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_file.html#select_directory"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_file.select_directory" title="Link to this definition"></a></dt>
@@ -1004,9 +1149,6 @@ Please refer to the separate license file for the license of the code.</p>
 </section>
 <section id="module-example.simple">
 <span id="example-simple-module"></span><h2>example.simple module<a class="headerlink" href="#module-example.simple" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <p>シンプルな顔認識のコード例.</p>
 <dl class="simple">
 <dt>Summary:</dt><dd><p>このコード例では、FACE01がどれほど簡単に実行できるのかを学びます。</p>

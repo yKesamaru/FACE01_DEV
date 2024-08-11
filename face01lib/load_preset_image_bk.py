@@ -1,10 +1,7 @@
-"""License for the Code.
+"""load_preset_image.pyのバックアップ用
 
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
+このファイルは使用されません。
 """
-
-"""Load preset images."""
 import os
 from os.path import exists, isdir
 from pathlib import Path
@@ -23,11 +20,12 @@ from face01lib.Calc import Cal
 Dlib_api_obj = Dlib_api()
 Utils_obj = Utils()
 
+
 class LoadPresetImage:
     def __init__(
-            self,
-            log_level: str = "info"
-        ) -> None:
+        self,
+        log_level: str = "info"
+    ) -> None:
         self.log_level = log_level
         # Setup logger
         name: str = __name__
@@ -37,17 +35,16 @@ class LoadPresetImage:
         self.logger = Logger(self.log_level).logger(name, parent_dir)
         Cal().cal_specify_date(self.logger)
 
-
     def load_preset_image(
-            self,
-            deep_learning_model: int,
-            RootDir: str,
-            preset_face_imagesDir: str,
-            upsampling: int = 0,
-            jitters:int = 100,
-            mode: str = 'hog',
-            model: str = 'small'
-        ) -> Tuple[List, List]:
+        self,
+        deep_learning_model: int,
+        RootDir: str,
+        preset_face_imagesDir: str,
+        upsampling: int = 0,
+        jitters: int = 100,
+        mode: str = 'hog',
+        model: str = 'small'
+    ) -> Tuple[List, List]:
         """Load face image from preset_face_images folder.
 
         Args:
@@ -74,7 +71,7 @@ class LoadPresetImage:
                 self.conf_dict["RootDir"],
                 self.conf_dict["preset_face_imagesDir"]
             )
-        """    
+        """
         self.deep_learning_model = deep_learning_model
         self.RootDir = RootDir
         self.preset_face_imagesDir = preset_face_imagesDir
@@ -83,7 +80,6 @@ class LoadPresetImage:
         self.mode = mode
         self.model = model
 
-        
         # Initialize
         known_face_names_list: List[str] = []
         known_face_encodings_list: List[np.ndarray] = []
@@ -96,7 +92,7 @@ class LoadPresetImage:
             cd = True
 
         self.logger.info("Loading npKnown.npz")
-        
+
         # npKnown.npzがdeep_learning_modelに合致しているかチェックする
         if exists("npKnown.npz"):
             if deep_learning_model == 1:
@@ -109,7 +105,8 @@ class LoadPresetImage:
 
                 # 条件をチェック
                 if has_efficientnetv2_arcface == False:
-                    self.logger.error('npKnown.npz file is corrupted. Create again.')
+                    self.logger.error(
+                        'npKnown.npz file is corrupted. Create again.')
                     # npKnown.npzファイルを削除
                     os.remove('npKnown.npz')
 
@@ -118,14 +115,15 @@ class LoadPresetImage:
         if exists("npKnown.npz"):
 
             # npKnown.npzの読み込みを行い、今までの全てのデータを格納する
-            npKnown = np.load('npKnown.npz', allow_pickle = True)
+            npKnown = np.load('npKnown.npz', allow_pickle=True)
             if 'dlib' in npKnown:
                 # deep_learning_modelが0の場合はdlibのデータを読み込むが、1の場合はエラーを表示する
                 if self.deep_learning_model == 0:
                     known_face_names_ndarray = npKnown['name']
                     known_face_encodings_ndarray = npKnown['dlib']
                 else:
-                    self.logger.error("Mismatch between deep_learning_model and npKnown.npz content. The deep_learning_model is set to 0 (dlib model), but the npKnown.npz contains data for a different model.")
+                    self.logger.error(
+                        "Mismatch between deep_learning_model and npKnown.npz content. The deep_learning_model is set to 0 (dlib model), but the npKnown.npz contains data for a different model.")
                     exit(1)
             elif 'efficientnetv2_arcface' in npKnown:
                 # deep_learning_modelが1の場合はefficientnetv2_arcfaceのデータを読み込むが、0の場合はエラーを表示する
@@ -133,7 +131,8 @@ class LoadPresetImage:
                     known_face_names_ndarray = npKnown['name']
                     known_face_encodings_ndarray = npKnown['efficientnetv2_arcface']
                 else:
-                    self.logger.error("Mismatch between deep_learning_model and npKnown.npz content. The deep_learning_model is set to 1 (efficientnetv2_arcface model), but the npKnown.npz contains data for a different model.")
+                    self.logger.error(
+                        "Mismatch between deep_learning_model and npKnown.npz content. The deep_learning_model is set to 1 (efficientnetv2_arcface model), but the npKnown.npz contains data for a different model.")
                     exit(1)
             else:
                 error_msg = "Unable to use npKnown.npz due to a mismatch between deep_learning_model and the file content. " \
@@ -181,24 +180,26 @@ class LoadPresetImage:
 
                     new_file_face_image: npt.NDArray[np.uint8] = \
                         Dlib_api_obj.load_image_file(
-                                new_file
-                            )
+                        new_file
+                    )
 
-                    new_file_face_locations: List[Tuple[int,int,int,int]] = \
+                    new_file_face_locations: List[Tuple[int, int, int, int]] = \
                         Dlib_api_obj.face_locations(
-                                new_file_face_image,
-                                self.upsampling,
-                                self.mode
-                            )
+                        new_file_face_image,
+                        self.upsampling,
+                        self.mode
+                    )
 
                     # 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する
                     if len(new_file_face_locations) == 0:
                         if self.mode == 'hog':
-                            self.logger.info("Face could not be detected. Temporarily switch to 'cnn' mode")
+                            self.logger.info(
+                                "Face could not be detected. Temporarily switch to 'cnn' mode")
                             new_file_face_locations = Dlib_api_obj.face_locations(
                                 new_file_face_image, self.upsampling, 'cnn')
                             # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
-                            self.logger.info(f"{cnt} No face detected in registered face image {new_file}(CNN mode).  Move it to the 'noFace' folder")
+                            self.logger.info(
+                                f"{cnt} No face detected in registered face image {new_file}(CNN mode).  Move it to the 'noFace' folder")
                             # `noFace`フォルダが存在しない場合は作成する
                             if not exists('../noFace'):
                                 os.mkdir('../noFace')
@@ -210,7 +211,7 @@ class LoadPresetImage:
                                 # if os.path.exists('../noFace/' + new_file):
                                 #     os.remove('../noFace/' + new_file)
                                 #     # ファイルを移動する
-                                    # move(new_file, '../noFace/')
+                                # move(new_file, '../noFace/')
                                 self.logger.error(e)
                                 os.remove('../noFace/' + new_file)
                                 move(new_file, '../noFace/')
@@ -230,7 +231,7 @@ class LoadPresetImage:
                             face_location_list=new_file_face_locations,
                             num_jitters=self.jitters,
                             model=self.model
-                            )
+                        )
                     # efficientnetv2_arcface.onnx使用時の顔画像のエンコーディング処理
                     elif self.deep_learning_model == 1:
                         new_file_face_encodings = Dlib_api_obj.face_encodings(
@@ -239,23 +240,26 @@ class LoadPresetImage:
                             face_location_list=new_file_face_locations,
                             num_jitters=self.jitters,
                             model=self.model
-                            )
-                    
+                        )
+
                     # CPU温度が設定温度を超過していたら待機
                     Utils_obj.temp_sleep()
-                    
+
                     if len(new_file_face_encodings) > 1:  # 複数の顔が検出された時
-                        self.logger.info(f"{cnt} Multiple faces detected in registered face image  {new_file}. Move it to noFace folder.")
+                        self.logger.info(
+                            f"{cnt} Multiple faces detected in registered face image  {new_file}. Move it to noFace folder.")
                         # もしnoFaceフォルダに同じファイル名が存在したら削除する
                         if os.path.exists('../noFace/' + new_file):
                             os.remove('../noFace/' + new_file)
                         # もし`new_file`自体がカレントディレクトリに存在しない場合、`continue`する
                         if not os.path.exists(new_file):
-                            self.logger.error(f"{new_file} does not exist in the current directory. Skip it.")
+                            self.logger.error(
+                                f"{new_file} does not exist in the current directory. Skip it.")
                             continue
                         move(new_file, '../noFace/')
                     elif len(new_file_face_encodings) == 0:  # 顔が検出されなかった時
-                        self.logger.info(f"{cnt} No face detected in registered face image {new_files}. Move it to noFace folder.")
+                        self.logger.info(
+                            f"{cnt} No face detected in registered face image {new_files}. Move it to noFace folder.")
                         try:
                             move(new_file, '../noFace/' + new_file)
                         except:
@@ -264,7 +268,8 @@ class LoadPresetImage:
                     # エンコーディングした顔画像だけ新しい配列に入れる
                     if len(new_file_face_encodings) == 1:
                         known_face_names_list.append(new_file)
-                        known_face_encodings_list.append(new_file_face_encodings[0])
+                        known_face_encodings_list.append(
+                            new_file_face_encodings[0])
 
                     cnt += 1
 
@@ -289,16 +294,16 @@ class LoadPresetImage:
                 # それぞれの顔写真について顔認証データを作成する
                 preset_face_img = \
                     Dlib_api_obj.load_image_file(
-                            preset_face_image_filename
-                        )
+                        preset_face_image_filename
+                    )
 
                 preset_face_img_locations = \
                     Dlib_api_obj.face_locations(
-                            preset_face_img,
-                            self.upsampling,
-                            self.mode
-                        )
-                
+                        preset_face_img,
+                        self.upsampling,
+                        self.mode
+                    )
+
                 # CPU温度が設定温度を超過していたら待機
                 Utils_obj.temp_sleep()
 
@@ -306,52 +311,56 @@ class LoadPresetImage:
                 noFace_file = '../noFace/' + preset_face_image_filename
 
                 if len(preset_face_img_locations) == 0 or len(preset_face_img_locations) > 1:
-                    
+
                     if self.mode == 'hog':
 
-                        self.logger.info('No face detected or multiple face detected. Temporarily switch to cnn mode')
-                        
+                        self.logger.info(
+                            'No face detected or multiple face detected. Temporarily switch to cnn mode')
+
                         # CNNモードにて顔検出を行う
                         preset_face_img_locations = \
                             Dlib_api_obj.face_locations(
-                                    preset_face_img, self.upsampling,
-                                    'cnn'
-                                )
+                                preset_face_img, self.upsampling,
+                                'cnn'
+                            )
                         # CPU温度が設定温度を超過していたら待機
                         Utils_obj.temp_sleep()
 
                         # cnnでも顔検出できない場合はnoFaceフォルダへファイルを移動する
                         if len(preset_face_img_locations) == 0 or len(preset_face_img_locations) > 1:
-                            
-                            self.logger.info(f"{cnt} (CNN mode) Registered face image {preset_face_image_filename}, No face detected or multiple face detected. Move it to noFace folder.")
-                            
+
+                            self.logger.info(
+                                f"{cnt} (CNN mode) Registered face image {preset_face_image_filename}, No face detected or multiple face detected. Move it to noFace folder.")
+
                             if exists(noFace_file):
                                 os.remove(noFace_file)
-                            
+
                             move(preset_face_image_filename, '../noFace/')
-                            
+
                             self.mode = 'hog'
-                            
+
                             self.logger.info('Back to HOG mode')
 
                 # 得られた顔データ（この場合は顔ロケーション）を元にエンコーディングする：array([encoding 配列])
-                self.logger.info(f"{cnt} Encoding {preset_face_image_filename}")
+                self.logger.info(
+                    f"{cnt} Encoding {preset_face_image_filename}")
 
                 preset_face_image_encodings = \
                     Dlib_api_obj.face_encodings(
-                            self.deep_learning_model,
-                            preset_face_img,
-                            preset_face_img_locations,
-                            self.jitters,
-                            'small'
-                        )
+                        self.deep_learning_model,
+                        preset_face_img,
+                        preset_face_img_locations,
+                        self.jitters,
+                        'small'
+                    )
                 # CPU温度が設定温度を超過していたら待機
                 Utils_obj.temp_sleep()
 
                 # エンコーディングした顔写真について複数顔や顔がない場合はnoFaceフォルダへ移動する
                 if len(preset_face_image_encodings) > 1:  # 複数の顔が検出された時
-                    
-                    self.logger.info(f"{cnt} Multiple faces detected in registered face image {preset_face_image_filename}. Move it to noFace folder.")
+
+                    self.logger.info(
+                        f"{cnt} Multiple faces detected in registered face image {preset_face_image_filename}. Move it to noFace folder.")
                     if exists(noFace_file):
                         os.remove(noFace_file)
                     try:
@@ -359,7 +368,8 @@ class LoadPresetImage:
                     except:
                         pass
                 elif len(preset_face_image_encodings) == 0:  # 顔が検出されなかった時
-                    self.logger.info(f"{cnt} No face detected in registered face image {preset_face_image_filename}. Move it to noFace folder.")
+                    self.logger.info(
+                        f"{cnt} No face detected in registered face image {preset_face_image_filename}. Move it to noFace folder.")
                     if exists(noFace_file):  # noFaceフォルダに同じ名前のファイルがある場合は削除する
                         os.remove(noFace_file)
                     try:
@@ -372,7 +382,8 @@ class LoadPresetImage:
                 # 配列に、名前やエンコーディングデータを要素として追加する
                 # FACE01GRAPHICS本体の方では要素にndarrayを含むListを返り値として期待している(Dlib_api_obj APIにそう書いてある)
                 known_face_names_list.append(preset_face_image_filename)
-                known_face_encodings_list.extend(preset_face_image_encodings[0])
+                known_face_encodings_list.extend(
+                    preset_face_image_encodings[0])
                 # known_face_encodings_list.append(preset_face_image_encodings[0])
 
                 cnt += 1
@@ -409,4 +420,3 @@ class LoadPresetImage:
         # #################### 備考 ####################
         # 返り値のknown_face_encodingsと、npKnown.npzから読み込んだknown_face_encodingsとでは
         # もしかしたらデータ型とか？なにかが異なっているのかもしれない。
-

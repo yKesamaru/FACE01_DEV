@@ -261,9 +261,8 @@
 </section>
 <section id="module-face01lib.Calc">
 <span id="face01lib-calc-module"></span><h2>face01lib.Calc module<a class="headerlink" href="#module-face01lib.Calc" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>A module that performs various calculations.</p>
+<p>Calculation results are output to log</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Calc.</span></span><span class="sig-name descname"><span class="pre">Cal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Calc.html#Cal"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Calc.Cal" title="Link to this definition"></a></dt>
@@ -1227,9 +1226,6 @@ Dictionary of initialized preferences</p>
 </section>
 <section id="module-face01lib.api">
 <span id="face01lib-api-module"></span><h2>face01lib.api module<a class="headerlink" href="#module-face01lib.api" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <p>Summary.</p>
 <dl class="simple">
 <dt>COPYRIGHT:</dt><dd><p>This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
@@ -1342,12 +1338,22 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <li><p>dlib: (Left, Top, Right, Bottom), called 'rect'.</p></li>
 <li><p>face_recognition: (top, right, bottom, left), called 'css'.</p></li>
 </ul>
-<p>See bellow</p>
-<p><a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
+<p>See bellow
+<a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
 </div>
+<dl>
+<dt>DEBUG: MEMORY LEAK</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.memory_leak</span> <span class="kn">import</span> <span class="n">Memory_leak</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Memory_leak</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">key_type</span><span class="o">=</span><span class="s1">&#39;traceback&#39;</span><span class="p">,</span> <span class="n">nframe</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">memory_leak_analyze_start</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>See bellow:</dt><dd><p>[Ja] <a class="reference external" href="https://zenn.dev/ykesamaru/articles/bd403aa6d03100">https://zenn.dev/ykesamaru/articles/bd403aa6d03100</a></p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.api.</span></span><span class="sig-name descname"><span class="pre">Dlib_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'error'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api" title="Link to this definition"></a></dt>
 <dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Dlib api.</p>
 <p>Author: Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU</p>
@@ -1548,9 +1554,7 @@ Please refer to the separate license file for the license of the code.</p>
 </section>
 <section id="module-face01lib.load_preset_image">
 <span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>顔画像ファイルから`npKnown.npz`ファイルを作成する。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.load_preset_image.LoadPresetImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image.</span></span><span class="sig-name descname"><span class="pre">LoadPresetImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/load_preset_image.html#LoadPresetImage"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.load_preset_image.LoadPresetImage" title="Link to this definition"></a></dt>
@@ -1558,16 +1562,63 @@ Please refer to the separate license file for the license of the code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.load_preset_image.LoadPresetImage.load_preset_image">
 <span class="sig-name descname"><span class="pre">load_preset_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">RootDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">preset_face_imagesDir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsampling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hog'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'small'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/face01lib/load_preset_image.html#LoadPresetImage.load_preset_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.load_preset_image.LoadPresetImage.load_preset_image" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>load_preset_image npKnown.npzを作成する.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deep_learning_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) -- 0または1.  0: dlib, 1: JAPANESE FACE V1</p></li>
+<li><p><strong>RootDir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- npKnown.npzを作成するディレクトリ</p></li>
+<li><p><strong>preset_face_imagesDir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- 顔画像が格納されているディレクトリ</p></li>
+<li><p><strong>upsampling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- upsampling値. Defaults to 0.</p></li>
+<li><p><strong>jitters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- jitter値. Defaults to 100.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) -- HOG OR CNN. Defaults to 'hog'.</p></li>
+<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) -- Defaults to 'small'.</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>npKnown.npzを作成する
+Tuple[List, List]: known_face_encodings_list, known_face_names_list</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>known_face_encodings_list</dt><dd><ul>
+<li><p>List of encoded many face images as ndarray</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>known_face_names_list</dt><dd><ul>
+<li><p>List of name which encoded as ndarray</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[List[np.ndarray], List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]]</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> <span class="n">LoadPresetImage</span><span class="p">()</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
+<span class="go">    self,</span>
+<span class="go">    self.conf_dict[&quot;RootDir&quot;],</span>
+<span class="go">    self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="module-face01lib.load_preset_image_bk">
 <span id="face01lib-load-preset-image-bk-module"></span><h2>face01lib.load_preset_image_bk module<a class="headerlink" href="#module-face01lib.load_preset_image_bk" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>load_preset_image.pyのバックアップ用</p>
+<p>このファイルは使用されません。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.load_preset_image_bk.LoadPresetImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image_bk.</span></span><span class="sig-name descname"><span class="pre">LoadPresetImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/load_preset_image_bk.html#LoadPresetImage"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.load_preset_image_bk.LoadPresetImage" title="Link to this definition"></a></dt>
@@ -1711,10 +1762,10 @@ Please refer to the separate license file for the license of the code.</p>
 <p>Spoof Module.</p>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>This module is experimental.</p>
+<p>このモジュールは、試験段階です。</p>
 </div>
 <p>このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。</p>
-<dl class="simple">
+<dl>
 <dt>主なクラス:</dt><dd><ul class="simple">
 <li><p>Spoof: 顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成を行うメソッドを持つクラス。</p></li>
 </ul>
@@ -1730,12 +1781,8 @@ spoof_obj.iris()
 spoof_obj.obj_detect()
 spoof_obj.make_qr_code()</p>
 </dd>
-<dt>注意:</dt><dd><ul class="simple">
-<li><p>このモジュールは、実験的なものです。</p></li>
-</ul>
-</dd>
-<dt>License:</dt><dd><p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<dt>LICENSE:</dt><dd><p>Copyright Owner: Yoshitsugu Kesamaru</p>
+<p>Please refer to the separate license file for the license of the code.</p>
 </dd>
 </dl>
 <dl class="py class">

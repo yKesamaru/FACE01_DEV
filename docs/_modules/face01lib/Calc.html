@@ -81,13 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.Calc のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">&quot;&quot;&quot;A module that performs various calculations.</span>
+<span></span><span class="sd">&quot;&quot;&quot;A module that performs various calculations.</span>
 
 <span class="sd">Calculation results are output to log</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -118,13 +112,12 @@
     <span class="n">x2</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">y2</span><span class="p">:</span> <span class="nb">int</span>
 
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            log_level (str, optional): Receive log level value. Defaults to &#39;info&#39;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Setup logger: common way</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
         <span class="kn">import</span> <span class="nn">os.path</span>
@@ -133,24 +126,23 @@
         <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-    
 
 <div class="viewcode-block" id="Cal.Measure_processing_time">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.Measure_processing_time">[ドキュメント]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Measure_processing_time</span><span class="p">(</span>
-            <span class="n">HANDLING_FRAME_TIME_FRONT</span><span class="p">,</span>
-            <span class="n">HANDLING_FRAME_TIME_REAR</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">HANDLING_FRAME_TIME_FRONT</span><span class="p">,</span>
+        <span class="n">HANDLING_FRAME_TIME_REAR</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Measurement of processing time (calculation) and output to log.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            HANDLING_FRAME_TIME_FRONT (float): First half point</span>
 <span class="sd">            HANDLING_FRAME_TIME_REAR (float): Second half point</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">HANDLING_FRAME_TIME</span> <span class="o">=</span> \
-            <span class="p">(</span><span class="n">HANDLING_FRAME_TIME_REAR</span> <span class="o">-</span> <span class="n">HANDLING_FRAME_TIME_FRONT</span><span class="p">)</span>  <span class="c1">## 小数点以下がミリ秒</span>
-        
+            <span class="p">(</span><span class="n">HANDLING_FRAME_TIME_REAR</span> <span class="o">-</span> <span class="n">HANDLING_FRAME_TIME_FRONT</span><span class="p">)</span>  <span class="c1"># 小数点以下がミリ秒</span>
+
         <span class="c1"># logger.info(f&#39;Processing time: {round(HANDLING_FRAME_TIME, 3)}[Sec]&#39;)</span>
 
         <span class="k">return</span> <span class="n">HANDLING_FRAME_TIME</span></div>
@@ -164,11 +156,10 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: First half point</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">HANDLING_FRAME_TIME_FRONT</span> <span class="o">=</span> <span class="n">perf_counter</span><span class="p">()</span>
-        
-        <span class="k">return</span> <span class="n">HANDLING_FRAME_TIME_FRONT</span></div>
 
+        <span class="k">return</span> <span class="n">HANDLING_FRAME_TIME_FRONT</span></div>
 
 
 <div class="viewcode-block" id="Cal.Measure_processing_time_backward">
@@ -179,30 +170,28 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: Second half point</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">HANDLING_FRAME_TIME_REAR</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">perf_counter</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">HANDLING_FRAME_TIME_REAR</span></div>
 
 
-    
 <div class="viewcode-block" id="Cal.Measure_func">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.Measure_func">[ドキュメント]</a>
-    <span class="k">def</span> <span class="nf">Measure_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">Measure_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Used as a decorator to time a function.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
 
         <span class="nd">@wraps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
             <span class="n">start</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">perf_counter</span><span class="p">()</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
-            <span class="n">elapsed_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span>  <span class="nb">round</span><span class="p">((</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+            <span class="n">elapsed_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.............</span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">}</span><span class="s2">[mSec]&quot;</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">wrapper</span></div>
-
 
 
 <div class="viewcode-block" id="Cal.cal_specify_date">
@@ -221,18 +210,18 @@
         <span class="k">elif</span> <span class="n">today</span> <span class="o">&lt;</span> <span class="n">limit_date</span><span class="p">:</span>
             <span class="n">remaining_days</span> <span class="o">=</span> <span class="n">limit_date</span> <span class="o">-</span> <span class="n">today</span>
             <span class="k">if</span> <span class="n">remaining_days</span><span class="o">.</span><span class="n">days</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Remaining days of use: &quot;</span><span class="p">,</span>  <span class="nb">str</span><span class="p">(</span><span class="n">remaining_days</span><span class="o">.</span><span class="n">days</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;If you wish to continue using FACE01, please contact us.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Remaining days of use: &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">remaining_days</span><span class="o">.</span><span class="n">days</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;If you wish to continue using FACE01, please contact us.&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;email: y.kesamaru@tokai-kaoninsho.com&quot;</span><span class="p">)</span></div>
-
 
 
 <div class="viewcode-block" id="Cal.cal_resized_telop_image">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.cal_resized_telop_image">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">cal_resized_telop_image</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">resized_telop_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resized_telop_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate telop image data.</span>
 
 <span class="sd">        Args:</span>
@@ -240,29 +229,29 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple[int,int,int,int,npt.NDArray[np.float64],npt.NDArray[np.float64]]: Tuple</span>
-<span class="sd">        </span>
+
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; cal_resized_telop_nums = Cal().cal_resized_telop_image(resized_telop_image)</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resized_telop_image</span> <span class="o">=</span> <span class="n">resized_telop_image</span>
 
         <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">resized_telop_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">resized_telop_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">resized_telop_image</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">resized_telop_image</span><span class="p">[:,:,:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">resized_telop_image</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">resized_telop_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">resized_telop_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="n">resized_telop_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
         <span class="n">cal_resized_telop_nums</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="n">cal_resized_telop_nums</span></div>
 
+        <span class="k">return</span> <span class="n">cal_resized_telop_nums</span></div>
 
 
 <div class="viewcode-block" id="Cal.cal_resized_logo_image">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.cal_resized_logo_image">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">cal_resized_logo_image</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">resized_logo_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
-            <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resized_logo_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
+        <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate logo image data.</span>
 
 <span class="sd">        Args:</span>
@@ -279,35 +268,36 @@
 <span class="sd">                    set_height,</span>
 <span class="sd">                    set_width</span>
 <span class="sd">                )</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resized_logo_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_logo_image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">set_height</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">set_width</span>
 
-        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">set_width</span> <span class="o">-</span> <span class="n">resized_logo_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">set_height</span> <span class="o">-</span> <span class="n">resized_logo_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">set_width</span><span class="p">,</span> <span class="n">set_height</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">resized_logo_image</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">resized_logo_image</span><span class="p">[:,:,:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">resized_logo_image</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
-        
+        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">set_width</span> <span class="o">-</span> \
+            <span class="n">resized_logo_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">set_height</span> <span class="o">-</span> \
+            <span class="n">resized_logo_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">set_width</span><span class="p">,</span> <span class="n">set_height</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">resized_logo_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">resized_logo_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">resized_logo_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span>
+
         <span class="n">cal_resized_logo_nums</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]</span> <span class="o">=</span> \
             <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="n">cal_resized_logo_nums</span></div>
 
+        <span class="k">return</span> <span class="n">cal_resized_logo_nums</span></div>
 
 
 <div class="viewcode-block" id="Cal.to_tolerance">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.to_tolerance">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">to_tolerance</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">similar_percentage</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">similar_percentage</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive similar_percentage and return tolerance.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            similar_percentage (float): &#39;Probability of similarity&#39; described in config.ini</span>
 <span class="sd">            deep_learning_model (int): Deep learning model.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            float: tolerance</span>
 
@@ -322,7 +312,7 @@
 <span class="sd">                    self.CONFIG[&quot;similar_percentage&quot;],</span>
 <span class="sd">                    self.CONFIG[&quot;deep_learning_model&quot;]</span>
 <span class="sd">                )</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Dlib</span>
             <span class="c1">## 算出式</span>
             <span class="c1">## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100</span>
@@ -334,11 +324,11 @@
 
         <span class="c1"># EfficientNetV2_arcface</span>
             <span class="c1">## 算出式</span>
-            <span class="c1">## y=−23.71x2+49.98x+73.69 </span>
+            <span class="c1">## y=−23.71x2+49.98x+73.69</span>
             <span class="c1">## See: https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87</span>
             <span class="c1">## percentage = -23.71*(p*p)+49.98*p+73.69</span>
             <span class="c1">## 0 = -23.71*(p*p)+49.98*p+(73.69-similar_percentage)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">similar_percentage</span>
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
@@ -356,26 +346,25 @@
 
             <span class="n">tolerance_solution</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">tolerance_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        
+
         <span class="k">elif</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">tolerance_plus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="mf">49.98</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">73.69</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
             <span class="n">tolerance_minus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">73.69</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
             <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">tolerance_plus</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">tolerance</span><span class="o">=</span> <span class="n">tolerance_plus</span>
+                <span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance_plus</span>
             <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">tolerance_minus</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">tolerance</span><span class="o">=</span> <span class="n">tolerance_minus</span>
-        
-        <span class="k">return</span> <span class="n">tolerance</span></div>
+                <span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance_minus</span>
 
+        <span class="k">return</span> <span class="n">tolerance</span></div>
 
 
 <div class="viewcode-block" id="Cal.to_percentage">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.to_percentage">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">to_percentage</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive &#39;tolerance&#39; and return &#39;percentage&#39;.</span>
 
 <span class="sd">        Args:</span>
@@ -383,28 +372,27 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: percentage</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">tolerance</span>
         <span class="k">if</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.76190475</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="mf">0.380952375</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">+</span><span class="mi">100</span>
         <span class="k">elif</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.71</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mf">49.98</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="o">+</span><span class="mf">73.69</span>
-        
-        <span class="k">return</span> <span class="n">percentage</span></div>
 
+        <span class="k">return</span> <span class="n">percentage</span></div>
 
 
 <div class="viewcode-block" id="Cal.decide_text_position">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.decide_text_position">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">decide_text_position</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_bottom</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_left</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_right</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_fontsize</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_messg</span>
-        <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_bottom</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_left</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_right</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_fontsize</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_messg</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Not use.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_bottom</span> <span class="o">=</span> <span class="n">error_messg_rectangle_bottom</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_left</span> <span class="o">=</span> <span class="n">error_messg_rectangle_left</span>
@@ -415,36 +403,35 @@
         <span class="n">error_messg_rectangle_chaCenter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_messg</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">error_messg_rectangle_pos</span> <span class="o">=</span> <span class="n">error_messg_rectangle_center</span> <span class="o">-</span> <span class="p">(</span><span class="n">error_messg_rectangle_chaCenter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">error_messg_rectangle_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">error_messg_rectangle_pos</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_bottom</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
-        
-        <span class="k">return</span> <span class="n">error_messg_rectangle_position</span></div>
 
+        <span class="k">return</span> <span class="n">error_messg_rectangle_position</span></div>
 
 
 <div class="viewcode-block" id="Cal.make_error_messg_rectangle_font">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.make_error_messg_rectangle_font">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">make_error_messg_rectangle_font</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">fontpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">error_messg_rectangle_fontsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
-        <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">fontpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">error_messg_rectangle_fontsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Not use.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fontpath</span> <span class="o">=</span> <span class="n">fontpath</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span> <span class="o">=</span> <span class="n">error_messg_rectangle_fontsize</span>
-        
-        <span class="n">error_messg_rectangle_font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fontpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="n">error_messg_rectangle_font</span></div>
 
+        <span class="n">error_messg_rectangle_font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fontpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_fontsize</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">error_messg_rectangle_font</span></div>
 
 
 <div class="viewcode-block" id="Cal.return_percentage">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.return_percentage">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">return_percentage</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>  <span class="c1"># python版</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>  <span class="c1"># python版</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive &#39;distance&#39; and return percentage.</span>
 
 <span class="sd">        Args:</span>
@@ -462,24 +449,23 @@
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; percentage = Cal().return_percentage(distance, deep_learning_model)</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">distance</span>
         <span class="k">if</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.76190475</span> <span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="mf">0.380952375</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span><span class="o">+</span><span class="mi">100</span>
         <span class="k">elif</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">percentage</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.71</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">49.98</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span><span class="o">+</span><span class="mf">73.69</span>
-        
-        <span class="k">return</span> <span class="n">percentage</span></div>
 
+        <span class="k">return</span> <span class="n">percentage</span></div>
 
 
 <div class="viewcode-block" id="Cal.pil_img_instance">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.pil_img_instance">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">pil_img_instance</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="p">)</span> <span class="p">:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate pil_img object.</span>
 
 <span class="sd">        Args:</span>
@@ -487,7 +473,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            object: PIL object</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame</span>
 
         <span class="n">pil_img_obj</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
@@ -495,13 +481,12 @@
         <span class="k">return</span> <span class="n">pil_img_obj</span></div>
 
 
-
 <div class="viewcode-block" id="Cal.make_draw_rgb_object">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Calc.Cal.make_draw_rgb_object">[ドキュメント]</a>
-    <span class="k">def</span>  <span class="nf">make_draw_rgb_object</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">pil_img_obj_rgb</span>
-        <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_draw_rgb_object</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pil_img_obj_rgb</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate object.</span>
 
 <span class="sd">        Args:</span>
@@ -509,11 +494,11 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            object: object</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pil_img_obj_rgb</span> <span class="o">=</span> <span class="n">pil_img_obj_rgb</span>
 
         <span class="n">draw_rgb</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pil_img_obj_rgb</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="n">draw_rgb</span></div>
 </div>
 

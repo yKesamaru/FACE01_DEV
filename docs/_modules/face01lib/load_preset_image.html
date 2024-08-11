@@ -81,10 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.load_preset_image のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
+<span></span><span class="sd">&quot;&quot;&quot;顔画像ファイルから`npKnown.npz`ファイルを作成する。</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -154,7 +151,6 @@
             <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Create &#39;multipleFaces&#39; folder&quot;</span><span class="p">)</span>
 
-
     <span class="k">def</span> <span class="nf">_get_known_face_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        既知の顔データをnpKnown.npzからロードするメソッド</span>
@@ -168,7 +164,7 @@
             <span class="n">npKnown</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">),</span>
                 <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span>
-                <span class="p">)</span>
+            <span class="p">)</span>
             <span class="c1"># npKnown.npzファイルのdeep_learning_modelとself.deep_learning_modelが一致するか確認</span>
             <span class="k">if</span> <span class="s1">&#39;dlib&#39;</span> <span class="ow">in</span> <span class="n">npKnown</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">known_face_encodings_ndarray</span> <span class="o">=</span> <span class="n">npKnown</span><span class="p">[</span><span class="s1">&#39;dlib&#39;</span><span class="p">]</span>
@@ -192,7 +188,6 @@
             <span class="n">known_face_encodings_list</span><span class="p">,</span> <span class="n">known_face_names_list</span> <span class="o">=</span> \
                 <span class="bp">self</span><span class="o">.</span><span class="n">_encode_face_images</span><span class="p">(</span><span class="n">face_images_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">known_face_encodings_list</span><span class="p">,</span> <span class="n">known_face_names_list</span>
-
 
     <span class="k">def</span> <span class="nf">_update_known_face_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -222,8 +217,8 @@
             <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_file_name_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_known_face_data</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_file_name_list</span>
 
-
     <span class="c1"># ディレクトリから顔画像ファイルを取得するメソッド</span>
+
     <span class="k">def</span> <span class="nf">_get_face_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="c1"># 拡張子がpng, jpeg, jpg, webpの場合のみface_images_listに追加</span>
         <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 顔画像のリストを初期化</span>
@@ -233,10 +228,10 @@
             <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  <span class="c1"># 拡張子を小文字に変換</span>
             <span class="c1"># 拡張子がpng, jpeg, jpg, webpのいずれかの場合、リストに追加</span>
             <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.webp&#39;</span><span class="p">]:</span>
-                <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">face_image_filename_list</span><span class="p">,</span> <span class="p">[</span><span class="n">filename</span><span class="p">])</span>
+                <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span>
+                    <span class="n">face_image_filename_list</span><span class="p">,</span> <span class="p">[</span><span class="n">filename</span><span class="p">])</span>
                 <span class="c1"># face_image_filename_list.append(filename)</span>
         <span class="k">return</span> <span class="n">face_image_filename_list</span>
-
 
     <span class="c1"># 顔画像エンコードリストと顔画像名リストを返すメソッド</span>
     <span class="k">def</span> <span class="nf">_encode_face_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">face_images_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
@@ -251,7 +246,7 @@
             <span class="n">face_image_ndarray</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> \
                 <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preset_face_imagesDir</span><span class="p">,</span> <span class="n">face_image</span><span class="p">)</span>
-                <span class="p">)</span>
+            <span class="p">)</span>
             <span class="c1"># 顔画像ファイルから顔の位置を検出</span>
             <span class="n">face_location_list</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span>
                 <span class="n">face_image_ndarray</span><span class="p">,</span>
@@ -261,7 +256,8 @@
             <span class="c1"># 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;hog&#39;</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Face could not be detected. Temporarily switch to &#39;cnn&#39; mode&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                        <span class="s2">&quot;Face could not be detected. Temporarily switch to &#39;cnn&#39; mode&quot;</span><span class="p">)</span>
                     <span class="n">face_location_list</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span>
                         <span class="n">face_image_ndarray</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsampling</span><span class="p">,</span> <span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
                     <span class="c1"># modeをhogに戻す</span>
@@ -271,15 +267,19 @@
                     <span class="c1"># ファイルをnoFaceフォルダへ移動</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">try</span><span class="p">:</span>
-                            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;noFace&#39;</span><span class="p">))</span>  <span class="c1"># 既にファイルが存在する場合は上書きされる</span>
+                            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;noFace&#39;</span><span class="p">))</span>  <span class="c1"># 既にファイルが存在する場合は上書きされる</span>
                         <span class="k">except</span><span class="p">:</span>
                             <span class="k">pass</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No face detected in registered face image </span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">(CNN mode).  Move it to the &#39;noFace&#39; folder&quot;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;No face detected in registered face image </span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">(CNN mode).  Move it to the &#39;noFace&#39; folder&quot;</span><span class="p">)</span>
                         <span class="k">continue</span>
                     <span class="c1"># ファイルをmultipleFacesフォルダへ移動</span>
                     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple faces detected in registered face image </span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">(CNN mode).  Move it to the &#39;multipleFaces&#39; folder&quot;</span><span class="p">)</span>
-                        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;Multiple faces detected in registered face image </span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">(CNN mode).  Move it to the &#39;multipleFaces&#39; folder&quot;</span><span class="p">)</span>
+                        <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">))</span>
                         <span class="k">continue</span>
             <span class="c1"># 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -322,19 +322,46 @@
                 <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_file_name_list</span>
 
-
 <div class="viewcode-block" id="LoadPresetImage.load_preset_image">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.load_preset_image.LoadPresetImage.load_preset_image">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">load_preset_image</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">RootDir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">preset_face_imagesDir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">upsampling</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">jitters</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;hog&#39;</span><span class="p">,</span>
-            <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;small&#39;</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">RootDir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">preset_face_imagesDir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">upsampling</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;hog&#39;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;small&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;load_preset_image npKnown.npzを作成する.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            deep_learning_model (int): 0または1.  0: dlib, 1: JAPANESE FACE V1</span>
+<span class="sd">            RootDir (str): npKnown.npzを作成するディレクトリ</span>
+<span class="sd">            preset_face_imagesDir (str): 顔画像が格納されているディレクトリ</span>
+<span class="sd">            upsampling (int, optional): upsampling値. Defaults to 0.</span>
+<span class="sd">            jitters (int, optional): jitter値. Defaults to 100.</span>
+<span class="sd">            mode (str, optional): HOG OR CNN. Defaults to &#39;hog&#39;.</span>
+<span class="sd">            model (str, optional): Defaults to &#39;small&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[List[np.ndarray], List[str]]: npKnown.npzを作成する</span>
+<span class="sd">            Tuple[List, List]: known_face_encodings_list, known_face_names_list</span>
+
+<span class="sd">            - known_face_encodings_list</span>
+<span class="sd">                - List of encoded many face images as ndarray</span>
+
+<span class="sd">            - known_face_names_list</span>
+<span class="sd">                - List of name which encoded as ndarray</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; known_face_encodings, known_face_names = LoadPresetImage().load_preset_image(</span>
+<span class="sd">                self,</span>
+<span class="sd">                self.conf_dict[&quot;RootDir&quot;],</span>
+<span class="sd">                self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
+<span class="sd">            )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span> <span class="o">=</span> <span class="n">RootDir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preset_face_imagesDir</span> <span class="o">=</span> <span class="n">preset_face_imagesDir</span>
@@ -351,7 +378,8 @@
             <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_known_face_data</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">file_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_face_images</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preset_face_imagesDir</span><span class="p">)</span>
-            <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encode_face_images</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
+            <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_image_filename_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encode_face_images</span><span class="p">(</span>
+                <span class="n">file_list</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_save_as_noKnown</span><span class="p">(</span><span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_image_filename_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">face_encoding_list</span><span class="p">,</span> <span class="n">face_image_filename_list</span></div>
 </div>
