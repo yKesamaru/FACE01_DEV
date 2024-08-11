@@ -1,9 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-
-シンプルな顔認識のコード例.
+"""シンプルな顔認識のコード例.
 
 Summary:
     このコード例では、FACE01がどれほど簡単に実行できるのかを学びます。

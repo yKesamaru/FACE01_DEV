@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.make_npKnown_file &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>example.make_npKnown_file &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
   
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -37,7 +37,7 @@
           
           <a href="../../index.html" class="icon icon-home">
             FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -47,8 +47,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
@@ -80,24 +81,34 @@
            <div itemprop="articleBody">
              
   <h1>example.make_npKnown_file のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Example program to create npKnown.npz file.</span>
+<span></span><span class="sd">&quot;&quot;&quot;`npKnown.npz`ファイルを作成するコードの例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    In this example you can learn how to make npKnown.npz file.</span>
+<span class="sd">    このエグザンプルでは、`npKnown.npz`ファイルの作成手順を学びます。</span>
+
 <span class="sd">    ディレクトリ選択ダイアログでは&#39;preset_face_images&#39;ディレクトリを選択してください。</span>
 <span class="sd">    それ以外の場合はエラーが発生します。</span>
+
 <span class="sd">    &#39;preset_face_images&#39;ディレクトリを選択すると、同ディレクトリ内に&#39;npKnown.npz&#39;といくつかのフォルダが作成されます。</span>
+
+<span class="sd">    このコードを実行するには開発用パッケージを追加インストールする必要があります。</span>
+<span class="sd">    具体的にはrequirements_dev.txtをインストールしてください。</span>
+
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        pip install -r requirements_dev.txt</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
 <span class="sd">        python3 example/make_npKnown_file.py</span>
 
+<span class="sd">    .. image:: ../docs/img/make_noKnown_file.png</span>
+<span class="sd">        :scale: 100%</span>
+<span class="sd">        :alt: make_noKnown_file</span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `make_npKnown_file.py &lt;../example/make_npKnown_file.py&gt;`_</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -135,15 +146,21 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ディレクトリが選択されませんでした。プログラムを終了します。&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
-    <span class="c1"># ディレクトリ内のすべてのpngファイルを処理</span>
-    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">file_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">):</span>
-            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
-            <span class="n">load_preset_image_obj</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
-                <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                <span class="n">RootDir</span><span class="o">=</span><span class="n">root_dir</span><span class="p">,</span>  <span class="c1"># npKnown.npzを作成するディレクトリ</span>
-                <span class="n">preset_face_imagesDir</span><span class="o">=</span><span class="n">root_dir</span>  <span class="c1"># 顔画像が格納されているディレクトリ</span>
-            <span class="p">)</span>
+    <span class="c1"># npKnown.npz ファイルが存在するか確認</span>
+    <span class="n">npz_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">):</span>
+        <span class="c1"># npKnown.npz ファイルが存在しない場合のみ処理を実行</span>
+        <span class="c1"># ディレクトリ内のすべてのpngファイルを処理</span>
+        <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">):</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+                <span class="n">load_preset_image_obj</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
+                    <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">RootDir</span><span class="o">=</span><span class="n">root_dir</span><span class="p">,</span>  <span class="c1"># npKnown.npzを作成するディレクトリ</span>
+                    <span class="n">preset_face_imagesDir</span><span class="o">=</span><span class="n">root_dir</span>  <span class="c1"># 顔画像が格納されているディレクトリ</span>
+                <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;npKnown.npz ファイルは既に存在するため、処理を終了します。&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>

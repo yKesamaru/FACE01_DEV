@@ -81,12 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.api のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-
-<span class="sd">Summary.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Summary.</span>
 
 <span class="sd">COPYRIGHT:</span>
 <span class="sd">    This code is based on &#39;face_recognition&#39; written by Adam Geitgey (ageitgey),</span>
@@ -131,18 +126,17 @@
 <span class="sd">    - face_recognition: (top, right, bottom, left), called &#39;css&#39;.</span>
 
 <span class="sd">    See bellow</span>
-
 <span class="sd">    https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DEBUG: MEMORY LEAK</span>
+<span class="sd">    .. code-block:: python</span>
 
+<span class="sd">        from .memory_leak import Memory_leak</span>
+<span class="sd">        m = Memory_leak(limit=2, key_type=&#39;traceback&#39;, nframe=20)</span>
+<span class="sd">        m.memory_leak_analyze_start()</span>
 
-<span class="sd">&quot;&quot;&quot;DEBUG: MEMORY LEAK</span>
-<span class="sd">from .memory_leak import Memory_leak</span>
-<span class="sd">m = Memory_leak(limit=2, key_type=&#39;traceback&#39;, nframe=20)</span>
-<span class="sd">m.memory_leak_analyze_start()</span>
 <span class="sd">See bellow:</span>
-<span class="sd">[Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100</span>
+<span class="sd">    [Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -161,11 +155,10 @@
 
 <span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
-<span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
+<span class="c1"># from face01lib.video_capture import VidCap</span>
 <span class="kn">import</span> <span class="nn">onnx</span>
 <span class="kn">import</span> <span class="nn">onnxruntime</span> <span class="k">as</span> <span class="nn">ort</span>
 <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
-<span class="kn">import</span> <span class="nn">torch</span>
 
 
 <div class="viewcode-block" id="Dlib_api">
@@ -180,7 +173,8 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span>
+        <span class="c1"># log_level: str = &#39;info&#39;</span>
+        <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;error&#39;</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
 
@@ -194,9 +188,22 @@
         <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
         <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
+        <span class="c1"># self.logger = Logger(self.log_level).logger(name, parent_dir)</span>
         <span class="c1"># self.logger.info(&quot;COPYRIGHT: TOKAI-KAONINSHO, yKesamaru&quot;)</span>
         <span class="c1"># self.logger.info(&quot;FACE01: 商用利用にはライセンスが必要です&quot;)</span>
+
+        <span class="c1"># DEBUG: ログ抑制 #################################################</span>
+        <span class="c1"># Loggerクラスの初期化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>  <span class="c1"># ログレベルを&#39;error&#39;に設定</span>
+        <span class="c1"># ONNX Runtimeのログ抑制 (例)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ORT_LOGGING_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ERROR&#39;</span>
+        <span class="c1"># #################################################################</span>
+
+        <span class="c1"># cv2のスパムログ出力を抑制 ####################</span>
+        <span class="kn">import</span> <span class="nn">logging</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;cv2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OPENCV_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ERROR&#39;</span>
+        <span class="c1"># ##############################################</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Models</span>
@@ -208,7 +215,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
             <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="c1"># Cal().cal_specify_date(self.logger)  # 日付による使用停止処理は廃止</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">face_detector</span> <span class="o">=</span> <span class="n">dlib</span><span class="o">.</span><span class="n">get_frontal_face_detector</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 

@@ -27,7 +27,7 @@ dependencies = [
     "torch",
     "torchvision",
     "tqdm",
-    "ttkbootstrap",
+    "tk",
     "typing_extensions",
     "urllib3",
 ]

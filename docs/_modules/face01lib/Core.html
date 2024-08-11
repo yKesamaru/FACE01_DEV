@@ -144,6 +144,7 @@
 <span class="c1"># from __future__ import annotations</span>
 
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">exists</span>
@@ -157,7 +158,7 @@
 <span class="kn">import</span> <span class="nn">mojimoji</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">numpy.typing</span> <span class="k">as</span> <span class="nn">npt</span>  <span class="c1"># See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)</span>
-<span class="kn">import</span> <span class="nn">onnxruntime</span>
+<span class="kn">import</span> <span class="nn">onnxruntime</span> <span class="k">as</span> <span class="nn">ort</span>
 <span class="c1"># from memory_profiler import profile  # @profile()</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFile</span><span class="p">,</span> <span class="n">ImageFont</span>
 
@@ -168,7 +169,6 @@
 <span class="kn">from</span> <span class="nn">face01lib.return_face_image</span> <span class="kn">import</span> <span class="n">Return_face_image</span>
 <span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
 
-
 <span class="n">Cal_obj</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span>
 <span class="n">VidCap_obj</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span>
 <span class="n">Dlib_api_obj</span> <span class="o">=</span> <span class="n">Dlib_api</span><span class="p">()</span>
@@ -178,7 +178,12 @@
 
 
 <span class="n">anti_spoof_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Models</span><span class="p">()</span><span class="o">.</span><span class="n">anti_spoof_model_location</span><span class="p">()</span>
-<span class="n">onnx_session</span> <span class="o">=</span> <span class="n">onnxruntime</span><span class="o">.</span><span class="n">InferenceSession</span><span class="p">(</span><span class="n">anti_spoof_model</span><span class="p">)</span>
+
+<span class="c1"># mediapipeのスパムログ出力を抑制 ####################</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;GLOG_minloglevel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>  <span class="c1"># 3: FATAL (致命的なエラー)</span>
+<span class="c1"># ログレベルをERRORに設定 (INFOやDEBUGより低いレベルのログが出力されなくなる)</span>
+<span class="c1"># mp.logging_util.set_verbosity(mp.logging_util.ERROR)  # mediapipe v0.10.14では未対応</span>
+<span class="c1"># ####################################################</span>
 
 
 <div class="viewcode-block" id="Core">
@@ -202,7 +207,8 @@
         <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
         <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-        <span class="n">Cal_obj</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+
+        <span class="c1"># Cal_obj.cal_specify_date(self.logger)  # 日付による動作停止処理は廃止</span>
 
     <span class="c1"># @profile()</span>
 <div class="viewcode-block" id="Core.mp_face_detection_func">
@@ -1206,7 +1212,7 @@
 
                 <span class="c1"># nameがUnknownであってもなくても以降の処理を行う。</span>
                 <span class="c1"># クロップ画像保存</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;crop_face_image&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;crop_face_image&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;frequency_crop_image&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;number_of_crops&quot;</span><span class="p">]:</span>
                         <span class="n">pil_img_obj_rgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pil_img_rgb_instance</span><span class="p">(</span>
                             <span class="n">resized_frame</span><span class="p">)</span>
@@ -1407,7 +1413,7 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;headless&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
                 <span class="c1"># 半透明処理（後半）_1frameに対して1回</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;show_overlay&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;show_overlay&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                     <span class="c1"># cv2.addWeighted(overlay, self.CONFIG[&quot;alpha&quot;], resized_frame, 1-self.CONFIG[&quot;alpha&quot;], 0, resized_frame)</span>
                     <span class="k">for</span> <span class="n">modified_frame</span> <span class="ow">in</span> <span class="n">modified_frame_list</span><span class="p">:</span>
                         <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span>
@@ -1537,11 +1543,8 @@
             <span class="k">return</span> <span class="n">spoof_or_real</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">ELE</span></div>
 
 
-
 <span class="c1"># 以下、元libdraw.LibDraw</span>
     <span class="c1"># @profile()</span>
-
-
     <span class="k">def</span> <span class="nf">_draw_pink_rectangle</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
@@ -1557,7 +1560,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
         <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span><span class="p">,</span>
-            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span>  <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">),</span>
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span><span class="p">),</span>
             <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">243</span><span class="p">),</span>
             <span class="mi">2</span>
@@ -1565,7 +1568,6 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resized_frame</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_white_rectangle</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">rectangle</span><span class="p">,</span>
@@ -1646,7 +1648,6 @@
 
     <span class="c1"># デフォルト顔画像の描画処理</span>
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_default_face_image</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">logger</span><span class="p">,</span>
@@ -1689,8 +1690,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">CONFIG</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default_face_image</span> <span class="o">=</span> <span class="n">default_face_image</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;TODO</span>
-<span class="sd">        繰り返し計算させないようリファクタリング&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;TODO: 繰り返し計算させないようリファクタリング&quot;&quot;&quot;</span>
         <span class="n">face_image_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">)</span>
         <span class="n">default_face_small_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_face_image</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span>
             <span class="n">face_image_width</span><span class="p">,</span> <span class="n">face_image_width</span><span class="p">))</span>  <span class="c1"># 幅・高さともに同じとする</span>
@@ -1700,7 +1700,6 @@
         <span class="k">return</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">default_face_small_image</span><span class="p">,</span> <span class="n">face_image_width</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_default_face</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">logger</span><span class="p">,</span>
@@ -1757,7 +1756,6 @@
         <span class="k">return</span> <span class="n">resized_frame</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_rectangle_for_name</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">,</span>
@@ -1781,7 +1779,6 @@
 
     <span class="c1"># 帯状四角形（ピンク）の描画</span>
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_error_messg_rectangle</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">resized_frame</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
@@ -1802,14 +1799,12 @@
 
     <span class="c1"># drawオブジェクトを生成</span>
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_make_draw_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span>
         <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">draw</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_error_messg_rectangle_messg</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">draw</span><span class="p">,</span>
@@ -1826,7 +1821,6 @@
             <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messg_rectangle_font</span><span class="p">)</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_return_fontpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
         <span class="c1"># フォントの設定(フォントファイルのパスと文字の大きさ)</span>
         <span class="n">operating_system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">system</span><span class="p">()</span>
@@ -1844,7 +1838,6 @@
         <span class="k">return</span> <span class="n">fontpath</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_calculate_text_position</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">left</span><span class="p">,</span>
@@ -1869,7 +1862,6 @@
         <span class="k">return</span> <span class="n">position</span><span class="p">,</span> <span class="n">Unknown_position</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_name</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">deep_learning_model</span><span class="p">,</span>
@@ -1923,7 +1915,6 @@
 
     <span class="c1"># pil_img_objをnumpy配列に変換</span>
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_convert_pil_img_to_ndarray</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pil_img_obj</span>
@@ -1937,7 +1928,6 @@
         <span class="k">return</span> <span class="n">frame</span>
 
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_text_for_name</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">deep_learning_model</span><span class="p">,</span>
@@ -1997,7 +1987,6 @@
 
     <span class="c1"># target_rectangleの描画</span>
     <span class="c1"># @profile()</span>
-
     <span class="k">def</span> <span class="nf">_draw_target_rectangle</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">person_data_list</span><span class="p">,</span>

@@ -1,7 +1,7 @@
 """Spoof Module.
 
 NOTE:
-    This module is experimental.
+    このモジュールは、試験段階です。
 
 このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。
 
@@ -19,11 +19,9 @@ NOTE:
     spoof_obj.obj_detect()
     spoof_obj.make_qr_code()
 
-注意:
-    - このモジュールは、実験的なものです。
-
-License:
+LICENSE:
     Copyright Owner: Yoshitsugu Kesamaru
+
     Please refer to the separate license file for the license of the code.
 """
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About config.ini file. &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>config.iniファイルについて &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルについて</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -80,57 +80,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="about-config-ini-file">
-<h1>About <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file.<a class="headerlink" href="#about-config-ini-file" title="Link to this heading"></a></h1>
-<section id="config-ini-file-is-face01-configure-file">
-<h2><code class="docutils literal notranslate"><span class="pre">config.ini</span></code> file is FACE01 configure file.<a class="headerlink" href="#config-ini-file-is-face01-configure-file" title="Link to this heading"></a></h2>
-<p>'config.ini' is the configuration file of FACE01 using Python ConfigParser module.</p>
-<p>The [DEFAULT] section specifies standard default values, and this setting is example.</p>
+  <section id="config-ini">
+<h1><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルについて<a class="headerlink" href="#config-ini" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>`config.iniファイルとは<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の設定ファイルです。Pythonの<code class="docutils literal notranslate"><span class="pre">ConfigParser</span></code>モジュールを使って、<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の様々な設定を管理します。</p>
+<p><strong>[DEFAULT]セクション</strong>は、標準的な初期設定値を定義するセクションです。このセクションの設定はあくまで例であり、必要に応じて変更できます。</p>
 </section>
-<section id="note-important">
-<h2>Note (Important!)<a class="headerlink" href="#note-important" title="Link to this heading"></a></h2>
-<p>Before to modify config.ini, you should be familiar with the ConfigParser module.
-To refer ConfigParser module, see bellow.
+<section id="id2">
+<h2>注意（重要！）<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルを編集する前に、<code class="docutils literal notranslate"><span class="pre">ConfigParser</span></code>モジュールについて理解しておく必要があります。
+<code class="docutils literal notranslate"><span class="pre">ConfigParser</span></code>モジュールに関する詳細な情報は、以下のリンクを参照してください。
 https://docs.python.org/3/library/configparser.html</p>
 </section>
-<section id="inheritance">
-<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading"></a></h2>
-<p>Each section inherits from the [DEFAULT] section.</p>
-<p>Therefore, specify only items (key &amp; value) that override [DEFAULT] in each section.</p>
+<section id="id3">
+<h2>継承<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>各セクションは、<strong>[DEFAULT]セクション</strong>の設定を継承します。
+そのため、各セクションでは、<strong>[DEFAULT]セクション</strong>の設定を上書きしたい項目（キーと値）のみを記述すればよいです。</p>
 </section>
-<section id="format">
-<h2>Format<a class="headerlink" href="#format" title="Link to this heading"></a></h2>
-<p>Format is <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=</span> <span class="pre">value</span></code>.</p>
+<section id="id4">
+<h2>書式<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>設定項目の記述形式は、<code class="docutils literal notranslate"><span class="pre">key=value</span></code>です。</p>
 </section>
-<section id="edit">
-<h2>Edit<a class="headerlink" href="#edit" title="Link to this heading"></a></h2>
-<p>If you use docker Image, you can edit to modify the config.ini with <code class="docutils literal notranslate"><span class="pre">vim</span></code>.</p>
+<section id="id5">
+<h2>編集方法<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Docker</span></code>イメージを使用している場合は、<code class="docutils literal notranslate"><span class="pre">vim</span></code>エディタを使って<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルを直接編集できます。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
 $<span class="w"> </span>vim<span class="w"> </span>./config.ini
 </pre></div>
 </div>
 </section>
-</section>
 <section id="i-note">
-<h1>ℹ️: Note<a class="headerlink" href="#i-note" title="Link to this heading"></a></h1>
+<h2>ℹ️: Note<a class="headerlink" href="#i-note" title="Link to this heading"></a></h2>
+<section id="npknown-npz">
+<h3><code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>について<a class="headerlink" href="#npknown-npz" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>がフォルダーに存在するとき、そのファイルが従来のdlibモデル(<code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>)で作成されたものなのか、新しいモデル(<code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>)で作成されたものなのかは重要な要素です。
 もし<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>で指定した学習モデルと<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>が作られた学習モデルが一致しない場合、エラーが発生します。
 その場合は<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>を手動で削除してください。新しい<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>が自動的に作成されます。</p>
-<p>When <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> exists in the folder, which is it created by the old dlib model (<code class="docutils literal notranslate"><span class="pre">dlib_face_recognition_resnet_model_v1.dat</span></code>) or by the new model (<code class="docutils literal notranslate"><span class="pre">efficientnetv2_arcface.onnx</span></code>) is an important factor.
-If the deep learning model specified in <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> does not match one for which <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> was created, an error will occur.
-In that case, manually delete <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>. A new <code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code> will be created automatically.</p>
+</section>
+<section id="id6">
+<h3>デバッグログの異常出力について<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mediapipe</span></code>を使用する時(<code class="docutils literal notranslate"><span class="pre">use_pipe</span> <span class="pre">=</span> <span class="pre">True</span></code>)、大量にデバッグログが標準出力される場合があります。繰り返し出力されるデバッグログには以下のようなものがあります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>I0000<span class="w"> </span><span class="m">00</span>:00:1723362224.558539<span class="w">   </span><span class="m">40707</span><span class="w"> </span>gl_context_egl.cc:85<span class="o">]</span><span class="w"> </span>Successfully<span class="w"> </span>initialized<span class="w"> </span>EGL.<span class="w"> </span>Major<span class="w"> </span>:<span class="w"> </span><span class="m">1</span><span class="w"> </span>Minor:<span class="w"> </span><span class="m">5</span>
+I0000<span class="w"> </span><span class="m">00</span>:00:1723362224.680348<span class="w">   </span><span class="m">40865</span><span class="w"> </span>gl_context.cc:357<span class="o">]</span><span class="w"> </span>GL<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.2<span class="w"> </span><span class="o">(</span>OpenGL<span class="w"> </span>ES<span class="w"> </span><span class="m">3</span>.2<span class="w"> </span>NVIDIA<span class="w"> </span><span class="m">555</span>.42.06<span class="o">)</span>,<span class="w"> </span>renderer:<span class="w"> </span>NVIDIA<span class="w"> </span>GeForce<span class="w"> </span>GTX<span class="w"> </span><span class="m">1660</span><span class="w"> </span>Ti/PCIe/SSE2
+W0000<span class="w"> </span><span class="m">00</span>:00:1723362224.681858<span class="w">   </span><span class="m">40860</span><span class="w"> </span>inference_feedback_manager.cc:114<span class="o">]</span><span class="w"> </span>Feedback<span class="w"> </span>manager<span class="w"> </span>requires<span class="w"> </span>a<span class="w"> </span>model<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>single<span class="w"> </span>signature<span class="w"> </span>inference.<span class="w"> </span>Disabling<span class="w"> </span>support<span class="w"> </span><span class="k">for</span><span class="w"> </span>feedback<span class="w"> </span>tensors.
+</pre></div>
+</div>
+<p>この現象は<code class="docutils literal notranslate"><span class="pre">mediapipe</span></code>が最新バージョンである場合でも起こりえます。また、このデバッグログを抑制する効果的な方法は見つかっていません。
+もしこの現象が現れる場合、<code class="docutils literal notranslate"><span class="pre">use_pipe</span> <span class="pre">=</span> <span class="pre">False</span></code>を検討してください。</p>
+</section>
+<section id="id7">
+<h3>補足<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>環境によっては以下の対策でデバッグログを抑制する可能性があります。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>に以下を記述し、<code class="docutils literal notranslate"><span class="pre">source</span></code>コマンドで<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>をリロードする。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># mediapipeのデバッグログを抑制する</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MEDIPIPE_TRACE</span><span class="o">=</span><span class="m">0</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">GLOG_logtostderr</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~/.bashrcのリロード</span>
+$<span class="w"> </span>.<span class="w"> </span>.bashrc
+</pre></div>
+</div>
+</li>
+</ul>
+<p>この現象は<code class="docutils literal notranslate"><span class="pre">FACE01_DEV/lib/python3.10/site-packages/mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so</span></code>が原因です。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@user:~/bin/FACE01_DEV/lib/python3.10/site-packages$<span class="w"> </span>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;Successfully initialized EGL&quot;</span><span class="w"> </span>./*
+grep:<span class="w"> </span>./mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so:<span class="w"> </span>binary<span class="w"> </span>file<span class="w"> </span>matches
+user@user:~/bin/FACE01_DEV/lib/python3.10/site-packages$<span class="w"> </span>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;inference_feedback_manager&quot;</span><span class="w"> </span>./*
+grep:<span class="w"> </span>./mediapipe/python/_framework_bindings.cpython-310-x86_64-linux-gnu.so:<span class="w"> </span>binary<span class="w"> </span>file<span class="w"> </span>matches
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mediapipe</span></code>をソースコードからビルドする必要があるかも知れません。（未検証）</p>
+</section>
 </section>
 <section id="example-and-explain-each-items">
-<h1>Example and explain each items.<a class="headerlink" href="#example-and-explain-each-items" title="Link to this heading"></a></h1>
+<h2>Example and explain each items.<a class="headerlink" href="#example-and-explain-each-items" title="Link to this heading"></a></h2>
 <section id="default">
-<h2>[DEFAULT]<a class="headerlink" href="#default" title="Link to this heading"></a></h2>
+<h3>[DEFAULT]<a class="headerlink" href="#default" title="Link to this heading"></a></h3>
 <p>[DEFAULT] section is for simple example.
 This [DEFAULT] setting for only use CUI mode.</p>
 <p>Also, this setting is for user who's PC is *<strong>not</strong>* installed Nvidia GPU card or IOT devices.</p>
 <p>[DEFAULT] section is the inheritor of all sections.</p>
 </section>
 <section id="items">
-<h2>Items<a class="headerlink" href="#items" title="Link to this heading"></a></h2>
+<h3>Items<a class="headerlink" href="#items" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>headless</p>
 <ul>
@@ -469,6 +504,7 @@ set_area = 'TOP_LEFT'
 </ul>
 </li>
 </ul>
+</section>
 </section>
 </section>
 

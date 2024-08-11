@@ -1,21 +1,31 @@
-"""Example program to create npKnown.npz file.
+"""`npKnown.npz`ファイルを作成するコードの例.
 
 Summary:
-    In this example you can learn how to make npKnown.npz file.
+    このエグザンプルでは、`npKnown.npz`ファイルの作成手順を学びます。
+
     ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
     それ以外の場合はエラーが発生します。
+
     'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。
+
+    このコードを実行するには開発用パッケージを追加インストールする必要があります。
+    具体的にはrequirements_dev.txtをインストールしてください。
+
+    .. code-block:: bash
+
+        pip install -r requirements_dev.txt
 
 Example:
     .. code-block:: bash
 
         python3 example/make_npKnown_file.py
 
+    .. image:: ../docs/img/make_noKnown_file.png
+        :scale: 100%
+        :alt: make_noKnown_file
+
 Source code:
     `make_npKnown_file.py <../example/make_npKnown_file.py>`_
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
 """
 
 import os
@@ -50,12 +60,18 @@ if __name__ == '__main__':
         print("ディレクトリが選択されませんでした。プログラムを終了します。")
         sys.exit()
 
-    # ディレクトリ内のすべてのpngファイルを処理
-    for file_name in os.listdir(root_dir):
-        if file_name.lower().endswith('.png'):
-            file_path = os.path.join(root_dir, file_name)
-            load_preset_image_obj.load_preset_image(
-                deep_learning_model=1,
-                RootDir=root_dir,  # npKnown.npzを作成するディレクトリ
-                preset_face_imagesDir=root_dir  # 顔画像が格納されているディレクトリ
-            )
+    # npKnown.npz ファイルが存在するか確認
+    npz_file_path = os.path.join(root_dir, 'npKnown.npz')
+    if not os.path.exists(npz_file_path):
+        # npKnown.npz ファイルが存在しない場合のみ処理を実行
+        # ディレクトリ内のすべてのpngファイルを処理
+        for file_name in os.listdir(root_dir):
+            if file_name.lower().endswith('.png'):
+                file_path = os.path.join(root_dir, file_name)
+                load_preset_image_obj.load_preset_image(
+                    deep_learning_model=1,
+                    RootDir=root_dir,  # npKnown.npzを作成するディレクトリ
+                    preset_face_imagesDir=root_dir  # 顔画像が格納されているディレクトリ
+                )
+    else:
+        print("npKnown.npz ファイルは既に存在するため、処理を終了します。")

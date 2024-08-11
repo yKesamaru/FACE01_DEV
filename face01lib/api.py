@@ -1,9 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-
-Summary.
+"""Summary.
 
 COPYRIGHT:
     This code is based on 'face_recognition' written by Adam Geitgey (ageitgey),
@@ -48,18 +43,17 @@ NOTE:
     - face_recognition: (top, right, bottom, left), called 'css'.
 
     See bellow
-
     https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py
 
-"""
+DEBUG: MEMORY LEAK
+    .. code-block:: python
 
+        from .memory_leak import Memory_leak
+        m = Memory_leak(limit=2, key_type='traceback', nframe=20)
+        m.memory_leak_analyze_start()
 
-"""DEBUG: MEMORY LEAK
-from .memory_leak import Memory_leak
-m = Memory_leak(limit=2, key_type='traceback', nframe=20)
-m.memory_leak_analyze_start()
 See bellow:
-[Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100
+    [Ja] https://zenn.dev/ykesamaru/articles/bd403aa6d03100
 """
 
 
@@ -78,11 +72,10 @@ from traceback import format_exc
 
 from face01lib.Calc import Cal
 from face01lib.logger import Logger
-from face01lib.video_capture import VidCap
+# from face01lib.video_capture import VidCap
 import onnx
 import onnxruntime as ort
 import torchvision.transforms as transforms
-import torch
 
 
 class Dlib_api:
@@ -95,7 +88,8 @@ class Dlib_api:
 
     def __init__(
         self,
-        log_level: str = 'info'
+        # log_level: str = 'info'
+        log_level: str = 'error'
     ) -> None:
         """init.
 
@@ -109,9 +103,22 @@ class Dlib_api:
         dir: str = os.path.dirname(__file__)
         parent_dir, _ = os.path.split(dir)
 
-        self.logger = Logger(self.log_level).logger(name, parent_dir)
+        # self.logger = Logger(self.log_level).logger(name, parent_dir)
         # self.logger.info("COPYRIGHT: TOKAI-KAONINSHO, yKesamaru")
         # self.logger.info("FACE01: 商用利用にはライセンスが必要です")
+
+        # DEBUG: ログ抑制 #################################################
+        # Loggerクラスの初期化
+        self.logger = Logger('error').logger(name, parent_dir)  # ログレベルを'error'に設定
+        # ONNX Runtimeのログ抑制 (例)
+        os.environ['ORT_LOGGING_LEVEL'] = 'ERROR'
+        # #################################################################
+
+        # cv2のスパムログ出力を抑制 ####################
+        import logging
+        logging.getLogger('cv2').setLevel(logging.ERROR)
+        os.environ['OPENCV_LOG_LEVEL'] = 'ERROR'
+        # ##############################################
 
         try:
             from .models import Models
@@ -123,7 +130,7 @@ class Dlib_api:
             self.logger.error("-" * 20)
             exit(0)
 
-        Cal().cal_specify_date(self.logger)
+        # Cal().cal_specify_date(self.logger)  # 日付による使用停止処理は廃止
 
         self.face_detector = dlib.get_frontal_face_detector()  # type: ignore
 

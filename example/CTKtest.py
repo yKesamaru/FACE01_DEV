@@ -1,9 +1,31 @@
-"""CustomTkinter test.
+"""CustomTkinterの使用例.
 
-This is test of CustomTkinter.
+Summary:
+    このエグザンプルコードは`CustomTkinter`を使用してGUIアプリケーションを構築する際の例になります。`CustomTkinter`で紹介されているコードをそのまま掲載しています。
+    `Tkinter`よりリッチなGUIを使用したい場合に検討してください。
+    このコードを実行するには開発用パッケージを追加インストールする必要があります。
+    具体的にはrequirements_dev.txtをインストールしてください。
+
+    .. code-block:: bash
+
+        pip install -r requirements_dev.txt
+
+Example:
+    .. code-block:: bash
+
+        python3 example/CTKtest.py
+
+Result:
+    .. image:: ../docs/img/ctktest.png
+        :scale: 50%
+        :alt: ctktest
+
+Source code:
+    `CTKtest.py <../example/CTKtest.py>`_
 """
 import tkinter
 import tkinter.messagebox
+
 import customtkinter
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"

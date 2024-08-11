@@ -1,7 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
+"""顔画像ファイルから`npKnown.npz`ファイルを作成する。
 """
 
 import os
@@ -69,7 +66,6 @@ class LoadPresetImage:
             os.mkdir(os.path.join(self.RootDir, 'multipleFaces'))
             self.logger.info("Create 'multipleFaces' folder")
 
-
     def _get_known_face_data(self) -> Tuple[List[np.ndarray], List[str]]:
         """
         既知の顔データをnpKnown.npzからロードするメソッド
@@ -83,7 +79,7 @@ class LoadPresetImage:
             npKnown = np.load(
                 os.path.join(self.RootDir, 'npKnown.npz'),
                 allow_pickle=True
-                )
+            )
             # npKnown.npzファイルのdeep_learning_modelとself.deep_learning_modelが一致するか確認
             if 'dlib' in npKnown and self.deep_learning_model == 0:
                 known_face_encodings_ndarray = npKnown['dlib']
@@ -107,7 +103,6 @@ class LoadPresetImage:
             known_face_encodings_list, known_face_names_list = \
                 self._encode_face_images(face_images_list)
         return known_face_encodings_list, known_face_names_list
-
 
     def _update_known_face_data(self) -> Tuple[List[np.ndarray], List[str]]:
         """
@@ -137,8 +132,8 @@ class LoadPresetImage:
             face_encoding_list, face_file_name_list = self._get_known_face_data()
         return face_encoding_list, face_file_name_list
 
-
     # ディレクトリから顔画像ファイルを取得するメソッド
+
     def _get_face_images(self, dir: str) -> List[str]:
         # 拡張子がpng, jpeg, jpg, webpの場合のみface_images_listに追加
         face_image_filename_list = []  # 顔画像のリストを初期化
@@ -148,10 +143,10 @@ class LoadPresetImage:
             extension = os.path.splitext(filename)[1].lower()  # 拡張子を小文字に変換
             # 拡張子がpng, jpeg, jpg, webpのいずれかの場合、リストに追加
             if extension in ['.png', '.jpeg', '.jpg', '.webp']:
-                face_image_filename_list = C.comb(face_image_filename_list, [filename])
+                face_image_filename_list = C.comb(
+                    face_image_filename_list, [filename])
                 # face_image_filename_list.append(filename)
         return face_image_filename_list
-
 
     # 顔画像エンコードリストと顔画像名リストを返すメソッド
     def _encode_face_images(self, face_images_list: List[str]) -> Tuple[List[np.ndarray], List[str]]:
@@ -166,7 +161,7 @@ class LoadPresetImage:
             face_image_ndarray: npt.NDArray[np.uint8] = \
                 Dlib_api_obj.load_image_file(
                     os.path.join(self.preset_face_imagesDir, face_image)
-                )
+            )
             # 顔画像ファイルから顔の位置を検出
             face_location_list = Dlib_api_obj.face_locations(
                 face_image_ndarray,
@@ -176,7 +171,8 @@ class LoadPresetImage:
             # 顔検出できなかった場合hogからcnnへチェンジして再度顔検出する
             if len(face_location_list) == 0:
                 if self.mode == 'hog':
-                    self.logger.info("Face could not be detected. Temporarily switch to 'cnn' mode")
+                    self.logger.info(
+                        "Face could not be detected. Temporarily switch to 'cnn' mode")
                     face_location_list = Dlib_api_obj.face_locations(
                         face_image_ndarray, self.upsampling, 'cnn')
                     # modeをhogに戻す
@@ -186,15 +182,19 @@ class LoadPresetImage:
                     # ファイルをnoFaceフォルダへ移動
                     if len(face_location_list) == 0:
                         try:
-                            shutil.move(face_image, os.path.join(self.RootDir, 'noFace'))  # 既にファイルが存在する場合は上書きされる
+                            shutil.move(face_image, os.path.join(
+                                self.RootDir, 'noFace'))  # 既にファイルが存在する場合は上書きされる
                         except:
                             pass
-                        self.logger.info(f"No face detected in registered face image {face_image}(CNN mode).  Move it to the 'noFace' folder")
+                        self.logger.info(
+                            f"No face detected in registered face image {face_image}(CNN mode).  Move it to the 'noFace' folder")
                         continue
                     # ファイルをmultipleFacesフォルダへ移動
                     elif len(face_location_list) > 1:
-                        self.logger.info(f"Multiple faces detected in registered face image {face_image}(CNN mode).  Move it to the 'multipleFaces' folder")
-                        shutil.move(face_image, os.path.join(self.RootDir, 'multipleFaces'))
+                        self.logger.info(
+                            f"Multiple faces detected in registered face image {face_image}(CNN mode).  Move it to the 'multipleFaces' folder")
+                        shutil.move(face_image, os.path.join(
+                            self.RootDir, 'multipleFaces'))
                         continue
             # 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する
             elif len(face_location_list) > 1:
@@ -237,17 +237,44 @@ class LoadPresetImage:
                 sys.exit(1)
         return face_encoding_list, face_file_name_list
 
-
     def load_preset_image(
-            self,
-            deep_learning_model: int,
-            RootDir: str,
-            preset_face_imagesDir: str,
-            upsampling: int = 0,
-            jitters:int = 100,
-            mode: str = 'hog',
-            model: str = 'small'
-        ) -> Tuple[List[np.ndarray], List[str]]:
+        self,
+        deep_learning_model: int,
+        RootDir: str,
+        preset_face_imagesDir: str,
+        upsampling: int = 0,
+        jitters: int = 100,
+        mode: str = 'hog',
+        model: str = 'small'
+    ) -> Tuple[List[np.ndarray], List[str]]:
+        """load_preset_image npKnown.npzを作成する.
+
+        Args:
+            deep_learning_model (int): 0または1.  0: dlib, 1: JAPANESE FACE V1
+            RootDir (str): npKnown.npzを作成するディレクトリ
+            preset_face_imagesDir (str): 顔画像が格納されているディレクトリ
+            upsampling (int, optional): upsampling値. Defaults to 0.
+            jitters (int, optional): jitter値. Defaults to 100.
+            mode (str, optional): HOG OR CNN. Defaults to 'hog'.
+            model (str, optional): Defaults to 'small'.
+
+        Returns:
+            Tuple[List[np.ndarray], List[str]]: npKnown.npzを作成する
+            Tuple[List, List]: known_face_encodings_list, known_face_names_list
+
+            - known_face_encodings_list
+                - List of encoded many face images as ndarray
+
+            - known_face_names_list
+                - List of name which encoded as ndarray
+
+        Example:
+            >>> known_face_encodings, known_face_names = LoadPresetImage().load_preset_image(
+                self,
+                self.conf_dict["RootDir"],
+                self.conf_dict["preset_face_imagesDir"]
+            )
+        """
         self.deep_learning_model = deep_learning_model
         self.RootDir = RootDir
         self.preset_face_imagesDir = preset_face_imagesDir
@@ -264,6 +291,7 @@ class LoadPresetImage:
             face_encoding_list, face_image_filename_list = self._update_known_face_data()
         else:
             file_list = self._get_face_images(self.preset_face_imagesDir)
-            face_encoding_list, face_image_filename_list = self._encode_face_images(file_list)
+            face_encoding_list, face_image_filename_list = self._encode_face_images(
+                file_list)
             self._save_as_noKnown(face_encoding_list, face_image_filename_list)
         return face_encoding_list, face_image_filename_list

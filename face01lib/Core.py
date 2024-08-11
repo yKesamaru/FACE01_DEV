@@ -61,6 +61,7 @@ Reference.
 # from __future__ import annotations
 
 
+import os
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from os.path import exists
@@ -74,7 +75,7 @@ import mediapipe as mp
 import mojimoji
 import numpy as np
 import numpy.typing as npt  # See [](https://discuss.python.org/t/how-to-type-annotate-mathematical-operations-that-supports-built-in-numerics-collections-and-numpy-arrays/13509)
-import onnxruntime
+import onnxruntime as ort
 # from memory_profiler import profile  # @profile()
 from PIL import Image, ImageDraw, ImageFile, ImageFont
 
@@ -85,7 +86,6 @@ from face01lib.models import Models
 from face01lib.return_face_image import Return_face_image
 from face01lib.video_capture import VidCap
 
-
 Cal_obj = Cal()
 VidCap_obj = VidCap()
 Dlib_api_obj = Dlib_api()
@@ -95,7 +95,12 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 anti_spoof_model: str = Models().anti_spoof_model_location()
-onnx_session = onnxruntime.InferenceSession(anti_spoof_model)
+
+# mediapipeのスパムログ出力を抑制 ####################
+os.environ['GLOG_minloglevel'] = '3'  # 3: FATAL (致命的なエラー)
+# ログレベルをERRORに設定 (INFOやDEBUGより低いレベルのログが出力されなくなる)
+# mp.logging_util.set_verbosity(mp.logging_util.ERROR)  # mediapipe v0.10.14では未対応
+# ####################################################
 
 
 class Core:
@@ -117,7 +122,8 @@ class Core:
         dir: str = os.path.dirname(__file__)
         parent_dir, _ = os.path.split(dir)
         self.logger = Logger(self.log_level).logger(name, parent_dir)
-        Cal_obj.cal_specify_date(self.logger)
+
+        # Cal_obj.cal_specify_date(self.logger)  # 日付による動作停止処理は廃止
 
     # @profile()
     def mp_face_detection_func(
@@ -1104,7 +1110,7 @@ class Core:
 
                 # nameがUnknownであってもなくても以降の処理を行う。
                 # クロップ画像保存
-                if self.CONFIG["crop_face_image"] == True:
+                if self.CONFIG["crop_face_image"] is True:
                     if self.CONFIG["frequency_crop_image"] < self.CONFIG["number_of_crops"]:
                         pil_img_obj_rgb = self._pil_img_rgb_instance(
                             resized_frame)
@@ -1305,7 +1311,7 @@ class Core:
 
             if self.CONFIG["headless"] is False:
                 # 半透明処理（後半）_1frameに対して1回
-                if self.CONFIG["show_overlay"] == True:
+                if self.CONFIG["show_overlay"] is True:
                     # cv2.addWeighted(overlay, self.CONFIG["alpha"], resized_frame, 1-self.CONFIG["alpha"], 0, resized_frame)
                     for modified_frame in modified_frame_list:
                         cv2.addWeighted(
@@ -1428,11 +1434,8 @@ class Core:
             spoof_or_real = 'cannot_distinction'
             return spoof_or_real, score, ELE
 
-
 # 以下、元libdraw.LibDraw
     # @profile()
-
-
     def _draw_pink_rectangle(
         self,
         resized_frame: npt.NDArray[np.uint8],
@@ -1448,7 +1451,7 @@ class Core:
         self.right = right
         cv2.rectangle(
             self.resized_frame,
-            (self.left,  self.top),
+            (self.left, self.top),
             (self.right, self.bottom),
             (255, 87, 243),
             2
@@ -1456,7 +1459,6 @@ class Core:
         return self.resized_frame
 
     # @profile()
-
     def _draw_white_rectangle(
         self,
         rectangle,
@@ -1537,7 +1539,6 @@ class Core:
 
     # デフォルト顔画像の描画処理
     # @profile()
-
     def _draw_default_face_image(
         self,
         logger,
@@ -1580,8 +1581,7 @@ class Core:
     ) -> tuple:
         self.CONFIG = CONFIG
         self.default_face_image = default_face_image
-        """TODO
-        繰り返し計算させないようリファクタリング"""
+        """TODO: 繰り返し計算させないようリファクタリング"""
         face_image_width = int(self.CONFIG["set_width"] / 15)
         default_face_small_image = cv2.resize(self.default_face_image, dsize=(
             face_image_width, face_image_width))  # 幅・高さともに同じとする
@@ -1591,7 +1591,6 @@ class Core:
         return x1, y1, x2, y2, default_face_small_image, face_image_width
 
     # @profile()
-
     def _draw_default_face(
         self,
         logger,
@@ -1648,7 +1647,6 @@ class Core:
         return resized_frame
 
     # @profile()
-
     def _draw_rectangle_for_name(
         self,
         name,
@@ -1672,7 +1670,6 @@ class Core:
 
     # 帯状四角形（ピンク）の描画
     # @profile()
-
     def _draw_error_messg_rectangle(
         self,
         resized_frame: npt.NDArray[np.uint8],
@@ -1693,14 +1690,12 @@ class Core:
 
     # drawオブジェクトを生成
     # @profile()
-
     def _make_draw_object(self, frame):
         self.frame = frame
         draw = ImageDraw.Draw(Image.fromarray(self.frame))
         return draw
 
     # @profile()
-
     def _draw_error_messg_rectangle_messg(
         self,
         draw,
@@ -1717,7 +1712,6 @@ class Core:
             255, 255, 255, 255), font=self.error_messg_rectangle_font)
 
     # @profile()
-
     def _return_fontpath(self, logger):
         # フォントの設定(フォントファイルのパスと文字の大きさ)
         operating_system: str = system()
@@ -1735,7 +1729,6 @@ class Core:
         return fontpath
 
     # @profile()
-
     def _calculate_text_position(
         self,
         left,
@@ -1760,7 +1753,6 @@ class Core:
         return position, Unknown_position
 
     # @profile()
-
     def _draw_name(
         self,
         deep_learning_model,
@@ -1814,7 +1806,6 @@ class Core:
 
     # pil_img_objをnumpy配列に変換
     # @profile()
-
     def _convert_pil_img_to_ndarray(
         self,
         pil_img_obj
@@ -1828,7 +1819,6 @@ class Core:
         return frame
 
     # @profile()
-
     def _draw_text_for_name(
         self,
         deep_learning_model,
@@ -1888,7 +1878,6 @@ class Core:
 
     # target_rectangleの描画
     # @profile()
-
     def _draw_target_rectangle(
         self,
         person_data_list,
