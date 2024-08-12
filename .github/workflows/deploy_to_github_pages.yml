@@ -36,7 +36,7 @@ jobs:
       - name: Generate Sphinx documentation
         working-directory: /home/runner/work/FACE01_DEV/FACE01_DEV
         run: |
-          tree -F
+          tree -F -L 2
           sphinx-apidoc -f -o sphinx/ ./
           sphinx-apidoc -f -o sphinx/ sphinx/
           sphinx-apidoc -f -o sphinx/ example/

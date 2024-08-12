@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What to do when dlib.DLIB_USE_CUDA is False &mdash; FACE01 3.0.02 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ebc0197d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.02 ドキュメント 内を検索"
+          href="../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">What to do when dlib.DLIB_USE_CUDA is False</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="what-to-do-when-dlib-dlib-use-cuda-is-false">
+<h1>What to do when dlib.DLIB_USE_CUDA is False<a class="headerlink" href="#what-to-do-when-dlib-dlib-use-cuda-is-false" title="Link to this heading"></a></h1>
+<p>FACE01 uses CUDA to maximize GPU utilization. Normally, by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dlib</span></code> in the terminal, CUDA can be used according to the usage environment.
+To check if CUDA is available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
+FACE01<span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dlib
+<span class="nv">dlib</span><span class="o">==</span><span class="m">19</span>.24.0
+<span class="o">(</span>FACE01<span class="o">)</span>
+FACE01<span class="w"> </span>$<span class="w"> </span>python
+Python<span class="w"> </span><span class="m">3</span>.8.10<span class="w"> </span><span class="o">(</span>default,<span class="w"> </span>Nov<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">2022</span>,<span class="w"> </span><span class="m">12</span>:59:47<span class="o">)</span>
+<span class="o">[</span>GCC<span class="w"> </span><span class="m">9</span>.4.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
+Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+&gt;&gt;&gt;<span class="w"> </span>import<span class="w"> </span>dlib
+&gt;&gt;&gt;<span class="w"> </span>dlib.DLIB_USE_CUDA
+True
+&gt;&gt;&gt;
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">False</span></code> at this time, CUDA cannot be used.</p>
+<section id="uninstall-dlib">
+<h2>Uninstall Dlib<a class="headerlink" href="#uninstall-dlib" title="Link to this heading"></a></h2>
+<p>Please uninstall Dlib once as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>dlib
+</pre></div>
+</div>
+</section>
+<section id="extract-dlib-19-24-tar-bz2">
+<h2>Extract <code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code><a class="headerlink" href="#extract-dlib-19-24-tar-bz2" title="Link to this heading"></a></h2>
+<p>Unzip <code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code> to create <code class="docutils literal notranslate"><span class="pre">dlib-19.24</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvjf<span class="w"> </span>dlib-19.24.tar.bz2
+<span class="nb">cd</span><span class="w"> </span>dlib-19.24
+</pre></div>
+</div>
+</section>
+<section id="build-with-gcc-8">
+<h2>Build with <code class="docutils literal notranslate"><span class="pre">gcc-8</span></code><a class="headerlink" href="#build-with-gcc-8" title="Link to this heading"></a></h2>
+<p>The gcc version is very important when building Dlib. <code class="docutils literal notranslate"><span class="pre">gcc</span></code> versions later than <code class="docutils literal notranslate"><span class="pre">8</span></code> are <em><strong>not</strong></em> supported. Specify gcc-8 etc. as follows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">CC</span><span class="o">=</span>/usr/bin/gcc-8
+<span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">CXX</span><span class="o">=</span>/usr/bin/g++-8
+<span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span>python<span class="w"> </span>setup.py<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+<section id="check-if-installed">
+<h2>Check if installed<a class="headerlink" href="#check-if-installed" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dlib
+<span class="nv">dlib</span><span class="o">==</span><span class="m">19</span>.24.0
+<span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span>python
+Python<span class="w"> </span><span class="m">3</span>.8.10<span class="w"> </span><span class="o">(</span>default,<span class="w"> </span>Nov<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">2022</span>,<span class="w"> </span><span class="m">12</span>:59:47<span class="o">)</span>
+<span class="o">[</span>GCC<span class="w"> </span><span class="m">9</span>.4.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
+Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+&gt;&gt;&gt;<span class="w"> </span>import<span class="w"> </span>dlib
+&gt;&gt;&gt;<span class="w"> </span>dlib.DLIB_USE_CUDA
+True
+&gt;&gt;&gt;
+<span class="o">(</span>FACE01<span class="o">)</span>
+FACE01/dlib-19.24<span class="w"> </span>$
+</pre></div>
+</div>
+<p>If you can confirm that it is <code class="docutils literal notranslate"><span class="pre">True</span></code>, you are finished:tada:.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
