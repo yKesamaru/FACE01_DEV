@@ -3,7 +3,7 @@ lib*
 include
 bin
 .vscode
-dlib*
+dlib-19*
 output/*
 __pycache__
 pyvenv.cfg
