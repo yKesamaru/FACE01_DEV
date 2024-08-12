@@ -81,32 +81,27 @@
            <div itemprop="articleBody">
              
   <h1>example.data_augmentation_mp のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">&quot;&quot;&quot;Example of data augmentation for DNN using multi process.</span>
+<span></span><span class="sd">&quot;&quot;&quot;DNNをマルチプロセスで用いる際のデータ拡張のコード例.</span>
 
 <span class="sd">Summary:</span>
 <span class="sd">    In this example you can learn how to augment data for DNN using multi process.</span>
+<span class="sd">    このエグザンプルコードでは、DNNをマルチプロセスで用いる際のデータ拡張について学びます。</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
-<span class="sd">    </span>
+
 <span class="sd">        python3 example/data_augmentation.py \</span>
 <span class="sd">            &quot;/path/to/dir&quot; &quot;&quot; &quot;lens&quot; 224 10 -0.1 0.1 0.01 4</span>
-<span class="sd">        </span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `data_augmentation.py &lt;../example/data_augmentation_mp.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span>
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
-<span class="kn">import</span> <span class="nn">concurrent.futures</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
@@ -118,21 +113,19 @@
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">face01lib.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
-
 <span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
-<span class="sd">When coding a program that uses FACE01, code `initialize` and `logger` first.</span>
-<span class="sd">This will read the configuration file `config.ini` and log errors etc.</span>
+<span class="sd">When coding a program that uses FACE01, code initialize and logger first.</span>
+<span class="sd">This will read the configuration file config.ini and log errors etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
 
-<div class="viewcode-block" id="process_data">
-<a class="viewcode-back" href="../../example.html#example.data_augmentation_mp.process_data">[ドキュメント]</a>
-<span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span>
+
+<span class="k">def</span> <span class="nf">_process_data</span><span class="p">(</span>
     <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">initial_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -140,6 +133,16 @@
     <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_process_data 樽型歪みとジッター処理を行います</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dir (str): ディレクトリパス</span>
+<span class="sd">        size (int): 画像サイズ</span>
+<span class="sd">        initial_value (float): 初期値</span>
+<span class="sd">        closing_value (float): 最終値</span>
+<span class="sd">        step_value (float): ステップ値</span>
+<span class="sd">        num_jitters (int): ジッター回数</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
     <span class="n">utils</span><span class="o">.</span><span class="n">distort_barrel</span><span class="p">(</span>
         <span class="nb">dir</span><span class="p">,</span>
@@ -153,7 +156,7 @@
         <span class="n">num_jitters</span><span class="o">=</span><span class="n">num_jitters</span><span class="p">,</span>
         <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
         <span class="n">disturb_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span></div>
+    <span class="p">)</span>
 
 
 <div class="viewcode-block" id="main">
@@ -167,6 +170,17 @@
     <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="n">max_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;main メインメソッド</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dir_path (str): ディレクトリパス</span>
+<span class="sd">        size (int, optional): 画像サイズ. Defaults to 224.</span>
+<span class="sd">        num_jitters (int, optional): ジッター処理回数. Defaults to 10.</span>
+<span class="sd">        initial_value (float, optional): 初期値. Defaults to -0.1.</span>
+<span class="sd">        closing_value (float, optional): 最終値. Defaults to 0.1.</span>
+<span class="sd">        step_value (float, optional): ステップ値. Defaults to 0.01.</span>
+<span class="sd">        max_workers (Optional[int], optional): 並行処理値. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_dir</span> <span class="o">=</span> <span class="n">dir_path</span>
     <span class="n">directory_list</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -175,7 +189,7 @@
         <span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
             <span class="n">directory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
             <span class="c1"># Get all files in `directory_path` and store them in `files`</span>
-            <span class="n">files</span><span class="o">=</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
             <span class="c1"># skip the `for` statement if any element of the list `files` contains the string `jitter`</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;jitter&#39;</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">):</span>
                 <span class="k">continue</span>
@@ -186,7 +200,7 @@
     <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
         <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
-                <span class="n">process_data</span><span class="p">,</span>
+                <span class="n">_process_data</span><span class="p">,</span>
                 <span class="nb">dir</span><span class="p">,</span>
                 <span class="n">size</span><span class="p">,</span>
                 <span class="n">initial_value</span><span class="p">,</span>
@@ -202,6 +216,7 @@
             <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span></div>
 
 
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">args</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
     <span class="n">main</span><span class="p">(</span>
@@ -213,7 +228,6 @@
         <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span>
         <span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span>
     <span class="p">)</span>
-
 </pre></div>
 
            </div>

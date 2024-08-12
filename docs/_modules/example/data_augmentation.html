@@ -81,23 +81,23 @@
            <div itemprop="articleBody">
              
   <h1>example.data_augmentation のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">&quot;&quot;&quot;Example of data augmentation for DNN.</span>
+<span></span><span class="sd">&quot;&quot;&quot;DNNのためのデータ拡張コード例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    In this example you can learn how to augment data for DNN.</span>
+<span class="sd">    このエグザンプルコードでは、DNNのためのデータ拡張する方法に</span>
+<span class="sd">    ついて学びます。</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
-<span class="sd">    </span>
+
 <span class="sd">        python3 example/data_augmentation.py \</span>
 <span class="sd">            &quot;/path/to/dir&quot; &quot;&quot; &quot;lens&quot; 224 10 -0.1 0.1 0.01</span>
-<span class="sd">        </span>
+
+<span class="sd">Result:</span>
+<span class="sd">    .. image:: ../docs/img/data_augmentation.png</span>
+<span class="sd">        :scale: 50%</span>
+<span class="sd">        :alt: Image taken from https://tokai-kaoninsho.com</span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `data_augmentation.py &lt;../example/data_augmentation.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -105,19 +105,19 @@
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">face01lib.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
-
 <span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
@@ -131,28 +131,31 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../example.html#example.data_augmentation.main">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
-        <span class="n">dir_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span>
-        <span class="n">num_jitters</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">initial_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple example.</span>
+    <span class="n">dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">,</span>
+    <span class="n">num_jitters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">initial_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;簡単な例.</span>
 
-<span class="sd">        This simple example accepts a directory path and recursively loads</span>
-<span class="sd">        the directories for data augmentation.</span>
+<span class="sd">        この簡単なコード例では、与えられたディレクトリパスから再帰的に</span>
+<span class="sd">        ファイルを読み込み、それらに対してデータ拡張を行います。</span>
+<span class="sd">        この例でのデータ拡張は、FACE01のUtilsモジュールから、</span>
+<span class="sd">        樽型歪みとジッターを呼び出します。</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            dir_path (str): target directory path.</span>
-<span class="sd">            size (int, optional): image size. Defaults to 224.</span>
-<span class="sd">            num_jitters (int, optional): number of jitters. Defaults to 10.</span>
-<span class="sd">            initial_value (float, optional): initial value. Defaults to -0.1.</span>
-<span class="sd">            closing_value (float, optional): closing value. Defaults to 0.1.</span>
-<span class="sd">            step_value (float, optional): step value. Defaults to 0.01.</span>
+<span class="sd">            dir_path (str): ターゲットディレクトリの絶対パス.</span>
+<span class="sd">            size (int, optional): 作成するイメージサイズ. Defaults to 224.</span>
+<span class="sd">            num_jitters (int, optional): ジッター回数. Defaults to 10.</span>
+<span class="sd">            initial_value (float, optional): 樽型歪みの初期値. Defaults to -0.1.</span>
+<span class="sd">            closing_value (float, optional): 終わり値. Defaults to 0.1.</span>
+<span class="sd">            step_value (float, optional): ステップ値. Defaults to 0.01.</span>
 
 <span class="sd">        Return:</span>
-<span class="sd">            None</span>
+<span class="sd">            ターゲットディレクトリから再帰的に読み込んだディレクトリごとに</span>
+<span class="sd">            データ拡張したファイルを保存します。</span>
 
 <span class="sd">        See Also:</span>
 <span class="sd">            `dlib.jitter_image &lt;http://dlib.net/python/index.html#dlib_pybind11.jitter_image&gt;`_</span>
@@ -165,7 +168,7 @@
         <span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
             <span class="n">directory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
             <span class="c1"># Get all files in `directory_path` and store them in `files`</span>
-            <span class="n">files</span><span class="o">=</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
             <span class="c1"># skip the `for` statement if any element of the list `files` contains the string `jitter`</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;jitter&#39;</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">):</span>
                 <span class="k">continue</span>
@@ -176,18 +179,18 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dir: </span><span class="si">{</span><span class="nb">dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
         <span class="n">utils</span><span class="o">.</span><span class="n">distort_barrel</span><span class="p">(</span>
-                <span class="nb">dir</span><span class="p">,</span>
-                <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
-                <span class="n">initial_value</span><span class="o">=</span><span class="n">initial_value</span><span class="p">,</span>
-                <span class="n">closing_value</span><span class="o">=</span><span class="n">closing_value</span><span class="p">,</span>
-                <span class="n">step_value</span><span class="o">=</span><span class="n">step_value</span><span class="p">,</span>
-                <span class="p">)</span>
+            <span class="nb">dir</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+            <span class="n">initial_value</span><span class="o">=</span><span class="n">initial_value</span><span class="p">,</span>
+            <span class="n">closing_value</span><span class="o">=</span><span class="n">closing_value</span><span class="p">,</span>
+            <span class="n">step_value</span><span class="o">=</span><span class="n">step_value</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">utils</span><span class="o">.</span><span class="n">get_jitter_image</span><span class="p">(</span>
-                <span class="nb">dir</span><span class="p">,</span>
-                <span class="n">num_jitters</span><span class="o">=</span><span class="n">num_jitters</span><span class="p">,</span>
-                <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
-                <span class="n">disturb_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="p">)</span></div>
+            <span class="nb">dir</span><span class="p">,</span>
+            <span class="n">num_jitters</span><span class="o">=</span><span class="n">num_jitters</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+            <span class="n">disturb_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 
@@ -200,7 +203,7 @@
         <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
         <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span>
         <span class="nb">float</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span>
-        <span class="p">)</span>
+    <span class="p">)</span>
 </pre></div>
 
            </div>

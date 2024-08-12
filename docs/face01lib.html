@@ -1126,25 +1126,26 @@ It might occur side effects.</p>
 </section>
 <section id="module-face01lib.Initialize">
 <span id="face01lib-initialize-module"></span><h2>face01lib.Initialize module<a class="headerlink" href="#module-face01lib.Initialize" title="Link to this heading"></a></h2>
-<p>config.ini を読み込み、CONFIG 辞書データを返します。</p>
+<p>config.ini を読み込み、CONFIG 辞書データを返します.</p>
 <p>この関数は、ConfigParser モジュールを使用して 'config.ini' ファイルを読み込み、その内容を辞書として返します。</p>
-<dl>
-<dt>戻り値:</dt><dd><p>dict: 設定データを含む CONFIG 辞書。</p>
+<dl class="field-list simple">
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>設定データを含む CONFIG 辞書。</p>
 </dd>
-<dt>注意:</dt><dd><p>config.ini ファイルについては以下を参照してください:
-<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file">https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file</a></p>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>詳細については <a class="reference external" href="docs/config_ini.md">config_ini.md</a> を参照してください。</p>
+<p>config.ini ファイルについては以下を参照してください:
+<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file">https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file</a></p>
+<p>詳細については <a class="reference external" href="..docs/config_ini.md">config_ini.md</a> を参照してください。</p>
 <p>'config.ini' は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。</p>
 <p>'config.ini' を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては <a class="reference external" href="https://docs.python.org/3/library/configparser.html">ConfigParser module documentation</a> を参照してください。</p>
 <p>各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。</p>
 </div>
 <a class="reference internal image-reference" href="_images/About_config_ini_file.png"><img alt="config_ini.md" src="_images/About_config_ini_file.png" style="width: 626.0px; height: 364.0px;" /></a>
-</dd>
-</dl>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.Initialize.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DEFAULT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Initialize.html#Initialize"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Link to this definition"></a></dt>
@@ -1554,7 +1555,11 @@ Please refer to the separate license file for the license of the code.</p>
 </section>
 <section id="module-face01lib.load_preset_image">
 <span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Link to this heading"></a></h2>
-<p>顔画像ファイルから`npKnown.npz`ファイルを作成する。</p>
+<p>顔画像ファイルから`npKnown.npz`ファイルを作成する.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">`</span></a>preset_face_images`ディレクトリを捜査して、<a href="#id3"><span class="problematic" id="id4">`</span></a>npKnown.npz`ファイルを作成します。</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.load_preset_image.LoadPresetImage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.load_preset_image.</span></span><span class="sig-name descname"><span class="pre">LoadPresetImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/load_preset_image.html#LoadPresetImage"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.load_preset_image.LoadPresetImage" title="Link to this definition"></a></dt>
@@ -1603,10 +1608,10 @@ Tuple[List, List]: known_face_encodings_list, known_face_names_list</p>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> <span class="n">LoadPresetImage</span><span class="p">()</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
-<span class="go">    self,</span>
-<span class="go">    self.conf_dict[&quot;RootDir&quot;],</span>
-<span class="go">    self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
-<span class="go">)</span>
+<span class="go">        self,</span>
+<span class="go">        self.conf_dict[&quot;RootDir&quot;],</span>
+<span class="go">        self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
+<span class="go">    )</span>
 </pre></div>
 </div>
 </div>
