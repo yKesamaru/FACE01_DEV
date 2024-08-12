@@ -5,12 +5,12 @@ Summary:
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/face_coordinates.py
 
 Config.ini setting:
     Set config.ini as described below as an example to get face-coordinate and get cropped face images.
-    
+
     .. code-block:: bash
 
         [FACE-COORDINATE]
@@ -45,7 +45,7 @@ Result:
 
         face coordinates: [(156, 233, 304, 85), (114, 593, 276, 431), (130, 704, 349, 485), (319, 334, 449, 204), (281, 645, 405, 521), (23, 810, 313, 520), (349, 394, 573, 170), (244, 302, 408, 138), (344, 692, 514, 522), (21, 256, 215, 62)]
         }
-        
+
 Source code:
     `face_coordinates.py <../example/face_coordinates.py>`_
 
@@ -71,8 +71,8 @@ CONFIG: Dict =  Initialize('FACE-COORDINATE', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
+When coding a program that uses FACE01, code initialize and logger first.
+This will read the configuration file config.ini and log errors etc.
 """
 
 
@@ -85,7 +85,7 @@ def main(exec_times: int = 50) -> None:
     Returns:
         None
 
-    """    
+    """
     # Make generator
     frame_generator_obj = VidCap().frame_generator(CONFIG)
 
@@ -97,9 +97,9 @@ def main(exec_times: int = 50) -> None:
 
         # Call __next__() from the generator object
         resized_frame = frame_generator_obj.__next__()
-        
+
         VidCap().frame_imshow_for_debug(resized_frame)
-        
+
         frame_datas_array = core.frame_pre_processing(logger, CONFIG,resized_frame)
 
         for frame_datas in frame_datas_array:

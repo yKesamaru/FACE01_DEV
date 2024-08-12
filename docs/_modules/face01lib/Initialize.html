@@ -81,32 +81,29 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.Initialize のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;config.ini を読み込み、CONFIG 辞書データを返します。</span>
+<span></span><span class="sd">&quot;&quot;&quot;config.ini を読み込み、CONFIG 辞書データを返します.</span>
 
 <span class="sd">この関数は、ConfigParser モジュールを使用して &#39;config.ini&#39; ファイルを読み込み、その内容を辞書として返します。</span>
 
-<span class="sd">戻り値:</span>
+<span class="sd">Returns:</span>
 <span class="sd">    dict: 設定データを含む CONFIG 辞書。</span>
 
-<span class="sd">注意:</span>
+<span class="sd">Note:</span>
 <span class="sd">    config.ini ファイルについては以下を参照してください:</span>
 <span class="sd">    https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file</span>
 
-<span class="sd">    .. note::</span>
-<span class="sd">        詳細については `config_ini.md &lt;docs/config_ini.md&gt;`_ を参照してください。</span>
+<span class="sd">    詳細については `config_ini.md &lt;..docs/config_ini.md&gt;`_ を参照してください。</span>
 
-<span class="sd">        &#39;config.ini&#39; は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。</span>
+<span class="sd">    &#39;config.ini&#39; は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。</span>
 
-<span class="sd">        &#39;config.ini&#39; を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては `ConfigParser module documentation &lt;https://docs.python.org/3/library/configparser.html&gt;`_ を参照してください。</span>
+<span class="sd">    &#39;config.ini&#39; を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては `ConfigParser module documentation &lt;https://docs.python.org/3/library/configparser.html&gt;`_ を参照してください。</span>
 
-<span class="sd">        各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。</span>
+<span class="sd">    各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。</span>
 
-<span class="sd">    .. image:: ../docs/img/About_config_ini_file.png</span>
-<span class="sd">        :scale: 50%</span>
-<span class="sd">        :alt: config_ini.md</span>
+<span class="sd">.. image:: ../docs/img/About_config_ini_file.png</span>
+<span class="sd">    :scale: 50%</span>
+<span class="sd">    :alt: config_ini.md</span>
 
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -244,7 +241,6 @@
             <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Initialize variables, load images</span>
-
 <div class="viewcode-block" id="Initialize.initialize">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.Initialize.Initialize.initialize">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
@@ -271,10 +267,10 @@
         <span class="n">known_face_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
         <span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span> <span class="o">=</span> \
             <span class="n">LoadPresetImage</span><span class="p">()</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;deep_learning_model&quot;</span><span class="p">],</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;RootDir&quot;</span><span class="p">],</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;preset_face_imagesDir&quot;</span><span class="p">]</span>
-                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;deep_learning_model&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;RootDir&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;preset_face_imagesDir&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
         <span class="c1"># debug: 同一ファイルだった。</span>
         <span class="c1"># with open(f&#39;{self.parent_dir}/npKnownなし.txt&#39;, &#39;w&#39;) as f:</span>
         <span class="c1">#     f.write(str(known_face_names))</span>
@@ -283,51 +279,53 @@
         <span class="c1"># print(f&quot;known_face_encodings: {type(known_face_encodings)}&quot;)</span>
 
         <span class="c1"># set_width,fps,height,width,set_height</span>
-        <span class="n">set_width</span> <span class="p">:</span> <span class="nb">int</span>
-        <span class="n">fps</span> <span class="p">:</span> <span class="nb">int</span>
-        <span class="n">height</span> <span class="p">:</span> <span class="nb">int</span>
-        <span class="n">width</span> <span class="p">:</span> <span class="nb">int</span>
-        <span class="n">set_height</span> <span class="p">:</span> <span class="nb">int</span>
-        <span class="n">set_width</span><span class="p">,</span><span class="n">fps</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">set_height</span> <span class="o">=</span> \
+        <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">fps</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="n">set_width</span><span class="p">,</span> <span class="n">fps</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">set_height</span> <span class="o">=</span> \
             <span class="n">vid</span><span class="o">.</span><span class="n">return_movie_property</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">],</span>
-                    <span class="n">vid</span><span class="o">.</span><span class="n">return_vcap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;movie&quot;</span><span class="p">])</span>
-                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;set_width&quot;</span><span class="p">],</span>
+                <span class="n">vid</span><span class="o">.</span><span class="n">return_vcap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;movie&quot;</span><span class="p">])</span>
+            <span class="p">)</span>
 
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">to_tolerance</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;similar_percentage&quot;</span><span class="p">],</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;deep_learning_model&quot;</span><span class="p">]</span>
-            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;similar_percentage&quot;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">[</span><span class="s2">&quot;deep_learning_model&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
 
         <span class="n">LoadImage_obj</span><span class="p">:</span> <span class="n">LoadImage</span> <span class="o">=</span> <span class="n">LoadImage</span><span class="p">(</span>
-                <span class="n">headless</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span>
-            <span class="p">)</span>
+            <span class="n">headless</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conf_dict</span>
+        <span class="p">)</span>
 
-        <span class="n">rect01_png</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">rect01_NG_png</span> <span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]]</span>
-        <span class="n">rect01_REAL_png</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">rect01_SPOOF_png</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">rect01_CANNOT_DISTINCTION_png</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">resized_telop_image</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">cal_resized_telop_nums</span> <span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
-        <span class="n">resized_logo_image</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">cal_resized_logo_nums</span> <span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
-        <span class="n">load_unregistered_face_image</span> <span class="p">:</span> <span class="nb">bool</span>
-        <span class="n">telop_image</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">logo_image</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
-        <span class="n">unregistered_face_image</span> <span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">rect01_png</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">rect01_NG_png</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]]</span>
+        <span class="n">rect01_REAL_png</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">rect01_SPOOF_png</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">rect01_CANNOT_DISTINCTION_png</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">resized_telop_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">cal_resized_telop_nums</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span>
+                                      <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+        <span class="n">resized_logo_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">cal_resized_logo_nums</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span>
+                                     <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+        <span class="n">load_unregistered_face_image</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="n">telop_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">logo_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+        <span class="n">unregistered_face_image</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
 
         <span class="n">rect01_png</span><span class="p">,</span> <span class="n">rect01_NG_png</span><span class="p">,</span> <span class="n">rect01_REAL_png</span><span class="p">,</span> <span class="n">rect01_SPOOF_png</span><span class="p">,</span> <span class="n">rect01_CANNOT_DISTINCTION_png</span><span class="p">,</span> <span class="n">resized_telop_image</span><span class="p">,</span> <span class="n">cal_resized_telop_nums</span><span class="p">,</span> <span class="n">resized_logo_image</span><span class="p">,</span> \
             <span class="n">cal_resized_logo_nums</span><span class="p">,</span> <span class="n">load_unregistered_face_image</span><span class="p">,</span> <span class="n">telop_image</span><span class="p">,</span> <span class="n">logo_image</span><span class="p">,</span> <span class="n">unregistered_face_image</span> <span class="o">=</span> \
             <span class="n">LoadImage_obj</span><span class="o">.</span><span class="n">LI</span><span class="p">(</span><span class="n">set_height</span><span class="p">,</span> <span class="n">set_width</span><span class="p">)</span>
 
         <span class="c1"># 日付時刻算出</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y,%m,</span><span class="si">%d</span><span class="s2">,%H,%M,%S,</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># %f-&gt; マイクロ秒</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y,%m,</span><span class="si">%d</span><span class="s2">,%H,%M,%S,</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># %f-&gt; マイクロ秒</span>
 
         <span class="c1"># 辞書作成</span>
-        <span class="n">init_dict</span><span class="p">:</span> <span class="n">Dict</span> 
-        <span class="k">if</span> <span class="n">headless</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">init_dict</span><span class="p">:</span> <span class="n">Dict</span>
+        <span class="k">if</span> <span class="n">headless</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
             <span class="n">init_dict</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;known_face_encodings&#39;</span><span class="p">:</span> <span class="n">known_face_encodings</span><span class="p">,</span>
                 <span class="s1">&#39;known_face_names&#39;</span><span class="p">:</span> <span class="n">known_face_names</span><span class="p">,</span>
@@ -349,7 +347,7 @@
                 <span class="s1">&#39;tolerance&#39;</span><span class="p">:</span> <span class="n">tolerance</span><span class="p">,</span>
                 <span class="s1">&#39;default_face_image_dict&#39;</span><span class="p">:</span> <span class="p">{}</span>
             <span class="p">}</span>
-        <span class="k">elif</span> <span class="n">headless</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">headless</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">init_dict</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;known_face_encodings&#39;</span><span class="p">:</span> <span class="n">known_face_encodings</span><span class="p">,</span>
                 <span class="s1">&#39;known_face_names&#39;</span><span class="p">:</span> <span class="n">known_face_names</span><span class="p">,</span>
@@ -381,7 +379,6 @@
 
         <span class="k">return</span> <span class="n">CONFIG</span></div>
 </div>
-
 
 </pre></div>
 

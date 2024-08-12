@@ -1,8 +1,8 @@
 """CustomTkinterの使用例.
 
 Summary:
-    このエグザンプルコードは`CustomTkinter`を使用してGUIアプリケーションを構築する際の例になります。`CustomTkinter`で紹介されているコードをそのまま掲載しています。
-    `Tkinter`よりリッチなGUIを使用したい場合に検討してください。
+    このエグザンプルコードはCustomTkinterを使用してGUIアプリケーションを構築する際の例になります。CustomTkinterで紹介されているコードをそのまま掲載しています。
+    TkinterよりリッチなGUIを使用したい場合に検討してください。
     このコードを実行するには開発用パッケージを追加インストールする必要があります。
     具体的にはrequirements_dev.txtをインストールしてください。
 

@@ -36,7 +36,8 @@ class LoadPresetImage:
         parent_dir, _ = os.path.split(dir)
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
-        Cal().cal_specify_date(self.logger)
+
+        # Cal().cal_specify_date(self.logger)  # 廃止
 
     def _save_as_noKnown(self, known_face_encodings, known_face_names):
         """_save_as_noKnown エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド.

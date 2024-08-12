@@ -3,14 +3,14 @@
 Summary:
     In this example, you can learn about log functions.
 
-    You can choose from two types of `log_level`,
+    You can choose from two types of log_level,
         - info
         - debug
-    in `CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize()`.
-    
+    in CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize().
+
 Example:
     .. code-block:: python
-    
+
         # Initialize
         CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
         # Set up logger
@@ -18,9 +18,9 @@ Example:
 
 Example:
     .. code-block:: bash
-    
+
         python3 example/logging.py
-        
+
 Source code:
     `example_logging.py <../example/example_logging.py>`_
 """
@@ -51,8 +51,8 @@ CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
+When coding a program that uses FACE01, code initialize and logger first.
+This will read the configuration file config.ini and log errors etc.
 """
 
 
@@ -70,7 +70,7 @@ def main(exec_times: int = 50) -> None:
     """
     # Make generator
     gen = Core().common_process(CONFIG)
-    
+
 
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
@@ -79,14 +79,14 @@ def main(exec_times: int = 50) -> None:
         frame_datas_array = gen.__next__()
 
         for frame_datas in frame_datas_array:
-            
+
             for person_data in frame_datas['person_data_list']:
                 if not person_data['name'] == 'Unknown':
                     logger.debug(person_data['name'])
                     logger.debug(person_data['percentage_and_symbol'])
                     logger.debug(person_data['location'])
                     logger.debug("-----------------")
-            
-    
+
+
 if __name__ == '__main__':
     main(exec_times = 10)

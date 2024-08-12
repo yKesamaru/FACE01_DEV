@@ -94,7 +94,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-example.data_augmentation_mp">example.data_augmentation_mp module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.data_augmentation_mp.process_data"><code class="docutils literal notranslate"><span class="pre">process_data()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.data_structure">example.data_structure module</a><ul>
@@ -211,8 +210,8 @@
 <span id="example-ctktest-module"></span><h2>example.CTKtest module<a class="headerlink" href="#module-example.CTKtest" title="Link to this heading"></a></h2>
 <p>CustomTkinterの使用例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>このエグザンプルコードは`CustomTkinter`を使用してGUIアプリケーションを構築する際の例になります。<a href="#id1"><span class="problematic" id="id2">`</span></a>CustomTkinter`で紹介されているコードをそのまま掲載しています。
-<a href="#id3"><span class="problematic" id="id4">`</span></a>Tkinter`よりリッチなGUIを使用したい場合に検討してください。
+<dt>Summary:</dt><dd><p>このエグザンプルコードはCustomTkinterを使用してGUIアプリケーションを構築する際の例になります。CustomTkinterで紹介されているコードをそのまま掲載しています。
+TkinterよりリッチなGUIを使用したい場合に検討してください。
 このコードを実行するには開発用パッケージを追加インストールする必要があります。
 具体的にはrequirements_dev.txtをインストールしてください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
@@ -446,10 +445,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <span id="example-combination-counter-module"></span><h2>example.combination_counter module<a class="headerlink" href="#module-example.combination_counter" title="Link to this heading"></a></h2>
 <p>組み合わせ計算の例.</p>
 <dl>
-<dt>Summary:</dt><dd><p><a href="#id5"><span class="problematic" id="id6">`</span></a>Zenn`の記事のコード例です。</p>
+<dt>Summary:</dt><dd><p>Zennの記事のコード例です。</p>
 <p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/4e40e0285b0b66">【faiss】なにこれすごい。顔データセットの間違い探し 成功編③</a></p>
 <p>ここでは簡単でシンプルなコードを紹介しています。</p>
-<p><a href="#id7"><span class="problematic" id="id8">`</span></a>npKnown.npz`ファイルが見つからない場合、そのまま終了します。
+<p>npKnown.npzファイルが見つからない場合、そのまま終了します。
 詳しくは上記記事をご参照ください。</p>
 </dd>
 </dl>
@@ -467,9 +466,13 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <section id="module-example.combination_similarity">
 <span id="example-combination-similarity-module"></span><h2>example.combination_similarity module<a class="headerlink" href="#module-example.combination_similarity" title="Link to this heading"></a></h2>
 <p>顔画像ファイルの全組み合わせを計算する例.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>This is a sample code that calculates the similarity of all combinations of face image files,
-using the efficientnetv2_arcface.onnx model, which is a Japanese-only learning model.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このシンプルなコード例では、日本人専用として学習された顔学習モデルであるJAPANESE FACE V1を用いて、顔画像同士の全ての組み合わせを計算します。</p>
+<p>顔画像ファイルが異なるディレクトリに配置され、また各ディレクトリにはすでに`npKnown.npz`ファイルが作成済みなものと想定しています。</p>
+<p>このコードは`Zenn`の記事のコード例です。</p>
+<p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/4e40e0285b0b66">【faiss】なにこれすごい。顔データセットの間違い探し 成功編③</a></p>
+<p>詳しくは上記記事をご参照ください。
+このコード例では組み合わせパターンが爆発的に大きくなると処理時間もそれに応じて爆発的に大きくなるコード例を示しています。</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -485,9 +488,24 @@ using the efficientnetv2_arcface.onnx model, which is a Japanese-only learning m
 </section>
 <section id="module-example.data_augmentation">
 <span id="example-data-augmentation-module"></span><h2>example.data_augmentation module<a class="headerlink" href="#module-example.data_augmentation" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>DNNのためのデータ拡張コード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>このエグザンプルコードでは、DNNのためのデータ拡張する方法に
+ついて学びます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/data_augmentation.py<span class="w">             </span><span class="s2">&quot;/path/to/dir&quot;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;lens&quot;</span><span class="w"> </span><span class="m">224</span><span class="w"> </span><span class="m">10</span><span class="w"> </span>-0.1<span class="w"> </span><span class="m">0</span>.1<span class="w"> </span><span class="m">0</span>.01
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/data_augmentation.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/data_augmentation.png" style="width: 996.0px; height: 500.5px;" /></a>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/data_augmentation.py">data_augmentation.py</a></p>
+</dd>
+</dl>
 <dl class="py data">
 <dt class="sig sig-object py" id="example.data_augmentation.logger">
 <span class="sig-prename descclassname"><span class="pre">example.data_augmentation.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/data_augmentation.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.data_augmentation.logger" title="Link to this definition"></a></dt>
@@ -499,22 +517,25 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <dl class="py function">
 <dt class="sig sig-object py" id="example.data_augmentation.main">
 <span class="sig-prename descclassname"><span class="pre">example.data_augmentation.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/data_augmentation.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.data_augmentation.main" title="Link to this definition"></a></dt>
-<dd><p>Simple example.</p>
-<p>This simple example accepts a directory path and recursively loads
-the directories for data augmentation.</p>
+<dd><p>簡単な例.</p>
+<p>この簡単なコード例では、与えられたディレクトリパスから再帰的に
+ファイルを読み込み、それらに対してデータ拡張を行います。
+この例でのデータ拡張は、FACE01のUtilsモジュールから、
+樽型歪みとジッターを呼び出します。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dir_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- target directory path.</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- image size. Defaults to 224.</p></li>
-<li><p><strong>num_jitters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- number of jitters. Defaults to 10.</p></li>
-<li><p><strong>initial_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- initial value. Defaults to -0.1.</p></li>
-<li><p><strong>closing_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- closing value. Defaults to 0.1.</p></li>
-<li><p><strong>step_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- step value. Defaults to 0.01.</p></li>
+<li><p><strong>dir_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- ターゲットディレクトリの絶対パス.</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- 作成するイメージサイズ. Defaults to 224.</p></li>
+<li><p><strong>num_jitters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- ジッター回数. Defaults to 10.</p></li>
+<li><p><strong>initial_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- 樽型歪みの初期値. Defaults to -0.1.</p></li>
+<li><p><strong>closing_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- 終わり値. Defaults to 0.1.</p></li>
+<li><p><strong>step_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- ステップ値. Defaults to 0.01.</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p>ターゲットディレクトリから再帰的に読み込んだディレクトリごとに
+データ拡張したファイルを保存します。</p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -526,26 +547,48 @@ the directories for data augmentation.</p>
 </section>
 <section id="module-example.data_augmentation_mp">
 <span id="example-data-augmentation-mp-module"></span><h2>example.data_augmentation_mp module<a class="headerlink" href="#module-example.data_augmentation_mp" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>DNNをマルチプロセスで用いる際のデータ拡張のコード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>In this example you can learn how to augment data for DNN using multi process.
+このエグザンプルコードでは、DNNをマルチプロセスで用いる際のデータ拡張について学びます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/data_augmentation.py<span class="w">             </span><span class="s2">&quot;/path/to/dir&quot;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;lens&quot;</span><span class="w"> </span><span class="m">224</span><span class="w"> </span><span class="m">10</span><span class="w"> </span>-0.1<span class="w"> </span><span class="m">0</span>.1<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/data_augmentation_mp.py">data_augmentation.py</a></p>
+</dd>
+</dl>
 <dl class="py data">
 <dt class="sig sig-object py" id="example.data_augmentation_mp.logger">
 <span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/data_augmentation_mp.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.data_augmentation_mp.logger" title="Link to this definition"></a></dt>
 <dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+When coding a program that uses FACE01, code initialize and logger first.
+This will read the configuration file config.ini and log errors etc.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="example.data_augmentation_mp.main">
 <span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/data_augmentation_mp.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.data_augmentation_mp.main" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.data_augmentation_mp.process_data">
-<span class="sig-prename descclassname"><span class="pre">example.data_augmentation_mp.</span></span><span class="sig-name descname"><span class="pre">process_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_jitters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/data_augmentation_mp.html#process_data"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.data_augmentation_mp.process_data" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>main メインメソッド</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- ディレクトリパス</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- 画像サイズ. Defaults to 224.</p></li>
+<li><p><strong>num_jitters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- ジッター処理回数. Defaults to 10.</p></li>
+<li><p><strong>initial_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- 初期値. Defaults to -0.1.</p></li>
+<li><p><strong>closing_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- 最終値. Defaults to 0.1.</p></li>
+<li><p><strong>step_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) -- ステップ値. Defaults to 0.01.</p></li>
+<li><p><strong>max_workers</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) -- 並行処理値. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-example.data_structure">
@@ -867,13 +910,13 @@ Please refer to the separate license file for the license of the code.</p>
 <dl>
 <dt>Summary:</dt><dd><p>In this example, you can learn about log functions.</p>
 <dl class="simple">
-<dt>You can choose from two types of <cite>log_level</cite>,</dt><dd><ul class="simple">
+<dt>You can choose from two types of log_level,</dt><dd><ul class="simple">
 <li><p>info</p></li>
 <li><p>debug</p></li>
 </ul>
 </dd>
 </dl>
-<p>in <cite>CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize()</cite>.</p>
+<p>in CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize().</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -899,8 +942,8 @@ Please refer to the separate license file for the license of the code.</p>
 <dt class="sig sig-object py" id="example.example_logging.logger">
 <span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/example_logging.py</span> <span class="pre">(DEBUG)&gt;</span></em><a class="headerlink" href="#example.example_logging.logger" title="Link to this definition"></a></dt>
 <dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+When coding a program that uses FACE01, code initialize and logger first.
+This will read the configuration file config.ini and log errors etc.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -935,7 +978,7 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </pre></div>
 </div>
 </dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/faiss_combination_similarity.py">aligned_crop_face.py</a></p>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/faiss_combination_similarity.py">faiss_combination_similarity.py</a></p>
 </dd>
 </dl>
 </section>
@@ -1095,9 +1138,9 @@ jitter and saves them.</p>
 </section>
 <section id="module-example.make_npKnown_file">
 <span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Link to this heading"></a></h2>
-<p><a href="#id10"><span class="problematic" id="id11">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
+<p><a href="#id3"><span class="problematic" id="id4">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id12"><span class="problematic" id="id13">`</span></a>npKnown.npz`ファイルの作成手順を学びます。</p>
+<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id5"><span class="problematic" id="id6">`</span></a>npKnown.npz`ファイルの作成手順を学びます。</p>
 <p>ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
 それ以外の場合はエラーが発生します。</p>
 <p>'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。</p>

@@ -81,7 +81,10 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.load_preset_image のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;顔画像ファイルから`npKnown.npz`ファイルを作成する。</span>
+<span></span><span class="sd">&quot;&quot;&quot;顔画像ファイルから`npKnown.npz`ファイルを作成する.</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    `preset_face_images`ディレクトリを捜査して、`npKnown.npz`ファイルを作成します。</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -118,14 +121,15 @@
         <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-        <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
 
-    <span class="c1"># エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド</span>
+        <span class="c1"># Cal().cal_specify_date(self.logger)  # 廃止</span>
+
     <span class="k">def</span> <span class="nf">_save_as_noKnown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">known_face_encodings</span><span class="p">,</span> <span class="n">known_face_names</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド</span>
-<span class="sd">        :param known_face_encodings: エンコードされた顔のデータ</span>
-<span class="sd">        :param known_face_names: 名前のリスト</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_save_as_noKnown エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            known_face_encodings (_type_): エンコードされた顔のデータ</span>
+<span class="sd">            known_face_names (_type_): 名前のリスト</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span>
@@ -152,9 +156,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Create &#39;multipleFaces&#39; folder&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_known_face_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        既知の顔データをnpKnown.npzからロードするメソッド</span>
-<span class="sd">        :return: エンコードされた顔の情報と名前のリスト</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;既知の顔データをnpKnown.npzからロードするメソッド</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            エンコードされた顔の情報と名前のリスト</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">known_face_encodings_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">known_face_names_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -233,8 +237,15 @@
                 <span class="c1"># face_image_filename_list.append(filename)</span>
         <span class="k">return</span> <span class="n">face_image_filename_list</span>
 
-    <span class="c1"># 顔画像エンコードリストと顔画像名リストを返すメソッド</span>
     <span class="k">def</span> <span class="nf">_encode_face_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">face_images_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;_encode_face_images 顔画像エンコードリストと顔画像名リストを返すメソッド</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            face_images_list (List[str]): ファイルリスト</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple[List[np.ndarray], List[str]]: face_encoding_list, face_image_filename_list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># フォルダー存在の確認と作成</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_make_folder</span><span class="p">()</span>
         <span class="c1"># 変数の初期化</span>
@@ -297,7 +308,7 @@
                         <span class="n">face_location_list</span><span class="o">=</span><span class="n">face_location_list</span><span class="p">,</span>
                         <span class="n">num_jitters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jitters</span><span class="p">,</span>
                         <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-                        <span class="p">)</span>
+                    <span class="p">)</span>
                 <span class="c1"># efficientnetv2_arcface.onnx使用時の顔画像のエンコーディング処理</span>
                 <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">face_encode_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span>
@@ -306,7 +317,7 @@
                         <span class="n">face_location_list</span><span class="o">=</span><span class="n">face_location_list</span><span class="p">,</span>
                         <span class="n">num_jitters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jitters</span><span class="p">,</span>
                         <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-                        <span class="p">)</span>
+                    <span class="p">)</span>
                 <span class="c1"># self.deep_learning_modelの値が不正な場合</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">face_encode_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -357,10 +368,10 @@
 
 <span class="sd">        Example:</span>
 <span class="sd">            &gt;&gt;&gt; known_face_encodings, known_face_names = LoadPresetImage().load_preset_image(</span>
-<span class="sd">                self,</span>
-<span class="sd">                self.conf_dict[&quot;RootDir&quot;],</span>
-<span class="sd">                self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
-<span class="sd">            )</span>
+<span class="sd">                    self,</span>
+<span class="sd">                    self.conf_dict[&quot;RootDir&quot;],</span>
+<span class="sd">                    self.conf_dict[&quot;preset_face_imagesDir&quot;]</span>
+<span class="sd">                )</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span> <span class="o">=</span> <span class="n">RootDir</span>

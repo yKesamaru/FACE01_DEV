@@ -1,29 +1,26 @@
-"""config.ini を読み込み、CONFIG 辞書データを返します。
+"""config.ini を読み込み、CONFIG 辞書データを返します.
 
 この関数は、ConfigParser モジュールを使用して 'config.ini' ファイルを読み込み、その内容を辞書として返します。
 
-戻り値:
+Returns:
     dict: 設定データを含む CONFIG 辞書。
 
-注意:
+Note:
     config.ini ファイルについては以下を参照してください:
     https://github.com/yKesamaru/FACE01_DEV/blob/master/docs/config_ini.md#about-configini-file
 
-    .. note::
-        詳細については `config_ini.md <docs/config_ini.md>`_ を参照してください。
+    詳細については `config_ini.md <..docs/config_ini.md>`_ を参照してください。
 
-        'config.ini' は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。
+    'config.ini' は FACE01 の設定ファイルであり、Python の ConfigParser モジュールを使用しています。[DEFAULT] セクションは標準のデフォルト値を指定しており、この設定は例です。
 
-        'config.ini' を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては `ConfigParser module documentation <https://docs.python.org/3/library/configparser.html>`_ を参照してください。
+    'config.ini' を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては `ConfigParser module documentation <https://docs.python.org/3/library/configparser.html>`_ を参照してください。
 
-        各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。
+    各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。
 
-    .. image:: ../docs/img/About_config_ini_file.png
-        :scale: 50%
-        :alt: config_ini.md
+.. image:: ../docs/img/About_config_ini_file.png
+    :scale: 50%
+    :alt: config_ini.md
 
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
 """
 
 import os
@@ -159,7 +156,6 @@ class Initialize:
             exit(1)
 
     # Initialize variables, load images
-
     def initialize(
         self,
     ) -> Dict:
@@ -184,10 +180,10 @@ class Initialize:
         known_face_names: List[str]
         known_face_encodings, known_face_names = \
             LoadPresetImage().load_preset_image(
-                    self.conf_dict["deep_learning_model"],
-                    self.conf_dict["RootDir"],
-                    self.conf_dict["preset_face_imagesDir"]
-                )
+                self.conf_dict["deep_learning_model"],
+                self.conf_dict["RootDir"],
+                self.conf_dict["preset_face_imagesDir"]
+            )
         # debug: 同一ファイルだった。
         # with open(f'{self.parent_dir}/npKnownなし.txt', 'w') as f:
         #     f.write(str(known_face_names))
@@ -196,51 +192,53 @@ class Initialize:
         # print(f"known_face_encodings: {type(known_face_encodings)}")
 
         # set_width,fps,height,width,set_height
-        set_width : int
-        fps : int
-        height : int
-        width : int
-        set_height : int
-        set_width,fps,height,width,set_height = \
+        set_width: int
+        fps: int
+        height: int
+        width: int
+        set_height: int
+        set_width, fps, height, width, set_height = \
             vid.return_movie_property(
-                    self.conf_dict["set_width"],
-                    vid.return_vcap(self.conf_dict["movie"])
-                )
+                self.conf_dict["set_width"],
+                vid.return_vcap(self.conf_dict["movie"])
+            )
 
         tolerance: float = Cal().to_tolerance(
-                self.conf_dict["similar_percentage"],
-                self.conf_dict["deep_learning_model"]
-            )
+            self.conf_dict["similar_percentage"],
+            self.conf_dict["deep_learning_model"]
+        )
 
         LoadImage_obj: LoadImage = LoadImage(
-                headless,
-                self.conf_dict
-            )
+            headless,
+            self.conf_dict
+        )
 
-        rect01_png : npt.NDArray[np.uint8]
-        rect01_NG_png : List[npt.NDArray[np.uint8]]
-        rect01_REAL_png : npt.NDArray[np.uint8]
-        rect01_SPOOF_png : npt.NDArray[np.uint8]
-        rect01_CANNOT_DISTINCTION_png : npt.NDArray[np.uint8]
-        resized_telop_image : npt.NDArray[np.uint8]
-        cal_resized_telop_nums : Tuple[int,int,int,int,np.ndarray,np.ndarray]
-        resized_logo_image : npt.NDArray[np.uint8]
-        cal_resized_logo_nums : Tuple[int,int,int,int,np.ndarray,np.ndarray]
-        load_unregistered_face_image : bool
-        telop_image : npt.NDArray[np.uint8]
-        logo_image : npt.NDArray[np.uint8]
-        unregistered_face_image : npt.NDArray[np.uint8]
+        rect01_png: npt.NDArray[np.uint8]
+        rect01_NG_png: List[npt.NDArray[np.uint8]]
+        rect01_REAL_png: npt.NDArray[np.uint8]
+        rect01_SPOOF_png: npt.NDArray[np.uint8]
+        rect01_CANNOT_DISTINCTION_png: npt.NDArray[np.uint8]
+        resized_telop_image: npt.NDArray[np.uint8]
+        cal_resized_telop_nums: Tuple[int, int,
+                                      int, int, np.ndarray, np.ndarray]
+        resized_logo_image: npt.NDArray[np.uint8]
+        cal_resized_logo_nums: Tuple[int, int,
+                                     int, int, np.ndarray, np.ndarray]
+        load_unregistered_face_image: bool
+        telop_image: npt.NDArray[np.uint8]
+        logo_image: npt.NDArray[np.uint8]
+        unregistered_face_image: npt.NDArray[np.uint8]
 
         rect01_png, rect01_NG_png, rect01_REAL_png, rect01_SPOOF_png, rect01_CANNOT_DISTINCTION_png, resized_telop_image, cal_resized_telop_nums, resized_logo_image, \
             cal_resized_logo_nums, load_unregistered_face_image, telop_image, logo_image, unregistered_face_image = \
             LoadImage_obj.LI(set_height, set_width)
 
         # 日付時刻算出
-        date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f") # %f-> マイクロ秒
+        date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")  # %f-> マイクロ秒
 
         # 辞書作成
-        init_dict: Dict 
-        if headless == False:
+        init_dict: Dict
+        if headless is False:
             init_dict = {
                 'known_face_encodings': known_face_encodings,
                 'known_face_names': known_face_names,
@@ -262,7 +260,7 @@ class Initialize:
                 'tolerance': tolerance,
                 'default_face_image_dict': {}
             }
-        elif headless == True:
+        elif headless is True:
             init_dict = {
                 'known_face_encodings': known_face_encodings,
                 'known_face_names': known_face_names,
@@ -293,4 +291,3 @@ class Initialize:
         os.chdir(CONFIG["RootDir"])
 
         return CONFIG
-
