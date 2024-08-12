@@ -1,4 +1,7 @@
-"""顔画像ファイルから`npKnown.npz`ファイルを作成する。
+"""顔画像ファイルから`npKnown.npz`ファイルを作成する.
+
+Summary:
+    `preset_face_images`ディレクトリを捜査して、`npKnown.npz`ファイルを作成します。
 """
 
 import os
@@ -35,12 +38,12 @@ class LoadPresetImage:
         self.logger = Logger(self.log_level).logger(name, parent_dir)
         Cal().cal_specify_date(self.logger)
 
-    # エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド
     def _save_as_noKnown(self, known_face_encodings, known_face_names):
-        """
-        エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド
-        :param known_face_encodings: エンコードされた顔のデータ
-        :param known_face_names: 名前のリスト
+        """_save_as_noKnown エンコードされた顔のデータと名前のリストを、npKnown.npzファイルとして保存するメソッド.
+
+        Args:
+            known_face_encodings (_type_): エンコードされた顔のデータ
+            known_face_names (_type_): 名前のリスト
         """
         if self.deep_learning_model == 0:
             np.savez(
@@ -67,9 +70,9 @@ class LoadPresetImage:
             self.logger.info("Create 'multipleFaces' folder")
 
     def _get_known_face_data(self) -> Tuple[List[np.ndarray], List[str]]:
-        """
-        既知の顔データをnpKnown.npzからロードするメソッド
-        :return: エンコードされた顔の情報と名前のリスト
+        """既知の顔データをnpKnown.npzからロードするメソッド
+        Returns:
+            エンコードされた顔の情報と名前のリスト
         """
         known_face_encodings_list: List[np.ndarray] = []
         known_face_names_list: List[str] = []
@@ -148,8 +151,15 @@ class LoadPresetImage:
                 # face_image_filename_list.append(filename)
         return face_image_filename_list
 
-    # 顔画像エンコードリストと顔画像名リストを返すメソッド
     def _encode_face_images(self, face_images_list: List[str]) -> Tuple[List[np.ndarray], List[str]]:
+        """_encode_face_images 顔画像エンコードリストと顔画像名リストを返すメソッド
+
+        Args:
+            face_images_list (List[str]): ファイルリスト
+
+        Returns:
+            Tuple[List[np.ndarray], List[str]]: face_encoding_list, face_image_filename_list
+        """
         # フォルダー存在の確認と作成
         self._make_folder()
         # 変数の初期化
@@ -212,7 +222,7 @@ class LoadPresetImage:
                         face_location_list=face_location_list,
                         num_jitters=self.jitters,
                         model=self.model
-                        )
+                    )
                 # efficientnetv2_arcface.onnx使用時の顔画像のエンコーディング処理
                 elif self.deep_learning_model == 1:
                     face_encode_data: List[np.ndarray] = Dlib_api_obj.face_encodings(
@@ -221,7 +231,7 @@ class LoadPresetImage:
                         face_location_list=face_location_list,
                         num_jitters=self.jitters,
                         model=self.model
-                        )
+                    )
                 # self.deep_learning_modelの値が不正な場合
                 else:
                     face_encode_data = []
@@ -270,10 +280,10 @@ class LoadPresetImage:
 
         Example:
             >>> known_face_encodings, known_face_names = LoadPresetImage().load_preset_image(
-                self,
-                self.conf_dict["RootDir"],
-                self.conf_dict["preset_face_imagesDir"]
-            )
+                    self,
+                    self.conf_dict["RootDir"],
+                    self.conf_dict["preset_face_imagesDir"]
+                )
         """
         self.deep_learning_model = deep_learning_model
         self.RootDir = RootDir

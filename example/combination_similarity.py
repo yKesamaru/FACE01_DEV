@@ -1,8 +1,16 @@
 """顔画像ファイルの全組み合わせを計算する例.
 
 Summary:
-    This is a sample code that calculates the similarity of all combinations of face image files,
-    using the efficientnetv2_arcface.onnx model, which is a Japanese-only learning model.
+    このシンプルなコード例では、日本人専用として学習された顔学習モデルであるJAPANESE FACE V1を用いて、顔画像同士の全ての組み合わせを計算します。
+
+    顔画像ファイルが異なるディレクトリに配置され、また各ディレクトリにはすでに`npKnown.npz`ファイルが作成済みなものと想定しています。
+
+    このコードは`Zenn`の記事のコード例です。
+
+    `【faiss】なにこれすごい。顔データセットの間違い探し 成功編③ <https://zenn.dev/ykesamaru/articles/4e40e0285b0b66>`_
+
+    詳しくは上記記事をご参照ください。
+    このコード例では組み合わせパターンが爆発的に大きくなると処理時間もそれに応じて爆発的に大きくなるコード例を示しています。
 
 Example:
     .. code-block:: bash
@@ -25,8 +33,7 @@ dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
 
-root_dir: str = "/media/terms/2TB_Movie/face_data_backup/data"
-# root_dir: str = "/home/terms/ドキュメント/find_similar_faces/test"
+root_dir: str = "assets/data"
 
 if __name__ == '__main__':
     # ディレクトリのみを対象としたサブディレクトリの絶対パスのリストを取得
@@ -56,6 +63,9 @@ if __name__ == '__main__':
 
             # コサイン類似度が0.4以上の場合、出力
             if cos_sim >= 0.4:
-                with open("output.txt", mode="a") as f:
-                    f.write(f"{name_1},{name_2},{cos_sim}\n")
+                # # output.txtとして外部ファイルに出力
+                # with open("output.txt", mode="a") as f:
+                #     f.write(f"{name_1},{name_2},{cos_sim}\n")
+                # stdoutに出力
+                print(f"{name_1},{name_2},{cos_sim}")
             # print(f"{name_1} and {name_2} : {cos_sim}")
