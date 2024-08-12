@@ -33,6 +33,7 @@ jobs:
           pip install -r requirements_dev.txt
 
       - name: Generate Sphinx documentation
+        working-directory: /home/runner/work/FACE01_DEV/FACE01_DEV
         run: |
           sphinx-apidoc -f -o sphinx/ ./
           sphinx-apidoc -f -o sphinx/ sphinx/

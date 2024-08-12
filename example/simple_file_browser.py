@@ -4,7 +4,7 @@ Summary:
     ttkbootstrapを用いた簡易ファイルブラウザ実装例
 
 Example:
-    .. code-blok:: bash
+    .. code-block:: bash
 
         python3 example/simple_file_browser.py
 
@@ -12,8 +12,6 @@ See also:
     ttkbootstrap
     https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html
 
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
 """
 
 import os
