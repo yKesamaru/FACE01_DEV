@@ -1717,7 +1717,6 @@ class Core:
         operating_system: str = system()
         fontpath: str = ''
         if (operating_system == 'Linux'):
-            # fontpath = "/home/terms/.local/share/fonts/HackGenNerd_v2.5.3/HackGenNerdConsole-Regular.ttf"
             # fontpath = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
             fontpath = "/usr/share/fonts/truetype/mplus/mplus-1mn-bold.ttf"
 

@@ -1,31 +1,29 @@
-# Build Docker image
-If you want to build the Docker Image yourself, please refer to the article below.
+# `Docker image`をビルドする
+もしあなたが`Docker image`を自分自身でビルドしたいならば、下記を参考にしてください。
 
-
-First, you have to clone FACE01_DEV repository.
+まず`FACE01_DEV`リポジトリからクローンします。
 ```bash
 git clone https://github.com/yKesamaru/FACE01_DEV.git
 ```
 
 
-## Build FACE01 docker image with nvidia-docker2 package
-To make image
+## `nvidia-docker2`パッケージを使って`FACE01`の`Docker image`をビルドする
 ```bash
 cd FACE01_DEV
-docker build -t face01_gpu:1.4.10 -f docker/Dockerfile_gpu . --network host
+docker build -t <name:tag> -f docker/Dockerfile_gpu . --network host
 ```
 
 
-## Build FACE01 docker image * ***without*** * nvidia-docker2 package
+## `nvidia-docker2`パッケージを**使わずに**`FACE01`の`Docker image`をビルドする
 ```bash
 cd FACE01_DEV
-docker build -t face01_no_gpu:1.4.10 -f docker/Dockerfile_no_gpu . --network host
+docker build -t <name:tag> -f docker/Dockerfile_no_gpu . --network host
 ```
 
 
-## If you want to upload to you're own DockerHub
+## あなたの`DockerHub`リポジトリへアップロードしたいとき
 Reference is [here](https://docs.docker.com/docker-hub/repos/#pushing-a-docker-container-image-to-docker-hub).
-Japanese is [here](https://zenn.dev/katan/articles/1d5ff92fd809e7).
+日本語は[こちら](https://zenn.dev/katan/articles/1d5ff92fd809e7)です。
 ```bash
 # Built Docker Image
 docker built ...
@@ -39,7 +37,7 @@ docker images
 docker container commit <container-id> <hub-user>/<repo-name>[:<tag>]
 # Tag the Image with the repository name
 docker tag <image-id> <repo-name>
-# Docker loginr
+# Docker login
 docker login
 # Docker push
 docker push <hub-user>/<repo-name>[:<tag>]
@@ -54,14 +52,25 @@ face01_gpu    1.4.10                    41b1d82ee908   7 seconds ago   17.5GB
 ```
 
 
-## Launch FACE01_DEV
+## `FACE01_DEV`のコンテナを起動する
+### カメラを接続する場合
 ```bash
 docker run --rm -it \
         --gpus all -e DISPLAY=$DISPLAY \
         --device /dev/video0:/dev/video0:mwr \
-        -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:1.4.10
+        -v /tmp/.X11-unix/:/tmp/.X11-unix: \
+        <name:tag>
+```
+### カメラを**接続しない**場合
+```bash
+docker run --rm -it \
+    --gpus all -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    <name:tag>
+```
 
-# Check nvidia-smi
+# `nvidia-smi`でチェック
+```bash
 docker@ee44d08e933f:~/FACE01_DEV$ nvidia-smi
 Fri Jul 29 09:07:03 2022
 +-----------------------------------------------------------------------------+
@@ -86,7 +95,7 @@ Fri Jul 29 09:07:03 2022
 # Check files
 docker@6ee18359bde8:~/FACE01_DEV$  ls
 CALL_FACE01.py            SystemCheckLock  dlib-19.24          images   lib64        output              requirements.txt  test.mp4
-Docker_INSTALL_FACE01.sh  bin              dlib-19.24.tar.bz2  include  noFace       priset_face_images  share             顔無し区間を含んだテスト動画.mp4
+Docker_INSTALL_FACE01.sh  bin              dlib-19.24.tar.bz2  include  noFace       preset_face_images  share             顔無し区間を含んだテスト動画.mp4
 FACE01.py                 config.ini       face01lib           lib      npKnown.npz  pyvenv.cfg          some_people.mp4
 
 # Launch Python virtual environment (Important!)

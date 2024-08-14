@@ -352,7 +352,7 @@
         <span class="n">p_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert +append&quot;</span>
         <span class="n">m_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert -append&quot;</span>
         <span class="n">sp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-        <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/home/terms/bin/FACE01/images/224x224.png&quot;</span>
+        <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;assets/images/224x224.png&quot;</span>
         <span class="n">concat_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;concat.png&quot;</span>
         <span class="n">bb_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bb.png&quot;</span>
 
@@ -664,7 +664,7 @@
             <span class="c1"># print(&#39;The temperature has exceeded 80 degrees.&#39;)</span>
             <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;notify-send&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;The temperature has exceeded </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="si">}</span><span class="s1"> degrees.&#39;</span><span class="p">])</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;play&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="s1">&#39;-v 1&#39;</span><span class="p">,</span> <span class="s1">&#39;/home/terms/bin/FACE01/voices/CPU_temp.wav&#39;</span><span class="p">])</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;play&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="s1">&#39;-v 1&#39;</span><span class="p">,</span> <span class="s1">&#39;assets/voices/CPU_temp.wav&#39;</span><span class="p">])</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sleep_time</span><span class="p">)</span>

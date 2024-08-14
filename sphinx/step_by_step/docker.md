@@ -1,16 +1,15 @@
-# To install Docker
+# `Docker`のインストール
 See [here](Install_docker.md).
 
 
-# Pull Docker image
+# `Docker image`をプル
 \****The easiest way to use Docker is to pull the image.***\*
 
 ![](../../docs/img/PASTE_IMAGE_2022-08-29-07-43-12.png)
 
 ***NOTE*** (IMPORTANT!)
-If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is `face01_gpu:1.4.10`.
-If not, the Docker Image you should pull is `face01_no_gpu:1.4.10`.
-
+使用するPCがNVIDIA GPUを使用しているなら、`face01_gpu`のような名前のついた`Docker image`を使用してください。
+そうでなければ、`face01_no_gpu`のような名前のついた`Docker image`を使用してください。
 
 ## When using `face01_gpu:1.4.10`
 First, Check if GPU is available.
@@ -36,10 +35,11 @@ docker pull tokaikaoninsho/face01_gpu:1.4.10
 # Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)
 docker images
 
-# Run Docker
+# `image id`を指定してコンテナを起動する
 docker run --rm -it \
-  --gpus all -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:1.4.10
+    --gpus all -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    <image id>
 ```
 
 

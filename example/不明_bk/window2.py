@@ -38,8 +38,10 @@ class ImageBrowser:
 
         self.canvas.configure(yscrollcommand=self.scrollbar.set)  # キャンバスにスクロールバーを設定
 
-        self.canvas.bind('<Configure>', self.on_configure)  # キャンバスの設定イベントにメソッドをバインド
-        self.canvas_frame.bind_all('<MouseWheel>', self.on_mousewheel)  # マウスホイールイベントにメソッドをバインド
+        # キャンバスの設定イベントにメソッドをバインド
+        self.canvas.bind('<Configure>', self.on_configure)
+        self.canvas_frame.bind_all(
+            '<MouseWheel>', self.on_mousewheel)  # マウスホイールイベントにメソッドをバインド
 
         self.photos = []  # 写真リストの初期化
 
@@ -48,13 +50,16 @@ class ImageBrowser:
 
         self.current_image_path = None  # 現在の画像パスをNoneに設定
         if self.image_list:  # 画像リストが空でない場合
-            self.current_image_path = self.image_list[0]  # 現在の画像パスをリストの最初の画像に設定
-            self.master.after(100, self.show_image, self.current_image_path)  # 画像を表示するメソッドを呼び出す
+            # 現在の画像パスをリストの最初の画像に設定
+            self.current_image_path = self.image_list[0]
+            self.master.after(100, self.show_image,
+                              self.current_image_path)  # 画像を表示するメソッドを呼び出す
 
         self.observer = DirectoryObserver(path, self.load_images)
 
+
 # 画像をロードするメソッド
-def load_images(self, path): #オブジェクトの場合
+def load_images(self, path):  # オブジェクトの場合
     if isinstance(path, DirModifiedEvent):
         path = path.src_path  # DirModifiedEventオブジェクトからパスを取得
     # pathが文字列の場合
@@ -66,7 +71,6 @@ def load_images(self, path): #オブジェクトの場合
     for file_name in os.listdir(path):  # ディレクトリ内のファイル名を繰り返す
         if file_name.endswith(('.png', '.jpg', '.jpeg')):  # ファイルが画像の場合
             self.image_list.append(os.path.join(path, file_name))  # 画像リストに追加
-
 
     # キャンバス設定イベントのハンドラ
     def on_configure(self, event):
@@ -97,7 +101,7 @@ def load_images(self, path): #オブジェクトの場合
 
     # マウスホイールイベントのハンドラ
     def on_mousewheel(self, event):
-        self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")  # キャンバスをスクロール
+        self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")  # キャンバスをスクロール
 
     # 画像を表示するメソッド
     def show_image(self, image_path):
@@ -109,6 +113,7 @@ def load_images(self, path): #オブジェクトの場合
         self.image_label.configure(image=photo)  # 画像ラベルに画像を設定
         self.image_label.image = photo  # 画像ラベルに画像を保存
 
+
 if __name__ == '__main__':
     # メインウィンドウを作成
     root = tk.Tk()
@@ -119,7 +124,7 @@ if __name__ == '__main__':
     menubar.pack(side="top", fill="x")
 
     # アイコンを読み込む
-    icon = tk.PhotoImage(file="/home/terms/bin/FACE01_IOT_dev/images/Logo_dist.png")
+    icon = tk.PhotoImage(file="assets/images/Logo_dist.png")
 
     # メニューアイテムを作成
     file_menu = tk.Menu(menubar, tearoff=0)
