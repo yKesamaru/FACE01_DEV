@@ -259,7 +259,7 @@ class Utils:
         p_append: str = "convert +append"
         m_append: str = "convert -append"
         sp: str = " "
-        bk_png: str = "/home/terms/bin/FACE01/images/224x224.png"
+        bk_png: str = "assets/images/224x224.png"
         concat_png: str = "concat.png"
         bb_png: str = "bb.png"
 
@@ -559,7 +559,7 @@ class Utils:
             # print('The temperature has exceeded 80 degrees.')
             subprocess.run(['notify-send', f'The temperature has exceeded {self.temp} degrees.'])
             try:
-                subprocess.run(['play', '-q', '-v 1', '/home/terms/bin/FACE01/voices/CPU_temp.wav'])
+                subprocess.run(['play', '-q', '-v 1', 'assets/voices/CPU_temp.wav'])
             except:
                 pass
             time.sleep(self.sleep_time)

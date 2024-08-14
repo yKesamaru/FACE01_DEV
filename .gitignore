@@ -7,8 +7,8 @@ dlib-19*
 output/*
 __pycache__
 pyvenv.cfg
-npKnown.npz
 biyouseikei.mp4
 qrcode.svg
 build
 venv
+version_control.py

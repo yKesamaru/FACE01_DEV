@@ -84,7 +84,7 @@
 <span id="version-control-module"></span><h1>version_control module<a class="headerlink" href="#module-version_control" title="Link to this heading"></a></h1>
 <p>バージョンコントロールのためのスクリプト.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>バージョンを上げる場合、FACE01フォルダからDISTフォルダへ必要なファイルだけをコピーしたり
+<dt>Summary:</dt><dd><p>バージョンを上げる場合、FACE01_DEVフォルダからDISTフォルダへ必要なファイルだけをコピーしたり
 Dockerイメージを作ってDockerHubへアップロードしたりSphinxでドキュメントを生成してDISTフォルダへ
 コピーしたり煩雑な作業があり、その手順をすっかり忘れてしまいました。
 そこで上記工程をスクリプト化することにしました。</p>
@@ -107,7 +107,7 @@ Please refer to the separate license file for the license of the code.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="version_control.copy_files">
 <span class="sig-prename descclassname"><span class="pre">version_control.</span></span><span class="sig-name descname"><span class="pre">copy_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/version_control.html#copy_files"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#version_control.copy_files" title="Link to this definition"></a></dt>
-<dd><p>④必要なファイルをFACE01からDISTフォルダに上書き複製.</p>
+<dd><p>④必要なファイルをFACE01_DEVからDISTフォルダに上書き複製.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -140,6 +140,12 @@ Please refer to the separate license file for the license of the code.</p>
 <span class="sig-prename descclassname"><span class="pre">version_control.</span></span><span class="sig-name descname"><span class="pre">sphinx_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/version_control.html#sphinx_function"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#version_control.sphinx_function" title="Link to this definition"></a></dt>
 <dd><p>②SphinxによるDocファイルの自動生成.</p>
 <p>sphinxエラーまとめ.mdファイルを参照</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="version_control.stderr_buffer">
+<span class="sig-prename descclassname"><span class="pre">version_control.</span></span><span class="sig-name descname"><span class="pre">stderr_buffer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_io.StringIO</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#version_control.stderr_buffer" title="Link to this definition"></a></dt>
+<dd><p>作業ディレクトリを指定</p>
 </dd></dl>
 
 </section>

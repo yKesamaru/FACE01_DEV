@@ -37,9 +37,10 @@ OK！では始めましょう！
 ここでは、FACE01のインストール方法について解説します。
 [こちら](Installation.md)をご覧ください。
 
-## [Dockerのインストール](install_docker.md)
-`Docker`を使用する方法は[こちら](install_docker.md)をご覧ください。
-また具体的な`Docker`の使用法について[こちら](docker.md)で解説しています。
+## [Dockerの使用]
+- `Docker`をインストールする方法は[こちら](Install_docker.md)をご覧ください。
+- ビルド方法については[こちら](build_docker_image.md)をご覧ください。
+- また具体的な`Docker image`の使用法について[こちら](docker.md)で解説しています。
 
 ## [顔画像の登録](register_faces.md)
 この記事では、顔画像の登録方法について説明します。

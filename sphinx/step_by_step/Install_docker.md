@@ -6,22 +6,23 @@ This section, we talk about install `Docker Engine` and `Docker ce`.
 <!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
 
 ## NOTE
-You must meet the conditions listed below. See [official site](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
+動作環境は以下のリストを満たしている必要があります。詳しくは[公式サイト](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements)をご覧ください。
+`GPU`を使用しない条件に於いてはこの限りではありません。
 
 1. GNU/Linux x86_64 with kernel version > 3.10
 2. Docker >= 19.03 (recommended, but some distributions may include older versions of Docker. The minimum supported version is 1.12)
 3. NVIDIA GPU with Architecture >= Kepler (or compute capability 3.0)
 4. NVIDIA Linux drivers >= 418.81.07 (Note that older driver releases or branches are unsupported.)
 
-Please refer to the following.
+これらの条件は以下の操作で確認できます。
 ```bash
-# Your kernel version.
+# カーネルヴァージョン
 uname -r
 
 # Your docker version.
 docker --version
 
-# Your GPU architecture
+# GPUアーキテクチャ
 lspci | grep -ie nvidia
 ## List of architecture is [here](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures) and [here](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units) and [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/).
 
@@ -29,16 +30,17 @@ lspci | grep -ie nvidia
 nvidia-smi
 ```
 
-## Use convenient script
-You can install docker using convenient script.
+## 便利なスクリプトを使いましょう
+`Docker`のインストールは以下のスクリプトで行えます。
 ```bash
 sudo apt update && sudo apt upgrade -y \
   && curl https://get.docker.com | sh \
   && sudo systemctl --now enable docker
 ```
 
-## Manually install
-Also, you can install docker manually.
+## マニュアルインストール
+また、以下のように手動で`Docker`をインストールもできます。
+これらは予告なく更新されますので、正確な情報は`Docker`の公式サイトをご覧ください。
 ```bash
 # Uninstall old versions
 sudo apt remove docker docker-engine docker.io containerd runc
@@ -69,7 +71,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 If you want to confirm installed Docker, try the following command.
 `sudo docker run hello-world`
 
-## Install nvidia-docker2
+## `nvidia-docker2`をインストールする
 To install `nvidia-docker2`, refer to [NVIDIA official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit).
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
@@ -88,7 +90,7 @@ sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
 ![](../../docs/img/PASTE_IMAGE_2022-07-25-10-24-45.png)
 
-## Post installation
+## インストールが終わったら
 If you don’t want to preface the docker command with sudo, create a Unix group called docker and add users to it.
 ```bash
 sudo groupadd docker
