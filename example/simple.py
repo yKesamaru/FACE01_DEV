@@ -46,7 +46,7 @@ def main(exec_times: int = 50) -> None:
     This simple example script prints out results of face recognition process.
 
     Args:
-        exec_times (int, optional): Number of frames for process. Defaults to 50 times.
+        exec_times (int, optional): 何回フレームを処理するかを決定します。 Defaults to 50 times.
 
     Returns:
         None
@@ -68,6 +68,11 @@ def main(exec_times: int = 50) -> None:
                         "\t", "coordinate\t\t", person_data['location'], "\n",
                         "\t", "time\t\t\t", person_data['date'], "\n",
                         "\t", "output\t\t\t", person_data['pict'], "\n",
+                        "-------\n"
+                    )
+                else:
+                    print(
+                        "Unknown person", "\n",
                         "-------\n"
                     )
 

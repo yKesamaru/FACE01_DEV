@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>To install Docker &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>Dockerのインストール &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">To install Docker</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">Docker</span></code>のインストール</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -80,17 +80,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="to-install-docker">
-<h1>To install Docker<a class="headerlink" href="#to-install-docker" title="Link to this heading"></a></h1>
+  <section id="docker">
+<h1><code class="docutils literal notranslate"><span class="pre">Docker</span></code>のインストール<a class="headerlink" href="#docker" title="Link to this heading"></a></h1>
 <p>See <a class="reference internal" href="Install_docker.html"><span class="std std-doc">here</span></a>.</p>
 </section>
-<section id="pull-docker-image">
-<h1>Pull Docker image<a class="headerlink" href="#pull-docker-image" title="Link to this heading"></a></h1>
+<section id="docker-image">
+<h1><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をプル<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h1>
 <p>*<em><strong>The easiest way to use Docker is to pull the image.</strong></em>*</p>
 <p><img alt="" src="../_images/PASTE_IMAGE_2022-08-29-07-43-12.png" /></p>
 <p><em><strong>NOTE</strong></em> (IMPORTANT!)
-If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code>.
-If not, the Docker Image you should pull is <code class="docutils literal notranslate"><span class="pre">face01_no_gpu:1.4.10</span></code>.</p>
+使用するPCがNVIDIA GPUを使用しているなら、<code class="docutils literal notranslate"><span class="pre">face01_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。
+そうでなければ、<code class="docutils literal notranslate"><span class="pre">face01_no_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。</p>
 <section id="when-using-face01-gpu-1-4-10">
 <h2>When using <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code><a class="headerlink" href="#when-using-face01-gpu-1-4-10" title="Link to this heading"></a></h2>
 <p>First, Check if GPU is available.</p>
@@ -121,10 +121,11 @@ docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_
 <span class="c1"># Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)</span>
 docker<span class="w"> </span>images
 
-<span class="c1"># Run Docker</span>
+<span class="c1"># `image id`を指定してコンテナを起動する</span>
 docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
 <section id="note">

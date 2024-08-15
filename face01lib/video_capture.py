@@ -43,8 +43,6 @@ class VidCap:
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
 
-        Cal().cal_specify_date(self.logger)
-
     # デバッグ用imshow()
     def frame_imshow_for_debug(
         self,

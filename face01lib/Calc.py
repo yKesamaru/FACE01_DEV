@@ -98,23 +98,23 @@ class Cal:
         return wrapper
 
     def cal_specify_date(self, logger) -> None:
-        """Run evaluation version only."""
-        self.logger = logger
-        limit_date = datetime(2025, 12, 1, 0, 0, 0)   # 指定日付
-        today = datetime.now()
+        """廃止"""
+        # self.logger = logger
+        # limit_date = datetime(2025, 12, 1, 0, 0, 0)   # 指定日付
+        # today = datetime.now()
 
-        if today >= limit_date:
-            self.logger.warning("Trial period expired")
-            self.logger.warning("If you wish to continue using FACE01, please contact us.")
-            self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
-            exit(0)
-        elif today < limit_date:
-            remaining_days = limit_date - today
-            if remaining_days.days < 30:
-                self.logger.info("Remaining days of use: ", str(remaining_days.days))
-                self.logger.warning(
-                    "If you wish to continue using FACE01, please contact us.")
-                self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
+        # if today >= limit_date:
+        #     self.logger.warning("Trial period expired")
+        #     self.logger.warning("If you wish to continue using FACE01, please contact us.")
+        #     self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
+        #     exit(0)
+        # elif today < limit_date:
+        #     remaining_days = limit_date - today
+        #     if remaining_days.days < 30:
+        #         self.logger.info("Remaining days of use: ", str(remaining_days.days))
+        #         self.logger.warning(
+        #             "If you wish to continue using FACE01, please contact us.")
+        #         self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
 
     def cal_resized_telop_image(
         self,
@@ -184,11 +184,11 @@ class Cal:
         similar_percentage: float,
         deep_learning_model: int,
     ) -> float:
-        """Receive similar_percentage and return tolerance.
+        """similar_percentageを受け取ってtoleranceを返します.
 
         Args:
-            similar_percentage (float): 'Probability of similarity' described in config.ini
-            deep_learning_model (int): Deep learning model.
+            similar_percentage (float): config.iniで設定されたProbability of similarityの値
+            deep_learning_model (int): Deep learning modelを選びます.
 
         Returns:
             float: tolerance
@@ -196,7 +196,7 @@ class Cal:
         Note:
             deep_learning_model:
                 0:dlib_face_recognition_resnet_model_v1.dat,
-                1:efficientnetv2_arcface.onnx,
+                1:JAPANESE_FACE_V1.onnx,
                 2:mobilefacenet.onnx
 
         Example:
@@ -204,8 +204,8 @@ class Cal:
                     self.CONFIG["similar_percentage"],
                     self.CONFIG["deep_learning_model"]
                 )
-        """
-        # Dlib
+
+        Dlib
             ## 算出式
             ## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100
             ## percentage_example = -4.76190475*(0.45*0.45)+(-0.380952375)*0.45+100
@@ -214,12 +214,13 @@ class Cal:
             # # f(x) = 100 / (1 + exp(-10(x - 0.8)))
             # similar_percentage = 100 / (1 + np.exp(-10*(tolerance - 0.8)))
 
-        # EfficientNetV2_arcface
+        EfficientNetV2_arcface
             ## 算出式
-            ## y=−23.71x2+49.98x+73.69
+            ## y=-23.71x2+49.98x+73.69
             ## See: https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87
             ## percentage = -23.71*(p*p)+49.98*p+73.69
             ## 0 = -23.71*(p*p)+49.98*p+(73.69-similar_percentage)
+        """
 
         self.similar_percentage: float = similar_percentage
         tolerance: float = 0.0
@@ -324,7 +325,7 @@ class Cal:
         NOTE:
             deep_learning_model:
                 0:dlib_face_recognition_resnet_model_v1.dat,
-                1:efficientnetv2_arcface.onnx,
+                1:JAPANESE_FACE_V1.onnx,
                 2:mobilefacenet.onnx
 
         Example:

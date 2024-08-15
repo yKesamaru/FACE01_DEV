@@ -26,11 +26,11 @@ $ vim ./config.ini
 ```
 
 # ℹ️: Note
-`npKnown.npz`がフォルダーに存在するとき、そのファイルが従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)で作成されたものなのか、新しいモデル(`efficientnetv2_arcface.onnx`)で作成されたものなのかは重要な要素です。
+`npKnown.npz`がフォルダーに存在するとき、そのファイルが従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)で作成されたものなのか、新しいモデル(`JAPANESE_FACE_V1.onnx`)で作成されたものなのかは重要な要素です。
 もし`config.ini`で指定した学習モデルと`npKnown.npz`が作られた学習モデルが一致しない場合、エラーが発生します。
 その場合は`npKnown.npz`を手動で削除してください。新しい`npKnown.npz`が自動的に作成されます。
 
-When `npKnown.npz` exists in the folder, which is it created by the old dlib model (`dlib_face_recognition_resnet_model_v1.dat`) or by the new model (`efficientnetv2_arcface.onnx`) is an important factor.
+When `npKnown.npz` exists in the folder, which is it created by the old dlib model (`dlib_face_recognition_resnet_model_v1.dat`) or by the new model (`JAPANESE_FACE_V1.onnx`) is an important factor.
 If the deep learning model specified in `config.ini` does not match one for which `npKnown.npz` was created, an error will occur.
 In that case, manually delete `npKnown.npz`. A new `npKnown.npz` will be created automatically.
 
@@ -54,10 +54,10 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 
 - deep+learning_model
-  - 従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)と日本人の顔認証に特化したモデル(`efficientnetv2_arcface.onnx`)を切り替えることが出来ます。
+  - 従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)と日本人の顔認証に特化したモデル(`JAPANESE_FACE_V1.onnx`)を切り替えることが出来ます。
     - int: 0 or 1
       - `dlib_face_recognition_resnet_model_v1.dat`: 0
-      - `efficientnetv2_arcface.onnx`: 1
+      - `JAPANESE_FACE_V1.onnx`: 1
   - **NOTE**
     - 各モデルが生成する`npKnown.npz`は互いに互換性がありません。よって、`deep_learning_model`を変更した場合、既に作成されている`npKnown.npz`は手動で削除する必要があります。モデル切り替え後の`npKnown.npz`は新たに自動的に作成されます。
 

@@ -1,9 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-
-The utils class.
+"""The utils class.
 
 When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
 In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is "common way" that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.
@@ -88,8 +83,6 @@ class Utils:
         parent_dir, _ = os.path.split(dir)
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
-
-        Cal().cal_specify_date(self.logger)
 
         # Dlib
         try:

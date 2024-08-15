@@ -1,18 +1,12 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
-
 """Manage log."""
 
 import logging
 import sys
 from typing import Dict
 
+
 class Logger:
-    """Set log level."""    
+    """Set log level."""
     def __init__(self, log_level: str = 'info') -> None:
         """init.
 
@@ -23,15 +17,14 @@ class Logger:
             - 'info'
 
         You can pass value as CONFIG["set_level"]
-        """        
+        """
         self.log_level: str = log_level
 
-
     def logger(
-            self,
-            name: str,
-            dir: str
-        ):
+        self,
+        name: str,
+        dir: str
+    ):
         """Manage log.
 
         Args:
@@ -53,14 +46,14 @@ class Logger:
                 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 
 
-        """        
+        """
         self.name = name
         self.dir = dir
 
         logger = logging.getLogger(self.name)
 
         formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(filename)s] [%(levelname)s] %(message)s')
-        
+
         log_file = dir + 'face01.log'
         file_handler = logging.FileHandler(log_file, mode='a')
         if self.log_level == 'debug':

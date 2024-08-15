@@ -87,21 +87,22 @@ This section, we talk about install <code class="docutils literal notranslate"><
 <!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
 <section id="note">
 <h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
-<p>You must meet the conditions listed below. See <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements">official site</a>.</p>
+<p>動作環境は以下のリストを満たしている必要があります。詳しくは<a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements">公式サイト</a>をご覧ください。
+<code class="docutils literal notranslate"><span class="pre">GPU</span></code>を使用しない条件に於いてはこの限りではありません。</p>
 <ol class="arabic simple">
 <li><p>GNU/Linux x86_64 with kernel version &gt; 3.10</p></li>
 <li><p>Docker &gt;= 19.03 (recommended, but some distributions may include older versions of Docker. The minimum supported version is 1.12)</p></li>
 <li><p>NVIDIA GPU with Architecture &gt;= Kepler (or compute capability 3.0)</p></li>
 <li><p>NVIDIA Linux drivers &gt;= 418.81.07 (Note that older driver releases or branches are unsupported.)</p></li>
 </ol>
-<p>Please refer to the following.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your kernel version.</span>
+<p>これらの条件は以下の操作で確認できます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># カーネルヴァージョン</span>
 uname<span class="w"> </span>-r
 
 <span class="c1"># Your docker version.</span>
 docker<span class="w"> </span>--version
 
-<span class="c1"># Your GPU architecture</span>
+<span class="c1"># GPUアーキテクチャ</span>
 lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-ie<span class="w"> </span>nvidia
 <span class="c1">## List of architecture is [here](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures) and [here](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units) and [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/).</span>
 
@@ -110,18 +111,19 @@ nvidia-smi
 </pre></div>
 </div>
 </section>
-<section id="use-convenient-script">
-<h2>Use convenient script<a class="headerlink" href="#use-convenient-script" title="Link to this heading"></a></h2>
-<p>You can install docker using convenient script.</p>
+<section id="id1">
+<h2>便利なスクリプトを使いましょう<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Docker</span></code>のインストールは以下のスクリプトで行えます。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>--now<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>docker
 </pre></div>
 </div>
 </section>
-<section id="manually-install">
-<h2>Manually install<a class="headerlink" href="#manually-install" title="Link to this heading"></a></h2>
-<p>Also, you can install docker manually.</p>
+<section id="id2">
+<h2>マニュアルインストール<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>また、以下のように手動で<code class="docutils literal notranslate"><span class="pre">Docker</span></code>をインストールもできます。
+これらは予告なく更新されますので、正確な情報は<code class="docutils literal notranslate"><span class="pre">Docker</span></code>の公式サイトをご覧ください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uninstall old versions</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>docker<span class="w"> </span>docker-engine<span class="w"> </span>docker.io<span class="w"> </span>containerd<span class="w"> </span>runc
 sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
@@ -152,8 +154,8 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p>If you want to confirm installed Docker, try the following command.
 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">hello-world</span></code></p>
 </section>
-<section id="install-nvidia-docker2">
-<h2>Install nvidia-docker2<a class="headerlink" href="#install-nvidia-docker2" title="Link to this heading"></a></h2>
+<section id="nvidia-docker2">
+<h2><code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>をインストールする<a class="headerlink" href="#nvidia-docker2" title="Link to this heading"></a></h2>
 <p>To install <code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>, refer to <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit">NVIDIA official tutorial</a>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ID$VERSION_ID</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="se">\</span>
@@ -172,8 +174,8 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 </div>
 <p><img alt="" src="../_images/PASTE_IMAGE_2022-07-25-10-24-45.png" /></p>
 </section>
-<section id="post-installation">
-<h2>Post installation<a class="headerlink" href="#post-installation" title="Link to this heading"></a></h2>
+<section id="id3">
+<h2>インストールが終わったら<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <p>If you don’t want to preface the docker command with sudo, create a Unix group called docker and add users to it.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
 sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
