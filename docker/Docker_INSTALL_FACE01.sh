@@ -8,14 +8,15 @@ set -x
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
-cat << EOS >> ~/.bashrc
-export PATH="/usr/local/cuda/bin/:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-EOS
-'export QT_X11_NO_MITSHM=1' >> ~/.bashrc && \
-source ~/.bashrc
+# ベースイメージにENVとして記述があるので要らないと思われる
+# cat << EOS >> ~/.bashrc
+# export PATH="/usr/local/cuda/bin/:$PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda/lib64/:$LD_LIBRARY_PATH"
+# export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+# export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# EOS
+# 'export QT_X11_NO_MITSHM=1' >> ~/.bashrc && \
+# source ~/.bashrc
 
 python3 -m venv ./
 source bin/activate
