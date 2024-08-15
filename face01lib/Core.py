@@ -1,9 +1,4 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-
-Reference.
+"""Reference.
 
 - Data structure:
     - Definition of person_data_list and frame_datas_array:
@@ -330,13 +325,13 @@ class Core:
         face_encoding: npt.NDArray[np.float64],
         tolerance: float
     ) -> Tuple[npt.NDArray[np.bool8], float]:
-        """Return match list and min value using dlib_api.
+        """dlib_apiを用いてmatchリストとmin valueを返します.
 
         Args:
             logger (_type_): logger
-            known_face_encodings (List[npt.NDArray[np.float64]]): List of known face encodes
-            face_encoding (npt.NDArray[np.float64]): Face encoding data to be compared
-            tolerance (float): tolerance value
+            known_face_encodings (List[npt.NDArray[np.float64]]): known face encodesリスト
+            face_encoding (npt.NDArray[np.float64]): 比較されるFace encoding data
+            tolerance (float): tolerance値
 
         Returns:
             Tuple[npt.NDArray[np.bool8], float]: match list, min value
@@ -1026,12 +1021,12 @@ class Core:
             if "face_location_list" not in frame_data:
                 if self.CONFIG["headless"] is False:
                     # 半透明処理（後半）_1frameに対して1回
-                    if self.CONFIG["show_overlay"] == True:
+                    if self.CONFIG["show_overlay"] is True:
                         cv2.addWeighted(
                             frame_data["overlay"],
                             self.CONFIG["alpha"],
                             frame_data["img"],
-                            1-self.CONFIG["alpha"],
+                            1 - self.CONFIG["alpha"],
                             0,
                             frame_data["img"]
                         )

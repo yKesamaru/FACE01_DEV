@@ -44,13 +44,13 @@ docker run --rm -it \
 
 
 ### **NOTE**
-If you get an error as a result of entering the above command, try the following command.
+Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。
 
 ```bash
 docker run --rm -it \
   --gpus all -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:1.4.10
+  -v /tmp/.X11-unix/:/tmp/.X11-unix: <image id>
 ```
 
 ***Don't forget activate*** the Python virtual environment (activate venv).

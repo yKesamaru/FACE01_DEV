@@ -39,12 +39,13 @@ sys.path.append(parent_dir)
 
 import cProfile as pr
 import subprocess
+import tkinter as tk
+from tkinter import ttk
 from typing import Dict
 
 import cv2
-import tkinter as tk
-from tkinter import ttk
 from PIL import Image, ImageTk  # tkinterで画像を扱うために必要
+
 from face01lib.Calc import Cal
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize

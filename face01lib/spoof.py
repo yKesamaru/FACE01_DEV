@@ -18,11 +18,6 @@ NOTE:
     spoof_obj.iris()
     spoof_obj.obj_detect()
     spoof_obj.make_qr_code()
-
-LICENSE:
-    Copyright Owner: Yoshitsugu Kesamaru
-
-    Please refer to the separate license file for the license of the code.
 """
 
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build Docker image &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>Docker imageをビルドする &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Build Docker image</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をビルドする</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -80,32 +80,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="build-docker-image">
-<h1>Build Docker image<a class="headerlink" href="#build-docker-image" title="Link to this heading"></a></h1>
-<p>If you want to build the Docker Image yourself, please refer to the article below.</p>
-<p>First, you have to clone FACE01_DEV repository.</p>
+  <section id="docker-image">
+<h1><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をビルドする<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h1>
+<p>もしあなたが<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を自分自身でビルドしたいならば、下記を参考にしてください。</p>
+<p>まず<code class="docutils literal notranslate"><span class="pre">FACE01_DEV</span></code>リポジトリからクローンします。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/yKesamaru/FACE01_DEV.git
 </pre></div>
 </div>
-<section id="build-face01-docker-image-with-nvidia-docker2-package">
-<h2>Build FACE01 docker image with nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-with-nvidia-docker2-package" title="Link to this heading"></a></h2>
-<p>To make image</p>
+<section id="nvidia-docker2face01docker-image">
+<h2><code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>パッケージを使って<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をビルドする<a class="headerlink" href="#nvidia-docker2face01docker-image" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_DEV
-docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>&lt;name:tag&gt;<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
 </pre></div>
 </div>
 </section>
-<section id="build-face01-docker-image-without-nvidia-docker2-package">
-<h2>Build FACE01 docker image * <em><strong>without</strong></em> * nvidia-docker2 package<a class="headerlink" href="#build-face01-docker-image-without-nvidia-docker2-package" title="Link to this heading"></a></h2>
+<section id="id1">
+<h2><code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>パッケージを<strong>使わずに</strong><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>の<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をビルドする<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>FACE01_DEV
-docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>face01_no_gpu:1.4.10<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_no_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>&lt;name:tag&gt;<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile_no_gpu<span class="w"> </span>.<span class="w"> </span>--network<span class="w"> </span>host
 </pre></div>
 </div>
 </section>
-<section id="if-you-want-to-upload-to-you-re-own-dockerhub">
-<h2>If you want to upload to you're own DockerHub<a class="headerlink" href="#if-you-want-to-upload-to-you-re-own-dockerhub" title="Link to this heading"></a></h2>
+<section id="dockerhub">
+<h2>あなたの<code class="docutils literal notranslate"><span class="pre">DockerHub</span></code>リポジトリへアップロードしたいとき<a class="headerlink" href="#dockerhub" title="Link to this heading"></a></h2>
 <p>Reference is <a class="reference external" href="https://docs.docker.com/docker-hub/repos/#pushing-a-docker-container-image-to-docker-hub">here</a>.
-Japanese is <a class="reference external" href="https://zenn.dev/katan/articles/1d5ff92fd809e7">here</a>.</p>
+日本語は<a class="reference external" href="https://zenn.dev/katan/articles/1d5ff92fd809e7">こちら</a>です。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Built Docker Image</span>
 docker<span class="w"> </span>built<span class="w"> </span>...
 <span class="c1"># Run Docker Image</span>
@@ -118,60 +117,146 @@ docker<span class="w"> </span>images
 docker<span class="w"> </span>container<span class="w"> </span>commit<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>&lt;hub-user&gt;/&lt;repo-name&gt;<span class="o">[</span>:&lt;tag&gt;<span class="o">]</span>
 <span class="c1"># Tag the Image with the repository name</span>
 docker<span class="w"> </span>tag<span class="w"> </span>&lt;image-id&gt;<span class="w"> </span>&lt;repo-name&gt;
-<span class="c1"># Docker loginr</span>
+<span class="c1"># Docker login</span>
 docker<span class="w"> </span>login
 <span class="c1"># Docker push</span>
 docker<span class="w"> </span>push<span class="w"> </span>&lt;hub-user&gt;/&lt;repo-name&gt;<span class="o">[</span>:&lt;tag&gt;<span class="o">]</span>
 </pre></div>
 </div>
 </section>
-<section id="check-the-completed-image">
-<h2>Check the completed image.<a class="headerlink" href="#check-the-completed-image" title="Link to this heading"></a></h2>
+<section id="id2">
+<h2>ビルドされたイメージを確認する<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
-REPOSITORY<span class="w">    </span>TAG<span class="w">                       </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">         </span>SIZE
-face01_gpu<span class="w">    </span><span class="m">1</span>.4.10<span class="w">                    </span>41b1d82ee908<span class="w">   </span><span class="m">7</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">   </span><span class="m">17</span>.5GB
+REPOSITORY<span class="w">   </span>TAG<span class="w">        </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">          </span>SIZE
+face01_gpu<span class="w">   </span><span class="m">3</span>.0.03_1<span class="w">   </span>abd4c0896c00<span class="w">   </span><span class="m">48</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span><span class="m">21</span>.9GB
 </pre></div>
 </div>
 </section>
-<section id="launch-face01-dev">
-<h2>Launch FACE01_DEV<a class="headerlink" href="#launch-face01-dev" title="Link to this heading"></a></h2>
+<section id="face01-dev">
+<h2><code class="docutils literal notranslate"><span class="pre">FACE01_DEV</span></code>のコンテナを起動する<a class="headerlink" href="#face01-dev" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>カメラを<strong>接続しない</strong>場合<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>face01_gpu:1.4.10
-
-<span class="c1"># Check nvidia-smi</span>
-docker@ee44d08e933f:~/FACE01_DEV$<span class="w"> </span>nvidia-smi
-Fri<span class="w"> </span>Jul<span class="w"> </span><span class="m">29</span><span class="w"> </span><span class="m">09</span>:07:03<span class="w"> </span><span class="m">2022</span>
-+-----------------------------------------------------------------------------+
-<span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">515</span>.48.07<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">11</span>.7<span class="w">     </span><span class="p">|</span>
-<span class="p">|</span>-------------------------------+----------------------+----------------------+
-<span class="p">|</span><span class="w"> </span>GPU<span class="w">  </span>Name<span class="w">        </span>Persistence-M<span class="p">|</span><span class="w"> </span>Bus-Id<span class="w">        </span>Disp.A<span class="w"> </span><span class="p">|</span><span class="w"> </span>Volatile<span class="w"> </span>Uncorr.<span class="w"> </span>ECC<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="w"> </span>Fan<span class="w">  </span>Temp<span class="w">  </span>Perf<span class="w">  </span>Pwr:Usage/Cap<span class="p">|</span><span class="w">         </span>Memory-Usage<span class="w"> </span><span class="p">|</span><span class="w"> </span>GPU-Util<span class="w">  </span>Compute<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">               </span>MIG<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="o">===============================</span>+<span class="o">======================</span>+<span class="o">======================</span><span class="p">|</span>
-<span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span>NVIDIA<span class="w"> </span>GeForce<span class="w"> </span>...<span class="w">  </span>On<span class="w">   </span><span class="p">|</span><span class="w"> </span><span class="m">00000000</span>:08:00.0<span class="w">  </span>On<span class="w"> </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="w"> </span><span class="m">41</span>%<span class="w">   </span>37C<span class="w">    </span>P8<span class="w">    </span>16W<span class="w"> </span>/<span class="w"> </span>120W<span class="w"> </span><span class="p">|</span><span class="w">    </span>344MiB<span class="w"> </span>/<span class="w">  </span>6144MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">5</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
-+-------------------------------+----------------------+----------------------+
-
-+-----------------------------------------------------------------------------+
-<span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                  </span><span class="p">|</span>
-<span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                  </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>
-<span class="p">|</span><span class="w">        </span>ID<span class="w">   </span>ID<span class="w">                                                   </span>Usage<span class="w">      </span><span class="p">|</span>
-<span class="p">|</span><span class="o">=============================================================================</span><span class="p">|</span>
-+-----------------------------------------------------------------------------+
-
-<span class="c1"># Check files</span>
-docker@6ee18359bde8:~/FACE01_DEV$<span class="w">  </span>ls
-CALL_FACE01.py<span class="w">            </span>SystemCheckLock<span class="w">  </span>dlib-19.24<span class="w">          </span>images<span class="w">   </span>lib64<span class="w">        </span>output<span class="w">              </span>requirements.txt<span class="w">  </span>test.mp4
-Docker_INSTALL_FACE01.sh<span class="w">  </span>bin<span class="w">              </span>dlib-19.24.tar.bz2<span class="w">  </span>include<span class="w">  </span>noFace<span class="w">       </span>priset_face_images<span class="w">  </span>share<span class="w">             </span>顔無し区間を含んだテスト動画.mp4
-FACE01.py<span class="w">                 </span>config.ini<span class="w">       </span>face01lib<span class="w">           </span>lib<span class="w">      </span>npKnown.npz<span class="w">  </span>pyvenv.cfg<span class="w">          </span>some_people.mp4
-
-<span class="c1"># Launch Python virtual environment (Important!)</span>
-docker@ee44d08e933f:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </span>bin/activate
+<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
+</section>
+<section id="id4">
+<h3>カメラを接続する場合<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="nvidia-smi">
+<h1><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>でチェック<a class="headerlink" href="#nvidia-smi" title="Link to this heading"></a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># nvidia-smiによるチェック</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>nvidia-smi
+Thu<span class="w"> </span>Aug<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">11</span>:13:25<span class="w"> </span><span class="m">2024</span>
++-----------------------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">555</span>.42.06<span class="w">              </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">555</span>.42.06<span class="w">      </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">12</span>.5<span class="w">     </span><span class="p">|</span>
+<span class="p">|</span>-----------------------------------------+------------------------+----------------------+
+<span class="p">|</span><span class="w"> </span>GPU<span class="w">  </span>Name<span class="w">                 </span>Persistence-M<span class="w"> </span><span class="p">|</span><span class="w"> </span>Bus-Id<span class="w">          </span>Disp.A<span class="w"> </span><span class="p">|</span><span class="w"> </span>Volatile<span class="w"> </span>Uncorr.<span class="w"> </span>ECC<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Fan<span class="w">  </span>Temp<span class="w">   </span>Perf<span class="w">          </span>Pwr:Usage/Cap<span class="w"> </span><span class="p">|</span><span class="w">           </span>Memory-Usage<span class="w"> </span><span class="p">|</span><span class="w"> </span>GPU-Util<span class="w">  </span>Compute<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                                         </span><span class="p">|</span><span class="w">                        </span><span class="p">|</span><span class="w">               </span>MIG<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="o">=========================================</span>+<span class="o">========================</span>+<span class="o">======================</span><span class="p">|</span>
+<span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span>NVIDIA<span class="w"> </span>GeForce<span class="w"> </span>GTX<span class="w"> </span><span class="m">1660</span><span class="w"> </span>Ti<span class="w">     </span>Off<span class="w"> </span><span class="p">|</span><span class="w">   </span><span class="m">00000000</span>:09:00.0<span class="w">  </span>On<span class="w"> </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span><span class="m">41</span>%<span class="w">   </span>39C<span class="w">    </span>P8<span class="w">             </span>13W<span class="w"> </span>/<span class="w">  </span>120W<span class="w"> </span><span class="p">|</span><span class="w">     </span>570MiB<span class="w"> </span>/<span class="w">   </span>6144MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">3</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                                         </span><span class="p">|</span><span class="w">                        </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                              </span><span class="p">|</span>
+<span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                              </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">        </span>ID<span class="w">   </span>ID<span class="w">                                                               </span>Usage<span class="w">      </span><span class="p">|</span>
+<span class="p">|</span><span class="o">=========================================================================================</span><span class="p">|</span>
++-----------------------------------------------------------------------------------------+
+
+<span class="c1"># nvcc --versionによるチェック</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>nvcc<span class="w"> </span>--version
+nvcc:<span class="w"> </span>NVIDIA<span class="w"> </span><span class="o">(</span>R<span class="o">)</span><span class="w"> </span>Cuda<span class="w"> </span>compiler<span class="w"> </span>driver
+Copyright<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2005</span>-2022<span class="w"> </span>NVIDIA<span class="w"> </span>Corporation
+Built<span class="w"> </span>on<span class="w"> </span>Tue_Mar__8_18:18:20_PST_2022
+Cuda<span class="w"> </span>compilation<span class="w"> </span>tools,<span class="w"> </span>release<span class="w"> </span><span class="m">11</span>.6,<span class="w"> </span>V11.6.124
+Build<span class="w"> </span>cuda_11.6.r11.6/compiler.31057947_0
+
+<span class="c1"># ファイルをチェック</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>ls
+Docker_INSTALL_FACE01.sh<span class="w">  </span>bin<span class="w">         </span>docs<span class="w">       </span>include<span class="w">  </span>multipleFaces<span class="w">  </span>output<span class="w">              </span>pyvenv.cfg
+SystemCheckLock<span class="w">           </span>build<span class="w">       </span>example<span class="w">    </span>lib<span class="w">      </span>noFace<span class="w">         </span>preset_face_images<span class="w">  </span>requirements_dev.txt
+assets<span class="w">                    </span>config.ini<span class="w">  </span>face01lib<span class="w">  </span>lib64<span class="w">    </span>npKnown.npz<span class="w">    </span>pyproject.toml<span class="w">      </span>share
+
+<span class="c1"># エグザンプルコードをチェック</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>ls<span class="w"> </span>example/
+CTKtest.py<span class="w">               </span>combination_similarity.py<span class="w">               </span>example_logging.py<span class="w">                    </span>make_npKnown_file.py
+__init__.py<span class="w">              </span>data_augmentation.py<span class="w">                    </span>face_coordinates.py<span class="w">                   </span>output.txt
+__pycache__<span class="w">              </span>data_augmentation_mp.py<span class="w">                 </span>faiss_combination_similarity.py<span class="w">       </span>pysimplegui_bk
+aligned_crop_face.py<span class="w">     </span>data_structure.py<span class="w">                       </span>get_encoded_data.py<span class="w">                   </span>similarity.py
+anti_spoof.py<span class="w">            </span>detect_eye_blink.py<span class="w">                     </span>get_encoded_data_JAPANESE_FACE_V1.py<span class="w">  </span>simple.py
+average_face.py<span class="w">          </span>display_GUI_window.py<span class="w">                   </span>img<span class="w">                                   </span>simple_JAPANESE_FACE_V1.py
+benchmark_CUI.py<span class="w">         </span>display_GUI_window_JAPANESE_FACE_V1.py<span class="w">  </span>jitter.py<span class="w">                             </span>simple_file_browser.py
+benchmark_GUI_window.py<span class="w">  </span>distort_barrel.py<span class="w">                       </span>lightweight_GUI.py<span class="w">                    </span>点検済
+combination_counter.py<span class="w">   </span>draw_datas.py<span class="w">                           </span>make_ID_card.py<span class="w">                       </span>不明_bk
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$
+</pre></div>
+</div>
+<section id="python">
+<h2>コンテナ内の<code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>を起動する（重要）<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </span>bin/activate
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$
+</pre></div>
+</div>
+<blockquote>
+<div><p>![NOTE]:
+コンテナ内の``Python仮想環境<code class="docutils literal notranslate"><span class="pre">を起動しないと、</span></code>FACE01`は動作しません</p>
+</div></blockquote>
+</section>
+<section id="id5">
+<h2>エグザンプルコードを実行する<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>動作確認のためにエグザンプルコードを実行してみましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>python3<span class="w"> </span>example/lightweight_GUI.py
+Copyright<span class="w"> </span>Owner:<span class="w"> </span>Yoshitsugu<span class="w"> </span>Kesamaru
+Copyright<span class="w"> </span>Owner:<span class="w"> </span>Yoshitsugu<span class="w"> </span>Kesamaru
+<span class="o">[</span><span class="m">2024</span>-08-15<span class="w"> </span><span class="m">11</span>:26:42,563<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>load_preset_image.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
+</pre></div>
+</div>
+<p><img alt="" src="../_images/2024-08-15-11-28-20.png" /></p>
+<p>エグザンプルコードが正常に動作すれば、動作確認終了です。</p>
+<p>この開発環境を使って顔認証システムの開発を行いましょう！</p>
+</section>
+<section id="cuda">
+<h2>CUDAライセンス<a class="headerlink" href="#cuda" title="Link to this heading"></a></h2>
+<p>コンテナの起動にあたり、以下のメッセージが出力されます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span>
+<span class="o">==</span><span class="w"> </span><span class="nv">CUDA</span><span class="w"> </span><span class="o">==</span>
+<span class="o">==========</span>
+
+CUDA<span class="w"> </span>Version<span class="w"> </span><span class="m">11</span>.6.1
+
+Container<span class="w"> </span>image<span class="w"> </span>Copyright<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2016</span>-2023,<span class="w"> </span>NVIDIA<span class="w"> </span>CORPORATION<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>AFFILIATES.<span class="w"> </span>All<span class="w"> </span>rights<span class="w"> </span>reserved.
+
+This<span class="w"> </span>container<span class="w"> </span>image<span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>contents<span class="w"> </span>are<span class="w"> </span>governed<span class="w"> </span>by<span class="w"> </span>the<span class="w"> </span>NVIDIA<span class="w"> </span>Deep<span class="w"> </span>Learning<span class="w"> </span>Container<span class="w"> </span>License.
+By<span class="w"> </span>pulling<span class="w"> </span>and<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>container,<span class="w"> </span>you<span class="w"> </span>accept<span class="w"> </span>the<span class="w"> </span>terms<span class="w"> </span>and<span class="w"> </span>conditions<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A<span class="w"> </span>copy<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>license<span class="w"> </span>is<span class="w"> </span>made<span class="w"> </span>available<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>container<span class="w"> </span>at<span class="w"> </span>/NGC-DL-CONTAINER-LICENSE<span class="w"> </span><span class="k">for</span><span class="w"> </span>your<span class="w"> </span>convenience.
+
+*************************
+**<span class="w"> </span>DEPRECATION<span class="w"> </span>NOTICE!<span class="w"> </span>**
+*************************
+THIS<span class="w"> </span>IMAGE<span class="w"> </span>IS<span class="w"> </span>DEPRECATED<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span>scheduled<span class="w"> </span><span class="k">for</span><span class="w"> </span>DELETION.
+<span class="w">    </span>https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/support-policy.md
+</pre></div>
+</div>
+<p>CUDAを使った開発環境に向けてのメッセージです。具体的なライセンスは<a class="reference external" href="https://developer.download.nvidia.com/licenses/NVIDIA_Deep_Learning_Container_License.pdf?t=eyJscyI6IndlYnNpdGUiLCJsc2QiOiJkZXZlbG9wZXIubnZpZGlhLmNvbS9jdWRhLXRvb2xraXQifQ==">こちら</a>にあります。</p>
+<p>このコンテナを使って商用利用のための開発ができます。
+詳細は上記PDFをご覧ください。
+このような制限が邪魔である場合には、<code class="docutils literal notranslate"><span class="pre">docker/Dockerfile_gpu</span></code>のベースイメージを変更してください。</p>
 </section>
 </section>
 

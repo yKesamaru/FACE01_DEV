@@ -1,25 +1,19 @@
-"""License for the Code.
-
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
-"""
-
 """Return face image data as ndarray."""
-"""
-from __future__ import annotations  # 'cython'では使用不可
-"""
 
 from typing import Tuple
+
 import numpy as np
 import numpy.typing as npt
 
+
 class Return_face_image():
-    """This class include a method for return face image function."""    
+    """This class include a method for return face image function."""
+
     def return_face_image(
         self,
         resized_frame: npt.NDArray[np.uint8],
-        face_location: Tuple[int,int,int,int]
-    ) ->  npt.NDArray[np.uint8]:
+        face_location: Tuple[int, int, int, int]
+    ) -> npt.NDArray[np.uint8]:
         """Return face image array which contain ndarray.
 
         Args:
@@ -28,10 +22,10 @@ class Return_face_image():
 
         Returns:
             list ( npt.NDArray[np.uint8]): face image of ndarray or empty array
-        """        
+        """
         self.resized_frame = resized_frame
         empty_ndarray = \
-            np.empty(shape=(2,2,3), dtype=np.uint8)
+            np.empty(shape=(2, 2, 3), dtype=np.uint8)
         self.face_location: Tuple[int, ...] = face_location
 
         if len(self.face_location) > 0:

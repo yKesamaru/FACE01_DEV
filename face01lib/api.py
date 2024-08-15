@@ -512,16 +512,16 @@ class Dlib_api:
         # face_encodings: List[np.ndarray],
         # face_to_compare: np.ndarray
     ) -> npt.NDArray[np.float64]:
-        """Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.
+        """与えられた顔エンコーディングのリストを既知の顔エンコーディングと比較し、各比較顔のユークリッド距離を返します.
 
-        The distance tells you how similar the faces are.
+        距離が近ければ、顔がどれだけ似ているかが分かります。
 
         Args:
             face_encodings (List[npt.NDArray[np.float64]]): List of face encodings to compare (=small_frame)
             face_to_compare (npt.NDArray[np.float64]): A face encoding to compare against (=face_location_list)
 
         Returns:
-            npt.NDArray[np.float64]: A numpy ndarray with the distance for each face in the same order as the 'faces' array
+            npt.NDArray[np.float64]: 顔（名前）配列と同じ順序の、顔同士の距離である numpy ndarray を返します
         """
         # self.face_encodings = face_encodings
         # self.face_to_compare = face_to_compare
@@ -592,20 +592,20 @@ class Dlib_api:
         tolerance: float = 0.6,
         threshold: float = 0.4
     ) -> Tuple[np.ndarray, float]:
-        """Compare a list of face encodings against a candidate encoding to see if they match.
+        """顔エンコーディングのリストを候補エンコーディングと比較して、それらが一致するかどうかを確認します。
 
         Args:
             deep_learning_model (int): 0: dlib cnn model, 1: JAPANESE_FACE_V1.onnx
-            known_face_encodings (List[npt.NDArray[np.float64]]): A list of known face encodings
-            face_encoding_to_check (npt.NDArray[np.float64]): A single face encoding to compare against the list
-            tolerance (float): How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.
+            known_face_encodings (List[npt.NDArray[np.float64]]): known face encodingsのリスト
+            face_encoding_to_check (npt.NDArray[np.float64]): リストに対して比較する、単一の顔エンコーディング
+            tolerance (float): 顔間の距離がどのくらいあれば一致するとみなされるか。dlibの場合、低いほど厳密で、0.6 が一般的な値です。
+            threshold (float): 閾値
 
         Returns:
-            A tuple of True/False values indicating which known_face_encodings match the face encoding to check, and the min distance between them.
+            どの known_face_encoding がチェック対象の顔エンコーディングに一致するか、およびそれらの間の最小距離を示す True/False 値のタプル。
         """
         self.deep_learning_model: int = deep_learning_model
-        self.known_face_encodings: List[npt.NDArray[np.float64]
-                                        ] = known_face_encodings
+        self.known_face_encodings: List[npt.NDArray[np.float64]] = known_face_encodings
         self.face_encoding_to_check: npt.NDArray[np.float64] = face_encoding_to_check
         self.tolerance: float = tolerance
         self.threshold: float = threshold

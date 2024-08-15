@@ -137,7 +137,6 @@ class LoadPresetImage:
         return face_encoding_list, face_file_name_list
 
     # ディレクトリから顔画像ファイルを取得するメソッド
-
     def _get_face_images(self, dir: str) -> List[str]:
         # 拡張子がpng, jpeg, jpg, webpの場合のみface_images_listに追加
         face_image_filename_list = []  # 顔画像のリストを初期化
@@ -224,7 +223,7 @@ class LoadPresetImage:
                         num_jitters=self.jitters,
                         model=self.model
                     )
-                # efficientnetv2_arcface.onnx使用時の顔画像のエンコーディング処理
+                # JAPANESE_FACE_V1.onnx使用時の顔画像のエンコーディング処理
                 elif self.deep_learning_model == 1:
                     face_encode_data: List[np.ndarray] = Dlib_api_obj.face_encodings(
                         deep_learning_model=1,
