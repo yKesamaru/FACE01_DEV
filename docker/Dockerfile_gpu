@@ -4,12 +4,18 @@
 # ユーザーの追加、必要なパッケージのインストール、環境設定を行い、Docker_INSTALL_FACE01.shスクリプトを実行してセットアップを行います。
 # -----------------------------------------------------------------
 
+# ベースイメージ: https://hub.docker.com/r/nvidia/cuda/tags
+## ubuntu20.04: https://hub.docker.com/r/nvidia/cuda/tags?page=1&page_size=&name=ubuntu20.04&ordering=
+## cuda11: https://hub.docker.com/r/nvidia/cuda/tags?page=&page_size=&ordering=&name=11
+# FROM nvidia/cuda:11.0.3-base-ubuntu20.04
+# 開発版。全てのパッケージを含む。: https://hub.docker.com/layers/nvidia/cuda/11.6.1-devel-ubuntu20.04/images/sha256-2732cd07ffb34d73621a12de8ecea08a1caa7b87d43ccbca34112de189824c20?context=explore
+FROM nvidia/cuda:11.6.1-devel-ubuntu20.04
 
-FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
+# ベースイメージにあるのでいらない
+# ENV NVIDIA_VISIBLE_DEVICES all
+# ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -23,7 +29,7 @@ RUN apt-get update
 # RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
 # RUN dpkg -i cuda-keyring_1.0-1_all.deb
 # RUN apt-get update
-RUN apt-get install -y nvidia-cuda-toolkit
+# RUN apt-get install -y nvidia-cuda-toolkit
 RUN apt-get install -y libcudnn8
 RUN apt-get install -y libcudnn8-dev
 
