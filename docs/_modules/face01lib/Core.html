@@ -81,12 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.Core のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-
-<span class="sd">Reference.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Reference.</span>
 
 <span class="sd">- Data structure:</span>
 <span class="sd">    - Definition of person_data_list and frame_datas_array:</span>
@@ -418,13 +413,13 @@
         <span class="n">face_encoding</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool8</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return match list and min value using dlib_api.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;dlib_apiを用いてmatchリストとmin valueを返します.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            logger (_type_): logger</span>
-<span class="sd">            known_face_encodings (List[npt.NDArray[np.float64]]): List of known face encodes</span>
-<span class="sd">            face_encoding (npt.NDArray[np.float64]): Face encoding data to be compared</span>
-<span class="sd">            tolerance (float): tolerance value</span>
+<span class="sd">            known_face_encodings (List[npt.NDArray[np.float64]]): known face encodesリスト</span>
+<span class="sd">            face_encoding (npt.NDArray[np.float64]): 比較されるFace encoding data</span>
+<span class="sd">            tolerance (float): tolerance値</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple[npt.NDArray[np.bool8], float]: match list, min value</span>
@@ -1128,12 +1123,12 @@
             <span class="k">if</span> <span class="s2">&quot;face_location_list&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frame_data</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;headless&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
                     <span class="c1"># 半透明処理（後半）_1frameに対して1回</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;show_overlay&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;show_overlay&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
                         <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span>
                             <span class="n">frame_data</span><span class="p">[</span><span class="s2">&quot;overlay&quot;</span><span class="p">],</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
                             <span class="n">frame_data</span><span class="p">[</span><span class="s2">&quot;img&quot;</span><span class="p">],</span>
-                            <span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
+                            <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
                             <span class="mi">0</span><span class="p">,</span>
                             <span class="n">frame_data</span><span class="p">[</span><span class="s2">&quot;img&quot;</span><span class="p">]</span>
                         <span class="p">)</span>

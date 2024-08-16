@@ -426,17 +426,17 @@ class Dlib_api:
         Returns:
             List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image).
 
-            If `deep_learning_model == 1`, the returned list contains 512-dimensional face encodings, with the type
-            `List[npt.NDArray[np.float32]]`.
+            If deep_learning_model == 1, the returned list contains 512-dimensional face encodings, with the type
+            List[npt.NDArray[np.float32]].
 
-            Image size: The image should be of size 150x150. Also, cropping must be done as `dlib.get_face_chip` would do it.
+            Image size: The image should be of size 150x150. Also, cropping must be done as dlib.get_face_chip would do it.
             That is, centered and scaled essentially the same way.
 
         See also:
-            `class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)`:
+            class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs):
             http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1
 
-            `compute_face_descriptor(*args, **kwargs)`:
+            compute_face_descriptor(*args, **kwargs):
             http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor
         """
         self.deep_learning_model: int = deep_learning_model
@@ -527,7 +527,7 @@ class Dlib_api:
         # self.face_to_compare = face_to_compare
 
         if len(face_encodings) == 0:
-            # return `dummy data`
+            # return dummy data
             return np.empty((2, 2, 3), dtype=np.float64)
 
         # ord = None -> Frobenius norm. norm for vectors is '2-norm'.
@@ -592,7 +592,7 @@ class Dlib_api:
         tolerance: float = 0.6,
         threshold: float = 0.4
     ) -> Tuple[np.ndarray, float]:
-        """顔エンコーディングのリストを候補エンコーディングと比較して、それらが一致するかどうかを確認します。
+        """顔エンコーディングのリストを候補エンコーディングと比較して、それら数値の比較をします。
 
         Args:
             deep_learning_model (int): 0: dlib cnn model, 1: JAPANESE_FACE_V1.onnx
@@ -610,6 +610,7 @@ class Dlib_api:
         self.tolerance: float = tolerance
         self.threshold: float = threshold
 
+        # dlib model:
         if self.deep_learning_model == 0:
             face_distance_list: List[float] = list(
                 self.face_distance(
@@ -627,10 +628,12 @@ class Dlib_api:
             else:
                 bool_list: List[Tuple[bool, float]] = []
                 for face_distance in face_distance_list:
-                    if self.tolerance >= face_distance:
+                    if self.tolerance >= face_distance:  # face_distanceがtolerance以下のとき。
                         bool_list.append((True, face_distance))
-                    else:
+                    elif self.tolerance < face_distance:
                         bool_list.append((False, face_distance))
+                    else:
+                        exit(1)
                 return np.array(bool_list), self.min_distance
                 # bool_list: List[bool] = []
                 #     if self.tolerance >= face_distance:
@@ -639,6 +642,7 @@ class Dlib_api:
                 #         bool_list.append(False)
                 # return np.array(bool_list), self.min_distance
 
+        # JAPANESE_FACE_V1 model:
         elif self.deep_learning_model == 1:
             results: List[Tuple[bool, float]] = []
             results, max_cos_sim = \

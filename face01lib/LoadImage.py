@@ -6,7 +6,6 @@ from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from typing import Dict, List, Tuple, Union
 
-import numpy as np
 import numpy.typing as npt
 
 from face01lib.Calc import Cal
@@ -42,10 +41,10 @@ class LoadImage:
             self.load_unregistered_face_image = True
 
     def LI(
-            self,
-            set_height: int,
-            set_width: int
-        ) -> Tuple[cv2.Mat, ...]:
+        self,
+        set_height: int,
+        set_width: int
+    ) -> Tuple[cv2.Mat, ...]:
         """Return values.
 
         Summary:

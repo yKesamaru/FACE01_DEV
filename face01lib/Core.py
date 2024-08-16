@@ -1057,7 +1057,8 @@ class Core:
                         self.CONFIG["tolerance"]
                     )
 
-                if not np.any(matches is True):  # If there is no such person
+                # if not np.any(matches is True):  # If there is no such person
+                if not np.any(matches == 1):  # If there is no such person
                     face_names.append(name)  # Set "Unknown"
                     continue
                 else:  # If there is an applicable person

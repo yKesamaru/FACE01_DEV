@@ -81,12 +81,7 @@
            <div itemprop="articleBody">
              
   <h1>face01lib.utils のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;License for the Code.</span>
-
-<span class="sd">Copyright Owner: Yoshitsugu Kesamaru</span>
-<span class="sd">Please refer to the separate license file for the license of the code.</span>
-
-<span class="sd">The utils class.</span>
+<span></span><span class="sd">&quot;&quot;&quot;The utils class.</span>
 
 <span class="sd">When creating a deep learning model, we usually perform data augmentation processing to increase the base data.</span>
 <span class="sd">In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</span>
@@ -173,8 +168,6 @@
         <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-
-        <span class="n">Cal</span><span class="p">()</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
 
         <span class="c1"># Dlib</span>
         <span class="k">try</span><span class="p">:</span>
