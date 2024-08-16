@@ -130,11 +130,11 @@ docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </
 </div>
 <section id="note">
 <h3><strong>NOTE</strong><a class="headerlink" href="#note" title="Link to this heading"></a></h3>
-<p>If you get an error as a result of entering the above command, try the following command.</p>
+<p>Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10
+<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
 <p><em><strong>Don't forget activate</strong></em> the Python virtual environment (activate venv).</p>

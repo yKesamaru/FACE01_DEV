@@ -388,7 +388,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.cal_specify_date">
 <span class="sig-name descname"><span class="pre">cal_specify_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/face01lib/Calc.html#Cal.cal_specify_date"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Calc.Cal.cal_specify_date" title="Link to this definition"></a></dt>
-<dd><p>Run evaluation version only.</p>
+<dd><p>廃止</p>
 </dd></dl>
 
 <dl class="py method">
@@ -459,7 +459,7 @@
 <p class="admonition-title">注釈</p>
 <dl class="simple">
 <dt>deep_learning_model:</dt><dd><p>0:dlib_face_recognition_resnet_model_v1.dat,
-1:efficientnetv2_arcface.onnx,
+1:JAPANESE_FACE_V1.onnx,
 2:mobilefacenet.onnx</p>
 </dd>
 </dl>
@@ -492,12 +492,12 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.to_tolerance">
 <span class="sig-name descname"><span class="pre">to_tolerance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">similar_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></span><a class="reference internal" href="_modules/face01lib/Calc.html#Cal.to_tolerance"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Calc.Cal.to_tolerance" title="Link to this definition"></a></dt>
-<dd><p>Receive similar_percentage and return tolerance.</p>
+<dd><p>similar_percentageを受け取ってtoleranceを返します.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>similar_percentage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- 'Probability of similarity' described in config.ini</p></li>
-<li><p><strong>deep_learning_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) -- Deep learning model.</p></li>
+<li><p><strong>similar_percentage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- config.iniで設定されたProbability of similarityの値</p></li>
+<li><p><strong>deep_learning_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) -- Deep learning modelを選びます.</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
@@ -511,7 +511,7 @@
 <p class="admonition-title">注釈</p>
 <dl class="simple">
 <dt>deep_learning_model:</dt><dd><p>0:dlib_face_recognition_resnet_model_v1.dat,
-1:efficientnetv2_arcface.onnx,
+1:JAPANESE_FACE_V1.onnx,
 2:mobilefacenet.onnx</p>
 </dd>
 </dl>
@@ -525,6 +525,22 @@
 </pre></div>
 </div>
 </div>
+<dl class="simple">
+<dt>Dlib</dt><dd><p>## 算出式
+## percentage = -4.76190475*(p*p)+(-0.380952375)*p+100
+## percentage_example = -4.76190475*(0.45*0.45)+(-0.380952375)*0.45+100
+## -4.76190475*(p*p)+(-0.380952375)*p+(100-similar_percentage) = 0
+# 式の変更: 2023年9月14日
+# # f(x) = 100 / (1 + exp(-10(x - 0.8)))
+# similar_percentage = 100 / (1 + np.exp(-10*(tolerance - 0.8)))</p>
+</dd>
+<dt>EfficientNetV2_arcface</dt><dd><p>## 算出式
+## y=-23.71x2+49.98x+73.69
+## See: <a class="reference external" href="https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87">https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87</a>
+## percentage = -23.71*(p*p)+49.98*p+73.69
+## 0 = -23.71*(p*p)+49.98*p+(73.69-similar_percentage)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -552,9 +568,6 @@
 </section>
 <section id="module-face01lib.Core">
 <span id="face01lib-core-module"></span><h2>face01lib.Core module<a class="headerlink" href="#module-face01lib.Core" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <p>Reference.</p>
 <ul>
 <li><dl>
@@ -1385,18 +1398,19 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.compare_faces">
 <span class="sig-name descname"><span class="pre">compare_faces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">known_face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoding_to_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.compare_faces"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.compare_faces" title="Link to this definition"></a></dt>
-<dd><p>Compare a list of face encodings against a candidate encoding to see if they match.</p>
+<dd><p>顔エンコーディングのリストを候補エンコーディングと比較して、それらが一致するかどうかを確認します。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>deep_learning_model</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) -- 0: dlib cnn model, 1: JAPANESE_FACE_V1.onnx</p></li>
-<li><p><strong>known_face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) -- A list of known face encodings</p></li>
-<li><p><strong>face_encoding_to_check</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) -- A single face encoding to compare against the list</p></li>
-<li><p><strong>tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.</p></li>
+<li><p><strong>known_face_encodings</strong> (<em>List</em><em>[</em><em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em><em>]</em>) -- known face encodingsのリスト</p></li>
+<li><p><strong>face_encoding_to_check</strong> (<em>npt.NDArray</em><em>[</em><em>np.float64</em><em>]</em>) -- リストに対して比較する、単一の顔エンコーディング</p></li>
+<li><p><strong>tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- 顔間の距離がどのくらいあれば一致するとみなされるか。dlibの場合、低いほど厳密で、0.6 が一般的な値です。</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- 閾値</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple of True/False values indicating which known_face_encodings match the face encoding to check, and the min distance between them.</p>
+<dd class="field-even"><p>どの known_face_encoding がチェック対象の顔エンコーディングに一致するか、およびそれらの間の最小距離を示す True/False 値のタプル。</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1425,8 +1439,8 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.face_distance">
 <span class="sig-name descname"><span class="pre">face_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_to_compare</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.face_distance"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.face_distance" title="Link to this definition"></a></dt>
-<dd><p>Given a list of face encodings, compare them to a known face encoding and get a  euclidean distance for each comparison face.</p>
-<p>The distance tells you how similar the faces are.</p>
+<dd><p>与えられた顔エンコーディングのリストを既知の顔エンコーディングと比較し、各比較顔のユークリッド距離を返します.</p>
+<p>距離が近ければ、顔がどれだけ似ているかが分かります。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1435,7 +1449,7 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>A numpy ndarray with the distance for each face in the same order as the 'faces' array</p>
+<dd class="field-even"><p>顔（名前）配列と同じ順序の、顔同士の距離である numpy ndarray を返します</p>
 </dd>
 <dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
 <dd class="field-odd"><p>npt.NDArray[np.float64]</p>
@@ -1538,9 +1552,6 @@ That is, centered and scaled essentially the same way.</p>
 </section>
 <section id="module-face01lib.combine">
 <span id="face01lib-combine-module"></span><h2>face01lib.combine module<a class="headerlink" href="#module-face01lib.combine" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.combine.Comb">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.combine.</span></span><span class="sig-name descname"><span class="pre">Comb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/combine.html#Comb"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.combine.Comb" title="Link to this definition"></a></dt>
@@ -1685,9 +1696,7 @@ Tuple[List, List]: known_face_encodings_list, known_face_names_list</p>
 </section>
 <section id="module-face01lib.logger">
 <span id="face01lib-logger-module"></span><h2>face01lib.logger module<a class="headerlink" href="#module-face01lib.logger" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>Manage log.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.logger.Logger">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.logger.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/logger.html#Logger"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.logger.Logger" title="Link to this definition"></a></dt>
@@ -1731,9 +1740,7 @@ Please refer to the separate license file for the license of the code.</p>
 </section>
 <section id="module-face01lib.return_face_image">
 <span id="face01lib-return-face-image-module"></span><h2>face01lib.return_face_image module<a class="headerlink" href="#module-face01lib.return_face_image" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
+<p>Return face image data as ndarray.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.return_face_image.Return_face_image">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">face01lib.return_face_image.</span></span><span class="sig-name descname"><span class="pre">Return_face_image</span></span><a class="reference internal" href="_modules/face01lib/return_face_image.html#Return_face_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.return_face_image.Return_face_image" title="Link to this definition"></a></dt>
@@ -1770,7 +1777,7 @@ Please refer to the separate license file for the license of the code.</p>
 <p>このモジュールは、試験段階です。</p>
 </div>
 <p>このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。</p>
-<dl>
+<dl class="simple">
 <dt>主なクラス:</dt><dd><ul class="simple">
 <li><p>Spoof: 顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成を行うメソッドを持つクラス。</p></li>
 </ul>
@@ -1785,9 +1792,6 @@ Please refer to the separate license file for the license of the code.</p>
 spoof_obj.iris()
 spoof_obj.obj_detect()
 spoof_obj.make_qr_code()</p>
-</dd>
-<dt>LICENSE:</dt><dd><p>Copyright Owner: Yoshitsugu Kesamaru</p>
-<p>Please refer to the separate license file for the license of the code.</p>
 </dd>
 </dl>
 <dl class="py class">
@@ -1848,9 +1852,6 @@ spoof_obj.make_qr_code()</p>
 </section>
 <section id="module-face01lib.utils">
 <span id="face01lib-utils-module"></span><h2>face01lib.utils module<a class="headerlink" href="#module-face01lib.utils" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 <p>The utils class.</p>
 <p>When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
 In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</p>
@@ -2213,9 +2214,6 @@ The <cite>notify-send</cite> command is included in the <cite>libnotify-bin</cit
 </section>
 <section id="module-face01lib">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib" title="Link to this heading"></a></h2>
-<p>License for the Code.</p>
-<p>Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.</p>
 </section>
 </section>
 

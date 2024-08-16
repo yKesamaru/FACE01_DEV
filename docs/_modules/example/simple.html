@@ -131,7 +131,7 @@
 <span class="sd">    This simple example script prints out results of face recognition process.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        exec_times (int, optional): Number of frames for process. Defaults to 50 times.</span>
+<span class="sd">        exec_times (int, optional): 何回フレームを処理するかを決定します。 Defaults to 50 times.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
@@ -153,6 +153,11 @@
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinate</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;time</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;output</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;Unknown person&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="p">)</span></div>
 

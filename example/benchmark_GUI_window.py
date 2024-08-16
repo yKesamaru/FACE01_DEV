@@ -52,7 +52,7 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
 # Initialize
-CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
+CONFIG: Dict = Initialize('DISPLAY_GUI', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
@@ -127,5 +127,5 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    pr.run('main(exec_times = 30)', 'restats')
+    pr.run('main(exec_times = 300)', 'restats')
     subprocess.run(["snakeviz", "restats"])

@@ -79,4 +79,4 @@ def main(exec_times: int = 50) -> None:
 
 if __name__ == '__main__':
     # Call main function. Pass 5.
-    main(exec_times=100)
+    main(exec_times=20)

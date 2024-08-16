@@ -38,6 +38,7 @@ jobs:
         run: |
           tree -F -L 2
           sphinx-apidoc -f -o sphinx/ ./
+          sphinx-apidoc -f -o sphinx/ docs/
           sphinx-apidoc -f -o sphinx/ sphinx/
           sphinx-apidoc -f -o sphinx/ example/
           sphinx-apidoc -f -o sphinx/ face01lib/

@@ -103,9 +103,9 @@ def main(
     for root, dirs, _ in os.walk(data_dir):
         for directory in dirs:
             directory_path = os.path.join(root, directory)
-            # Get all files in `directory_path` and store them in `files`
+            # Get all files in directory_path and store them in files
             files = glob(os.path.join(directory_path, "*"))
-            # skip the `for` statement if any element of the list `files` contains the string `jitter`
+            # skip the for statement if any element of the list files contains the string jitter
             if any('jitter' in file for file in files):
                 continue
             else:

@@ -214,7 +214,7 @@ class Cal:
             # # f(x) = 100 / (1 + exp(-10(x - 0.8)))
             # similar_percentage = 100 / (1 + np.exp(-10*(tolerance - 0.8)))
 
-        EfficientNetV2_arcface
+        JAPANESE_FACE_V1
             ## 算出式
             ## y=-23.71x2+49.98x+73.69
             ## See: https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87
@@ -226,23 +226,28 @@ class Cal:
         tolerance: float = 0.0
 
         if deep_learning_model == 0:
-            # tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
-            # tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))
+            # 旧式 #########################################
+            # tolerance_plus: float = (-1 * (-0.380952375) + np.sqrt((-0.380952375) * (-0.380952375) - 4 * (-4.76190475) * (100 - self.similar_percentage))) / (2 * (-4.76190475))
+            # tolerance_minus: float = (-1 * (-0.380952375) - np.sqrt((-0.380952375) * (-0.380952375) - 4 * (-4.76190475) * (100 - self.similar_percentage))) / (2 * (-4.76190475))
             # if -5 < tolerance_plus < 0:
-            #     tolerance= tolerance_plus
+            #     tolerance = tolerance_plus
             # elif 0 < tolerance_minus < 5:
-            #     tolerance= tolerance_minus
+            #     tolerance = tolerance_minus
             # # toleranceの絶対値を得る
             # tolerance = abs(tolerance)
+            # return tolerance
+            # ##############################################
+
+            # 新式 #########################################
             def equation(tolerance):
                 return similar_percentage - 100 / (1 + np.exp(-10 * (tolerance - 0.8)))
-
             tolerance_solution = fsolve(equation, 0.5)
             return tolerance_solution[0]
+            # ##############################################
 
         elif deep_learning_model == 1:
-            tolerance_plus: float = (-1*49.98 + np.sqrt(49.98*49.98-4*(-23.71)*(73.69-self.similar_percentage))) / (2*(-23.71))
-            tolerance_minus: float = (-1*49.98-np.sqrt(49.98*49.98-4*(-23.71)*(73.69-self.similar_percentage))) / (2*(-23.71))
+            tolerance_plus: float = (-1 * 49.98 + np.sqrt(49.98 * 49.98 - 4 * (-23.71) * (73.69 - self.similar_percentage))) / (2 * (-23.71))
+            tolerance_minus: float = (-1 * 49.98 - np.sqrt(49.98 * 49.98 - 4 * (-23.71) * (73.69 - self.similar_percentage))) / (2 * (-23.71))
             if 0 < tolerance_plus < 1:
                 tolerance = tolerance_plus
             elif 0 < tolerance_minus < 1:
