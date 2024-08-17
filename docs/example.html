@@ -100,7 +100,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.data_structure.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-detect-eye-blink-module">example.detect_eye_blink module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.detect_eye_blink">example.detect_eye_blink module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.detect_eye_blink.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.terminate"><code class="docutils literal notranslate"><span class="pre">App.terminate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.update_image"><code class="docutils literal notranslate"><span class="pre">App.update_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.start"><code class="docutils literal notranslate"><span class="pre">App.start()</span></code></a></li>
@@ -111,8 +118,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-display-gui-window-japanese-face-v1-module">example.display_GUI_window_JAPANESE_FACE_V1 module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-distort-barrel-module">example.distort_barrel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window_JAPANESE_FACE_V1">example.display_GUI_window_JAPANESE_FACE_V1 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_JAPANESE_FACE_V1.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.distort_barrel">example.distort_barrel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.draw_datas">example.draw_datas module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.draw_datas.f_norm"><code class="docutils literal notranslate"><span class="pre">f_norm()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.draw_datas.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
@@ -558,7 +572,7 @@ This will read the configuration file config.ini and log errors etc.</p>
 </div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/data_augmentation_mp.py">data_augmentation.py</a></p>
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/data_augmentation_mp.py">data_augmentation_mp.py</a></p>
 </dd>
 </dl>
 <dl class="py data">
@@ -734,8 +748,44 @@ The contents of config.ini described below are the settings for face-detection a
 </dd></dl>
 
 </section>
-<section id="example-detect-eye-blink-module">
-<h2>example.detect_eye_blink module<a class="headerlink" href="#example-detect-eye-blink-module" title="Link to this heading"></a></h2>
+<section id="module-example.detect_eye_blink">
+<span id="example-detect-eye-blink-module"></span><h2>example.detect_eye_blink module<a class="headerlink" href="#module-example.detect_eye_blink" title="Link to this heading"></a></h2>
+<p>まばたきを検出するコード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>このエグザンプルでは、目の瞬き検出を扱うコード例を示します。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/detect_eye_blink.py
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。
+複数人を対象とすることはできません。</p>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/detect_eye_blink.py">detect_eye_blink.py</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.detect_eye_blink.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App.terminate">
+<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.terminate"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.terminate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App.update_image">
+<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.update_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.update_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-example.display_GUI_window">
 <span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Link to this heading"></a></h2>
@@ -798,11 +848,127 @@ Please refer to the separate license file for the license of the code.</p>
 </dd></dl>
 
 </section>
-<section id="example-display-gui-window-japanese-face-v1-module">
-<h2>example.display_GUI_window_JAPANESE_FACE_V1 module<a class="headerlink" href="#example-display-gui-window-japanese-face-v1-module" title="Link to this heading"></a></h2>
+<section id="module-example.display_GUI_window_JAPANESE_FACE_V1">
+<span id="example-display-gui-window-japanese-face-v1-module"></span><h2>example.display_GUI_window_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.display_GUI_window_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
+<p>顔認識モデルとしてJAPANESE FACE V1を使用したGUIアプリケーションのコード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>In this example you can learn how to display GUI and output
+face recognition.</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py
+</pre></div>
+</div>
+</div>
+<p>Results:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/display_GUI_window_JAPANESE_FACE_V1.png"><img alt="Screenshot of the GUI output" src="_images/display_GUI_window_JAPANESE_FACE_V1.png" style="width: 410.0px; height: 327.5px;" /></a>
+<p>コンソール出力は以下のようになります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">岸田文雄</span>
+<span class="go">        similarity              94.1%</span>
+<span class="go">        coordinate              (161, 711, 376, 496)</span>
+<span class="go">        time                    2024,08,17,14,16,05,135247</span>
+<span class="go">        output                  output/岸田文雄_2024,08,17,14,16,05,141640_0.55.png</span>
+<span class="go">-------</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/display_GUI_window_JAPANESE_FACE_V1.py">display_GUI_window_JAPANESE_FACE_V1.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.display_GUI_window_JAPANESE_FACE_V1.main">
+<span class="sig-prename descclassname"><span class="pre">example.display_GUI_window_JAPANESE_FACE_V1.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/display_GUI_window_JAPANESE_FACE_V1.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window_JAPANESE_FACE_V1.main" title="Link to this definition"></a></dt>
+<dd><p>Display window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Receive value of number which is processed. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="example-distort-barrel-module">
-<h2>example.distort_barrel module<a class="headerlink" href="#example-distort-barrel-module" title="Link to this heading"></a></h2>
+<section id="module-example.distort_barrel">
+<span id="example-distort-barrel-module"></span><h2>example.distort_barrel module<a class="headerlink" href="#module-example.distort_barrel" title="Link to this heading"></a></h2>
+<p>樽型歪み画像をシミュレートするコード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>In this example, you can learn how to get distorted images.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">param path<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Directory path where images containing faces exist</p>
+</dd>
+<dt class="field-even">type path<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">param size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200px.</p>
+</dd>
+<dt class="field-even">type size<span class="colon">:</span></dt>
+<dd class="field-even"><p>int, optional</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/distort_barrel.py<span class="w"> </span>path<span class="w"> </span>size
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/distort_barrel.py">distort_barrel.py</a></p>
+</dd>
+</dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.distort_barrel.logger">
+<span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/distort_barrel.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.distort_barrel.logger" title="Link to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.distort_barrel.main">
+<span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">align_and_resize_bool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/distort_barrel.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.distort_barrel.main" title="Link to this definition"></a></dt>
+<dd><p>Simple example.</p>
+<p>このシンプルなコード例では、拡張子がpng, jpg, jpeg画像を含むディレクトリのパスを受け取り、樽型歪み処理をして、それらを保存します。</p>
+<p>See <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/">Tokai-kaoninsho:レンズの歪曲収差と対応方法(6)</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) -- 絶対パス: 例えば&quot;~/bin/FACE01_DEV/assets/data&quot;</p></li>
+<li><p><strong>align_and_resize_bool</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether to align and resize. Defaults to False.</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Width and height. Defaults to 224.</p></li>
+<li><p><strong>initial_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- Initial value. Default is -0.05.</p></li>
+<li><p><strong>closing_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- Closing value. Default is 0.05.</p></li>
+<li><p><strong>step_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) -- Step value. Default is 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>システムにImageMagickがインストールされていなければ正常動作しません。</p>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://imagemagick.org/script/download.php">ImageMagick</a></p></li>
+</ul>
+</div>
+<dl>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="distort_barrel" src="_images/distort_barrel.png" style="width: 753.0px; height: 323.0px;" /></a>
+</dd>
+<dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">Pakutasoハート型のチョコと指ハートの無料写真素材</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-example.draw_datas">
 <span id="example-draw-datas-module"></span><h2>example.draw_datas module<a class="headerlink" href="#module-example.draw_datas" title="Link to this heading"></a></h2>

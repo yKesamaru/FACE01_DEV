@@ -246,17 +246,24 @@ class Utils:
                     :alt: Image taken from https://tokai-kaoninsho.com
         """
         self.img: str = img
+        self.size: int = size
 
         path, file_name = os.path.split(self.img)
 
         p_append: str = "convert +append"
         m_append: str = "convert -append"
         sp: str = " "
-        bk_png: str = "assets/images/224x224.png"
+        if self.size == 224:
+            bk_png: str = "../images/224x224.png"
+        elif self.size == 512:
+            bk_png: str = "../images/512x512.png"
+        else:
+            self.logger.error("入力画像サイズは224pxあるいは512pxに指定してください")
+            exit()
         concat_png: str = "concat.png"
         bb_png: str = "bb.png"
 
-        # pwd = os.getcwd()
+        pwd = os.getcwd()
 
         # top-left
         subprocess.run([p_append + sp + self.img + sp + bk_png + sp + concat_png], shell=True)
@@ -325,7 +332,7 @@ class Utils:
         self.closing_value: float = closing_value
         self.step_value: float = step_value
 
-        if self.align_and_resize_bool == True:
+        if self.align_and_resize_bool is True:
             self.align_and_resize_maintain_aspect_ratio(
                 path=self.path,
                 padding=self.padding,
@@ -336,10 +343,10 @@ class Utils:
         os.mkdir(os.path.join(self.path, "concat_images"))
 
         files: list = []
-        files = self.get_files_from_path(self.path, contain='resize')
+        files = self.get_files_from_path(self.path, contain='')
 
         for file_path in tqdm(files):
-            self.create_concat_images(file_path)
+            self.create_concat_images(file_path, self.size)
 
         # Make float list
         value_list = [initial_value]

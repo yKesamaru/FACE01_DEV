@@ -9,15 +9,8 @@ Example:
         python3 example/detect_eye_blink.py
 
 Note:
-    このコードを実行する際、以下のような大量のスパム出力が標準出力に表示されることがあります。
-    これは、OpenGLやEGLの初期化、および推論処理に関連する内部ログの出力が原因です。
-    これらの出力はプログラムの動作に影響を与えませんが、ログのフィルタリングやリダイレクトが必要な場合があります。
-
-    .. code-block:: text
-
-        I0000 00:00:1723262233.064390   20773 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
-        I0000 00:00:1723262233.148223   21035 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 555.42.06), renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2
-        W0000 00:00:1723262233.150802   21030 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+    このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。
+    複数人を対象とすることはできません。
 
 Source code:
     `detect_eye_blink.py <../example/detect_eye_blink.py>`_
@@ -31,17 +24,17 @@ dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
 
+import tkinter as tk
+from tkinter import Button, Label
 from typing import Dict
 
 import cv2
-import tkinter as tk
-from tkinter import Label, Button
 from PIL import Image, ImageTk
 
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
-from face01lib.spoof import Spoof
 from face01lib.logger import Logger
+from face01lib.spoof import Spoof
 
 # 出力ログの抑制 #################################
 # import os
