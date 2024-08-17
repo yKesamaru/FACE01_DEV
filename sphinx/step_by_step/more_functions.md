@@ -99,7 +99,7 @@ if ELE is False:
         "-------\n"
     )
 ```
-Whole code is [here](../CALL_FACE01.py).
+
 
 # `VidCap` class
 This class is included in `video_capture`.
@@ -113,7 +113,7 @@ Return numpy array of resized image.
 ```python
 resized_frame = VidCap().resize_frame(set_width, set_height, original_frame)
 ```
-Whole code is [here](../../example/resize_frame.py).
+
 
 ## `return_movie_property`
 Return property fps, height and width of input movie data.

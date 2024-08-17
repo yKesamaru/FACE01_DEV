@@ -3,7 +3,7 @@ name: Deploy Sphinx Docs to GitHub Pages
 on:
   push:
     branches:
-        - '**'  # 全てのブランチでトリガー
+      - '**'  # 全てのブランチでトリガー
 
 permissions:
   contents: read
@@ -11,49 +11,23 @@ permissions:
   pages: write
 
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.10.12'
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake
-          sudo apt-get install -y build-essential
-          sudo apt-get install -y libopenblas-dev liblapack-dev
-          sudo apt-get install -y tree
-          pip install -e .
-          pip install -r requirements_dev.txt
-
-      - name: Generate Sphinx documentation
-        working-directory: /home/runner/work/FACE01_DEV/FACE01_DEV
-        run: |
-          tree -F -L 2
-          sphinx-apidoc -f -o sphinx/ ./
-          sphinx-apidoc -f -o sphinx/ sphinx/
-          sphinx-apidoc -f -o sphinx/ docs/
-          sphinx-apidoc -f -o sphinx/ example/
-          sphinx-apidoc -f -o sphinx/ face01lib/
-          sphinx-build -a -b html -E ./sphinx ./docs
-
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs
+          path: ./docs  # ローカルで生成されたドキュメントが入っているディレクトリ
           name: github-pages
           retention-days: 1
 
   deploy:
     runs-on: ubuntu-22.04
-    needs: build
+    needs: upload
 
     steps:
       - name: Deploy to GitHub Pages
