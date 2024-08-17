@@ -339,17 +339,24 @@
 <span class="sd">                    :alt: Image taken from https://tokai-kaoninsho.com</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">img</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">size</span>
 
         <span class="n">path</span><span class="p">,</span> <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">img</span><span class="p">)</span>
 
         <span class="n">p_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert +append&quot;</span>
         <span class="n">m_append</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;convert -append&quot;</span>
         <span class="n">sp</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-        <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;assets/images/224x224.png&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">224</span><span class="p">:</span>
+            <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;../images/224x224.png&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">512</span><span class="p">:</span>
+            <span class="n">bk_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;../images/512x512.png&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;入力画像サイズは224pxあるいは512pxに指定してください&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
         <span class="n">concat_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;concat.png&quot;</span>
         <span class="n">bb_png</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bb.png&quot;</span>
 
-        <span class="c1"># pwd = os.getcwd()</span>
+        <span class="n">pwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
         <span class="c1"># top-left</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">p_append</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">bk_png</span> <span class="o">+</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">concat_png</span><span class="p">],</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -421,7 +428,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">closing_value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">step_value</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_bool</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_bool</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">align_and_resize_maintain_aspect_ratio</span><span class="p">(</span>
                 <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
                 <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span>
@@ -432,10 +439,10 @@
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;concat_images&quot;</span><span class="p">))</span>
 
         <span class="n">files</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">contain</span><span class="o">=</span><span class="s1">&#39;resize&#39;</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">contain</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">create_concat_images</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_concat_images</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 
         <span class="c1"># Make float list</span>
         <span class="n">value_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_value</span><span class="p">]</span>

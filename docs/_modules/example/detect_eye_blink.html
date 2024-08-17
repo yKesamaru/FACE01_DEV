@@ -92,15 +92,8 @@
 <span class="sd">        python3 example/detect_eye_blink.py</span>
 
 <span class="sd">Note:</span>
-<span class="sd">    このコードを実行する際、以下のような大量のスパム出力が標準出力に表示されることがあります。</span>
-<span class="sd">    これは、OpenGLやEGLの初期化、および推論処理に関連する内部ログの出力が原因です。</span>
-<span class="sd">    これらの出力はプログラムの動作に影響を与えませんが、ログのフィルタリングやリダイレクトが必要な場合があります。</span>
-
-<span class="sd">    .. code-block:: text</span>
-
-<span class="sd">        I0000 00:00:1723262233.064390   20773 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5</span>
-<span class="sd">        I0000 00:00:1723262233.148223   21035 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 555.42.06), renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2</span>
-<span class="sd">        W0000 00:00:1723262233.150802   21030 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.</span>
+<span class="sd">    このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。</span>
+<span class="sd">    複数人を対象とすることはできません。</span>
 
 <span class="sd">Source code:</span>
 <span class="sd">    `detect_eye_blink.py &lt;../example/detect_eye_blink.py&gt;`_</span>
@@ -114,17 +107,17 @@
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Label</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
-<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Label</span><span class="p">,</span> <span class="n">Button</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
 
 <span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
-<span class="kn">from</span> <span class="nn">face01lib.spoof</span> <span class="kn">import</span> <span class="n">Spoof</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">face01lib.spoof</span> <span class="kn">import</span> <span class="n">Spoof</span>
 
 <span class="c1"># 出力ログの抑制 #################################</span>
 <span class="c1"># import os</span>
