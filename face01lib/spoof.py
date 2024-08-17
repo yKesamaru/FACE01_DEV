@@ -19,14 +19,20 @@ NOTE:
     spoof_obj.obj_detect()
     spoof_obj.make_qr_code()
 """
+# Operate directory: Common to all examples
+import os.path
+import sys
 
+dir: str = os.path.dirname(__file__)
+parent_dir, _ = os.path.split(dir)
+sys.path.append(parent_dir)
 
 from enum import Enum
 
 import cv2
 import mediapipe as mp
 import numpy as np
-import pyqrcode
+import qrcode
 from PIL import ImageFile
 
 # from face01lib.api import Dlib_api
@@ -187,24 +193,48 @@ class Spoof():
         cap.release()
 
     def make_qr_code(self):
+        """make_qr_code QRCodeを作成するメソッド.
+        Note:
+            入力される映像には1人のみ映っているようにしてください。
+        """
+        import base64
+        import zlib
         # Get CONFIG
         CONFIG = Initialize("MAKE_QR_CODE").initialize()
 
-        # Make generator
-        gen = VidCap_obj.frame_generator(CONFIG)
+        while True:
+            try:
+                resized_frame = VidCap_obj.frame_generator(CONFIG=CONFIG).__next__()  # Make generator
+                # DEBUG:
+                # VidCap_obj.frame_imshow_for_debug(resized_frame)
+                frame_datas_array = Core_obj.frame_pre_processing(self.logger, CONFIG, resized_frame)
+                encoded_list, frame_datas_array = Core_obj.face_encoding_process(self.logger, CONFIG, frame_datas_array)
+                datas_list = Core_obj.frame_post_processing(self.logger, CONFIG, encoded_list, frame_datas_array)
+                if not datas_list[0]['person_data_list'][0]['name'] == 'Unknown':
+                    # DEBUG:
+                    # VidCap_obj.frame_imshow_for_debug(datas_list[0]["img"])
+                    encode_bytes: bytes = encoded_list[0].tobytes()
+                    compressed_bytes: bytes = zlib.compress(encode_bytes)
+                    compressed_bytesencode_str: str = base64.b64encode(compressed_bytes).decode('utf-8')
+                    # QRコードを生成するためのオプションを設定
+                    qr = qrcode.QRCode(
+                        version=None,
+                        error_correction=qrcode.constants.ERROR_CORRECT_L,  # エラー訂正レベルを最小に設定
+                        box_size=10,  # 1ボックスのサイズ（ピクセル）
+                        border=4,  # ボーダーのサイズ（ボックス数）
+                    )
+                    # QRコードにデータを追加
+                    qr.add_data(compressed_bytesencode_str)
+                    qr.make(fit=True)  # データに合わせて最適なQRコードサイズを計算
+                    # QRコードを画像に変換し、保存
+                    img = qr.make_image(fill_color="black", back_color="white")
+                    img.save(datas_list[0]['person_data_list'][0]['name'] + '.png')
 
-        for _ in range(0, 2):
-            resized_frame = VidCap().frame_generator(CONFIG).__next__()
-            VidCap_obj.frame_imshow_for_debug(resized_frame)
-            frame_datas_array = Core_obj.frame_pre_processing(self.logger, CONFIG, resized_frame)
-            encoded_list, frame_datas_array = Core_obj.face_encoding_process(self.logger, CONFIG, frame_datas_array)
-            datas_list = Core_obj.frame_post_processing(self.logger, CONFIG, encoded_list, frame_datas_array)
-            print('datas_list:', datas_list)
-            VidCap_obj.frame_imshow_for_debug(datas_list[0]["img"])
-        pass
-        url = pyqrcode.create('http://uca.edu')
-        url.svg('uca-url.svg', scale=8)
-        print(url.terminal(quiet_zone=1))
+                    # QRコードをターミナルに表示
+                    print("プロジェクトルートディレクトリにQRコードを生成しました。")
+                    break
+            except StopIteration:
+                break
 
 
 if __name__ == '__main__':
