@@ -62,8 +62,6 @@ while True:
                     location = person_data['location']
                     percentage_and_symbol = person_data['percentage_and_symbol']
 ```
-Whole code is [CALL_FACE01.py](../CALL_FACE01.py).
-
 
 ### `frame_pre_processing`
 ```python
@@ -145,4 +143,3 @@ will result
          output  output/菅義偉_2022,07,22,11,05,01,459014_0.34.png
  -------
 ```
-Whole code is described `CALL_FACE01.py`.
