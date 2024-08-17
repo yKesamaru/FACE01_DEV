@@ -102,14 +102,20 @@
 <span class="sd">    spoof_obj.obj_detect()</span>
 <span class="sd">    spoof_obj.make_qr_code()</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Operate directory: Common to all examples</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">mediapipe</span> <span class="k">as</span> <span class="nn">mp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pyqrcode</span>
+<span class="kn">import</span> <span class="nn">qrcode</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFile</span>
 
 <span class="c1"># from face01lib.api import Dlib_api</span>
@@ -283,24 +289,48 @@
 <div class="viewcode-block" id="Spoof.make_qr_code">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.make_qr_code">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">make_qr_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;make_qr_code QRCodeを作成するメソッド.</span>
+<span class="sd">        Note:</span>
+<span class="sd">            入力される映像には1人のみ映っているようにしてください。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">base64</span>
+        <span class="kn">import</span> <span class="nn">zlib</span>
         <span class="c1"># Get CONFIG</span>
         <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;MAKE_QR_CODE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
-        <span class="c1"># Make generator</span>
-        <span class="n">gen</span> <span class="o">=</span> <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">resized_frame</span> <span class="o">=</span> <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="o">=</span><span class="n">CONFIG</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>  <span class="c1"># Make generator</span>
+                <span class="c1"># DEBUG:</span>
+                <span class="c1"># VidCap_obj.frame_imshow_for_debug(resized_frame)</span>
+                <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">resized_frame</span><span class="p">)</span>
+                <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
+                <span class="n">datas_list</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">datas_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span>
+                    <span class="c1"># DEBUG:</span>
+                    <span class="c1"># VidCap_obj.frame_imshow_for_debug(datas_list[0][&quot;img&quot;])</span>
+                    <span class="n">encode_bytes</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">encoded_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+                    <span class="n">compressed_bytes</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">encode_bytes</span><span class="p">)</span>
+                    <span class="n">compressed_bytesencode_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">compressed_bytes</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+                    <span class="c1"># QRコードを生成するためのオプションを設定</span>
+                    <span class="n">qr</span> <span class="o">=</span> <span class="n">qrcode</span><span class="o">.</span><span class="n">QRCode</span><span class="p">(</span>
+                        <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">error_correction</span><span class="o">=</span><span class="n">qrcode</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">ERROR_CORRECT_L</span><span class="p">,</span>  <span class="c1"># エラー訂正レベルを最小に設定</span>
+                        <span class="n">box_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># 1ボックスのサイズ（ピクセル）</span>
+                        <span class="n">border</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># ボーダーのサイズ（ボックス数）</span>
+                    <span class="p">)</span>
+                    <span class="c1"># QRコードにデータを追加</span>
+                    <span class="n">qr</span><span class="o">.</span><span class="n">add_data</span><span class="p">(</span><span class="n">compressed_bytesencode_str</span><span class="p">)</span>
+                    <span class="n">qr</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># データに合わせて最適なQRコードサイズを計算</span>
+                    <span class="c1"># QRコードを画像に変換し、保存</span>
+                    <span class="n">img</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">back_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+                    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">datas_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="n">resized_frame</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
-            <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_imshow_for_debug</span><span class="p">(</span><span class="n">resized_frame</span><span class="p">)</span>
-            <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">resized_frame</span><span class="p">)</span>
-            <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
-            <span class="n">datas_list</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_post_processing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span> <span class="n">encoded_list</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;datas_list:&#39;</span><span class="p">,</span> <span class="n">datas_list</span><span class="p">)</span>
-            <span class="n">VidCap_obj</span><span class="o">.</span><span class="n">frame_imshow_for_debug</span><span class="p">(</span><span class="n">datas_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;img&quot;</span><span class="p">])</span>
-        <span class="k">pass</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">pyqrcode</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;http://uca.edu&#39;</span><span class="p">)</span>
-        <span class="n">url</span><span class="o">.</span><span class="n">svg</span><span class="p">(</span><span class="s1">&#39;uca-url.svg&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">terminal</span><span class="p">(</span><span class="n">quiet_zone</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span></div>
+                    <span class="c1"># QRコードをターミナルに表示</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;プロジェクトルートディレクトリにQRコードを生成しました。&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+                <span class="k">break</span></div>
 </div>
 
 

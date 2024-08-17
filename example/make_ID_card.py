@@ -3,6 +3,9 @@
 Summary:
     この例では、マルチモーダル認証のためのQRコード付きIDカードサンプルの作成方法を学ぶことができます。
     作成された画像ファイルは'example/img/'ディレクトリに保存されます。
+    この例ではより洗練されたQRコード付きIDカードサンプルを作成していますが、QRコードだけの作成ならば
+    Spoof().make_qr_code()
+    で作成できます。'example/anti_spoof.py'を参照してください。
 
 Example:
     .. code-block:: bash

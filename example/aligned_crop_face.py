@@ -18,7 +18,7 @@ Result:
         :alt: face_alignment
 
 Image:
-    `Pakutaso <https://www.pakutaso.com/20230104005post-42856.html>`_
+    `Pakutaso 笑顔でスマホ操作を教えてくれる女性の無料写真素材 <https://www.pakutaso.com/20230104005post-42856.html>`_
 
 Source code:
     `aligned_crop_face.py <../example/aligned_crop_face.py>`_
