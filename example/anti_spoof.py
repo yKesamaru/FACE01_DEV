@@ -1,12 +1,3 @@
-import os.path
-import sys
-
-dir: str = os.path.dirname(__file__)
-parent_dir, _ = os.path.split(dir)
-sys.path.append(parent_dir)
-
-from face01lib.spoof import Spoof
-
 """ アンチスプーフ機能を試すエグザンプルコード.
 
 Summary:
@@ -27,6 +18,14 @@ Results:
         :alt: Screenshot of the lightweight GUI output
 """
 
+import os.path
+import sys
+
+dir: str = os.path.dirname(__file__)
+parent_dir, _ = os.path.split(dir)
+sys.path.append(parent_dir)
+
+from face01lib.spoof import Spoof
 
 if __name__ == '__main__':
 
