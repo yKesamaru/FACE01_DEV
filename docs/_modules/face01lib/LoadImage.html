@@ -89,7 +89,6 @@
 <span class="n">ImageFile</span><span class="o">.</span><span class="n">LOAD_TRUNCATED_IMAGES</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">numpy.typing</span> <span class="k">as</span> <span class="nn">npt</span>
 
 <span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
@@ -129,10 +128,10 @@
 <div class="viewcode-block" id="LoadImage.LI">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.LoadImage.LoadImage.LI">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">LI</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span>
-        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">set_height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">set_width</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">Mat</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return values.</span>
 
 <span class="sd">        Summary:</span>

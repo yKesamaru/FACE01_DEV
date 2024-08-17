@@ -522,17 +522,17 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            List[npt.NDArray[np.float64]]: A list of 128-dimensional face encodings (one for each face in the image).</span>
 
-<span class="sd">            If `deep_learning_model == 1`, the returned list contains 512-dimensional face encodings, with the type</span>
-<span class="sd">            `List[npt.NDArray[np.float32]]`.</span>
+<span class="sd">            If deep_learning_model == 1, the returned list contains 512-dimensional face encodings, with the type</span>
+<span class="sd">            List[npt.NDArray[np.float32]].</span>
 
-<span class="sd">            Image size: The image should be of size 150x150. Also, cropping must be done as `dlib.get_face_chip` would do it.</span>
+<span class="sd">            Image size: The image should be of size 150x150. Also, cropping must be done as dlib.get_face_chip would do it.</span>
 <span class="sd">            That is, centered and scaled essentially the same way.</span>
 
 <span class="sd">        See also:</span>
-<span class="sd">            `class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)`:</span>
+<span class="sd">            class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs):</span>
 <span class="sd">            http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</span>
 
-<span class="sd">            `compute_face_descriptor(*args, **kwargs)`:</span>
+<span class="sd">            compute_face_descriptor(*args, **kwargs):</span>
 <span class="sd">            http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">deep_learning_model</span>
@@ -567,8 +567,6 @@
                     <span class="n">face_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_landmark_ndarray</span><span class="p">)</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">raw_face_landmark</span> <span class="ow">in</span> <span class="n">raw_face_landmarks</span><span class="p">:</span>
-                    <span class="c1"># faces = dlib.full_object_detections()  # type: ignore</span>
-                    <span class="c1"># Make 512 dimensional vector</span>
                     <span class="n">face_landmark_ndarray</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">JAPANESE_FACE_V1_model_compute_face_descriptor</span><span class="p">(</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings_resized_frame</span><span class="p">,</span>
@@ -577,7 +575,7 @@
                             <span class="n">_PADDING</span><span class="o">=</span><span class="mf">0.1</span>
                         <span class="p">)</span>
                     <span class="p">)</span>
-                <span class="n">face_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_landmark_ndarray</span><span class="p">)</span>
+                    <span class="n">face_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face_landmark_ndarray</span><span class="p">)</span>  <span class="c1"># 修正: 各顔のエンコーディングをリストに追加</span>
 
         <span class="k">return</span> <span class="n">face_encodings</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -626,7 +624,7 @@
         <span class="c1"># self.face_to_compare = face_to_compare</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_encodings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1"># return `dummy data`</span>
+            <span class="c1"># return dummy data</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
         <span class="c1"># ord = None -&gt; Frobenius norm. norm for vectors is &#39;2-norm&#39;.</span>
@@ -700,7 +698,7 @@
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
         <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;顔エンコーディングのリストを候補エンコーディングと比較して、それらが一致するかどうかを確認します。</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;顔エンコーディングのリストを候補エンコーディングと比較して、それら数値の比較をします。</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            deep_learning_model (int): 0: dlib cnn model, 1: JAPANESE_FACE_V1.onnx</span>
@@ -718,6 +716,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">tolerance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">threshold</span>
 
+        <span class="c1"># dlib model:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">face_distance_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">face_distance</span><span class="p">(</span>
@@ -735,10 +734,12 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">bool_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">face_distance</span> <span class="ow">in</span> <span class="n">face_distance_list</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">&gt;=</span> <span class="n">face_distance</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">&gt;=</span> <span class="n">face_distance</span><span class="p">:</span>  <span class="c1"># face_distanceがtolerance以下のとき。</span>
                         <span class="n">bool_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">True</span><span class="p">,</span> <span class="n">face_distance</span><span class="p">))</span>
-                    <span class="k">else</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">&lt;</span> <span class="n">face_distance</span><span class="p">:</span>
                         <span class="n">bool_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">False</span><span class="p">,</span> <span class="n">face_distance</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bool_list</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_distance</span>
                 <span class="c1"># bool_list: List[bool] = []</span>
                 <span class="c1">#     if self.tolerance &gt;= face_distance:</span>
@@ -747,6 +748,7 @@
                 <span class="c1">#         bool_list.append(False)</span>
                 <span class="c1"># return np.array(bool_list), self.min_distance</span>
 
+        <span class="c1"># JAPANESE_FACE_V1 model:</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">results</span><span class="p">,</span> <span class="n">max_cos_sim</span> <span class="o">=</span> \

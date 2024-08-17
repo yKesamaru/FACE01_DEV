@@ -605,8 +605,7 @@ class Core:
             finally_width_size: int = int(width * fy)
 
             resized_person_frame: cv2.Mat = \
-                cv2.resize(person_frame, dsize=(
-                    finally_width_size, finally_height_size))
+                cv2.resize(person_frame, dsize=(finally_width_size, finally_height_size))
             person_frame_list.append(resized_person_frame)  # type: ignore
             """DEBUG
             cv2.imshow("DEBUG", person_frame)
@@ -653,7 +652,6 @@ class Core:
 
     # フレーム前処理
     # @profile()
-
     def frame_pre_processing(
         self,
         logger,

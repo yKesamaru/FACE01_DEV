@@ -100,14 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.data_structure.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.detect_eye_blink">example.detect_eye_blink module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.detect_eye_blink.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.terminate"><code class="docutils literal notranslate"><span class="pre">App.terminate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.update_image"><code class="docutils literal notranslate"><span class="pre">App.update_image()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-detect-eye-blink-module">example.detect_eye_blink module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.start"><code class="docutils literal notranslate"><span class="pre">App.start()</span></code></a></li>
@@ -158,7 +151,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.simple.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-simple-japanese-face-v1-module">example.simple_JAPANESE_FACE_V1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.simple_JAPANESE_FACE_V1">example.simple_JAPANESE_FACE_V1 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.simple_JAPANESE_FACE_V1.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.simple_JAPANESE_FACE_V1.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.simple_file_browser">example.simple_file_browser module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.simple_file_browser.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.simple_file_browser.ImageBrowser"><code class="docutils literal notranslate"><span class="pre">ImageBrowser</span></code></a><ul>
@@ -737,50 +734,8 @@ The contents of config.ini described below are the settings for face-detection a
 </dd></dl>
 
 </section>
-<section id="module-example.detect_eye_blink">
-<span id="example-detect-eye-blink-module"></span><h2>example.detect_eye_blink module<a class="headerlink" href="#module-example.detect_eye_blink" title="Link to this heading"></a></h2>
-<p>まばたきを検出するコード例.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>このエグザンプルでは、目の瞬き検出を扱うコード例を示します。</p>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/detect_eye_blink.py
-</pre></div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">注釈</p>
-<p>このコードを実行する際、以下のような大量のスパム出力が標準出力に表示されることがあります。
-これは、OpenGLやEGLの初期化、および推論処理に関連する内部ログの出力が原因です。
-これらの出力はプログラムの動作に影響を与えませんが、ログのフィルタリングやリダイレクトが必要な場合があります。</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I0000 00:00:1723262233.064390   20773 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
-I0000 00:00:1723262233.148223   21035 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 555.42.06), renderer: NVIDIA GeForce GTX 1660 Ti/PCIe/SSE2
-W0000 00:00:1723262233.150802   21030 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-</pre></div>
-</div>
-</div>
-<dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="../example/detect_eye_blink.py">detect_eye_blink.py</a></p>
-</dd>
-</dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="example.detect_eye_blink.App">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.detect_eye_blink.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App" title="Link to this definition"></a></dt>
-<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="example.detect_eye_blink.App.terminate">
-<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.terminate"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.terminate" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="example.detect_eye_blink.App.update_image">
-<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.update_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.update_image" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<section id="example-detect-eye-blink-module">
+<h2>example.detect_eye_blink module<a class="headerlink" href="#example-detect-eye-blink-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.display_GUI_window">
 <span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Link to this heading"></a></h2>
@@ -1232,8 +1187,46 @@ Please refer to the separate license file for the license of the code.</p>
 </dd></dl>
 
 </section>
-<section id="example-simple-japanese-face-v1-module">
-<h2>example.simple_JAPANESE_FACE_V1 module<a class="headerlink" href="#example-simple-japanese-face-v1-module" title="Link to this heading"></a></h2>
+<section id="module-example.simple_JAPANESE_FACE_V1">
+<span id="example-simple-japanese-face-v1-module"></span><h2>example.simple_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.simple_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
+<p>Example of simple face recognition script with EfficientNetV2 Arcface model.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple.</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/simple_efficientnetv2_arcface.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="../example/simple_efficientnetv2_arcface.py">simple_efficientnetv2_arcface.py</a></p>
+</dd>
+</dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="example.simple_JAPANESE_FACE_V1.logger">
+<span class="sig-prename descclassname"><span class="pre">example.simple_JAPANESE_FACE_V1.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/simple_JAPANESE_FACE_V1.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.simple_JAPANESE_FACE_V1.logger" title="Link to this definition"></a></dt>
+<dd><p>Initialize and Setup logger.
+When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
+This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.simple_JAPANESE_FACE_V1.main">
+<span class="sig-prename descclassname"><span class="pre">example.simple_JAPANESE_FACE_V1.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/simple_JAPANESE_FACE_V1.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_JAPANESE_FACE_V1.main" title="Link to this definition"></a></dt>
+<dd><p>Simple example.</p>
+<p>This simple example script prints out results of face recognition process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-example.simple_file_browser">
 <span id="example-simple-file-browser-module"></span><h2>example.simple_file_browser module<a class="headerlink" href="#module-example.simple_file_browser" title="Link to this heading"></a></h2>

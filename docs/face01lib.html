@@ -534,7 +534,7 @@
 # # f(x) = 100 / (1 + exp(-10(x - 0.8)))
 # similar_percentage = 100 / (1 + np.exp(-10*(tolerance - 0.8)))</p>
 </dd>
-<dt>EfficientNetV2_arcface</dt><dd><p>## 算出式
+<dt>JAPANESE_FACE_V1</dt><dd><p>## 算出式
 ## y=-23.71x2+49.98x+73.69
 ## See: <a class="reference external" href="https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87">https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87</a>
 ## percentage = -23.71*(p*p)+49.98*p+73.69
@@ -1398,7 +1398,7 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.compare_faces">
 <span class="sig-name descname"><span class="pre">compare_faces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep_learning_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">known_face_encodings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">face_encoding_to_check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.compare_faces"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.compare_faces" title="Link to this definition"></a></dt>
-<dd><p>顔エンコーディングのリストを候補エンコーディングと比較して、それらが一致するかどうかを確認します。</p>
+<dd><p>顔エンコーディングのリストを候補エンコーディングと比較して、それら数値の比較をします。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1472,9 +1472,9 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>A list of 128-dimensional face encodings (one for each face in the image).</p>
-<p>If <cite>deep_learning_model == 1</cite>, the returned list contains 512-dimensional face encodings, with the type
-<cite>List[npt.NDArray[np.float32]]</cite>.</p>
-<p>Image size: The image should be of size 150x150. Also, cropping must be done as <cite>dlib.get_face_chip</cite> would do it.
+<p>If deep_learning_model == 1, the returned list contains 512-dimensional face encodings, with the type
+List[npt.NDArray[np.float32]].</p>
+<p>Image size: The image should be of size 150x150. Also, cropping must be done as dlib.get_face_chip would do it.
 That is, centered and scaled essentially the same way.</p>
 </p>
 </dd>
@@ -1484,9 +1484,9 @@ That is, centered and scaled essentially the same way.</p>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
-<p><cite>class dlib.face_recognition_model_v1: compute_face_descriptor(*args, **kwargs)</cite>:
+<p>class dlib.face_recognition_model_v1: compute_face_descriptor(<a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs):
 <a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1</a></p>
-<p><cite>compute_face_descriptor(*args, **kwargs)</cite>:
+<p>compute_face_descriptor(<a href="#id5"><span class="problematic" id="id6">*</span></a>args, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs):
 <a class="reference external" href="http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor">http://dlib.net/python/index.html#dlib_pybind11.face_recognition_model_v1.compute_face_descriptor</a></p>
 </div>
 </dd></dl>
@@ -1568,7 +1568,7 @@ That is, centered and scaled essentially the same way.</p>
 <span id="face01lib-load-preset-image-module"></span><h2>face01lib.load_preset_image module<a class="headerlink" href="#module-face01lib.load_preset_image" title="Link to this heading"></a></h2>
 <p>顔画像ファイルから`npKnown.npz`ファイルを作成する.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">`</span></a>preset_face_images`ディレクトリを捜査して、<a href="#id3"><span class="problematic" id="id4">`</span></a>npKnown.npz`ファイルを作成します。</p>
+<dt>Summary:</dt><dd><p><a href="#id9"><span class="problematic" id="id10">`</span></a>preset_face_images`ディレクトリを捜査して、<a href="#id11"><span class="problematic" id="id12">`</span></a>npKnown.npz`ファイルを作成します。</p>
 </dd>
 </dl>
 <dl class="py class">

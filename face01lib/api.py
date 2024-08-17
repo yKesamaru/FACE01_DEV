@@ -471,8 +471,6 @@ class Dlib_api:
                     face_encodings.append(face_landmark_ndarray)
             elif self.deep_learning_model == 1:
                 for raw_face_landmark in raw_face_landmarks:
-                    # faces = dlib.full_object_detections()  # type: ignore
-                    # Make 512 dimensional vector
                     face_landmark_ndarray: npt.NDArray[np.float64] = np.array(
                         self.JAPANESE_FACE_V1_model_compute_face_descriptor(
                             self.face_encodings_resized_frame,
@@ -481,8 +479,7 @@ class Dlib_api:
                             _PADDING=0.1
                         )
                     )
-                face_encodings.append(face_landmark_ndarray)
-
+                    face_encodings.append(face_landmark_ndarray)  # 修正: 各顔のエンコーディングをリストに追加
         return face_encodings
         """
         [compute_face_descriptor](https://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html?m=0&commentPage=2)

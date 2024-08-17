@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.benchmark_GUI_window &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>example.simple_JAPANESE_FACE_V1 &mdash; FACE01 3.0.02 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -71,7 +71,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
-      <li class="breadcrumb-item active">example.benchmark_GUI_window</li>
+      <li class="breadcrumb-item active">example.simple_JAPANESE_FACE_V1</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -80,37 +80,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>example.benchmark_GUI_window のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;顔認証におけるベンチマークコード例.</span>
+  <h1>example.simple_JAPANESE_FACE_V1 のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Example of simple face recognition script with EfficientNetV2 Arcface model.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    このエグザンプルコードでは、GUIウィンドウを作成したときの顔認証ベンチマークを取得する方法を学びます。</span>
-<span class="sd">    このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。</span>
-<span class="sd">    具体的にはrequirements_dev.txtをインストールしてください。</span>
-
-<span class="sd">    .. code-block:: bash</span>
-
-<span class="sd">        pip install -r requirements_dev.txt</span>
-
-<span class="sd">    起動後、自動的にベンチマーク結果がブラウザ表示されます。</span>
-<span class="sd">    終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</span>
+<span class="sd">    In this example, you can learn how to execute FACE01 as simple.</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python3 example/benchmark_GUI_window.py</span>
-
-<span class="sd">Result:</span>
-<span class="sd">    .. image:: ../docs/img/benchmark_GUI_window.png</span>
-<span class="sd">        :scale: 50%</span>
-<span class="sd">        :alt: benchmark_GUI_window</span>
-
-<span class="sd">    .. image:: ../docs/img/benchmark_GUI.png</span>
-<span class="sd">        :scale: 50%</span>
-<span class="sd">        :alt: benchmark_GUI</span>
+<span class="sd">        python3 example/simple_efficientnetv2_arcface.py</span>
 
 <span class="sd">Source code:</span>
-<span class="sd">    `benchmark_GUI_window.py &lt;../example/benchmark_GUI_window.py&gt;`_</span>
+<span class="sd">    `simple_efficientnetv2_arcface.py &lt;../example/simple_efficientnetv2_arcface.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
@@ -120,22 +102,15 @@
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">cProfile</span> <span class="k">as</span> <span class="nn">pr</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
-<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
+
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>  <span class="c1"># tkinterで画像を扱うために必要</span>
-
-<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
 <span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 <span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DISPLAY_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;JAPANESE_FACE_V1_MODEL&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
@@ -143,44 +118,32 @@
 <span class="sd">This will read the configuration file `config.ini` and log errors etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="c1"># Make generator</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../example.html#example.benchmark_GUI_window.main">[ドキュメント]</a>
+<a class="viewcode-back" href="../../example.html#example.simple_JAPANESE_FACE_V1.main">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make GUI window and benchmark on your own browser.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple example.</span>
+
+<span class="sd">    This simple example script prints out results of face recognition process.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        exec_times (int, optional): Number of frames for process. Defaults to 50 times.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Create tkinter window</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;FACE01 EXAMPLE&#39;</span><span class="p">)</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;800x600&quot;</span><span class="p">)</span>  <span class="c1"># ウィンドウサイズの設定</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">iconphoto</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;assets/images/g1320.png&quot;</span><span class="p">))</span>
-
-    <span class="c1"># Create tkinter widgets</span>
-    <span class="n">display_label</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-    <span class="n">display_label</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
-
-    <span class="c1"># Specify START point</span>
-    <span class="n">START</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time_forward</span><span class="p">()</span>
-
     <span class="c1"># Repeat &#39;exec_times&#39; times</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+
         <span class="c1"># Call __next__() from the generator object</span>
         <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
 
-        <span class="c1"># Process events</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">update_idletasks</span><span class="p">()</span>
-        <span class="n">root</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-
         <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
+
             <span class="k">for</span> <span class="n">person_data</span> <span class="ow">in</span> <span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span>
@@ -190,31 +153,12 @@
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;time</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;output</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown person&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-                          <span class="s2">&quot;------</span><span class="se">\n</span><span class="s2">&quot;</span>
-                          <span class="p">)</span>
-
-                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">],</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
-                <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-                <span class="n">imgtk</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
-                <span class="n">display_label</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">imgtk</span><span class="p">)</span>
-                <span class="n">display_label</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">imgtk</span>  <span class="c1"># 参照を保持するために必要</span>
-
-    <span class="c1"># Close the tkinter window</span>
-    <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-
-    <span class="n">END</span> <span class="o">=</span> <span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time_backward</span><span class="p">()</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total processing time: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time</span><span class="p">(</span><span class="n">START</span><span class="p">,</span><span class="w"> </span><span class="n">END</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">[seconds]&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Per frame: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">Cal</span><span class="o">.</span><span class="n">Measure_processing_time</span><span class="p">(</span><span class="n">START</span><span class="p">,</span><span class="w"> </span><span class="n">END</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">exec_times</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">[seconds]&#39;</span><span class="p">)</span></div>
+                    <span class="p">)</span></div>
 
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">pr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;main(exec_times = 300)&#39;</span><span class="p">,</span> <span class="s1">&#39;restats&#39;</span><span class="p">)</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;snakeviz&quot;</span><span class="p">,</span> <span class="s2">&quot;restats&quot;</span><span class="p">])</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 
            </div>
