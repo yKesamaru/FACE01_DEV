@@ -54,7 +54,7 @@ class App:
 
         self.running = True
         self.gen = None
-        self.CONFIG = Initialize('bug_DISPLAY_GUI').initialize()
+        self.CONFIG = Initialize('DISPLAY_GUI').initialize()
 
     def start(self):
         self.gen = Core().common_process(self.CONFIG)

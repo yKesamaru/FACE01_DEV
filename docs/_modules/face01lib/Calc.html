@@ -322,7 +322,7 @@
 <span class="sd">            # # f(x) = 100 / (1 + exp(-10(x - 0.8)))</span>
 <span class="sd">            # similar_percentage = 100 / (1 + np.exp(-10*(tolerance - 0.8)))</span>
 
-<span class="sd">        EfficientNetV2_arcface</span>
+<span class="sd">        JAPANESE_FACE_V1</span>
 <span class="sd">            ## 算出式</span>
 <span class="sd">            ## y=-23.71x2+49.98x+73.69</span>
 <span class="sd">            ## See: https://zenn.dev/ykesamaru/articles/bc74ec27925896#%E9%96%BE%E5%80%A4%E3%81%A8%E7%99%BE%E5%88%86%E7%8E%87</span>
@@ -334,23 +334,28 @@
         <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
         <span class="k">if</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1"># tolerance_plus: float = (-1*(-0.380952375) + np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))</span>
-            <span class="c1"># tolerance_minus: float = (-1*(-0.380952375)-np.sqrt((-0.380952375)*(-0.380952375)-4*(-4.76190475)*(100-self.similar_percentage))) / (2*(-4.76190475))</span>
+            <span class="c1"># 旧式 #########################################</span>
+            <span class="c1"># tolerance_plus: float = (-1 * (-0.380952375) + np.sqrt((-0.380952375) * (-0.380952375) - 4 * (-4.76190475) * (100 - self.similar_percentage))) / (2 * (-4.76190475))</span>
+            <span class="c1"># tolerance_minus: float = (-1 * (-0.380952375) - np.sqrt((-0.380952375) * (-0.380952375) - 4 * (-4.76190475) * (100 - self.similar_percentage))) / (2 * (-4.76190475))</span>
             <span class="c1"># if -5 &lt; tolerance_plus &lt; 0:</span>
-            <span class="c1">#     tolerance= tolerance_plus</span>
+            <span class="c1">#     tolerance = tolerance_plus</span>
             <span class="c1"># elif 0 &lt; tolerance_minus &lt; 5:</span>
-            <span class="c1">#     tolerance= tolerance_minus</span>
+            <span class="c1">#     tolerance = tolerance_minus</span>
             <span class="c1"># # toleranceの絶対値を得る</span>
             <span class="c1"># tolerance = abs(tolerance)</span>
+            <span class="c1"># return tolerance</span>
+            <span class="c1"># ##############################################</span>
+
+            <span class="c1"># 新式 #########################################</span>
             <span class="k">def</span> <span class="nf">equation</span><span class="p">(</span><span class="n">tolerance</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">similar_percentage</span> <span class="o">-</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="n">tolerance</span> <span class="o">-</span> <span class="mf">0.8</span><span class="p">)))</span>
-
             <span class="n">tolerance_solution</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">tolerance_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># ##############################################</span>
 
         <span class="k">elif</span> <span class="n">deep_learning_model</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">tolerance_plus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="mf">49.98</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">73.69</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
-            <span class="n">tolerance_minus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span><span class="o">*</span><span class="mf">49.98</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">73.69</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
+            <span class="n">tolerance_plus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="mf">49.98</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span> <span class="o">*</span> <span class="mf">49.98</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">73.69</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
+            <span class="n">tolerance_minus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="mf">49.98</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">49.98</span> <span class="o">*</span> <span class="mf">49.98</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">73.69</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">similar_percentage</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.71</span><span class="p">))</span>
             <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">tolerance_plus</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">tolerance</span> <span class="o">=</span> <span class="n">tolerance_plus</span>
             <span class="k">elif</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">tolerance_minus</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
