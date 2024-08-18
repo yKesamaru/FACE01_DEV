@@ -81,5 +81,7 @@ python example/simple.py
 - コンテナとホストのCUDAドライバを確認してください
   - ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。その場合はDockerの使用を諦め、まっさらなUbuntu環境に`FACE01`をインストールするか、`GUI`を使わない方法に切り替えてください。`GUI`を使わない場合、`no-gpu`のタグがついたイメージを使用し、`config.ini`ファイルの`headless`を`True`に指定してください。
 - `config.ini`の`use_pipe`を`False`に設定してください。
+### その他
+[こちらのトラブルシューティング](https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id12)も参考にしてください。
 ### それでも解決しない時
 - [Issue](https://github.com/yKesamaru/FACE01_DEV/issues)に投稿してください
