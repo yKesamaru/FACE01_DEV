@@ -15,7 +15,7 @@ for i in sys.path:
 project = 'FACE01'
 copyright = '2024, yKesamaru'
 author = 'yKesamaru'
-release = '3.0.02'
+release = '3.0.03'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -46,22 +46,39 @@ intersphinx_mapping = {
 
 language = 'ja'
 
+# Googleスタイルのdocstringをサポートするかどうかを指定。`True`: GoogleスタイルのdocstringをSphinxが理解し、正しくフォーマットする。
 napoleon_google_docstring = True
+# NumPyスタイルのdocstringをサポートするかどうかを指定。`False`: NumPyスタイルのdocstringはサポートされない。
 napoleon_numpy_docstring = False
+# クラスの`__init__`メソッドのdocstringをクラスのdocstringに含めるかどうかを指定。`False`: `__init__`のdocstringは無視される。
 napoleon_include_init_with_doc = False
+# プライベートメンバー（アンダースコアで始まるメソッドや属性）のdocstringをドキュメントに含めるかどうかを指定。`False`: プライベートメンバーのdocstringは無視される。
 napoleon_include_private_with_doc = False
+# 特殊メソッド（`__str__`, `__repr__`など）のdocstringをドキュメントに含めるかどうかを指定。`True`: 特殊メソッドのdocstringもドキュメントに含まれる。
 napoleon_include_special_with_doc = True
+# "Examples"セクションに対してadmonition（注意書き）ブロックを使用するかどうかを指定。`True`: "Examples"セクションがadmonitionブロックとして表示される。
 napoleon_use_admonition_for_examples = True
+# "Notes"セクションに対してadmonitionブロックを使用するかどうかを指定。`False`: 通常のセクションとして表示される。
 napoleon_use_admonition_for_notes = False
+# "References"セクションに対してadmonitionブロックを使用するかどうかを指定。`False`: 通常のセクションとして表示される。
 napoleon_use_admonition_for_references = False
+# 属性（インスタンス変数）を`ivar`フィールドとしてドキュメントに含めるかどうかを指定。`False`: 通常の属性として扱われる。
 napoleon_use_ivar = False
+# 関数やメソッドの引数に対して`param`フィールドを使用するかどうかを指定。`True`: 引数が`param`フィールドとして表示される。
 napoleon_use_param = True
+# 関数やメソッドのキーワード引数に対して`keyword`フィールドを使用するかどうかを指定。`True`: キーワード引数が`keyword`フィールドとして表示される。
 napoleon_use_keyword = True
+# 関数やメソッドの戻り値に対して`rtype`フィールドを使用するかどうかを指定。`True`: 戻り値が`rtype`フィールドとして表示される。
 napoleon_use_rtype = True
+# 型情報を事前に処理するかどうかを指定。`False`: 型情報はそのまま表示される。
 napoleon_preprocess_types = False
+# 型の別名（type alias）を定義するための辞書。`None`: 別名は定義されない。
 napoleon_type_aliases = None
+# 属性にアノテーションがある場合、それをドキュメントに含めるかどうかを指定。`True`: アノテーションもドキュメントに含まれる。
 napoleon_attr_annotations = True
+# カスタムセクションを定義するためのリスト。`None`: カスタムセクションは定義されない。
 napoleon_custom_sections = None
+
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -95,6 +112,10 @@ html_favicon = 'https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/as
 # html_last_updated_fmt = "%b %d, %Y"
 
 html_static_path = ['_static']
+# メソッドなどのページに区切り線を挿入する
+html_css_files = [
+    'custom.css',
+]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_context = {
