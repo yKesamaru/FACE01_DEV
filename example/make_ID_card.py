@@ -17,7 +17,7 @@ Results:
         :scale: 50%
 
 Source code:
-    `make_ID_card.py <../example/make_ID_card.py>`_
+    `make_ID_card.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_ID_card.py>`_
 """
 
 # Operate directory: Common to all examples

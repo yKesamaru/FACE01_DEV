@@ -11,7 +11,7 @@ Example:
             "/path/to/dir" "" "lens" 224 10 -0.1 0.1 0.01 4
 
 Source code:
-    `data_augmentation_mp.py <../example/data_augmentation_mp.py>`_
+    `data_augmentation_mp.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_augmentation_mp.py>`_
 """
 import concurrent.futures
 # Operate directory: Common to all examples

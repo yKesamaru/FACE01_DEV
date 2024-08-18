@@ -10,7 +10,7 @@ Example:
         python3 example/similarity.py
 
 Source code:
-    `similarity.py <../example/similarity.py>`_
+    `similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/similarity.py>`_
 
 Copyright Owner: Yoshitsugu Kesamaru
 Please refer to the separate license file for the license of the code.

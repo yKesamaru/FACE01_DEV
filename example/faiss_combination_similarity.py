@@ -16,7 +16,7 @@ Usage:
         python3 example/faiss_combination_similarity.py
 
 Source code:
-    `faiss_combination_similarity.py <../example/faiss_combination_similarity.py>`_
+    `faiss_combination_similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/faiss_combination_similarity.py>`_
 """
 
 # Operate directory: Common to all examples

@@ -18,7 +18,7 @@ Result:
         :alt: 20 times
 
 Source code:
-    `draw_datas.py <../example/draw_datas.py>`_
+    `draw_datas.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/draw_datas.py>`_
 """
 
 # Operate directory: Common to all examples

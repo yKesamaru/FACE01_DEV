@@ -18,7 +18,7 @@ Example:
         python3 example/combination_similarity.py
 
 Source code:
-    `combination_similarity.py <../example/combination_similarity.py>`_
+    `combination_similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/combination_similarity.py>`_
 """
 # Operate directory: Common to all examples
 import os

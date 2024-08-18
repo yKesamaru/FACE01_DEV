@@ -9,7 +9,7 @@ Example:
         python3 example/simple.py
 
 Source code:
-    `simple.py <../example/simple.py>`_
+    `simple.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/simple.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

@@ -27,7 +27,7 @@ Result:
         :alt: benchmark_GUI
 
 Source code:
-    `benchmark_GUI_window.py <../example/benchmark_GUI_window.py>`_
+    `benchmark_GUI_window.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/benchmark_GUI_window.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

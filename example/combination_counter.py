@@ -16,7 +16,7 @@ Example:
         python3 combination_counter.py
 
 Source code:
-    `combination_counter.py <../example/combination_counter.py>`_
+    `combination_counter.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/combination_counter.py>`_
 """
 
 import os

@@ -23,7 +23,7 @@ Result:
         :alt: jitter_image
 
 Source code:
-    `jitter.py <../example/jitter.py>`_
+    `jitter.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/jitter.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

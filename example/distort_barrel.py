@@ -13,7 +13,7 @@ Example:
         python3 example/distort_barrel.py path size
 
 Source code:
-    `distort_barrel.py <../example/distort_barrel.py>`_
+    `distort_barrel.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/distort_barrel.py>`_
 """
 import os
 import sys

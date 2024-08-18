@@ -28,7 +28,7 @@ Results:
         -------
 
 Source code:
-    `lightweight_GUI.py <../example/lightweight_GUI.py>`_
+    `lightweight_GUI.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/lightweight_GUI.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

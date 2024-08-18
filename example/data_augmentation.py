@@ -16,7 +16,7 @@ Result:
         :alt: Image taken from https://tokai-kaoninsho.com
 
 Source code:
-    `data_augmentation.py <../example/data_augmentation.py>`_
+    `data_augmentation.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_augmentation.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

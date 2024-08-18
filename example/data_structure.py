@@ -113,7 +113,7 @@ Data structure:
             * percentage_and_symbol: xx%
         
 Source code:
-    `data_structure.py <../example/data_structure.py>`_
+    `data_structure.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_structure.py>`_
 """
 
 # Operate directory: Common to all examples

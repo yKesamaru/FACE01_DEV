@@ -14,7 +14,7 @@ Example:
     Not more two persons in same input.
 
 Source code:
-    `get_encoded_data.py <../example/get_encoded_data.py>`_
+    `get_encoded_data.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/get_encoded_data.py>`_
 """
 
 # Operate directory: Common to all examples
