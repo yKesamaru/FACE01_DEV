@@ -10,7 +10,7 @@ Args:
 Usage:
     .. code-block:: bash
 
-        python3 example/aligned_crop_face.py path size
+        python3 example/aligned_crop_face.py <path> <size>
 
 Result:
     .. image:: ../docs/img/face_alignment.png

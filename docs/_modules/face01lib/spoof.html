@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.spoof &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>face01lib.spoof &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
@@ -15,13 +16,13 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.02 ドキュメント 内を検索"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -86,7 +87,7 @@
 <span class="sd">NOTE:</span>
 <span class="sd">    このモジュールは、試験段階です。</span>
 
-<span class="sd">このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。</span>
+<span class="sd">    このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。</span>
 
 <span class="sd">主なクラス:</span>
 <span class="sd">    - Spoof: 顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成を行うメソッドを持つクラス。</span>
@@ -101,6 +102,9 @@
 <span class="sd">    spoof_obj.iris()</span>
 <span class="sd">    spoof_obj.obj_detect()</span>
 <span class="sd">    spoof_obj.make_qr_code()</span>
+
+<span class="sd">Source code:</span>
+<span class="sd">    `spoof.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/face01lib/spoof.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
@@ -292,9 +296,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;make_qr_code QRCodeを作成するメソッド.</span>
 <span class="sd">        Note:</span>
 <span class="sd">            入力される映像には1人のみ映っているようにしてください。</span>
+<span class="sd">            preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">base64</span>
         <span class="kn">import</span> <span class="nn">zlib</span>
+
         <span class="c1"># Get CONFIG</span>
         <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s2">&quot;MAKE_QR_CODE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
