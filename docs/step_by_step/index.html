@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FACE01ライブラリのステップバイステップガイド &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>FACE01ライブラリのステップバイステップガイド &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
@@ -16,13 +17,13 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ebc0197d"></script>
+        <script src="../_static/documentation_options.js?v=8f0fc939"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.02 ドキュメント 内を検索"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
           href="../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
@@ -54,21 +55,22 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../step_by_step.html">ステップ・バイ・ステップ</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">FACE01ライブラリのステップバイステップガイド</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">チェック項目</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2"><span class="xref myst">FACE01のインストール</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">ライセンス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">チェック項目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><span class="xref myst">FACE01のインストール</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#docker">[Dockerの使用]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3"><span class="xref myst">顔画像の登録</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><span class="xref myst">顔画像の登録</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#python">仮想Python環境の有効化</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vim">vimのインストール確認</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4"><span class="xref myst">設定ファイルの編集</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5"><span class="xref myst">FACE01の簡単な使用フロー</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6"><span class="xref myst">ファンクションについて</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7"><span class="xref myst">簡単な顔認識</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><span class="xref myst">設定ファイルの編集</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6"><span class="xref myst">FACE01の簡単な使用フロー</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7"><span class="xref myst">ファンクションについて</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8"><span class="xref myst">簡単な顔認識</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gui"><span class="xref myst">GUIウィンドウの表示</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8"><span class="xref myst">会社の「テロップ」や「ロゴ」画像を表示</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9"><span class="xref myst">ベンチマークを取りたい？</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">エグザンプルリスト</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">トラブルシューティング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9"><span class="xref myst">会社の「テロップ」や「ロゴ」画像を表示</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10"><span class="xref myst">ベンチマークを取りたい？</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">エグザンプルリスト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">トラブルシューティング</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cuda">CUDAが動作しない</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dlib-dlib-use-cudafalse">dlib.DLIB_USE_CUDAがFalseの場合の対処法</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#libcudart-so-11-0"><code class="docutils literal notranslate"><span class="pre">libcudart.so.11.0</span></code>などが見つからないエラーが出力される</a></li>
@@ -130,7 +132,13 @@
    1. [CUDAが動作しない](#cudaが動作しない)
    2. [dlib.DLIB\_USE\_CUDAがFalseの場合の対処法](#dlibdlib_use_cudaがfalseの場合の対処法) -->
 <section id="id1">
-<h2>チェック項目<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>ライセンス<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>ライセンスについては<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE">こちら</a>をご覧ください。</p>
+<p>また、YouTube上で<code class="docutils literal notranslate"><span class="pre">OpenSeeFace</span></code>などを動作させるためのライセンスは<a class="reference internal" href="#YouTube_license.md"><span class="xref myst">こちら</span></a>をご覧ください。</p>
+<p>教育目的で<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をご利用の場合は<a class="reference internal" href="#academic.md"><span class="xref myst">こちら</span></a>をご覧ください。</p>
+</section>
+<section id="id2">
+<h2>チェック項目<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <p>✅</p>
 <ul class="simple">
 <li><p>[x] Pythonの基本操作</p></li>
@@ -141,8 +149,8 @@
 <p>すべての項目を確認しましたか？
 OK！では始めましょう！</p>
 </section>
-<section id="id2">
-<h2><a class="reference internal" href="Installation.html"><span class="std std-doc">FACE01のインストール</span></a><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h2><a class="reference internal" href="Installation.html"><span class="std std-doc">FACE01のインストール</span></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <p>ここでは、FACE01のインストール方法について解説します。
 <a class="reference internal" href="Installation.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
@@ -154,8 +162,8 @@ OK！では始めましょう！</p>
 <li><p>また具体的な<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>の使用法について<a class="reference internal" href="docker.html"><span class="std std-doc">こちら</span></a>で解説しています。</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2><a class="reference internal" href="register_faces.html"><span class="std std-doc">顔画像の登録</span></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h2><a class="reference internal" href="register_faces.html"><span class="std std-doc">顔画像の登録</span></a><a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <p>この記事では、顔画像の登録方法について説明します。
 詳細は<a class="reference internal" href="register_faces.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
@@ -175,22 +183,22 @@ which<span class="w"> </span>vim
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h2><a class="reference internal" href="config_ini.html"><span class="std std-doc">設定ファイルの編集</span></a><a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h2><a class="reference internal" href="config_ini.html"><span class="std std-doc">設定ファイルの編集</span></a><a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
 <p>設定は<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルで行います。
 <code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルについては<a class="reference internal" href="config_ini.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
-<section id="id5">
-<h2><a class="reference internal" href="simple_flow.html"><span class="std std-doc">FACE01の簡単な使用フロー</span></a><a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="id6">
+<h2><a class="reference internal" href="simple_flow.html"><span class="std std-doc">FACE01の簡単な使用フロー</span></a><a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
 <p>FACE01の使い方の一例ですが、簡単なフローを見てみましょう。
 詳細は<a class="reference internal" href="simple_flow.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
-<section id="id6">
-<h2><a class="reference internal" href="functions.html"><span class="std std-doc">ファンクションについて</span></a><a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h2><a class="reference internal" href="functions.html"><span class="std std-doc">ファンクションについて</span></a><a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を試用する上での基本的なファンクションについて<a class="reference internal" href="functions.html"><span class="std std-doc">こちら</span></a>で確認しましょう。</p>
 </section>
-<section id="id7">
-<h2><a class="reference internal" href="simple.html"><span class="std std-doc">簡単な顔認識</span></a><a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h2><a class="reference internal" href="simple.html"><span class="std std-doc">簡単な顔認識</span></a><a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">simple.py</span></code>を試してみましょう。
 simple.pyはCUI動作のためのエグザンプルのスクリプトです。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
@@ -208,18 +216,18 @@ simple.pyはCUI動作のためのエグザンプルのスクリプトです。</
 </div>
 <p>詳細は<a class="reference internal" href="simple.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
-<section id="id8">
-<h2><a class="reference internal" href="ch_telop.html"><span class="std std-doc">会社の「テロップ」や「ロゴ」画像を表示</span></a><a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h2><a class="reference internal" href="ch_telop.html"><span class="std std-doc">会社の「テロップ」や「ロゴ」画像を表示</span></a><a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
 <p>ウィンドウに会社のロゴなどを表示したいですか？
 もちろん可能です！
 詳細は<a class="reference internal" href="ch_telop.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
-<section id="id9">
-<h2><a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">ベンチマークを取りたい？</span></a><a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h2><a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">ベンチマークを取りたい？</span></a><a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
 <p>詳細は<a class="reference internal" href="benchmark_CUI.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
-<section id="id10">
-<h2>エグザンプルリスト<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="id11">
+<h2>エグザンプルリスト<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Simple</span>
 <span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
 
@@ -251,8 +259,8 @@ simple.pyはCUI動作のためのエグザンプルのスクリプトです。</
 </div>
 <p><strong>FACE01の多くのクラスとメソッドの詳細については、<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/">FACE01ドキュメント</a>をご覧ください。</strong></p>
 </section>
-<section id="id11">
-<h2>トラブルシューティング<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h2>トラブルシューティング<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
 <section id="cuda">
 <h3>CUDAが動作しない<a class="headerlink" href="#cuda" title="Link to this heading"></a></h3>
 <p><a class="reference internal" href="reinstall_gpu.html"><span class="std std-doc">CUDAライブラリをすべて削除して再インストールする方法</span></a>をご覧ください。</p>
@@ -277,8 +285,8 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <a class="reference external" href="https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements">CUDA Execution Provider: Requirements </a></p>
 <p><img alt="" src="../_images/2024-08-07-18-43-08.png" /></p>
 </section>
-<section id="id12">
-<h4><code class="docutils literal notranslate"><span class="pre">シンボリックリンク</span></code>の作成<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
+<section id="id13">
+<h4><code class="docutils literal notranslate"><span class="pre">シンボリックリンク</span></code>の作成<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">libonnxruntime_providers_cuda.so</span></code>などが必要とする（依存する）ライブラリがすべて正しい場所に存在することを確認します。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ldd<span class="w"> </span>/home/user/bin/FACE01/lib/python3.10/site-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so
 </pre></div>
@@ -295,8 +303,8 @@ sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>
 </pre></div>
 </div>
 </section>
-<section id="id13">
-<h4><code class="docutils literal notranslate"><span class="pre">環境変数</span></code>に正しいパスを記述して永続化させる<a class="headerlink" href="#id13" title="Link to this heading"></a></h4>
+<section id="id14">
+<h4><code class="docutils literal notranslate"><span class="pre">環境変数</span></code>に正しいパスを記述して永続化させる<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">CUDA</span></code>ライブラリが正しいパスに設定されているか確認します。
 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>に以下の記述を行います。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/cuda-11.8/bin:<span class="nv">$PATH</span>

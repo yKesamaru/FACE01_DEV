@@ -23,6 +23,13 @@
    1. [CUDAが動作しない](#cudaが動作しない)
    2. [dlib.DLIB\_USE\_CUDAがFalseの場合の対処法](#dlibdlib_use_cudaがfalseの場合の対処法) -->
 
+## ライセンス
+ライセンスについては[こちら](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE)をご覧ください。
+
+また、YouTube上で`OpenSeeFace`などを動作させるためのライセンスは[こちら](YouTube_license.md)をご覧ください。
+
+教育目的で`FACE01`をご利用の場合は[こちら](academic.md)をご覧ください。
+
 ## チェック項目
 ✅
 - [x] Pythonの基本操作
