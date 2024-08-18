@@ -47,7 +47,7 @@ Result:
         }
 
 Source code:
-    `face_coordinates.py <../example/face_coordinates.py>`_
+    `face_coordinates.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/face_coordinates.py>`_
 
 """
 # Operate directory: Common to all examples

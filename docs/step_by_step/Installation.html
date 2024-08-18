@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>まっさらなUbuntu環境にFACE01をインストールする &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Installation</li>
+      <li class="breadcrumb-item active">まっさらな<code class="docutils literal notranslate"><span class="pre">Ubuntu環境</span></code>に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールする</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,17 +81,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+  <section id="ubuntuface01">
+<h1>まっさらな<code class="docutils literal notranslate"><span class="pre">Ubuntu環境</span></code>に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールする<a class="headerlink" href="#ubuntuface01" title="Link to this heading"></a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
 chmod<span class="w"> </span>+x<span class="w"> </span>INSTALL_FACE01.sh
 bash<span class="w"> </span>-c<span class="w"> </span>./INSTALL_FACE01.sh
 </pre></div>
 </div>
-<p>NOTE: THIS IS <em>ONLY</em> USE FOR UBUNTU <em>20.04</em>.
-If you are a Windows user, please use on <code class="docutils literal notranslate"><span class="pre">WSLg</span></code> or <code class="docutils literal notranslate"><span class="pre">Docker</span></code>.
-If you are using another Linux distribution, use <code class="docutils literal notranslate"><span class="pre">Docker</span></code>, <code class="docutils literal notranslate"><span class="pre">Boxes</span></code>, or <code class="docutils literal notranslate"><span class="pre">lxd</span></code>.</p>
-<p>Alternatively, refer to INSTALL_FACE01.sh and install manually.</p>
+<section id="note">
+<h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>動作環境は<code class="docutils literal notranslate"><span class="pre">Ubuntu</span> <span class="pre">20.04</span></code>を推奨します。<code class="docutils literal notranslate"><span class="pre">Ubuntu</span> <span class="pre">22.04</span></code>でも動作を確認していますが、<code class="docutils literal notranslate"><span class="pre">CUDAドライバ</span></code>まわりで手を入れる必要が発生するかもしれません。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Windows</span></code>ユーザの方は <code class="docutils literal notranslate"><span class="pre">WSLg</span></code>を使用するか <code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使用してください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code>以外のOSをお使いの方は、<code class="docutils literal notranslate"><span class="pre">Docker</span></code>, <code class="docutils literal notranslate"><span class="pre">Boxes</span></code>, or <code class="docutils literal notranslate"><span class="pre">lxd</span></code>をご使用ください</p></li>
+<li><p>使用前に<code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしてください</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">Jetson</span></code>を使用される場合、ソースコードに手を加えて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>をインストールさせる必要があります</p></li>
+</ul>
+</section>
 </section>
 
 

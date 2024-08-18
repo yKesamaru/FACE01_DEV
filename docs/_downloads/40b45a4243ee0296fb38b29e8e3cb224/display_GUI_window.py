@@ -10,7 +10,7 @@ Example:
         python3 example/display_GUI_window.py
 
 Source code:
-    `display_GUI_window.py <../example/display_GUI_window.py>`_
+    `display_GUI_window.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window.py>`_
 
 See also:
     ttkbootstrap

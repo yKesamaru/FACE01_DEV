@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dockerのインストール &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>Dockerを使ってFACE01を使う &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">Docker</span></code>のインストール</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使って<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使う</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,110 +81,117 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="docker">
-<h1><code class="docutils literal notranslate"><span class="pre">Docker</span></code>のインストール<a class="headerlink" href="#docker" title="Link to this heading"></a></h1>
-<p>See <a class="reference internal" href="Install_docker.html"><span class="std std-doc">here</span></a>.</p>
-</section>
+  <section id="dockerface01">
+<h1><code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使って<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使う<a class="headerlink" href="#dockerface01" title="Link to this heading"></a></h1>
+<p>ここでは<code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使って煩雑な環境構築なしに<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使用する手順を解説します。</p>
 <section id="docker-image">
-<h1><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をプル<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h1>
-<p>*<em><strong>The easiest way to use Docker is to pull the image.</strong></em>*</p>
-<p><img alt="" src="../_images/PASTE_IMAGE_2022-08-29-07-43-12.png" /></p>
-<p><em><strong>NOTE</strong></em> (IMPORTANT!)
+<h2><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をプル<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Dockerイメージ</span></code>をダウンロード（プル）しましょう。</p>
+<p><img alt="" src="../_images/2024-08-18-12-56-10.png" /></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_gpu
+</pre></div>
+</div>
+<blockquote>
+<div><p>![NOTE]:
 使用するPCがNVIDIA GPUを使用しているなら、<code class="docutils literal notranslate"><span class="pre">face01_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。
 そうでなければ、<code class="docutils literal notranslate"><span class="pre">face01_no_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。</p>
-<section id="when-using-face01-gpu-1-4-10">
-<h2>When using <code class="docutils literal notranslate"><span class="pre">face01_gpu:1.4.10</span></code><a class="headerlink" href="#when-using-face01-gpu-1-4-10" title="Link to this heading"></a></h2>
-<p>First, Check if GPU is available.</p>
+</div></blockquote>
+</section>
+<section id="when-using-face01-gpu">
+<h2>When using <code class="docutils literal notranslate"><span class="pre">face01_gpu</span></code><a class="headerlink" href="#when-using-face01-gpu" title="Link to this heading"></a></h2>
+<p>まずお使いのPCで<code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">GPU</span></code>が使用可能かチェックしましょう。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>nvidia
 </pre></div>
 </div>
-<p>Make sure nvidia-docker is installed.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--rm<span class="w"> </span>nvidia/cuda<span class="w"> </span>nvidia-smi
-</pre></div>
-</div>
-<p>(To add NVIDIA GPU support to Docker, install the <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker/blob/master/README.md#quickstart">NVIDIA Container Toolkit</a>. nvidia-container-runtime is only available on Linux.
-See https://www.tensorflow.org/install/docker#gpu_support [ja])</p>
-<ul class="simple">
-<li><p>Reference</p>
-<ul>
-<li><p>NVIDIA Container Toolkit</p>
-<ul>
-<li><p><a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html">Overview</a></p></li>
-<li><p><a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html">User Guide</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download Docker Image</span>
-docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_gpu:1.4.10
-
-<span class="c1"># Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)</span>
-docker<span class="w"> </span>images
-
-<span class="c1"># `image id`を指定してコンテナを起動する</span>
-docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<section id="id1">
+<h3>Docker Imageをダウンロードする<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">tokaikaoninsho/face01_gpu</span></code></p>
+</section>
+<section id="dockertag-image-id">
+<h3>DockerイメージのTAG, IMAGE IDを確認しましょう<a class="headerlink" href="#dockertag-image-id" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">images</span></code></p>
+</section>
+<section id="dockerguixhost">
+<h3>DockerでGUIが使えるようにxhostの設定をします<a class="headerlink" href="#dockerguixhost" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:</span></code>
+よくわからない場合は<a class="reference external" href="https://zenn.dev/ykesamaru/articles/add7d844f56516">DockerでGUIアプリケーションを開く基本的な押さえどころ</a>を参考にしてください。</p>
+</section>
+<section id="image-id">
+<h3><code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">id</span></code>を指定してコンテナを起動します<a class="headerlink" href="#image-id" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
 <section id="note">
-<h3><strong>NOTE</strong><a class="headerlink" href="#note" title="Link to this heading"></a></h3>
-<p>Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。</p>
+<h4><strong>NOTE</strong><a class="headerlink" href="#note" title="Link to this heading"></a></h4>
+<p>Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。
+この場合<code class="docutils literal notranslate"><span class="pre">/dev/video0</span></code>を指定していますが、ご利用の環境によってはパスがちがう可能性があります。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
-<p><em><strong>Don't forget activate</strong></em> the Python virtual environment (activate venv).</p>
+<p>もしデバイスパスがちがう場合は以下を試してください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/video*
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="id2">
+<h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="python">
+<h3>Python仮想環境<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<p>Python仮想環境を起動してください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate venv (IMPORTANT!)</span>
 .<span class="w"> </span>bin/activate
 </pre></div>
 </div>
-<p>Let's try <code class="docutils literal notranslate"><span class="pre">simple.py</span></code> in example folder.</p>
+</section>
+<section id="xhost">
+<h3><code class="docutils literal notranslate"><span class="pre">xhost</span></code><a class="headerlink" href="#xhost" title="Link to this heading"></a></h3>
+<p>使い終わったら<code class="docutils literal notranslate"><span class="pre">xhost</span></code>から<code class="docutils literal notranslate"><span class="pre">local</span></code>を削除しましょう
+<code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">-local:</span></code></p>
+</section>
+</section>
+<section id="id3">
+<h2>ここまで確認したら、簡単なエグザンプルコードを使用してみましょう<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/simple.py
 </pre></div>
 </div>
 </section>
+<section id="id4">
+<h2>トラブルシューティング<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="docker">
+<h3>Dockerコンテナを機動したがエグザンプルコードが動かない<a class="headerlink" href="#docker" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>プルしたイメージが最新か確認してください</p></li>
+<li><p>Python仮想環境を起動したか確認してください</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xhost</span></code>の<code class="docutils literal notranslate"><span class="pre">local</span></code>を追加したか確認してください</p></li>
+</ul>
 </section>
-<section id="when-using-face01-no-gpu-1-4-10">
-<h2>When using <code class="docutils literal notranslate"><span class="pre">face01_no_gpu:1.4.10</span></code><a class="headerlink" href="#when-using-face01-no-gpu-1-4-10" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download Docker Image</span>
-docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10
-
-<span class="c1"># Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)</span>
-docker<span class="w"> </span>images
-
-<span class="c1"># Run Docker</span>
-docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10
-</pre></div>
-</div>
-<section id="id1">
-<h3><strong>NOTE</strong><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p>If you get an error as a result of entering the above command, try the following command.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>tokaikaoninsho/face01_no_gpu:1.4.10
-</pre></div>
-</div>
-<p><em><strong>Don't forget activate</strong></em> the Python virtual environment (activate venv).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate venv (IMPORTANT!)</span>
-.<span class="w"> </span>bin/activate
-</pre></div>
-</div>
-<p>Let's try <code class="docutils literal notranslate"><span class="pre">simple.py</span></code> in example folder.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/simple.py
-</pre></div>
-</div>
+<section id="id5">
+<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Nvidia GPUを搭載したPCかどうかを確認してください</p></li>
+<li><p>コンテナとホストのCUDAドライバを確認してください</p>
+<ul>
+<li><p>ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。その場合はDockerの使用を諦め、まっさらなUbuntu環境に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールするか、<code class="docutils literal notranslate"><span class="pre">GUI</span></code>を使わない方法に切り替えてください。<code class="docutils literal notranslate"><span class="pre">GUI</span></code>を使わない場合、<code class="docutils literal notranslate"><span class="pre">no-gpu</span></code>のタグがついたイメージを使用し、<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルの<code class="docutils literal notranslate"><span class="pre">headless</span></code>を<code class="docutils literal notranslate"><span class="pre">True</span></code>に指定してください。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>の<code class="docutils literal notranslate"><span class="pre">use_pipe</span></code>を<code class="docutils literal notranslate"><span class="pre">False</span></code>に設定してください。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>それでも解決しない時<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/issues">Issue</a>に投稿してください</p></li>
+</ul>
 </section>
 </section>
-</section>
-<section id="build-docker-image">
-<h1>Build Docker image<a class="headerlink" href="#build-docker-image" title="Link to this heading"></a></h1>
-<p>If you want to build the Docker Image yourself, See <a class="reference internal" href="build_docker_image.html"><span class="std std-doc">here</span></a>.</p>
 </section>
 
 

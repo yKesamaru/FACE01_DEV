@@ -57,8 +57,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">FACE01ライブラリのステップバイステップガイド</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">ライセンス</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">チェック項目</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3"><span class="xref myst">FACE01のインストール</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#docker">[Dockerの使用]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><span class="xref myst">FACE01のインストール</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4"><span class="xref myst">顔画像の登録</span></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#python">仮想Python環境の有効化</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vim">vimのインストール確認</a></li>
@@ -116,26 +116,14 @@
 <p>この記事では、エグザンプルプログラムを使用して、FACE01を用いた顔認識アプリケーションを作成するために必要な知識と技術を紹介します。</p>
 <p>準備はいいですか？</p>
 <p>まずは、<strong>チェック項目を確認</strong>しましょう。</p>
-<!-- TOC
-1. [FACE01ライブラリのステップバイステップガイド](#face01ライブラリのステップバイステップガイド)
-   1. [チェック項目](#チェック項目)
-   2. [顔画像の登録](#顔画像の登録)
-   3. [仮想Python環境の有効化](#仮想python環境の有効化)
-   4. [vimのインストール確認](#vimのインストール確認)
-2. [FACE01の簡単な使用フロー](#face01の簡単な使用フロー)
-3. [簡単な顔認識](#簡単な顔認識)
-4. [GUIウィンドウの表示](#guiウィンドウの表示)
-5. [会社の「テロップ」や「ロゴ」画像を表示](#会社の「テロップ」や「ロゴ」画像を表示)
-6. [ベンチマークを取りたい？](#ベンチマークを取りたい)
-7. [例リスト](#例リスト)
-8. [トラブルシューティング:thinking:](#トラブルシューティングthinking)
-   1. [CUDAが動作しない](#cudaが動作しない)
-   2. [dlib.DLIB\_USE\_CUDAがFalseの場合の対処法](#dlibdlib_use_cudaがfalseの場合の対処法) -->
 <section id="id1">
 <h2>ライセンス<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<p>ライセンスについては<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE">こちら</a>をご覧ください。</p>
-<p>また、YouTube上で<code class="docutils literal notranslate"><span class="pre">OpenSeeFace</span></code>などを動作させるためのライセンスは<a class="reference internal" href="#YouTube_license.md"><span class="xref myst">こちら</span></a>をご覧ください。</p>
-<p>教育目的で<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をご利用の場合は<a class="reference internal" href="#academic.md"><span class="xref myst">こちら</span></a>をご覧ください。</p>
+<ul class="simple">
+<li><p>ライセンスについては<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/LICENSE">こちら</a>をご覧ください。</p></li>
+<li><p>また、YouTube上で<code class="docutils literal notranslate"><span class="pre">OpenSeeFace</span></code>などを動作させるためのライセンスは<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/YouTube_license.md">こちら</a>をご覧ください。</p></li>
+<li><p>教育目的で<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をご利用の場合は<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/academic.md">こちら</a>をご覧ください。</p></li>
+<li><p>ライセンスに関してご質問がある場合は<a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/issues">Issue</a>に投稿するか<a class="reference external" href="mailto:y&#46;kesamaru&#37;&#52;&#48;tokai-kaoninsho&#46;com">メール</a>で連絡してください。</p></li>
+</ul>
 </section>
 <section id="id2">
 <h2>チェック項目<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
@@ -149,18 +137,23 @@
 <p>すべての項目を確認しましたか？
 OK！では始めましょう！</p>
 </section>
-<section id="id3">
-<h2><a class="reference internal" href="Installation.html"><span class="std std-doc">FACE01のインストール</span></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<p>ここでは、FACE01のインストール方法について解説します。
-<a class="reference internal" href="Installation.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
-</section>
 <section id="docker">
 <h2>[Dockerの使用]<a class="headerlink" href="#docker" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使用する際、一番簡単な環境構築方法は<code class="docutils literal notranslate"><span class="pre">Docker</span></code>を用いることです。</p>
+<p><img alt="" src="../_images/2024-08-18-12-56-10.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">dockerhub</span></code>から最新のイメージをプルしましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>tokaikaoninsho/face01_gpu
+</pre></div>
+</div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Docker</span></code>をインストールする方法は<a class="reference internal" href="Install_docker.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p></li>
-<li><p>ビルド方法については<a class="reference internal" href="build_docker_image.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Docker</span></code>自体をインストールする方法は<a class="reference internal" href="Install_docker.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p></li>
 <li><p>また具体的な<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>の使用法について<a class="reference internal" href="docker.html"><span class="std std-doc">こちら</span></a>で解説しています。</p></li>
+<li><p>ご自身でビルドしたい方は<a class="reference internal" href="build_docker_image.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p></li>
 </ul>
+</section>
+<section id="id3">
+<h2><a class="reference internal" href="Installation.html"><span class="std std-doc">FACE01のインストール</span></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>まっさらなシステムに<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を直接インストールしたい方は<a class="reference internal" href="Installation.html"><span class="std std-doc">こちら</span></a>をご覧ください。</p>
 </section>
 <section id="id4">
 <h2><a class="reference internal" href="register_faces.html"><span class="std std-doc">顔画像の登録</span></a><a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
