@@ -13,7 +13,7 @@ Note:
     複数人を対象とすることはできません。
 
 Source code:
-    `detect_eye_blink.py <../example/detect_eye_blink.py>`_
+    `detect_eye_blink.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/detect_eye_blink.py>`_
 """
 
 # Operate directory: Common to all examples

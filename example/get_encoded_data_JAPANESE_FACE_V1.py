@@ -14,7 +14,7 @@ Example:
         python3 example/get_encoded_data_JAPANESE_FACE_V1.py
 
 Source code:
-    `get_encoded_data_JAPANESE_FACE_V1.py <../example/get_encoded_data_JAPANESE_FACE_V1.py>`_
+    `get_encoded_data_JAPANESE_FACE_V1.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/get_encoded_data_JAPANESE_FACE_V1.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

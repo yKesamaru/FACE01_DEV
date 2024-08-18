@@ -21,7 +21,7 @@ Image:
     `Pakutaso 笑顔でスマホ操作を教えてくれる女性の無料写真素材 <https://www.pakutaso.com/20230104005post-42856.html>`_
 
 Source code:
-    `aligned_crop_face.py <../example/aligned_crop_face.py>`_
+    `aligned_crop_face.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/aligned_crop_face.py>`_
 """
 
 # Operate directory: Common to all examples

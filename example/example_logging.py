@@ -22,7 +22,7 @@ Example:
         python3 example/logging.py
 
 Source code:
-    `example_logging.py <../example/example_logging.py>`_
+    `example_logging.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/example_logging.py>`_
 """
 
 # Operate directory: Common to all examples

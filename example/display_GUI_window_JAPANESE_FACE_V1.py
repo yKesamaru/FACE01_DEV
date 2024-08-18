@@ -28,7 +28,7 @@ Results:
 
 
 Source code:
-    `display_GUI_window_JAPANESE_FACE_V1.py <../example/display_GUI_window_JAPANESE_FACE_V1.py>`_
+    `display_GUI_window_JAPANESE_FACE_V1.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window_JAPANESE_FACE_V1.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

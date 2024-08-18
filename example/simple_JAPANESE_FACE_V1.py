@@ -9,7 +9,7 @@ Example:
         python3 example/simple_efficientnetv2_arcface.py
 
 Source code:
-    `simple_efficientnetv2_arcface.py <../example/simple_efficientnetv2_arcface.py>`_
+    `simple_efficientnetv2_arcface.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/simple_efficientnetv2_arcface.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

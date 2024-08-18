@@ -22,7 +22,7 @@ Example:
         python3 benchmark_CUI.py
 
 Source code:
-    `benchmark_CUI.py <../example/benchmark_CUI.py>`_
+    `benchmark_CUI.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/benchmark_CUI.py>`_
 """
 # Operate directory: Common to all examples
 import os.path

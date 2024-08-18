@@ -22,7 +22,7 @@ Result:
         :alt: ctktest
 
 Source code:
-    `CTKtest.py <../example/CTKtest.py>`_
+    `CTKtest.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/CTKtest.py>`_
 """
 import tkinter
 import tkinter.messagebox

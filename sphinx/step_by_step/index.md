@@ -7,28 +7,12 @@
 
 まずは、**チェック項目を確認**しましょう。
 
-<!-- TOC
-1. [FACE01ライブラリのステップバイステップガイド](#face01ライブラリのステップバイステップガイド)
-   1. [チェック項目](#チェック項目)
-   2. [顔画像の登録](#顔画像の登録)
-   3. [仮想Python環境の有効化](#仮想python環境の有効化)
-   4. [vimのインストール確認](#vimのインストール確認)
-2. [FACE01の簡単な使用フロー](#face01の簡単な使用フロー)
-3. [簡単な顔認識](#簡単な顔認識)
-4. [GUIウィンドウの表示](#guiウィンドウの表示)
-5. [会社の「テロップ」や「ロゴ」画像を表示](#会社の「テロップ」や「ロゴ」画像を表示)
-6. [ベンチマークを取りたい？](#ベンチマークを取りたい)
-7. [例リスト](#例リスト)
-8. [トラブルシューティング:thinking:](#トラブルシューティングthinking)
-   1. [CUDAが動作しない](#cudaが動作しない)
-   2. [dlib.DLIB\_USE\_CUDAがFalseの場合の対処法](#dlibdlib_use_cudaがfalseの場合の対処法) -->
 
 ## ライセンス
-ライセンスについては[こちら](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE)をご覧ください。
-
-また、YouTube上で`OpenSeeFace`などを動作させるためのライセンスは[こちら](YouTube_license.md)をご覧ください。
-
-教育目的で`FACE01`をご利用の場合は[こちら](academic.md)をご覧ください。
+- ライセンスについては[こちら](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/LICENSE)をご覧ください。
+- また、YouTube上で`OpenSeeFace`などを動作させるためのライセンスは[こちら](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/YouTube_license.md)をご覧ください。
+- 教育目的で`FACE01`をご利用の場合は[こちら](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/academic.md)をご覧ください。
+- ライセンスに関してご質問がある場合は[Issue](https://github.com/yKesamaru/FACE01_DEV/issues)に投稿するか[メール](mailto:y.kesamaru@tokai-kaoninsho.com)で連絡してください。
 
 ## チェック項目
 ✅
@@ -40,14 +24,23 @@
 すべての項目を確認しましたか？
 OK！では始めましょう！
 
-## [FACE01のインストール](Installation.md)
-ここでは、FACE01のインストール方法について解説します。
-[こちら](Installation.md)をご覧ください。
-
 ## [Dockerの使用]
-- `Docker`をインストールする方法は[こちら](Install_docker.md)をご覧ください。
-- ビルド方法については[こちら](build_docker_image.md)をご覧ください。
+`FACE01`を使用する際、一番簡単な環境構築方法は`Docker`を用いることです。
+
+![](assets/2024-08-18-12-56-10.png)
+
+`dockerhub`から最新のイメージをプルしましょう。
+
+```bash
+docker pull tokaikaoninsho/face01_gpu
+```
+
+- `Docker`自体をインストールする方法は[こちら](Install_docker.md)をご覧ください。
 - また具体的な`Docker image`の使用法について[こちら](docker.md)で解説しています。
+- ご自身でビルドしたい方は[こちら](build_docker_image.md)をご覧ください。
+
+## [FACE01のインストール](Installation.md)
+まっさらなシステムに`FACE01`を直接インストールしたい方は[こちら](Installation.md)をご覧ください。
 
 ## [顔画像の登録](register_faces.md)
 この記事では、顔画像の登録方法について説明します。

@@ -25,7 +25,7 @@ Example:
         :alt: make_noKnown_file
 
 Source code:
-    `make_npKnown_file.py <../example/make_npKnown_file.py>`_
+    `make_npKnown_file.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py>`_
 """
 
 import os

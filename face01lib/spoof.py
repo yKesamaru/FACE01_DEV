@@ -3,7 +3,7 @@
 NOTE:
     このモジュールは、試験段階です。
 
-このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。
+    このモジュールは、顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成に関連する機能を提供します。
 
 主なクラス:
     - Spoof: 顔の特徴点の検出、オブジェクトの検出、およびQRコードの生成を行うメソッドを持つクラス。
@@ -18,6 +18,9 @@ NOTE:
     spoof_obj.iris()
     spoof_obj.obj_detect()
     spoof_obj.make_qr_code()
+
+Source code:
+    `spoof.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/face01lib/spoof.py>`_
 """
 # Operate directory: Common to all examples
 import os.path
@@ -196,9 +199,11 @@ class Spoof():
         """make_qr_code QRCodeを作成するメソッド.
         Note:
             入力される映像には1人のみ映っているようにしてください。
+            preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。
         """
         import base64
         import zlib
+
         # Get CONFIG
         CONFIG = Initialize("MAKE_QR_CODE").initialize()
 
