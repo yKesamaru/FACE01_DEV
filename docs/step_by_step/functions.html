@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Functions tutorial &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>関数のチュートリアル &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Functions tutorial</li>
+      <li class="breadcrumb-item active">関数のチュートリアル</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,18 +81,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="functions-tutorial">
-<h1>Functions tutorial<a class="headerlink" href="#functions-tutorial" title="Link to this heading"></a></h1>
-<p>This section talk about <code class="docutils literal notranslate"><span class="pre">main_process</span></code> function.
-More function's information is described <a class="reference internal" href="more_functions.html"><span class="std std-doc">here</span></a>.
-To use FACE01, it is enough to read this tutorial.</p>
-<p>First, we have to import FACE01.</p>
+  <section id="id1">
+<h1>関数のチュートリアル<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>このセクションでは、<code class="docutils literal notranslate"><span class="pre">main_process</span></code>関数について説明します。
+他の関数の情報は<a class="reference internal" href="more_functions.html"><span class="std std-doc">こちら</span></a>で説明されています。
+FACE01を使用するためには、このチュートリアルを読むだけで十分です。</p>
+<p>まず、FACE01をインポートする必要があります。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">FACE01</span> <span class="k">as</span> <span class="nn">fg</span>
 </pre></div>
 </div>
 <section id="main-process">
 <h2><code class="docutils literal notranslate"><span class="pre">main_process</span></code><a class="headerlink" href="#main-process" title="Link to this heading"></a></h2>
-<p>It is defined as follows in the <code class="docutils literal notranslate"><span class="pre">FACE01.py</span></code> file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01.py</span></code>ファイル内で以下のように定義されています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Core_obj</span><span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">main_process</span><span class="p">():</span>
     <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">,</span> <span class="n">frame_generator_obj</span><span class="o">.</span><span class="fm">__next__</span><span class="p">())</span>
@@ -101,15 +101,15 @@ To use FACE01, it is enough to read this tutorial.</p>
     <span class="k">yield</span> <span class="n">frame_datas_array</span>
 </pre></div>
 </div>
-<p>There are 3 part of functions.</p>
+<p>この関数は3つの部分に分かれています。</p>
 <ol class="arabic simple">
-<li><p>Core_obj.frame_pre_processing(logger, args_dict, frame_generator_obj.<strong>next</strong>())</p></li>
-<li><p>Core_obj.face_encoding_process(logger, args_dict, frame_datas_array)</p></li>
-<li><p>Core_obj.frame_post_processing(logger, args_dict, face_encodings, frame_datas_array, GLOBAL_MEMORY)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Core_obj.frame_pre_processing(logger,</span> <span class="pre">args_dict,</span> <span class="pre">frame_generator_obj.__next__())</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Core_obj.face_encoding_process(logger,</span> <span class="pre">args_dict,</span> <span class="pre">frame_datas_array)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Core_obj.frame_post_processing(logger,</span> <span class="pre">args_dict,</span> <span class="pre">face_encodings,</span> <span class="pre">frame_datas_array,</span> <span class="pre">GLOBAL_MEMORY)</span></code></p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">Core</span></code> is the class declared in <code class="docutils literal notranslate"><span class="pre">face01lib.Core</span></code>.
-To import <code class="docutils literal notranslate"><span class="pre">Core</span></code> class, see <code class="docutils literal notranslate"><span class="pre">frame_pre_processing</span></code> section.</p>
-<p><code class="docutils literal notranslate"><span class="pre">main_process</span></code> method is the generator, return array.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Core</span></code>は<code class="docutils literal notranslate"><span class="pre">face01lib.Core</span></code>内で宣言されたクラスです。
+<code class="docutils literal notranslate"><span class="pre">Core</span></code>クラスをインポートするには、<code class="docutils literal notranslate"><span class="pre">frame_pre_processing</span></code>セクションを参照してください。</p>
+<p><code class="docutils literal notranslate"><span class="pre">main_process</span></code>メソッドはジェネレータであり、配列を返します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">main_process</span><span class="p">()</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -151,14 +151,14 @@ To import <code class="docutils literal notranslate"><span class="pre">Core</spa
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fg</span><span class="o">.</span><span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">args_dict</span><span class="p">,</span><span class="n">next_frame</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will return <code class="docutils literal notranslate"><span class="pre">Dict</span></code> contains variables <code class="docutils literal notranslate"><span class="pre">img</span></code>, <code class="docutils literal notranslate"><span class="pre">face_location_list</span></code>, <code class="docutils literal notranslate"><span class="pre">overlay</span></code>,<code class="docutils literal notranslate"><span class="pre">person_data_list</span></code>.</p>
+<p>は、<code class="docutils literal notranslate"><span class="pre">img</span></code>、<code class="docutils literal notranslate"><span class="pre">face_location_list</span></code>、<code class="docutils literal notranslate"><span class="pre">overlay</span></code>、<code class="docutils literal notranslate"><span class="pre">person_data_list</span></code>の変数を含む<code class="docutils literal notranslate"><span class="pre">Dict</span></code>を返します。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">img</span></code></p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">face_location_list</span></code> variable is the</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">face_location_list</span></code></p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">List[tuple]</span></code></p></li>
 </ul>
@@ -174,26 +174,26 @@ To import <code class="docutils literal notranslate"><span class="pre">Core</spa
 </ul>
 </li>
 </ul>
-<p>In <code class="docutils literal notranslate"><span class="pre">face_location_list</span></code> contains coordinates of faces. If you want only coordinates of faces, this function is useful.</p>
+<p><code class="docutils literal notranslate"><span class="pre">face_location_list</span></code>には顔の座標が含まれています。顔の座標のみが必要な場合、この関数は便利です。</p>
 </section>
 <section id="face-encoding-process">
 <h3><code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code><a class="headerlink" href="#face-encoding-process" title="Link to this heading"></a></h3>
-<p>If you want to get names who are in movie frames, you need call methods <code class="docutils literal notranslate"><span class="pre">frame_pre_processing</span></code>, <code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code>, and <code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code>.
-The above three methods are grouped in the <code class="docutils literal notranslate"><span class="pre">main_process</span></code>.
-<code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code> and <code class="docutils literal notranslate"><span class="pre">frame_post_processing</span></code> are few opportunities to use alone.</p>
+<p>映像のフレーム内にいる人物の名前を取得したい場合、<code class="docutils literal notranslate"><span class="pre">frame_pre_processing</span></code>、<code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code>、および<code class="docutils literal notranslate"><span class="pre">frame_post_processing</span></code>メソッドを呼び出す必要があります。
+これら3つのメソッドは<code class="docutils literal notranslate"><span class="pre">main_process</span></code>内にグループ化されています。
+<code class="docutils literal notranslate"><span class="pre">face_encoding_process</span></code>と<code class="docutils literal notranslate"><span class="pre">frame_post_processing</span></code>は、単独で使用される機会は少ないです。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fg</span><span class="o">.</span><span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">args_dict</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">frame_datas_array</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will return <code class="docutils literal notranslate"><span class="pre">face_encodings</span></code>, <code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code>.</p>
+<p>は、<code class="docutils literal notranslate"><span class="pre">face_encodings</span></code>、<code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code>を返します。</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">face_encodings</span></code></p>
 <ul>
-<li><p>numpy.ndarray[list, ...]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray[list,</span> <span class="pre">...]</span></code></p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code></p>
 <ul>
-<li><p>[{'img': 'no-data_img', 'face_location_list': [...], 'overlay': array([], dtype=float64), 'person_data_list': [...]}]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[{'img':</span> <span class="pre">'no-data_img',</span> <span class="pre">'face_location_list':</span> <span class="pre">[...],</span> <span class="pre">'overlay':</span> <span class="pre">array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">'person_data_list':</span> <span class="pre">[...]}]</span></code></p></li>
 </ul>
 </li>
 </ul>
@@ -203,38 +203,38 @@ The above three methods are grouped in the <code class="docutils literal notrans
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="n">fg</span><span class="o">.</span><span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">frame_post_processing</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">logger</span><span class="p">,</span><span class="n">fg</span><span class="o">.</span><span class="n">args_dict</span><span class="p">,</span> <span class="n">face_encodings</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">GLOBAL_MEMORY</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will return <code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code>.</p>
+<p>は、<code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code>を返します。</p>
 <ul class="simple">
-<li><p>[{'img': 'no-data_img', 'face_location_list': [...], 'overlay': array([], dtype=float64), 'person_data_list': [...]}]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[{'img':</span> <span class="pre">'no-data_img',</span> <span class="pre">'face_location_list':</span> <span class="pre">[...],</span> <span class="pre">'overlay':</span> <span class="pre">array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">'person_data_list':</span> <span class="pre">[...]}]</span></code></p></li>
 </ul>
 </section>
 </section>
 <section id="person-data-list">
 <h2><code class="docutils literal notranslate"><span class="pre">person_data_list</span></code><a class="headerlink" href="#person-data-list" title="Link to this heading"></a></h2>
-<p>Above example, returned value <code class="docutils literal notranslate"><span class="pre">person_data_list</span></code> is very important.
-Person_data_list contains some values as bellow.</p>
+<p>上記の例では、返された値<code class="docutils literal notranslate"><span class="pre">person_data_list</span></code>が非常に重要です。
+<code class="docutils literal notranslate"><span class="pre">person_data_list</span></code>には、以下の値が含まれています。</p>
 <ul class="simple">
-<li><p>name</p></li>
-<li><p>pict</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pict</span></code></p>
 <ul>
-<li><p>Saved faces image file path.</p></li>
+<li><p>保存された顔画像ファイルのパス</p></li>
 </ul>
 </li>
-<li><p>date</p></li>
-<li><p>location</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code></p>
 <ul>
-<li><p>Tuple: Coordinate of a face in a frame.</p></li>
+<li><p>Tuple: フレーム内の顔の座標</p></li>
 <li><p>(top, right, bottom, left)</p></li>
 </ul>
 </li>
-<li><p>percentage_and_symbol</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">percentage_and_symbol</span></code></p>
 <ul>
-<li><p>Similarity of face in a frame represented by '%'.</p></li>
+<li><p>フレーム内の顔の類似度を'%'で表したもの</p></li>
 </ul>
 </li>
 </ul>
-<section id="example">
-<h3>example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<section id="id2">
+<h3>例<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">person_data</span> <span class="ow">in</span> <span class="n">person_data_list</span><span class="p">:</span>
     <span class="n">name</span><span class="p">,</span> <span class="n">pict</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span>  <span class="n">location</span><span class="p">,</span> <span class="n">percentage_and_symbol</span> <span class="o">=</span> \
         <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>  <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;percentage_and_symbol&#39;</span><span class="p">]</span>
@@ -249,7 +249,7 @@ Person_data_list contains some values as bellow.</p>
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>will result</p>
+<p>結果は以下のようになります。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>菅義偉
 <span class="w">         </span>similarity<span class="w">      </span><span class="m">99</span>.3%
 <span class="w">         </span>coordinate<span class="w">      </span><span class="o">(</span><span class="m">127</span>,<span class="w"> </span><span class="m">182</span>,<span class="w"> </span><span class="m">276</span>,<span class="w"> </span><span class="m">33</span><span class="o">)</span>

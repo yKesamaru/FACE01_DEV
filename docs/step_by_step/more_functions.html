@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💥 This document is not used! &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>追加の関数チュートリアル &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">💥 This document is not used!</li>
+      <li class="breadcrumb-item active">追加の関数チュートリアル</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,49 +81,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="this-document-is-not-used">
-<h1>💥 This document is not used!<a class="headerlink" href="#this-document-is-not-used" title="Link to this heading"></a></h1>
-</section>
-<section id="more-functions-tutorial">
-<h1>More functions tutorial<a class="headerlink" href="#more-functions-tutorial" title="Link to this heading"></a></h1>
-<p>FACE01 have many functions inner `face01lib/'.
-This section, we will talk about how to use useable functions in FACE01.</p>
-<p><strong>Note</strong>
-To refer exhaustive document of all public class and method in FACE01, see <a class="reference external" href="https://ykesamaru.github.io/FACE01_SAMPLE/index.html">here</a>.</p>
-</section>
-<section id="preparation">
-<h1>Preparation<a class="headerlink" href="#preparation" title="Link to this heading"></a></h1>
-<section id="initialize-and-setup-logger">
-<h2>Initialize and Setup logger.<a class="headerlink" href="#initialize-and-setup-logger" title="Link to this heading"></a></h2>
-<p>When coding a program that uses FACE01, code <code class="docutils literal notranslate"><span class="pre">initialize</span></code> and <code class="docutils literal notranslate"><span class="pre">logger</span></code> first.
-This will read the configuration file <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> and log errors etc.</p>
+  <section id="id1">
+<h1>追加の関数チュートリアル<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>FACE01には、<code class="docutils literal notranslate"><span class="pre">face01lib/</span></code>内に多くの関数が含まれています。
+このセクションでは、FACE01で使用可能な関数の使い方について(補足的に)説明します。</p>
+<p>💥 このドキュメントは<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/">公式ドキュメント</a>を保管するものです。そのため最新のドキュメントを反映していません。正しい使い方は必ず<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/">公式ドキュメント</a>を参照するようにしてください。</p>
+<section id="id2">
+<h2>準備<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="logger">
+<h3>Loggerの初期化と設定<a class="headerlink" href="#logger" title="Link to this heading"></a></h3>
+<p>FACE01を使用するプログラムをコーディングする際には、最初に<code class="docutils literal notranslate"><span class="pre">initialize</span></code>および<code class="docutils literal notranslate"><span class="pre">logger</span></code>をコードします。
+これにより、設定ファイル<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>を読み込み、エラーなどをログに記録します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
-<span class="c1"># Initialize</span>
+<span class="c1"># 初期化</span>
 <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;LIGHTWEIGHT_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="c1"># Set up logger</span>
+<span class="c1"># Loggerの設定</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
 </section>
-<section id="dlib-api-class">
-<h1><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code> class<a class="headerlink" href="#dlib-api-class" title="Link to this heading"></a></h1>
-<p>This class is modified from <a class="reference external" href="https://github.com/ageitgey/face_recognition">face_recognition</a> by ageitgey. And model data from <a class="reference external" href="https://github.com/davisking/dlib">dlib</a> by davisking. We will not to use 68 face model but also 5 face model. In FACE01 repository, not exist 68 face model and using it's code.
-See to refer <code class="docutils literal notranslate"><span class="pre">Core.return_face_location_list</span></code> example.</p>
+<section id="dlib-api">
+<h2><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code>クラス<a class="headerlink" href="#dlib-api" title="Link to this heading"></a></h2>
+<p>このクラスは、ageitgeyによる<a class="reference external" href="https://github.com/ageitgey/face_recognition">face_recognition</a>を元に修正されており、モデルデータはdaviskingによる<a class="reference external" href="https://github.com/davisking/dlib">dlib</a>から取得しています。68点のフェイスモデルだけでなく、5点のフェイスモデルも使用します。
+例については<code class="docutils literal notranslate"><span class="pre">Core.return_face_location_list</span></code>を参照してください。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.api</span> <span class="kn">import</span> <span class="n">Dlib_api</span>
 <span class="n">Dlib_api_obj</span> <span class="o">=</span> <span class="n">Dlib_api</span><span class="p">()</span>
 </pre></div>
 </div>
 <section id="face-locations">
-<h2>face_locations<a class="headerlink" href="#face-locations" title="Link to this heading"></a></h2>
-<p>Returns an array of bounding boxes of faces in a frame.</p>
+<h3>face_locations<a class="headerlink" href="#face-locations" title="Link to this heading"></a></h3>
+<p>フレーム内の顔のバウンディングボックスの配列を返します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">face_list</span> <span class="o">=</span> <span class="n">Dlib_api_obj</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">number_of_times_to_upsample</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="example">
-<h3>example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<section id="id3">
+<h4>例<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">exec_times</span><span class="p">):</span>
     <span class="n">next_frame</span> <span class="o">=</span> <span class="n">next_frame_gen_obj</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;cnn&#39;</span><span class="p">:</span>
@@ -133,8 +128,8 @@ See to refer <code class="docutils literal notranslate"><span class="pre">Core.r
 </pre></div>
 </div>
 </section>
-<section id="result">
-<h3>result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
+<section id="id4">
+<h4>結果<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
 <span class="o">[(</span><span class="m">145</span>,<span class="w"> </span><span class="m">177</span>,<span class="w"> </span><span class="m">259</span>,<span class="w"> </span><span class="m">63</span><span class="o">)</span>,<span class="w"> </span><span class="o">(</span><span class="m">108</span>,<span class="w"> </span><span class="m">521</span>,<span class="w"> </span><span class="m">272</span>,<span class="w"> </span><span class="m">357</span><span class="o">)]</span>
 <span class="o">[(</span><span class="m">134</span>,<span class="w"> </span><span class="m">177</span>,<span class="w"> </span><span class="m">248</span>,<span class="w"> </span><span class="m">63</span><span class="o">)</span>,<span class="w"> </span><span class="o">(</span><span class="m">92</span>,<span class="w"> </span><span class="m">521</span>,<span class="w"> </span><span class="m">256</span>,<span class="w"> </span><span class="m">357</span><span class="o">)]</span>
@@ -147,43 +142,43 @@ See to refer <code class="docutils literal notranslate"><span class="pre">Core.r
 </section>
 </section>
 </section>
-<section id="core-class">
-<h1><code class="docutils literal notranslate"><span class="pre">Core</span></code> class<a class="headerlink" href="#core-class" title="Link to this heading"></a></h1>
-<p>Import Core class.</p>
+<section id="core">
+<h2><code class="docutils literal notranslate"><span class="pre">Core</span></code>クラス<a class="headerlink" href="#core" title="Link to this heading"></a></h2>
+<p>Coreクラスをインポートします。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
 <section id="return-face-location-list">
-<h2>return_face_location_list<a class="headerlink" href="#return-face-location-list" title="Link to this heading"></a></h2>
-<p>Return face location list. This function is much faster against <code class="docutils literal notranslate"><span class="pre">api.face_locations</span></code>.</p>
+<h3>return_face_location_list<a class="headerlink" href="#return-face-location-list" title="Link to this heading"></a></h3>
+<p>顔の位置リストを返します。この関数は、<code class="docutils literal notranslate"><span class="pre">api.face_locations</span></code>よりも高速です。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span><span class="n">resized_frame</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;face coordinates: </span><span class="si">{</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;face_location_list&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id1">
-<h3>result<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id5">
+<h4>結果<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2023</span>-01-23<span class="w"> </span><span class="m">09</span>:28:02,587<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>load_preset_image.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
 face<span class="w"> </span>coordinates:<span class="w"> </span><span class="o">[(</span><span class="m">161</span>,<span class="w"> </span><span class="m">443</span>,<span class="w"> </span><span class="m">311</span>,<span class="w"> </span><span class="m">294</span><span class="o">)]</span>
 
 face<span class="w"> </span>coordinates:<span class="w"> </span><span class="o">[(</span><span class="m">162</span>,<span class="w"> </span><span class="m">438</span>,<span class="w"> </span><span class="m">286</span>,<span class="w"> </span><span class="m">314</span><span class="o">)]</span>
 </pre></div>
 </div>
-<p>Whole example code is <a class="reference download internal" download="" href="../_downloads/40015b8be8ea49e4faf32902896a4dd4/face_coordinates.py"><span class="xref download myst">here</span></a>.</p>
-</section>
+<p>完全な例のコードは<a class="reference download internal" download="" href="../_downloads/40015b8be8ea49e4faf32902896a4dd4/face_coordinates.py"><span class="xref download myst">こちら</span></a>にあります。</p>
 </section>
 </section>
 <section id="load-preset-image">
-<h1><code class="docutils literal notranslate"><span class="pre">load_preset_image</span></code><a class="headerlink" href="#load-preset-image" title="Link to this heading"></a></h1>
-<p>This function loads face images in <code class="docutils literal notranslate"><span class="pre">preset_face_images</span></code> folder, and make npKnown.npz file.</p>
+<h3><code class="docutils literal notranslate"><span class="pre">load_preset_image</span></code><a class="headerlink" href="#load-preset-image" title="Link to this heading"></a></h3>
+<p>この関数は<code class="docutils literal notranslate"><span class="pre">preset_face_images</span></code>フォルダ内の顔画像を読み込み、npKnown.npzファイルを作成します。</p>
 </section>
-<section id="return-anti-spoof-experimental">
-<h1><code class="docutils literal notranslate"><span class="pre">return_anti_spoof</span></code> (Experimental)<a class="headerlink" href="#return-anti-spoof-experimental" title="Link to this heading"></a></h1>
-<p>This method returns valuable <code class="docutils literal notranslate"><span class="pre">spoof_or_real</span></code>, <code class="docutils literal notranslate"><span class="pre">score</span></code> and <code class="docutils literal notranslate"><span class="pre">ELE</span></code>.</p>
-<p>In general, the results inferred from the trained model are not clearly divided into 1 and 0. For this reason, FACE01 incorporates the concept of <code class="docutils literal notranslate"><span class="pre">ELE:</span> <span class="pre">Equally</span> <span class="pre">Likely</span> <span class="pre">Events</span></code>. <code class="docutils literal notranslate"><span class="pre">score</span></code> originally presents two numbers between 0 ~ 1. At this time, the difference between the two numbers is set to 0.4, and the combination of numbers with a difference of 0.4 or less is considered to be &quot;similarly certain&quot;(=Equally Likely Events). FACE01 expresses this as ELE. That is, if the difference between the two numbers is LESS 0.4, it is not possible to determine whether it is <code class="docutils literal notranslate"><span class="pre">spoof</span></code> or<code class="docutils literal notranslate"> <span class="pre">not</span> <span class="pre">spoof</span></code>.</p>
-<section id="id2">
-<h2>example<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+</section>
+<section id="return-anti-spoof">
+<h2><code class="docutils literal notranslate"><span class="pre">return_anti_spoof</span></code>（実験的）<a class="headerlink" href="#return-anti-spoof" title="Link to this heading"></a></h2>
+<p>このメソッドは、<code class="docutils literal notranslate"><span class="pre">spoof_or_real</span></code>、<code class="docutils literal notranslate"><span class="pre">score</span></code>、および<code class="docutils literal notranslate"><span class="pre">ELE</span></code>のデータを返します。</p>
+<p>一般に、トレーニングされたモデルから推測される結果は、1と0に明確に分かれるわけではありません。このため、FACE01では<code class="docutils literal notranslate"><span class="pre">ELE:</span> <span class="pre">Equally</span> <span class="pre">Likely</span> <span class="pre">Events</span></code>という概念を取り入れています。<code class="docutils literal notranslate"><span class="pre">score</span></code>は元々0〜1の間の2つの数字を示します。このとき、2つの数字の差が<code class="docutils literal notranslate"><span class="pre">0.4</span></code>に設定され、その差が<code class="docutils literal notranslate"><span class="pre">0.4以下</span></code>の組み合わせは「同じくらい確度」であると見なされます（<code class="docutils literal notranslate"><span class="pre">=Equally</span> <span class="pre">Likely</span> <span class="pre">Events</span></code>）。FACE01ではこれを<code class="docutils literal notranslate"><span class="pre">ELE</span></code>として表現しています。つまり、2つの数字の差が<code class="docutils literal notranslate"><span class="pre">0.4未満</span></code>の場合、それが<code class="docutils literal notranslate"><span class="pre">spoof</span></code>か<code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">spoof</span></code>かを判断することはできません。</p>
+<section id="id6">
+<h3>例<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 <span class="n">spoof_or_real</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">ELE</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">return_anti_spoof</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">],</span> <span class="n">person_data</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">])</span>
 <span class="k">if</span> <span class="n">ELE</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -201,33 +196,34 @@ face<span class="w"> </span>coordinates:<span class="w"> </span><span class="o">
 </div>
 </section>
 </section>
-<section id="vidcap-class">
-<h1><code class="docutils literal notranslate"><span class="pre">VidCap</span></code> class<a class="headerlink" href="#vidcap-class" title="Link to this heading"></a></h1>
-<p>This class is included in <code class="docutils literal notranslate"><span class="pre">video_capture</span></code>.
-To import, see bellow.</p>
+<section id="vidcap">
+<h2><code class="docutils literal notranslate"><span class="pre">VidCap</span></code>クラス<a class="headerlink" href="#vidcap" title="Link to this heading"></a></h2>
+<p>このクラスは<code class="docutils literal notranslate"><span class="pre">video_capture</span></code>に含まれています。
+インポートするには、以下を参照してください。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
 </pre></div>
 </div>
 <section id="resize-frame">
-<h2><code class="docutils literal notranslate"><span class="pre">resize_frame</span></code><a class="headerlink" href="#resize-frame" title="Link to this heading"></a></h2>
-<p>Return numpy array of resized image.</p>
+<h3><code class="docutils literal notranslate"><span class="pre">resize_frame</span></code><a class="headerlink" href="#resize-frame" title="Link to this heading"></a></h3>
+<p>リサイズされた画像のnumpy配列を返します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resized_frame</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">resize_frame</span><span class="p">(</span><span class="n">set_width</span><span class="p">,</span> <span class="n">set_height</span><span class="p">,</span> <span class="n">original_frame</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="return-movie-property">
-<h2><code class="docutils literal notranslate"><span class="pre">return_movie_property</span></code><a class="headerlink" href="#return-movie-property" title="Link to this heading"></a></h2>
-<p>Return property fps, height and width of input movie data.</p>
+<h3><code class="docutils literal notranslate"><span class="pre">return_movie_property</span></code><a class="headerlink" href="#return-movie-property" title="Link to this heading"></a></h3>
+<p>入力された映画データのfps、高さ、幅のプロパティを返します。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_width</span><span class="p">,</span><span class="n">fps</span><span class="p">,</span><span class="n">height</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">set_height</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">return_movie_property</span><span class="p">(</span><span class="n">set_width</span><span class="p">,</span> <span class="n">vcap</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>result</p>
+<p>結果</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
 set_width:<span class="w">  </span><span class="m">750</span>
 <span class="w"> </span>set_height:<span class="w"> </span><span class="m">421</span>
 <span class="w"> </span>fps:<span class="w">  </span><span class="m">30</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 

@@ -86,11 +86,13 @@
 
 <span class="sd">Summary:</span>
 <span class="sd">    このエグザンプルでは、`npKnown.npz`ファイルの作成手順を学びます。</span>
+<span class="sd">    ディレクトリを選択すると、そのディレクトリに含まれる顔画像ファイルを全て読み込み、人物名とその512次元特徴量データをデータセットとして保存します。</span>
 
-<span class="sd">    ディレクトリ選択ダイアログでは&#39;preset_face_images&#39;ディレクトリを選択してください。</span>
+<span class="sd">    ディレクトリ選択ダイアログでは&#39;preset_face_images&#39;ディレクトリ、あるいはこちらで用意したデータセット（&quot;assets/data/&quot;以下のディレクトリ）を選択してください。</span>
 <span class="sd">    それ以外の場合はエラーが発生します。</span>
 
 <span class="sd">    &#39;preset_face_images&#39;ディレクトリを選択すると、同ディレクトリ内に&#39;npKnown.npz&#39;といくつかのフォルダが作成されます。</span>
+<span class="sd">    既に&#39;npKnown.npz&#39;ファルがある場合、終了します。その場合は&#39;npKnown.npz&#39;ファイルを手動で削除してから、再度実行してみましょう。</span>
 
 <span class="sd">    このコードを実行するには開発用パッケージを追加インストールする必要があります。</span>
 <span class="sd">    具体的にはrequirements_dev.txtをインストールしてください。</span>
@@ -132,7 +134,7 @@
     <span class="n">root</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="n">themename</span><span class="o">=</span><span class="s2">&quot;minty&quot;</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>  <span class="c1"># ウィンドウを非表示にする</span>
     <span class="n">selected_directory</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askdirectory</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ディレクトリを選択&quot;</span><span class="p">,</span> <span class="n">initialdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ディレクトリを選択。`assets/data/a`を選択してみましょう。&quot;</span><span class="p">,</span> <span class="n">initialdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
     <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># ウィンドウを破棄する</span>
     <span class="k">return</span> <span class="n">selected_directory</span></div>
 

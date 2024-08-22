@@ -1,6 +1,12 @@
-# What to do when dlib.DLIB_USE_CUDA is False
-FACE01 uses CUDA to maximize GPU utilization. Normally, by typing `pip install dlib` in the terminal, CUDA can be used according to the usage environment.
-To check if CUDA is available:
+# `dlib.DLIB_USE_CUDA`が`False`の場合の対処方法
+
+> ![NOTE]
+> この作業はこちらで用意している`Dockerイメージ`を使用している場合は不要です。
+
+
+`FACE01`では、`GPU`の利用率を最大化するために`CUDA`を使用します。通常、ターミナルで`pip install dlib`と入力することで、使用環境に応じて`CUDA`を使用できるようになります。
+
+`CUDA`が利用可能かどうかを確認するには、以下のコマンドを使用します。
 ```bash
 (FACE01)
 FACE01 $ pip freeze | grep dlib
@@ -15,20 +21,26 @@ Type "help", "copyright", "credits" or "license" for more information.
 True
 >>>
 ```
-If `False` at this time, CUDA cannot be used.
-## Uninstall Dlib
-Please uninstall Dlib once as follows.
+この時点で`False`が表示される場合、`CUDA`を使用出来ていないことが判明します。
+
+## `Dlib`のアンインストール
+
+まず、以下のコマンドを使用して`Dlib`をアンインストールしてください。
 ```bash
 pip uninstall dlib
 ```
-## Extract `dlib-19.24.tar.bz2`
-Unzip `dlib-19.24.tar.bz2` to create `dlib-19.24` directory.
+
+## `dlib-19.24.tar.bz2`の解凍
+
+`dlib-19.24.tar.bz2`を解凍し、`dlib-19.24`ディレクトリを作成します。
 ```bash
 tar xvjf dlib-19.24.tar.bz2
 cd dlib-19.24
 ```
-## Build with `gcc-8`
-The gcc version is very important when building Dlib. `gcc` versions later than `8` are ***not*** supported. Specify gcc-8 etc. as follows.
+
+## `gcc-8`を使用してビルド
+
+Dlibをビルドする際には、`gcc`のバージョンが非常に重要です。`gcc`のバージョンが`8`以降の場合はサポートされません。次のようにして、`gcc-8`などを指定します。
 ```bash
 (FACE01)
 FACE01/dlib-19.24 $ export CC=/usr/bin/gcc-8
@@ -37,7 +49,10 @@ FACE01/dlib-19.24 $ export CXX=/usr/bin/g++-8
 (FACE01)
 FACE01/dlib-19.24 $ python setup.py install
 ```
-## Check if installed
+
+## インストールの確認
+
+以下のコマンドでインストールが成功したか確認します。
 ```bash
 (FACE01)
 FACE01/dlib-19.24 $ pip freeze | grep dlib
@@ -54,4 +69,4 @@ True
 (FACE01)
 FACE01/dlib-19.24 $
 ```
-If you can confirm that it is `True`, you are finished:tada:.
+`True`であることが確認できたら、作業は完了です🎉。

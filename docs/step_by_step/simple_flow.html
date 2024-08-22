@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple flow for using FACE01 &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>FACE01を使用するためのシンプルな流れ &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Simple flow for using FACE01</li>
+      <li class="breadcrumb-item active">FACE01を使用するためのシンプルな流れ</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,39 +81,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="simple-flow-for-using-face01">
-<h1>Simple flow for using FACE01<a class="headerlink" href="#simple-flow-for-using-face01" title="Link to this heading"></a></h1>
-<p>When coding a program that uses FACE01, code <code class="docutils literal notranslate"><span class="pre">initialize</span></code> and <code class="docutils literal notranslate"><span class="pre">logger</span></code> first.
-This will read the configuration file <code class="docutils literal notranslate"><span class="pre">config.ini</span></code> and log errors etc.
-Choose a section of config.ini according to your usage, or inherit DEFAULT and add a new one.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Initialize class</span>
+  <section id="face01">
+<h1>FACE01を使用するためのシンプルな流れ<a class="headerlink" href="#face01" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使用するプログラムをコーディングする際には、最初に<code class="docutils literal notranslate"><span class="pre">initialize</span></code>および<code class="docutils literal notranslate"><span class="pre">logger</span></code>をコードします。</p>
+<p>これにより、設定ファイル<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>が読み込まれ、エラーなどがログに記録されます。</p>
+<p>使用目的に応じて<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>のセクションを選択するか、<code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code>を継承して新しいセクションを追加してください。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initializeクラスをインポート</span>
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
-<span class="c1"># Initialize</span>
+<span class="c1"># 初期化</span>
 <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="c1"># Set up logger</span>
+<span class="c1"># Loggerの設定</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Next, we have to make <code class="docutils literal notranslate"><span class="pre">generator</span></code> for load contiguous frame datas.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Core class</span>
+<p>次に、連続するフレームデータを読み込むために<code class="docutils literal notranslate"><span class="pre">generator</span></code>を作成する必要があります。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coreクラスをインポート</span>
 <span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 
-<span class="c1"># Make generator</span>
+<span class="c1"># ジェネレータの作成</span>
 <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>By using common_process method of Core class, a series of flow from face-detection to face-recognition can be performed smoothly.</p>
-<p>For getting datas, we have to call <code class="docutils literal notranslate"><span class="pre">__next__</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Core</span></code>クラスの<code class="docutils literal notranslate"><span class="pre">common_processメソッド</span></code>を使用することで、顔検出から顔認識までの一連の流れをスムーズに実行できます。</p>
+<p>データを取得するには、<code class="docutils literal notranslate"><span class="pre">__next__</span></code>を呼び出す必要があります。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 
-    <span class="c1"># Call __next__() from the generator object</span>
+    <span class="c1"># ジェネレータオブジェクトから__next__()を呼び出す</span>
     <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code> contains various data.
-Set what kind of data to get and include in config.ini.</p>
+<p><code class="docutils literal notranslate"><span class="pre">frame_datas_array</span></code>にはさまざまなデータが含まれています。取得するデータの種類や内容を<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>に設定してください。</p>
 </section>
 
 

@@ -61,16 +61,16 @@ $ vim ./config.ini
   ```
   `mediapipe`をソースコードからビルドする必要があるかも知れません。（未検証）
 
-## Example and explain each items.
+## 全項目の例と説明
 
 ### [DEFAULT]
 
-[DEFAULT] section is for simple example.
-This [DEFAULT] setting for only use CUI mode.
+[DEFAULT] セクションは最も基本的な項目です。
+このデフォルトセクションはCUI用に設定するのが良いでしょう。
 
-Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card or IOT devices.
+Nvidia GPUがインストールされていないPCでアプリケーションを使用する場合には、CUIモードが適しています。
 
-[DEFAULT] section is the inheritor of all sections.
+全ての項目はこのデフォルトセクションを継承します。
 
 ### Items
 
@@ -87,6 +87,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
       - `efficientnetv2_arcface.onnx`: 1
   - **NOTE**
     - 各モデルが生成する`npKnown.npz`は互いに互換性がありません。よって、`deep_learning_model`を変更した場合、既に作成されている`npKnown.npz`は手動で削除する必要があります。モデル切り替え後の`npKnown.npz`は新たに自動的に作成されます。
+    - マスクをした顔を顔認証する場合は`DLIB`モデルを使用してください。
 
 - anti_spoof
   - **Experimental**
@@ -114,7 +115,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
 
 
 - similar_percentage
-  - Number of % which determine if the person on the screen is the person in the registered face information.
+  - 画面上の人物が、登録されている人物であるかどうかを判定する場合のパーセンテージ値。`dlib`の場合は`99%`以上が本人として認識される。`JAPANESE FACE V1`の場合は`90%`以上が本人と認識される。
   - Type: float
   - Default: 99.1
 
@@ -125,7 +126,7 @@ Also, this setting is for user who's PC is \***not**\* installed Nvidia GPU card
   - Default: 0
 
 
-- priset_face_images_jitters
+- preset_face_images_jitters
   - Number of value what means calculate jitters for priset_face_images.
   - Type: int
   - Default: 100

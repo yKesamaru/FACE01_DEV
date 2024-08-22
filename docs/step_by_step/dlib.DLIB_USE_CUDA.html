@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What to do when dlib.DLIB_USE_CUDA is False &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>dlib.DLIB_USE_CUDAがFalseの場合の対処方法 &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">What to do when dlib.DLIB_USE_CUDA is False</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">dlib.DLIB_USE_CUDA</span></code>が<code class="docutils literal notranslate"><span class="pre">False</span></code>の場合の対処方法</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,10 +81,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="what-to-do-when-dlib-dlib-use-cuda-is-false">
-<h1>What to do when dlib.DLIB_USE_CUDA is False<a class="headerlink" href="#what-to-do-when-dlib-dlib-use-cuda-is-false" title="Link to this heading"></a></h1>
-<p>FACE01 uses CUDA to maximize GPU utilization. Normally, by typing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dlib</span></code> in the terminal, CUDA can be used according to the usage environment.
-To check if CUDA is available:</p>
+  <section id="dlib-dlib-use-cudafalse">
+<h1><code class="docutils literal notranslate"><span class="pre">dlib.DLIB_USE_CUDA</span></code>が<code class="docutils literal notranslate"><span class="pre">False</span></code>の場合の対処方法<a class="headerlink" href="#dlib-dlib-use-cudafalse" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>![NOTE]
+この作業はこちらで用意している<code class="docutils literal notranslate"><span class="pre">Dockerイメージ</span></code>を使用している場合は不要です。</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>では、<code class="docutils literal notranslate"><span class="pre">GPU</span></code>の利用率を最大化するために<code class="docutils literal notranslate"><span class="pre">CUDA</span></code>を使用します。通常、ターミナルで<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dlib</span></code>と入力することで、使用環境に応じて<code class="docutils literal notranslate"><span class="pre">CUDA</span></code>を使用できるようになります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">CUDA</span></code>が利用可能かどうかを確認するには、以下のコマンドを使用します。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
 FACE01<span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dlib
 <span class="nv">dlib</span><span class="o">==</span><span class="m">19</span>.24.0
@@ -99,25 +103,25 @@ True
 &gt;&gt;&gt;
 </pre></div>
 </div>
-<p>If <code class="docutils literal notranslate"><span class="pre">False</span></code> at this time, CUDA cannot be used.</p>
-<section id="uninstall-dlib">
-<h2>Uninstall Dlib<a class="headerlink" href="#uninstall-dlib" title="Link to this heading"></a></h2>
-<p>Please uninstall Dlib once as follows.</p>
+<p>この時点で<code class="docutils literal notranslate"><span class="pre">False</span></code>が表示される場合、<code class="docutils literal notranslate"><span class="pre">CUDA</span></code>を使用出来ていないことが判明します。</p>
+<section id="dlib">
+<h2><code class="docutils literal notranslate"><span class="pre">Dlib</span></code>のアンインストール<a class="headerlink" href="#dlib" title="Link to this heading"></a></h2>
+<p>まず、以下のコマンドを使用して<code class="docutils literal notranslate"><span class="pre">Dlib</span></code>をアンインストールしてください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>dlib
 </pre></div>
 </div>
 </section>
-<section id="extract-dlib-19-24-tar-bz2">
-<h2>Extract <code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code><a class="headerlink" href="#extract-dlib-19-24-tar-bz2" title="Link to this heading"></a></h2>
-<p>Unzip <code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code> to create <code class="docutils literal notranslate"><span class="pre">dlib-19.24</span></code> directory.</p>
+<section id="dlib-19-24-tar-bz2">
+<h2><code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code>の解凍<a class="headerlink" href="#dlib-19-24-tar-bz2" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dlib-19.24.tar.bz2</span></code>を解凍し、<code class="docutils literal notranslate"><span class="pre">dlib-19.24</span></code>ディレクトリを作成します。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvjf<span class="w"> </span>dlib-19.24.tar.bz2
 <span class="nb">cd</span><span class="w"> </span>dlib-19.24
 </pre></div>
 </div>
 </section>
-<section id="build-with-gcc-8">
-<h2>Build with <code class="docutils literal notranslate"><span class="pre">gcc-8</span></code><a class="headerlink" href="#build-with-gcc-8" title="Link to this heading"></a></h2>
-<p>The gcc version is very important when building Dlib. <code class="docutils literal notranslate"><span class="pre">gcc</span></code> versions later than <code class="docutils literal notranslate"><span class="pre">8</span></code> are <em><strong>not</strong></em> supported. Specify gcc-8 etc. as follows.</p>
+<section id="gcc-8">
+<h2><code class="docutils literal notranslate"><span class="pre">gcc-8</span></code>を使用してビルド<a class="headerlink" href="#gcc-8" title="Link to this heading"></a></h2>
+<p>Dlibをビルドする際には、<code class="docutils literal notranslate"><span class="pre">gcc</span></code>のバージョンが非常に重要です。<code class="docutils literal notranslate"><span class="pre">gcc</span></code>のバージョンが<code class="docutils literal notranslate"><span class="pre">8</span></code>以降の場合はサポートされません。次のようにして、<code class="docutils literal notranslate"><span class="pre">gcc-8</span></code>などを指定します。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
 FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">CC</span><span class="o">=</span>/usr/bin/gcc-8
 <span class="o">(</span>FACE01<span class="o">)</span>
@@ -127,8 +131,9 @@ FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span>python<span cl
 </pre></div>
 </div>
 </section>
-<section id="check-if-installed">
-<h2>Check if installed<a class="headerlink" href="#check-if-installed" title="Link to this heading"></a></h2>
+<section id="id1">
+<h2>インストールの確認<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>以下のコマンドでインストールが成功したか確認します。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01<span class="o">)</span>
 FACE01/dlib-19.24<span class="w"> </span>$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dlib
 <span class="nv">dlib</span><span class="o">==</span><span class="m">19</span>.24.0
@@ -145,7 +150,7 @@ True
 FACE01/dlib-19.24<span class="w"> </span>$
 </pre></div>
 </div>
-<p>If you can confirm that it is <code class="docutils literal notranslate"><span class="pre">True</span></code>, you are finished:tada:.</p>
+<p><code class="docutils literal notranslate"><span class="pre">True</span></code>であることが確認できたら、作業は完了です🎉。</p>
 </section>
 </section>
 
