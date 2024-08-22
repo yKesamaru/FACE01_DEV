@@ -1,9 +1,16 @@
 # FACE01ライブラリのステップバイステップガイド
 **FACE01の世界へようこそ！**
 
-この記事では、エグザンプルプログラムを使用して、FACE01を用いた顔認識アプリケーションを作成するために必要な知識と技術を紹介します。
-
-準備はいいですか？
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="../../assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">この記事では、エグザンプルプログラムを使用して、`FACE01`を用いた顔認識アプリケーションを作成するために必要な知識と技術を紹介します。</p>
+        <p style="margin: 10;">準備はいいですか？</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 
 まずは、**チェック項目を確認**しましょう。
 
@@ -25,7 +32,20 @@
 OK！では始めましょう！
 
 ## [Dockerの使用]
-`FACE01`を使用する際、一番簡単な環境構築方法は`Docker`を用いることです。
+''⭐️''`FACE01`を使用する際、一番簡単な環境構築方法は`Docker`を用いることです。
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらで用意した`Dockerイメージ`を使うことで、煩わしい環境設定から解放されるだけでなく、予期せぬエラーやローカル環境の汚染を防ぐことが出来ます。</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="../../assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
+[Dockerhub/東海顔認証](https://hub.docker.com/r/tokaikaoninsho/face01_gpu)
 
 ![](assets/2024-08-18-12-56-10.png)
 
@@ -134,6 +154,21 @@ python example/benchmark_GUI_window.py
 **FACE01の多くのクラスとメソッドの詳細については、[FACE01ドキュメント](https://ykesamaru.github.io/FACE01_DEV/)をご覧ください。**
 
 ## トラブルシューティング
+
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="../../assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">開発にトラブルはつきもの！😥</p>
+        <p style="margin: 10;">発生しやすいトラブル例をまとめました。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
+
+
 ### CUDAが動作しない
 [CUDAライブラリをすべて削除して再インストールする方法](reinstall_gpu.md)をご覧ください。
 

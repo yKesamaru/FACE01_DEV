@@ -43,8 +43,8 @@ Audrey Hepburn
   - [リポジトリについて](#リポジトリについて)
   - [その他](#その他)
 - [Install](#install)
+  - [Dockerイメージを使用する](#dockerイメージを使用する)
   - [INSTALL\_FACE01.sh](#install_face01sh)
-  - [Dockerを使用したい場合](#dockerを使用したい場合)
   - [モジュールのインストールについて](#モジュールのインストールについて)
   - [Pythonのパスを設定する](#pythonのパスを設定する)
 - [Example](#example)
@@ -59,6 +59,20 @@ Audrey Hepburn
 ## About FACE01
 
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">日本人専用の高精度顔認識学習モデル「JAPANESE FACE V1」をトコトン便利に使うための<br />
+        「⭐️豊富なクラスとメソッド⭐️」<br />
+        が揃ってます！</p>
+        <p style="margin: 10;">ドキュメントもめっちゃ充実してますよ💗</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
 
 - 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
@@ -82,6 +96,19 @@ Audrey Hepburn
 
 `FACE01_DEV`リポジトリをご使用ください。
 
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">実稼働でなければ、企業様も自由に使用可能です！</p>
+        <p style="margin: 10;">教育・研究用途でしたら著作権表示だけでOK！</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
+
 ### その他
 - このリポジトリが提供するファイルは、無料でお使いいただけます。
 教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
@@ -98,8 +125,18 @@ Audrey Hepburn
 
 FACE01開発環境のセッティングは本当に簡単です！
 
+### Dockerイメージを使用する
+
+🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
+
+[こちら](docs/docker.md)で丁寧な導入手順を解説をしていますのでぜひご覧ください。
+
+docker未経験の方は[こちら](docs/Installation.md).
+
+---
+
 ### INSTALL_FACE01.sh
-現在の環境に直接`FACE01`をインストールするには、`INSTALL_FACE01.sh`スクリプトを実行します。
+実働環境を想定してまっさらなマシンに直接`FACE01`をインストールするには、`INSTALL_FACE01.sh`スクリプトを実行します。
 
 ```bash
 wget https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
@@ -109,17 +146,7 @@ bash -c ./INSTALL_FACE01.sh
 
 See [here](docs/Installation.md).
 
-これで開発環境が整いました！
-
 ---
-
-### Dockerを使用したい場合
-
-🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
-
-See [here](docs/docker.md).
-
-If you cannot use Docker by any means, please refer to [here](docs/Installation.md).
 
 ### モジュールのインストールについて
 `INSTALL_FACE01.sh`にはモジュールのインストールコマンドが記述されています。
