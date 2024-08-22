@@ -1284,10 +1284,12 @@ Spoof().make_qr_code()
 <span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Link to this heading"></a></h2>
 <p><a href="#id3"><span class="problematic" id="id4">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id5"><span class="problematic" id="id6">`</span></a>npKnown.npz`ファイルの作成手順を学びます。</p>
-<p>ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
+<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id5"><span class="problematic" id="id6">`</span></a>npKnown.npz`ファイルの作成手順を学びます。
+ディレクトリを選択すると、そのディレクトリに含まれる顔画像ファイルを全て読み込み、人物名とその512次元特徴量データをデータセットとして保存します。</p>
+<p>ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリ、あるいはこちらで用意したデータセット（&quot;assets/data/&quot;以下のディレクトリ）を選択してください。
 それ以外の場合はエラーが発生します。</p>
-<p>'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。</p>
+<p>'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。
+既に'npKnown.npz'ファルがある場合、終了します。その場合は'npKnown.npz'ファイルを手動で削除してから、再度実行してみましょう。</p>
 <p>このコードを実行するには開発用パッケージを追加インストールする必要があります。
 具体的にはrequirements_dev.txtをインストールしてください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt

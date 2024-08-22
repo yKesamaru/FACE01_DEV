@@ -116,11 +116,33 @@
 <p><code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:</span></code>
 よくわからない場合は<a class="reference external" href="https://zenn.dev/ykesamaru/articles/add7d844f56516">DockerでGUIアプリケーションを開く基本的な押さえどころ</a>を参考にしてください。</p>
 </section>
+<section id="wayland">
+<h3>ディスプレイマネージャとして<code class="docutils literal notranslate"><span class="pre">wayland</span></code>を使用している場合<a class="headerlink" href="#wayland" title="Link to this heading"></a></h3>
+<p>ご用意している<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">イメージ</span></code>は<code class="docutils literal notranslate"><span class="pre">X11</span></code>環境で作成しております。ですのでお使いのディスプレイマネージャが<code class="docutils literal notranslate"><span class="pre">X11</span></code>あるいは<code class="docutils literal notranslate"><span class="pre">XWayland</span></code>であれば使用できますが、<code class="docutils literal notranslate"><span class="pre">Wayland</span></code>には対応していません。この場合はご自身でイメージをビルドしていただく必要があります。<a class="reference internal" href="build_docker_image.html"><span class="std std-doc">build_docker_image.md</span></a>をご参照ください。</p>
+</section>
 <section id="image-id">
 <h3><code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">id</span></code>を指定してコンテナを起動します<a class="headerlink" href="#image-id" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
+</pre></div>
+</div>
+<p>開発用としてコンテナを起動させたい場合には、<code class="docutils literal notranslate"><span class="pre">--rm</span></code>を除去し、永続化のためのフォルダを指定してください。
+例えば以下のようにします。（必要に応じて細部を変更してください。）</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/host/folder:/path/to/container/folder<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
+</pre></div>
+</div>
+<p>ここで、'/path/to/host/folder'はホスト側の永続化したいデータを保存するフォルダパスを指定し、'/path/to/container/folder'はコンテナ内でそのデータを利用するためのフォルダパスを指定します。</p>
+<p>例えば、ホストの'/home/user/dataフォルダ'をコンテナ内の'/mnt/data'にマウントしたい場合は、以下のようになります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/home/user/data:/mnt/data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
@@ -144,12 +166,72 @@
 <section id="id2">
 <h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <section id="python">
-<h3>Python仮想環境<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<h3>Python仮想環境をアクティベート<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
 <p>Python仮想環境を起動してください。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate venv (IMPORTANT!)</span>
 .<span class="w"> </span>bin/activate
 </pre></div>
 </div>
+<p>例：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Docker imageを確認する</span>
+user@user:~/bin/FACE01_DEV/assets$<span class="w"> </span>docker<span class="w"> </span>images
+REPOSITORY<span class="w">                     </span>TAG<span class="w">        </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">      </span>SIZE
+tokaikaoninsho/face01_no_gpu<span class="w">   </span><span class="m">3</span>.0.03_3<span class="w">   </span>87c09dec0a45<span class="w">   </span><span class="m">4</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">13</span>.4GB
+tokaikaoninsho/face01_gpu<span class="w">      </span><span class="m">3</span>.0.03_3<span class="w">   </span>ce2952ad62d6<span class="w">   </span><span class="m">4</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">22</span>.3GB
+tokaikaoninsho/face01_no_gpu<span class="w">   </span><span class="m">3</span>.0.03_2<span class="w">   </span>6f03f200582d<span class="w">   </span><span class="m">5</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">13</span>.2GB
+tokaikaoninsho/face01_gpu<span class="w">      </span><span class="m">3</span>.0.03_2<span class="w">   </span>c4203ae49bec<span class="w">   </span><span class="m">6</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">22</span>.1GB
+face01_gpu<span class="w">                     </span><span class="m">3</span>.0.03_1<span class="w">   </span>abd4c0896c00<span class="w">   </span><span class="m">7</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">21</span>.9GB
+tokaikaoninsho/face01_gpu<span class="w">      </span><span class="m">3</span>.0.03_1<span class="w">   </span>abd4c0896c00<span class="w">   </span><span class="m">7</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">   </span><span class="m">21</span>.9GB
+
+<span class="c1"># xhostにlocalを加える</span>
+user@user:~/bin/FACE01_DEV/assets$<span class="w"> </span>xhost<span class="w"> </span>+local:
+non-network<span class="w"> </span><span class="nb">local</span><span class="w"> </span>connections<span class="w"> </span>being<span class="w"> </span>added<span class="w"> </span>to<span class="w"> </span>access<span class="w"> </span>control<span class="w"> </span>list
+<span class="c1"># localが加わっているか確認</span>
+user@user:~/bin/FACE01_DEV/assets$<span class="w"> </span>xhost
+access<span class="w"> </span>control<span class="w"> </span>enabled,<span class="w"> </span>only<span class="w"> </span>authorized<span class="w"> </span>clients<span class="w"> </span>can<span class="w"> </span>connect
+LOCAL:
+SI:localuser:user
+
+<span class="c1"># コンテナをGUIモードで起動</span>
+user@user:~/bin/FACE01_DEV/assets$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="nv">ce2952ad62d6</span>
+
+<span class="o">==========</span>
+<span class="o">==</span><span class="w"> </span><span class="nv">CUDA</span><span class="w"> </span><span class="o">==</span>
+<span class="o">==========</span>
+
+CUDA<span class="w"> </span>Version<span class="w"> </span><span class="m">11</span>.6.1
+
+Container<span class="w"> </span>image<span class="w"> </span>Copyright<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2016</span>-2023,<span class="w"> </span>NVIDIA<span class="w"> </span>CORPORATION<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>AFFILIATES.<span class="w"> </span>All<span class="w"> </span>rights<span class="w"> </span>reserved.
+
+This<span class="w"> </span>container<span class="w"> </span>image<span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>contents<span class="w"> </span>are<span class="w"> </span>governed<span class="w"> </span>by<span class="w"> </span>the<span class="w"> </span>NVIDIA<span class="w"> </span>Deep<span class="w"> </span>Learning<span class="w"> </span>Container<span class="w"> </span>License.
+By<span class="w"> </span>pulling<span class="w"> </span>and<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>container,<span class="w"> </span>you<span class="w"> </span>accept<span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>and<span class="w"> </span>conditions<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A<span class="w"> </span>copy<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>license<span class="w"> </span>is<span class="w"> </span>made<span class="w"> </span>available<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>container<span class="w"> </span>at<span class="w"> </span>/NGC-DL-CONTAINER-LICENSE<span class="w"> </span><span class="k">for</span><span class="w"> </span>your<span class="w"> </span>convenience.
+
+*************************
+**<span class="w"> </span>DEPRECATION<span class="w"> </span>NOTICE!<span class="w"> </span>**
+*************************
+THIS<span class="w"> </span>IMAGE<span class="w"> </span>IS<span class="w"> </span>DEPRECATED<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span>scheduled<span class="w"> </span><span class="k">for</span><span class="w"> </span>DELETION.
+<span class="w">    </span>https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/support-policy.md
+
+<span class="c1"># Python仮想環境をアクティベートする</span>
+docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </span>bin/activate
+
+<span class="c1"># 試しにエグザンプルコードを使ってみる</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>python<span class="w"> </span>example/simple.py
+
+<span class="c1"># config.iniファイルをgeditで開き、編集する</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>gedit<span class="w"> </span>config.ini
+
+<span class="c1"># GUIウィンドウを作成するエグザンプルコードを使ってみる</span>
+<span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>python<span class="w"> </span>example/display_GUI_window.py
+</pre></div>
+</div>
+<p><img alt="" src="../_images/2024-08-22-16-13-45.png" />
+<img alt="" src="../_images/2024-08-22-16-16-07.png" /></p>
 </section>
 <section id="xhost">
 <h3><code class="docutils literal notranslate"><span class="pre">xhost</span></code><a class="headerlink" href="#xhost" title="Link to this heading"></a></h3>
@@ -158,13 +240,7 @@
 </section>
 </section>
 <section id="id3">
-<h2>ここまで確認したら、簡単なエグザンプルコードを使用してみましょう<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/simple.py
-</pre></div>
-</div>
-</section>
-<section id="id4">
-<h2>トラブルシューティング<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<h2>トラブルシューティング<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <section id="docker">
 <h3>Dockerコンテナを機動したがエグザンプルコードが動かない<a class="headerlink" href="#docker" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -173,8 +249,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">xhost</span></code>の<code class="docutils literal notranslate"><span class="pre">local</span></code>を追加したか確認してください</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id4">
+<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Nvidia GPUを搭載したPCかどうかを確認してください</p></li>
 <li><p>コンテナとホストのCUDAドライバを確認してください</p>
@@ -185,12 +261,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>の<code class="docutils literal notranslate"><span class="pre">use_pipe</span></code>を<code class="docutils literal notranslate"><span class="pre">False</span></code>に設定してください。</p></li>
 </ul>
 </section>
-<section id="id6">
-<h3>その他<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>その他<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id12">こちらのトラブルシューティング</a>も参考にしてください。</p>
 </section>
-<section id="id7">
-<h3>それでも解決しない時<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>それでも解決しない時<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/issues">Issue</a>に投稿してください</p></li>
 </ul>

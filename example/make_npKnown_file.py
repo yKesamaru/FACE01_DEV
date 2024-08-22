@@ -2,11 +2,13 @@
 
 Summary:
     このエグザンプルでは、`npKnown.npz`ファイルの作成手順を学びます。
+    ディレクトリを選択すると、そのディレクトリに含まれる顔画像ファイルを全て読み込み、人物名とその512次元特徴量データをデータセットとして保存します。
 
-    ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリを選択してください。
+    ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリ、あるいはこちらで用意したデータセット（"assets/data/"以下のディレクトリ）を選択してください。
     それ以外の場合はエラーが発生します。
 
     'preset_face_images'ディレクトリを選択すると、同ディレクトリ内に'npKnown.npz'といくつかのフォルダが作成されます。
+    既に'npKnown.npz'ファルがある場合、終了します。その場合は'npKnown.npz'ファイルを手動で削除してから、再度実行してみましょう。
 
     このコードを実行するには開発用パッケージを追加インストールする必要があります。
     具体的にはrequirements_dev.txtをインストールしてください。
@@ -46,7 +48,7 @@ def select_directory():
     root = ttk.Window(themename="minty")
     root.withdraw()  # ウィンドウを非表示にする
     selected_directory = filedialog.askdirectory(
-        title="ディレクトリを選択", initialdir=os.getcwd())
+        title="ディレクトリを選択。`assets/data/a`を選択してみましょう。", initialdir=os.getcwd())
     root.destroy()  # ウィンドウを破棄する
     return selected_directory
 

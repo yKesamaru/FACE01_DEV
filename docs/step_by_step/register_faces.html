@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register face images &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>顔画像の登録 &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Register face images</li>
+      <li class="breadcrumb-item active">顔画像の登録</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,42 +81,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="register-face-images">
-<h1>Register face images<a class="headerlink" href="#register-face-images" title="Link to this heading"></a></h1>
-<p>This article describes how to register face images.</p>
-<section id="basic-knowledge-of-facial-images">
-<h2>Basic knowledge of facial images<a class="headerlink" href="#basic-knowledge-of-facial-images" title="Link to this heading"></a></h2>
-<p>Just like your passport photo, it is important that the facial image you register is accurate.</p>
+  <section id="id1">
+<h1>顔画像の登録<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この記事では、顔画像の登録方法について説明します。</p>
+<section id="id2">
+<h2>登録する顔画像ファイル名のきまり<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ファイル形式は<code class="docutils literal notranslate"><span class="pre">PNG</span></code>にしてください</p></li>
+<li><p>同じ人物の顔画像を複数登録できます。その場合、少なくとも1つのファイルは<code class="docutils literal notranslate"><span class="pre">&lt;人物名&gt;_default.png</span></code>としてください。その他の顔画像ファイルは<code class="docutils literal notranslate"><span class="pre">&lt;人物名&gt;_1.png</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;人物名&gt;_2.png</span></code>としてください。</p>
+<ul>
+<li><p>例：</p></li>
+<li><p><img alt="" src="../_images/2024-08-22-18-48-10.png" /></p></li>
+<li><p>ウィンドウに顔画像を描画する際、<code class="docutils literal notranslate"><span class="pre">default画像</span></code>が使用されます。逆に<code class="docutils literal notranslate"><span class="pre">default画像</span></code>が存在しない場合、エラーが発生します。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>顔画像に関する基本的な知識<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>パスポート写真と同様に、登録する顔画像が正確であることが重要です。</p>
 <blockquote>
 <div><p><img alt="" src="../_images/passport.jpg" />
-quoted from <a class="reference external" href="https://visa.d2.r-cms.jp/">Russia Visa Center</a></p>
+引用元: <a class="reference external" href="https://visa.d2.r-cms.jp/">Russia Visa Center</a></p>
 </div></blockquote>
-<p>When using on FACE01, make the <em>height 200px and width 200px</em>.</p>
-<p>If you want to crop only the face part from the photo, it is very easy to use the <code class="docutils literal notranslate"><span class="pre">align_and_resize_maintain_aspect_ratio</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Utils</span></code> class in FACE01.</p>
+<p>FACE01で使用する際は、<em>高さ200px、幅200px</em>にしてください。</p>
+<p>写真から顔の部分だけを切り取る場合、FACE01の<code class="docutils literal notranslate"><span class="pre">Utils</span></code>クラスにある<code class="docutils literal notranslate"><span class="pre">align_and_resize_maintain_aspect_ratio</span></code>メソッドを使用すると非常に簡単です。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/aligned_crop_face.py<span class="w"> </span>docs/img/Elon_Musk_Colorado_2022.jpg
 </pre></div>
 </div>
 <ul>
-<li><p>Original image</p>
+<li><p>元の画像</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Elon_Musk_Colorado_2022.jpg">U.S. Air Force photo by Trevor cokley</a></p></li>
+<li><p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Elon_Musk_Colorado_2022.jpg">U.S. Air Force photo by Trevor Cokley</a></p></li>
 </ul>
 <p><img alt="" src="../_images/Elon_Musk_Colorado_2022.jpg" /></p>
 </li>
-<li><p>Output face image
+<li><p>出力された顔画像
 <img alt="" src="../_images/Elon_Musk_Colorado_2022.jpg_align_resize.png" /></p></li>
 </ul>
-<p>If a directory name is given as an argument, all image files in that directory will be targeted.</p>
+<p>ディレクトリ名を引数として指定すると、そのディレクトリ内のすべての画像ファイルが対象となります。</p>
 </section>
-<section id="put-face-images-in-the-preset-images-folder">
-<h2>Put face images in the <code class="docutils literal notranslate"><span class="pre">preset_images</span></code> folder.<a class="headerlink" href="#put-face-images-in-the-preset-images-folder" title="Link to this heading"></a></h2>
+<section id="preset-images">
+<h2><code class="docutils literal notranslate"><span class="pre">preset_images</span></code>フォルダに顔画像を配置します。<a class="headerlink" href="#preset-images" title="Link to this heading"></a></h2>
 <p><img alt="" src="../_images/preset_face_images.png" /></p>
-<p>When you start the application, it automatically converts the face image into 128D ndarray data.</p>
-<p>ℹ️ <strong>NOTE</strong>
-If you want to delete other face image files in the <code class="docutils literal notranslate"><span class="pre">preset_images</span></code> folder, move them to the <code class="docutils literal notranslate"><span class="pre">debug</span></code> folder before starting the application.</p>
+<p>アプリケーションを起動すると、顔画像が自動的に<code class="docutils literal notranslate"><span class="pre">128D</span></code>の<code class="docutils literal notranslate"><span class="pre">ndarray</span></code>データに変換されます。</p>
+<p>ℹ️ <strong>注意</strong>
+<code class="docutils literal notranslate"><span class="pre">preset_images</span></code>フォルダ内の他の顔画像ファイルを削除したい場合は、アプリケーションを起動する前にそれらを<code class="docutils literal notranslate"><span class="pre">debug</span></code>フォルダに移動してください。</p>
 <p><img alt="" src="../_images/PASTE_IMAGE_2023-01-23-21-30-46.png" /></p>
-<p>Just Done!
-It's simple!</p>
+<p>これで完了です！
+とても簡単ですね！</p>
 </section>
 </section>
 

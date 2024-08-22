@@ -83,11 +83,18 @@
              
   <section id="ubuntuface01">
 <h1>まっさらな<code class="docutils literal notranslate"><span class="pre">Ubuntu環境</span></code>に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールする<a class="headerlink" href="#ubuntuface01" title="Link to this heading"></a></h1>
+<p>実環境を構築するためにまっさらなマシンに<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールしたい場合、以下をご参考にして下さい。</p>
+<p>ホストOSは<code class="docutils literal notranslate"><span class="pre">Ubuntu20.04</span></code>を想定しています。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
 chmod<span class="w"> </span>+x<span class="w"> </span>INSTALL_FACE01.sh
 bash<span class="w"> </span>-c<span class="w"> </span>./INSTALL_FACE01.sh
 </pre></div>
 </div>
+<blockquote>
+<div><p>![NOTE]
+ホストOSを<code class="docutils literal notranslate"><span class="pre">Ubuntu22.04</span></code>にする場合、追加の手順が必要になります。
+詳しくは<a class="reference external" href="https://zenn.dev/ykesamaru/articles/53a3839afbc302">ONNX RuntimeとCUDAのバージョンが合わない時</a>をご参照ください。</p>
+</div></blockquote>
 <section id="note">
 <h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
 <ul class="simple">

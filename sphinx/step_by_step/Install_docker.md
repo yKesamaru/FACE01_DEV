@@ -1,7 +1,9 @@
 # Install Docker
 
-For Ubuntu, you can choose some method to install Docker, and before to install, should choice `Docker Desktop` or `Docker Engine`. Official tutorial is [here](https://docs.docker.com/engine/install/ubuntu/).
-This section, we talk about install `Docker Engine` and `Docker ce`.
+Ubuntuにおいて、Dockerをインストールするにはいくつかの方法を選択できますが、インストールする前に`Docker Desktop`または`Docker Engine`のどちらを選ぶか決定する必要があります。公式チュートリアルは[こちら](https://docs.docker.com/engine/install/ubuntu/)にあります。
+このセクションでは、`Docker Engine`および`Docker CE`のインストールについて説明します。
+
+この情報を基に、適切なDockerのインストール方法を選んでください。
 
 <!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
 
@@ -24,11 +26,15 @@ docker --version
 
 # GPUアーキテクチャ
 lspci | grep -ie nvidia
-## List of architecture is [here](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures) and [here](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units) and [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/).
+
 
 # Your NVIDIA linux driver version.
 nvidia-smi
 ```
+GPUのアーキテクチャのリストは以下を参照して下さい。
+- [Category:Nvidia_microarchitectures](https://en.wikipedia.org/wiki/Category:Nvidia_microarchitectures)
+- [Nvidia_graphics_processing_units](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units)
+- [sm-architectures-arch-and-gencode-for-various-nvidia-cards](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)
 
 ## 便利なスクリプトを使いましょう
 `Docker`のインストールは以下のスクリプトで行えます。
@@ -72,7 +78,9 @@ If you want to confirm installed Docker, try the following command.
 `sudo docker run hello-world`
 
 ## `nvidia-docker2`をインストールする
-To install `nvidia-docker2`, refer to [NVIDIA official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit).
+`FACE01`を`Docker`で利用するには`nvidia-docker2`が必要です。
+`nvidia-docker2`をインストールするには、[NVIDIA official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit)をご参照ください。
+
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -84,7 +92,9 @@ sudo apt update
 sudo apt install -y nvidia-docker2
 sudo systemctl restart docker
 ```
-If you want to test, seel bellow.
+
+テストに関しては以下をご参照ください。
+
 ```bash
 sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```

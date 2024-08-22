@@ -156,14 +156,14 @@ grep:<span class="w"> </span>./mediapipe/python/_framework_bindings.cpython-310-
 <p><code class="docutils literal notranslate"><span class="pre">mediapipe</span></code>をソースコードからビルドする必要があるかも知れません。（未検証）</p>
 </section>
 </section>
-<section id="example-and-explain-each-items">
-<h2>Example and explain each items.<a class="headerlink" href="#example-and-explain-each-items" title="Link to this heading"></a></h2>
+<section id="id8">
+<h2>全項目の例と説明<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
 <section id="default">
 <h3>[DEFAULT]<a class="headerlink" href="#default" title="Link to this heading"></a></h3>
-<p>[DEFAULT] section is for simple example.
-This [DEFAULT] setting for only use CUI mode.</p>
-<p>Also, this setting is for user who's PC is *<strong>not</strong>* installed Nvidia GPU card or IOT devices.</p>
-<p>[DEFAULT] section is the inheritor of all sections.</p>
+<p>[DEFAULT] セクションは最も基本的な項目です。
+このデフォルトセクションはCUI用に設定するのが良いでしょう。</p>
+<p>Nvidia GPUがインストールされていないPCでアプリケーションを使用する場合には、CUIモードが適しています。</p>
+<p>全ての項目はこのデフォルトセクションを継承します。</p>
 </section>
 <section id="items">
 <h3>Items<a class="headerlink" href="#items" title="Link to this heading"></a></h3>
@@ -190,6 +190,7 @@ This [DEFAULT] setting for only use CUI mode.</p>
 <li><p><strong>NOTE</strong></p>
 <ul>
 <li><p>各モデルが生成する<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は互いに互換性がありません。よって、<code class="docutils literal notranslate"><span class="pre">deep_learning_model</span></code>を変更した場合、既に作成されている<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は手動で削除する必要があります。モデル切り替え後の<code class="docutils literal notranslate"><span class="pre">npKnown.npz</span></code>は新たに自動的に作成されます。</p></li>
+<li><p>マスクをした顔を顔認証する場合は<code class="docutils literal notranslate"><span class="pre">DLIB</span></code>モデルを使用してください。</p></li>
 </ul>
 </li>
 </ul>
@@ -225,7 +226,7 @@ This [DEFAULT] setting for only use CUI mode.</p>
 </li>
 <li><p>similar_percentage</p>
 <ul>
-<li><p>Number of % which determine if the person on the screen is the person in the registered face information.</p></li>
+<li><p>画面上の人物が、登録されている人物であるかどうかを判定する場合のパーセンテージ値。<code class="docutils literal notranslate"><span class="pre">dlib</span></code>の場合は<code class="docutils literal notranslate"><span class="pre">99%</span></code>以上が本人として認識される。<code class="docutils literal notranslate"><span class="pre">JAPANESE</span> <span class="pre">FACE</span> <span class="pre">V1</span></code>の場合は<code class="docutils literal notranslate"><span class="pre">90%</span></code>以上が本人と認識される。</p></li>
 <li><p>Type: float</p></li>
 <li><p>Default: 99.1</p></li>
 </ul>
@@ -237,7 +238,7 @@ This [DEFAULT] setting for only use CUI mode.</p>
 <li><p>Default: 0</p></li>
 </ul>
 </li>
-<li><p>priset_face_images_jitters</p>
+<li><p>preset_face_images_jitters</p>
 <ul>
 <li><p>Number of value what means calculate jitters for priset_face_images.</p></li>
 <li><p>Type: int</p></li>

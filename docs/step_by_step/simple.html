@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>If you want to get only face recognition &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>シンプルに顔認識だけしたい場合 &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">If you want to get only face recognition</li>
+      <li class="breadcrumb-item active">シンプルに顔認識だけしたい場合</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,8 +81,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="if-you-want-to-get-only-face-recognition">
-<h1>If you want to get only face recognition<a class="headerlink" href="#if-you-want-to-get-only-face-recognition" title="Link to this heading"></a></h1>
+  <section id="id1">
+<h1>シンプルに顔認識だけしたい場合<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしてから、<code class="docutils literal notranslate"><span class="pre">example/simple.py</span></code>を起動してみましょう。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># activate virtual environment</span>
 <span class="nb">source</span><span class="w"> </span>bin/activate
 
@@ -90,9 +91,9 @@
 python<span class="w"> </span>example/simple.py
 </pre></div>
 </div>
-<section id="result">
-<h2>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2022</span>-09-27<span class="w"> </span><span class="m">19</span>:20:48,174<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_priset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>simple.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
+<section id="id2">
+<h2>結果<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2022</span>-09-27<span class="w"> </span><span class="m">19</span>:20:48,174<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>simple.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz
 菅義偉
 <span class="w">         </span>similarity<span class="w">              </span><span class="m">99</span>.1%
 <span class="w">         </span>coordinate<span class="w">              </span><span class="o">(</span><span class="m">138</span>,<span class="w"> </span><span class="m">240</span>,<span class="w"> </span><span class="m">275</span>,<span class="w"> </span><span class="m">104</span><span class="o">)</span>
@@ -109,8 +110,7 @@ python<span class="w"> </span>example/simple.py
 <span class="w"> </span>...
 </pre></div>
 </div>
-<p>The face images are output to the <code class="docutils literal notranslate"><span class="pre">/output/</span></code> folder.</p>
-<p><img alt="" src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/img/PASTE_IMAGE_2022-07-20-07-36-26.png" /></p>
+<p>クロップされた顔画像は<code class="docutils literal notranslate"><span class="pre">output</span></code>ディレクトリに保存されます。</p>
 </section>
 </section>
 
