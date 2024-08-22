@@ -62,7 +62,7 @@ Audrey Hepburn
 
 <br />
 <div style="display: flex; align-items: center;">
-    <img src="assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
         <p style="margin: 10;">日本人専用の高精度顔認識学習モデル「JAPANESE FACE V1」をトコトン便利に使うための<br />
         「⭐️豊富なクラスとメソッド⭐️」<br />
@@ -104,7 +104,7 @@ Audrey Hepburn
         <p style="margin: 10;">教育・研究用途でしたら著作権表示だけでOK！</p>
         <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
     </div>
-    <img src="assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
 </div>
 <br />
 
