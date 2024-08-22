@@ -3,7 +3,7 @@
 
 <br />
 <div style="display: flex; align-items: center;">
-    <img src="../../assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
         <p style="margin: 10;">この記事では、エグザンプルプログラムを使用して、`FACE01`を用いた顔認識アプリケーションを作成するために必要な知識と技術を紹介します。</p>
         <p style="margin: 10;">準備はいいですか？</p>
@@ -41,7 +41,7 @@ OK！では始めましょう！
         <p style="margin: 10;"></p>
         <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
     </div>
-    <img src="../../assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
 </div>
 <br />
 
@@ -158,7 +158,7 @@ python example/benchmark_GUI_window.py
 
 <br />
 <div style="display: flex; align-items: center;">
-    <img src="../../assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
         <p style="margin: 10;">開発にトラブルはつきもの！😥</p>
         <p style="margin: 10;">発生しやすいトラブル例をまとめました。</p>
