@@ -8,7 +8,7 @@
 <div style="display: flex; align-items: center;">
     <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
-        <p style="margin: 10;">「期待した動作とは違う」と思ったら、まず'config.ini'ファイルを確認しましょう。もしかしたら設定が間違っているかもしれません。</p>
+        <p style="margin: 10;">「期待した動作とは違う」と思ったら、まず<span style="background-color: yellow;">'config.ini'ファイルを確認</span>しましょう。もしかしたら設定が間違っているかもしれません。</p>
         <p style="margin: 10;">'config.ini'ファイルに慣れたら、独自のセクションを作ってみましょう！</p>
         <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
     </div>
@@ -30,7 +30,7 @@ https://docs.python.org/3/library/configparser.html
 <br />
 <div style="display: flex; align-items: center; justify-content: flex-end;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
-        <p style="margin: 10;">継承元の[DEFAULT]セクションの設定にミスがあると、継承されたあらゆるセクションに、エラーや予期せぬ動作が発生します。</p>
+        <p style="margin: 10;">継承元の<span style="background-color: yellow;">[DEFAULT]セクションの設定にミスがあると</span>、継承されたあらゆるセクションに、エラーや予期せぬ動作が発生します。</p>
         <p style="margin: 10;">[DEFAULT]セクションを固定して、新しいセクションで必要な設定を上書きするとよいでしょう。</p>
         <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
     </div>
@@ -170,7 +170,7 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
 <div style="display: flex; align-items: center;">
     <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
-        <p style="margin: 10;">deep_learning_modelでdlibとJAPANESE FACE V1のどちらを選んだかで、similar_percentageの指定する数値を変える必要があります。</p>
+        <p style="margin: 10;">deep_learning_modelでdlibとJAPANESE FACE V1のどちらを選んだかで、<span style="background-color: yellow;">similar_percentageの指定する数値を変える必要があります。</span></p>
         <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
     </div>
 </div>
@@ -220,8 +220,8 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
 <br />
 <div style="display: flex; align-items: center; justify-content: flex-end;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
-        <p style="margin: 10;">use_pipeをTrue、つまりmediapipeをオンにすると処理速度が低下します。</p>
-        <p style="margin: 10;"></p>
+        <p style="margin: 10;">use_pipeをTrue、つまりmediapipeをオンにすると<span style="background-color: yellow;">処理速度が低下します。</span></p>
+        <p style="margin: 10;">残念ながら原因不明です💦</p>
         <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
     </div>
     <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">

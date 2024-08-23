@@ -37,7 +37,7 @@ OK！では始めましょう！
 <br />
 <div style="display: flex; align-items: center; justify-content: flex-end;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
-        <p style="margin: 10;">こちらで用意した`Dockerイメージ`を使うことで、煩わしい環境設定から解放されるだけでなく、予期せぬエラーやローカル環境の汚染を防ぐことが出来ます。</p>
+        <p style="margin: 10;"><span style="background-color: yellow;">こちらで用意した`Dockerイメージ`を使う</span>ことで、煩わしい環境設定から解放されるだけでなく、予期せぬエラーやローカル環境の汚染を防ぐことが出来ます。</p>
         <p style="margin: 10;"></p>
         <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
     </div>
@@ -62,6 +62,16 @@ docker pull tokaikaoninsho/face01_gpu
 ## [FACE01のインストール](Installation.md)
 まっさらなシステムに`FACE01`を直接インストールしたい方は[こちら](Installation.md)をご覧ください。
 
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00061-2065233.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;"><span style="background-color: yellow;">本稼働用のテスト</span>としてFACE01をインストールする場合、ですね⭐️''</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
 ## [顔画像の登録](register_faces.md)
 この記事では、顔画像の登録方法について説明します。
 詳細は[こちら](register_faces.md)をご覧ください。
@@ -85,6 +95,17 @@ which vim
 ## [設定ファイルの編集](config_ini.md)
 設定は`config.ini`ファイルで行います。
 `config.ini`ファイルについては[こちら](config_ini.md)をご覧ください。
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">設定ファイルの把握は<span style="background-color: yellow;">超重要</span>です！！</p>
+        <p style="margin: 10;">かならず確認してくださいね⭐️''</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 
 ## [FACE01の簡単な使用フロー](simple_flow.md)
 FACE01の使い方の一例ですが、簡単なフローを見てみましょう。
@@ -158,7 +179,7 @@ python example/benchmark_GUI_window.py
 
 <br />
 <div style="display: flex; align-items: center;">
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
     <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
         <p style="margin: 10;">開発にトラブルはつきもの！😥</p>
         <p style="margin: 10;">発生しやすいトラブル例をまとめました。</p>

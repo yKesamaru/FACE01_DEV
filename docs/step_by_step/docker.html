@@ -84,6 +84,16 @@
   <section id="dockerface01">
 <h1><code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使って<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使う<a class="headerlink" href="#dockerface01" title="Link to this heading"></a></h1>
 <p>ここでは<code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使って煩雑な環境構築なしに<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を使用する手順を解説します。</p>
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらで用意している<span style="background-color: yellow;">`Dockerイメージ`</span>を使ってFACE01を使うのが<span style="background-color: yellow;">一番簡単でローカル環境も汚しません</span>⭐️''</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 <section id="docker-image">
 <h2><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をプル<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Dockerイメージ</span></code>をダウンロード（プル）しましょう。</p>
@@ -92,10 +102,18 @@
 </pre></div>
 </div>
 <blockquote>
-<div><p>![NOTE]:
-使用するPCがNVIDIA GPUを使用しているなら、<code class="docutils literal notranslate"><span class="pre">face01_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。
-そうでなければ、<code class="docutils literal notranslate"><span class="pre">face01_no_gpu</span></code>のような名前のついた<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>を使用してください。</p>
+<div><p>![NOTE]:</p>
 </div></blockquote>
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">使用するPCがNVIDIA GPUを使用しているなら、<span style="background-color: yellow;">`face01_gpu`</span>のような名前のついた`Docker image`を使用してください。</p>
+        <p style="margin: 10;">そうでなければ、<span style="background-color: yellow;">`face01_no_gpu`</span>のような名前のついた`Docker image`を使用してください。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 </section>
 <section id="when-using-face01-gpu">
 <h2>When using <code class="docutils literal notranslate"><span class="pre">face01_gpu</span></code><a class="headerlink" href="#when-using-face01-gpu" title="Link to this heading"></a></h2>
@@ -104,7 +122,7 @@
 </pre></div>
 </div>
 <section id="id1">
-<h3>Docker Imageをダウンロードする<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<h3>Docker Imageをダウンロード（プル）する<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">tokaikaoninsho/face01_gpu</span></code></p>
 </section>
 <section id="dockertag-image-id">
@@ -113,8 +131,16 @@
 </section>
 <section id="dockerguixhost">
 <h3>DockerでGUIが使えるようにxhostの設定をします<a class="headerlink" href="#dockerguixhost" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:</span></code>
-よくわからない場合は<a class="reference external" href="https://zenn.dev/ykesamaru/articles/add7d844f56516">DockerでGUIアプリケーションを開く基本的な押さえどころ</a>を参考にしてください。</p>
+<p><code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">+local:</span></code></p>
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">よくわからない場合は<a https://zenn.dev/ykesamaru/articles/add7d844f56516>DockerでGUIアプリケーションを開く基本的な押さえどころ</a>を参考にしてください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 </section>
 <section id="wayland">
 <h3>ディスプレイマネージャとして<code class="docutils literal notranslate"><span class="pre">wayland</span></code>を使用している場合<a class="headerlink" href="#wayland" title="Link to this heading"></a></h3>
@@ -172,6 +198,16 @@
 .<span class="w"> </span>bin/activate
 </pre></div>
 </div>
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">Python仮想環境の<span style="background-color: yellow;">アクティベートを忘れない</span>ようにしましょう。</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 <p>例：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Docker imageを確認する</span>
 user@user:~/bin/FACE01_DEV/assets$<span class="w"> </span>docker<span class="w"> </span>images
@@ -255,11 +291,21 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 <li><p>Nvidia GPUを搭載したPCかどうかを確認してください</p></li>
 <li><p>コンテナとホストのCUDAドライバを確認してください</p>
 <ul>
-<li><p>ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。その場合はDockerの使用を諦め、まっさらなUbuntu環境に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールするか、<code class="docutils literal notranslate"><span class="pre">GUI</span></code>を使わない方法に切り替えてください。<code class="docutils literal notranslate"><span class="pre">GUI</span></code>を使わない場合、<code class="docutils literal notranslate"><span class="pre">no-gpu</span></code>のタグがついたイメージを使用し、<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>ファイルの<code class="docutils literal notranslate"><span class="pre">headless</span></code>を<code class="docutils literal notranslate"><span class="pre">True</span></code>に指定してください。</p></li>
+<li><p>ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">config.ini</span></code>の<code class="docutils literal notranslate"><span class="pre">use_pipe</span></code>を<code class="docutils literal notranslate"><span class="pre">False</span></code>に設定してください。</p></li>
 </ul>
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">ごく稀に、<span style="background-color: yellow;">ホストOSとDocker内のCUDAドライバの相性問題</span>が発生することがあります。</p>
+        <p style="margin: 10;">そんなときは<a https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#libcudart-so-11-0>libcudart.so.11.0などが見つからないエラーが出力される</a>を参照してください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 </section>
 <section id="id5">
 <h3>その他<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>

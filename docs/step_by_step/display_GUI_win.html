@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>If you want to display GUI window &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>GUIウィンドウを作成する &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">If you want to display GUI window</li>
+      <li class="breadcrumb-item active">GUIウィンドウを作成する</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,10 +81,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="if-you-want-to-display-gui-window">
-<h1>If you want to display GUI window<a class="headerlink" href="#if-you-want-to-display-gui-window" title="Link to this heading"></a></h1>
-<p>Want to display in a cool GUI window?
-Try <code class="docutils literal notranslate"><span class="pre">example/display_GUI_window.py</span></code>.</p>
+  <section id="gui">
+<h1>GUIウィンドウを作成する<a class="headerlink" href="#gui" title="Link to this heading"></a></h1>
+<p>GUIウィンドウを描画するシンプルなエグザンプルです。
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">example/display_GUI_window.py</span></code>.</p>
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">複数人の顔認証もラクラクです⭐️''</p>
+        <p style="margin: 10;">処理が遅い場合はconfig.iniの設定を変更しましょう。i/oが遅い場合、処理速度に影響することがあります。そんなときはcrop_face_imageをfalseにするかfrequency_crop_imageの値を上げましょう。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 <section id="result">
 <h2>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>...
@@ -106,10 +116,6 @@ Try <code class="docutils literal notranslate"><span class="pre">example/display
 </pre></div>
 </div>
 <p><img alt="FACE01_GUI" src="https://user-images.githubusercontent.com/93259837/180339656-7ef7baea-480f-4d78-b29b-e8e12bc85189.gif" /></p>
-</section>
-<section id="example-code">
-<h2>Example code<a class="headerlink" href="#example-code" title="Link to this heading"></a></h2>
-<p>Whole example source code is <a class="reference download internal" download="" href="../_downloads/40b45a4243ee0296fb38b29e8e3cb224/display_GUI_window.py"><span class="xref download myst">here</span></a>.</p>
 </section>
 </section>
 

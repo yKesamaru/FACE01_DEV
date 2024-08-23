@@ -1,9 +1,18 @@
-# If you want to display GUI window
+# GUIウィンドウを作成する
 
-Want to display in a cool GUI window?
-Try `example/display_GUI_window.py`.
+GUIウィンドウを描画するシンプルなエグザンプルです。
+`python example/display_GUI_window.py`.
 
-
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">複数人の顔認証もラクラクです⭐️''</p>
+        <p style="margin: 10;">処理が遅い場合はconfig.iniの設定を変更しましょう。i/oが遅い場合、処理速度に影響することがあります。そんなときはcrop_face_imageをfalseにするかfrequency_crop_imageの値を上げましょう。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 ## Result
 ```bash
@@ -27,7 +36,4 @@ Try `example/display_GUI_window.py`.
 ```
 ![FACE01_GUI](https://user-images.githubusercontent.com/93259837/180339656-7ef7baea-480f-4d78-b29b-e8e12bc85189.gif)
 
-
-## Example code
-Whole example source code is [here](../../example/display_GUI_window.py).
 
