@@ -60,9 +60,7 @@ Audrey Hepburn
 
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
 
-
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-23_07-55.png)
-
 
 - 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
