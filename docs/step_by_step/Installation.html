@@ -84,17 +84,31 @@
   <section id="ubuntuface01">
 <h1>まっさらな<code class="docutils literal notranslate"><span class="pre">Ubuntu環境</span></code>に<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールする<a class="headerlink" href="#ubuntuface01" title="Link to this heading"></a></h1>
 <p>実環境を構築するためにまっさらなマシンに<code class="docutils literal notranslate"><span class="pre">FACE01</span></code>をインストールしたい場合、以下をご参考にして下さい。</p>
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">FACE01をまだ試していない方は<span style="background-color: yellow;">Dockerを使用</span>してください⭐️''</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 <p>ホストOSは<code class="docutils literal notranslate"><span class="pre">Ubuntu20.04</span></code>を想定しています。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/INSTALL_FACE01.sh
 chmod<span class="w"> </span>+x<span class="w"> </span>INSTALL_FACE01.sh
 bash<span class="w"> </span>-c<span class="w"> </span>./INSTALL_FACE01.sh
 </pre></div>
 </div>
-<blockquote>
-<div><p>![NOTE]
-ホストOSを<code class="docutils literal notranslate"><span class="pre">Ubuntu22.04</span></code>にする場合、追加の手順が必要になります。
-詳しくは<a class="reference external" href="https://zenn.dev/ykesamaru/articles/53a3839afbc302">ONNX RuntimeとCUDAのバージョンが合わない時</a>をご参照ください。</p>
-</div></blockquote>
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">ホストOSを`Ubuntu22.04`にする場合、<span style="background-color: yellow;">追加の手順が必要</span>になります。</p>
+        <p style="margin: 10;">詳しくは<a https://zenn.dev/ykesamaru/articles/53a3839afbc302>ONNX RuntimeとCUDAのバージョンが合わない時</a>をご参照ください。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 <section id="note">
 <h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -102,7 +116,15 @@ bash<span class="w"> </span>-c<span class="w"> </span>./INSTALL_FACE01.sh
 <li><p><code class="docutils literal notranslate"><span class="pre">Windows</span></code>ユーザの方は <code class="docutils literal notranslate"><span class="pre">WSLg</span></code>を使用するか <code class="docutils literal notranslate"><span class="pre">Docker</span></code>を使用してください。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code>以外のOSをお使いの方は、<code class="docutils literal notranslate"><span class="pre">Docker</span></code>, <code class="docutils literal notranslate"><span class="pre">Boxes</span></code>, or <code class="docutils literal notranslate"><span class="pre">lxd</span></code>をご使用ください</p></li>
 <li><p>使用前に<code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしてください</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">Jetson</span></code>を使用される場合、ソースコードに手を加えて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>をインストールさせる必要があります</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">Jetson</span></code>を使用される場合、ソースコードに手を加えて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>をインストールさせる必要があります（バージョンによります）。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dlib/cuda/cudnn_dlibapi.cpp</span></code>854行目<code class="docutils literal notranslate"><span class="pre">forward_algo</span> <span class="pre">=</span> <span class="pre">forward_best_algo;</span></code>をコメントアウトしてコンパイルして下さい。</p>
+<ul>
+<li><p>参考: <a class="reference external" href="https://wisteriahill.sakura.ne.jp/CMS/WordPress/2020/12/15/jetson-nano-build-dlib-use-gpu-for-face-recognition/">Jetson NanoでDlibをビルドして顔認識でGPUを使ってみる </a></p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 </section>

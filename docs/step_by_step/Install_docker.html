@@ -87,6 +87,16 @@
 このセクションでは、<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">Engine</span></code>および<code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">CE</span></code>のインストールについて説明します。</p>
 <p>この情報を基に、適切なDockerのインストール方法を選んでください。</p>
 <!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらに掲載しているDockerのインストール方法は<span style="background-color: yellow;">情報が古くなる</span>可能性があります。</p>
+        <p style="margin: 10;">必ず<span style="background-color: yellow;">公式サイト</span>をチェックしてください⭐️''</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 <section id="note">
 <h2>NOTE<a class="headerlink" href="#note" title="Link to this heading"></a></h2>
 <p>動作環境は以下のリストを満たしている必要があります。詳しくは<a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements">公式サイト</a>をご覧ください。
@@ -106,7 +116,6 @@ docker<span class="w"> </span>--version
 
 <span class="c1"># GPUアーキテクチャ</span>
 lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-ie<span class="w"> </span>nvidia
-
 
 <span class="c1"># Your NVIDIA linux driver version.</span>
 nvidia-smi
@@ -166,6 +175,15 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <h2><code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>をインストールする<a class="headerlink" href="#nvidia-docker2" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">FACE01</span></code>を<code class="docutils literal notranslate"><span class="pre">Docker</span></code>で利用するには<code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>が必要です。
 <code class="docutils literal notranslate"><span class="pre">nvidia-docker2</span></code>をインストールするには、<a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit">NVIDIA official tutorial</a>をご参照ください。</p>
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;"><span style="background-color: yellow;">nvidia-docker2</span>をかならずインストールしましょう。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ID$VERSION_ID</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://nvidia.github.io/libnvidia-container/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg<span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/libnvidia-container/<span class="nv">$distribution</span>/libnvidia-container.list<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
