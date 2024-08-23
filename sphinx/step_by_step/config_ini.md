@@ -127,7 +127,7 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
   - Default: True
 
 
-- deep+learning_model
+- deep_learning_model
   - 従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)と日本人の顔認証に特化したモデル(`efficientnetv2_arcface.onnx`)を切り替えることが出来ます。
     - int: 0 or 1
       - `dlib_face_recognition_resnet_model_v1.dat`: 0
@@ -166,6 +166,15 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
   - Type: float
   - Default: 99.1
 
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">deep_learning_modelでdlibとJAPANESE FACE V1のどちらを選んだかで、similar_percentageの指定する数値を変える必要があります。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 
 - jitters
   - Number of value what means calculate jitters on running FACE01.
@@ -208,6 +217,16 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
   - Type: bool
   - Default: True
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">use_pipeをTrue、つまりmediapipeをオンにすると処理速度が低下します。</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 - model_selection
   - 0 OR 1
@@ -219,10 +238,10 @@ Nvidia GPUがインストールされていないPCでアプリケーション�
 
 
 - min_detection_confidence
-- The minimum confidence value from the face detection model for the detection to be considered successful. If wearing the mask, set it to about 0.3. The lower the number, the higher the possibility of erroneous recognition other than the face. The standard is 0.4 to 0.5.
-  - NOTE: You can set `person_frame_face_encoding` to `True` only if `use_pipe` is True.
-  - Type: float
-  - Default: 0.4
+  - The minimum confidence value from the face detection model for the detection to be considered successful. If wearing the mask, set it to about 0.3. The lower the number, the higher the possibility of erroneous recognition other than the face. The standard is 0.4 to 0.5.
+    - NOTE: You can set `person_frame_face_encoding` to `True` only if `use_pipe` is True.
+    - Type: float
+    - Default: 0.4
 
 
 - person_frame_face_encoding
