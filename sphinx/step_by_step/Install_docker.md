@@ -7,6 +7,17 @@ Ubuntuにおいて、Dockerをインストールするにはいくつかの方�
 
 <!-- *If you're PC is not installed NVIDIA GPU card, refer [section]([docs/to_build_docker_image.md](Install_docker.md#if-youre-pc-is-not-installed-nvidia-gpu-card)) 'To build FACE01 docker image without nvidia-docker2 package'.* -->
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらに掲載しているDockerのインストール方法は<span style="background-color: yellow;">情報が古くなる</span>可能性があります。</p>
+        <p style="margin: 10;">必ず<span style="background-color: yellow;">公式サイト</span>をチェックしてください⭐️''</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 ## NOTE
 動作環境は以下のリストを満たしている必要があります。詳しくは[公式サイト](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements)をご覧ください。
 `GPU`を使用しない条件に於いてはこの限りではありません。
@@ -26,7 +37,6 @@ docker --version
 
 # GPUアーキテクチャ
 lspci | grep -ie nvidia
-
 
 # Your NVIDIA linux driver version.
 nvidia-smi
@@ -80,6 +90,16 @@ If you want to confirm installed Docker, try the following command.
 ## `nvidia-docker2`をインストールする
 `FACE01`を`Docker`で利用するには`nvidia-docker2`が必要です。
 `nvidia-docker2`をインストールするには、[NVIDIA official tutorial](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit)をご参照ください。
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;"><span style="background-color: yellow;">nvidia-docker2</span>をかならずインストールしましょう。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 
 ```bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \

@@ -72,6 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id11">エグザンプルリスト</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id12">トラブルシューティング</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cuda">CUDAが動作しない</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nvidia-jetsondlib"><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">jetson</span></code>にて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>が動作しない</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dlib-dlib-use-cudafalse">dlib.DLIB_USE_CUDAがFalseの場合の対処法</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#libcudart-so-11-0"><code class="docutils literal notranslate"><span class="pre">libcudart.so.11.0</span></code>などが見つからないエラーが出力される</a></li>
 </ul>
@@ -305,6 +306,20 @@ simple.pyはCUI動作のためのエグザンプルのスクリプトです。</
 <section id="cuda">
 <h3>CUDAが動作しない<a class="headerlink" href="#cuda" title="Link to this heading"></a></h3>
 <p><a class="reference internal" href="reinstall_gpu.html"><span class="std std-doc">CUDAライブラリをすべて削除して再インストールする方法</span></a>をご覧ください。</p>
+</section>
+<section id="nvidia-jetsondlib">
+<h3><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">jetson</span></code>にて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>が動作しない<a class="headerlink" href="#nvidia-jetsondlib" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">Jetson</span></code>を使用される場合、ソースコードに手を加えて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>をインストールさせる必要があります（バージョンによります）。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dlib/cuda/cudnn_dlibapi.cpp</span></code>854行目<code class="docutils literal notranslate"><span class="pre">forward_algo</span> <span class="pre">=</span> <span class="pre">forward_best_algo;</span></code>をコメントアウトしてコンパイルして下さい。</p>
+<ul>
+<li><p>参考: <a class="reference external" href="https://wisteriahill.sakura.ne.jp/CMS/WordPress/2020/12/15/jetson-nano-build-dlib-use-gpu-for-face-recognition/">Jetson NanoでDlibをビルドして顔認識でGPUを使ってみる </a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="dlib-dlib-use-cudafalse">
 <h3>dlib.DLIB_USE_CUDAがFalseの場合の対処法<a class="headerlink" href="#dlib-dlib-use-cudafalse" title="Link to this heading"></a></h3>

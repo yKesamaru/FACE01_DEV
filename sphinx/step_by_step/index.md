@@ -193,6 +193,11 @@ python example/benchmark_GUI_window.py
 ### CUDAが動作しない
 [CUDAライブラリをすべて削除して再インストールする方法](reinstall_gpu.md)をご覧ください。
 
+### `Nvidia jetson`にて`dlib`が動作しない
+- `Nvidia Jetson`を使用される場合、ソースコードに手を加えて`dlib`をインストールさせる必要があります（バージョンによります）。
+  - `dlib/cuda/cudnn_dlibapi.cpp`854行目`forward_algo = forward_best_algo;`をコメントアウトしてコンパイルして下さい。
+    - 参考: [Jetson NanoでDlibをビルドして顔認識でGPUを使ってみる ](https://wisteriahill.sakura.ne.jp/CMS/WordPress/2020/12/15/jetson-nano-build-dlib-use-gpu-for-face-recognition/)
+
 ### dlib.DLIB_USE_CUDAがFalseの場合の対処法
 [dlib.DLIB_USE_CUDAがFalseの場合の対処法](dlib.DLIB_USE_CUDA.md)をご覧ください。
 

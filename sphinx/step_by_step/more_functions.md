@@ -4,7 +4,17 @@
 FACE01には、`face01lib/`内に多くの関数が含まれています。
 このセクションでは、FACE01で使用可能な関数の使い方について(補足的に)説明します。
 
-💥 このドキュメントは[公式ドキュメント](https://ykesamaru.github.io/FACE01_DEV/)を保管するものです。そのため最新のドキュメントを反映していません。正しい使い方は必ず[公式ドキュメント](https://ykesamaru.github.io/FACE01_DEV/)を参照するようにしてください。
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">💥 このドキュメントは公式ドキュメントを補完するものです。そのため<span style="background-color: yellow;">最新のドキュメントを反映していません。</span></p>
+        <p style="margin: 10;">正しい使い方は必ず<a https://ykesamaru.github.io/FACE01_DEV/>公式ドキュメント</a>を参照するようにしてください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+<a https://ykesamaru.github.io/FACE01_DEV/>公式ドキュメント</a>
 
 ## 準備
 ### Loggerの初期化と設定
