@@ -3,6 +3,18 @@
 他の関数の情報は[こちら](more_functions.md)で説明されています。
 FACE01を使用するためには、このチュートリアルを読むだけで十分です。
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">FACE01を本格的に使うには多くのクラスとメソッドを知らなくてはいけません⭐️''</p>
+        <p style="margin: 10;">でもこのページに書いてあることを知れば最低限動かせます💗</p>
+        <p style="margin: 10;">疑問点があれば<span style="background-color: yellow;">エグザンプルコードを参考</span>にしましょう。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 まず、FACE01をインポートする必要があります。
 ```python
 import FACE01 as fg
@@ -30,6 +42,18 @@ def main_process():
 ```python
 frame_datas_array = fg.main_process().__next__()
 ```
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">ジェネレーターをぶん回すと<span style="background-color: yellow;">映像フレームごとの様々な情報が取得</span>できます。</p>
+        <p style="margin: 10;">どんなデータをどのように利用するか、アナタ次第です⭐️''</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
 ```python
 while True:
     try:

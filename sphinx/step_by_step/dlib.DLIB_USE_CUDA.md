@@ -1,8 +1,18 @@
 # `dlib.DLIB_USE_CUDA`が`False`の場合の対処方法
 
 > ![NOTE]
-> この作業はこちらで用意している`Dockerイメージ`を使用している場合は不要です。
+> 
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">この作業はこちらで用意している<span style="background-color: yellow;">`Dockerイメージ`</span>を使用している場合は<span style="background-color: yellow;">不要です</span>。⭐️''</p>
+        <p style="margin: 10;">本稼働対象のPCにFACE01をインストールする時、システム環境によってはここに紹介する手順が必要になる場合があります💦</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 `FACE01`では、`GPU`の利用率を最大化するために`CUDA`を使用します。通常、ターミナルで`pip install dlib`と入力することで、使用環境に応じて`CUDA`を使用できるようになります。
 

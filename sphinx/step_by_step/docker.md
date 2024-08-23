@@ -1,6 +1,16 @@
 # `Docker`を使って`FACE01`を使う
 ここでは`Docker`を使って煩雑な環境構築なしに`FACE01`を使用する手順を解説します。
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらで用意している<span style="background-color: yellow;">`Dockerイメージ`</span>を使ってFACE01を使うのが<span style="background-color: yellow;">一番簡単でローカル環境も汚しません</span>⭐️''</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 ## `Docker image`をプル
 `Dockerイメージ`をダウンロード（プル）しましょう。
@@ -12,8 +22,20 @@ docker pull tokaikaoninsho/face01_gpu
 ```
 
 > ![NOTE]:
-> 使用するPCがNVIDIA GPUを使用しているなら、`face01_gpu`のような名前のついた`Docker image`を使用してください。
-> そうでなければ、`face01_no_gpu`のような名前のついた`Docker image`を使用してください。
+> 
+> 
+
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">使用するPCがNVIDIA GPUを使用しているなら、<span style="background-color: yellow;">`face01_gpu`</span>のような名前のついた`Docker image`を使用してください。</p>
+        <p style="margin: 10;">そうでなければ、<span style="background-color: yellow;">`face01_no_gpu`</span>のような名前のついた`Docker image`を使用してください。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
 
 ## When using `face01_gpu`
 まずお使いのPCで`Nvidia GPU`が使用可能かチェックしましょう。
@@ -22,7 +44,7 @@ lspci | grep -i nvidia
 ```
 
 
-### Docker Imageをダウンロードする
+### Docker Imageをダウンロード（プル）する
 `docker pull tokaikaoninsho/face01_gpu`
 
 ### DockerイメージのTAG, IMAGE IDを確認しましょう
@@ -30,7 +52,17 @@ lspci | grep -i nvidia
 
 ### DockerでGUIが使えるようにxhostの設定をします
 `xhost +local:`
-よくわからない場合は[DockerでGUIアプリケーションを開く基本的な押さえどころ](https://zenn.dev/ykesamaru/articles/add7d844f56516)を参考にしてください。
+
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">よくわからない場合は<a https://zenn.dev/ykesamaru/articles/add7d844f56516>DockerでGUIアプリケーションを開く基本的な押さえどころ</a>を参考にしてください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 ### ディスプレイマネージャとして`wayland`を使用している場合
 ご用意している`docker イメージ`は`X11`環境で作成しております。ですのでお使いのディスプレイマネージャが`X11`あるいは`XWayland`であれば使用できますが、`Wayland`には対応していません。この場合はご自身でイメージをビルドしていただく必要があります。[build_docker_image.md](build_docker_image.md)をご参照ください。
@@ -83,6 +115,18 @@ Python仮想環境を起動してください。
 # Activate venv (IMPORTANT!)
 . bin/activate
 ```
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">Python仮想環境の<span style="background-color: yellow;">アクティベートを忘れない</span>ようにしましょう。</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
 例：
 ```bash
 # Docker imageを確認する
@@ -156,8 +200,20 @@ docker@bb030de27861:~/FACE01_DEV$ . bin/activate
 ### エグザンプルコードは起動したが処理がおそすぎる
 - Nvidia GPUを搭載したPCかどうかを確認してください
 - コンテナとホストのCUDAドライバを確認してください
-  - ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。その場合はDockerの使用を諦め、まっさらなUbuntu環境に`FACE01`をインストールするか、`GUI`を使わない方法に切り替えてください。`GUI`を使わない場合、`no-gpu`のタグがついたイメージを使用し、`config.ini`ファイルの`headless`を`True`に指定してください。
+  - ホストのCUDAドライバのバージョンによってはコンテナ内のCUDAドライババージョンをサポートしていない場合があります。
 - `config.ini`の`use_pipe`を`False`に設定してください。
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">ごく稀に、<span style="background-color: yellow;">ホストOSとDocker内のCUDAドライバの相性問題</span>が発生することがあります。</p>
+        <p style="margin: 10;">そんなときは<a https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#libcudart-so-11-0>libcudart.so.11.0などが見つからないエラーが出力される</a>を参照してください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 ### その他
 [こちらのトラブルシューティング](https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id12)も参考にしてください。
 ### それでも解決しない時
