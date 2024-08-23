@@ -3,6 +3,19 @@
 ## `config.iniファイルとは
 `FACE01`の設定ファイルです。Pythonの`ConfigParser`モジュールを使って、`FACE01`の様々な設定を管理します。
 
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">「期待した動作とは違う」と思ったら、まず'config.ini'ファイルを確認しましょう。もしかしたら設定が間違っているかもしれません。</p>
+        <p style="margin: 10;">'config.ini'ファイルに慣れたら、独自のセクションを作ってみましょう！</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
+
 **[DEFAULT]セクション**は、標準的な初期設定値を定義するセクションです。このセクションの設定はあくまで例であり、必要に応じて変更できます。
 
 ## 注意（重要！）
@@ -13,6 +26,18 @@ https://docs.python.org/3/library/configparser.html
 ## 継承
 各セクションは、**[DEFAULT]セクション**の設定を継承します。
 そのため、各セクションでは、**[DEFAULT]セクション**の設定を上書きしたい項目（キーと値）のみを記述すればよいです。
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">継承元の[DEFAULT]セクションの設定にミスがあると、継承されたあらゆるセクションに、エラーや予期せぬ動作が発生します。</p>
+        <p style="margin: 10;">[DEFAULT]セクションを固定して、新しいセクションで必要な設定を上書きするとよいでしょう。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 
 ## 書式
 設定項目の記述形式は、`key=value`です。
@@ -29,6 +54,28 @@ $ vim ./config.ini
 `npKnown.npz`がフォルダーに存在するとき、そのファイルが従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)で作成されたものなのか、新しいモデル(`efficientnetv2_arcface.onnx`)で作成されたものなのかは重要な要素です。
   もし`config.ini`で指定した学習モデルと`npKnown.npz`が作られた学習モデルが一致しない場合、エラーが発生します。
   その場合は`npKnown.npz`を手動で削除してください。新しい`npKnown.npz`が自動的に作成されます。
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00147-2005948782.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">FACE01ではdlibとJAPANESE FACE V1の2つの学習モデルを使用でき、npKnown.npzというデータファイルが作成されます。</p>
+        <p style="margin: 10;">しかしdlibとJAPANESE FACE V1では得られる特徴量の粒度が違うため、同じnpKnown.npzファイルでも中身は別物です。</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">dlibで作成されたnpKnown.npzファイルはJAPANESE FACE V1では使えませんし、その逆も然りです。</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00030-2065202.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 
 ### デバッグログの異常出力について
 `mediapipe`を使用する時(`use_pipe = True`)、大量にデバッグログが標準出力される場合があります。繰り返し出力されるデバッグログには以下のようなものがあります。
