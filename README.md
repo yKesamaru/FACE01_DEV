@@ -1,6 +1,7 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_sample/master/images/g1320.png" width="200px">
+
+![](assets/images/eye-catch.png)
 
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、<br />
 Pythonで書かれたオープンソースのリファレンス実装**です。
@@ -45,7 +46,7 @@ Audrey Hepburn
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-23_07-55.png)
 
 - 🎉 LICENSEが「もっと使いやすく」なりました！実稼動以外はアパッチライセンスV2です！
-- 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
+- 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（[LICENSE](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/why_apache_license.md)に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
   - `JAPANESE FACE V1` は日本人の顔認証に特化したモデルです。
 - **10,000人以上**の顔データからリアルタイムで顔認証が可能です
@@ -89,7 +90,7 @@ FACE01開発環境のセッティングは本当に簡単です！
 
 🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
 
-[こちら](https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#docker)で丁寧な導入手順を解説をしていますのでぜひご覧ください。
+[こちら](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html)で丁寧な導入手順を解説をしていますのでぜひご覧ください。
 
 ---
 
