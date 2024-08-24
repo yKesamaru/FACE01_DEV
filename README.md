@@ -17,7 +17,6 @@ ___
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
 ![](https://img.shields.io/badge/Release-v3.0-blue)
 ![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue)
-![](https://img.shields.io/github/deployments/yKesamaru/FACE01_DEV/github-pages)
 
 ![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
@@ -62,6 +61,7 @@ Audrey Hepburn
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-23_07-55.png)
 
+- 🎉 LICENSEが「もっと使いやすく」なりました！実稼動以外はアパッチライセンスV2です！
 - 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（`LICENSE`に従ってください）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
   - `JAPANESE FACE V1` は日本人の顔認証に特化したモデルです。
@@ -89,10 +89,10 @@ Audrey Hepburn
 ### その他
 - このリポジトリが提供するファイルは、無料でお使いいただけます。
 教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
-  詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](docs/academic.md)をご覧ください。
+  詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](LICENSE/why_apache_license.md)をご覧ください。
 - 商用利用にあたっては別途ライセンスが必要です。（LICENSEファイルをご参照ください。）
 - YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
-  - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](docs/YouTube_license.md)をご参照ください。
+  - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](LICENSE/YouTube_license.md)をご参照ください。
 - このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
 - JAPANESE FACE（日本人に最適化された顔学習モデル）だけを使用したい場合は、[FACE01_trained_models](https://github.com/yKesamaru/FACE01_trained_models)リポジトリをご使用ください。
 
