@@ -262,3 +262,11 @@ pip install onnxruntime-gpu==1.18.1
 
 > ![HINT]
 > `Docker`を利用すると簡単に環境構築ができます。
+
+### Pythonのパスを設定する
+システムによってはPythonのパスを毎回設定しなければならない場合もあります。（環境に依存します）
+パスが通っていない場合は以下のコマンドを実行してください。
+```bash
+export PYTHONPATH=$PYTHONPATH:/path/to/your/project/FACE01_IOT_dev
+```
+`/path/to/your/project/`部分は個々の環境で修正してください。
