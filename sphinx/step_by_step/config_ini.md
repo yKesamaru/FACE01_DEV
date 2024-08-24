@@ -49,6 +49,17 @@ https://docs.python.org/3/library/configparser.html
 $ vim ./config.ini
 ```
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">こちらで用意している<span style="background-color: yellow;">`Dockerイメージ`</span>にはvimの他に<span style="background-color: yellow;">gedit</span>も含まれています。GUI操作のほうが好きな方はgeditを使いましょう⭐️''</p>
+        <p style="margin: 10;"></p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 ## ℹ️: Note
 ### `npKnown.npz`について
 `npKnown.npz`がフォルダーに存在するとき、そのファイルが従来のdlibモデル(`dlib_face_recognition_resnet_model_v1.dat`)で作成されたものなのか、新しいモデル(`efficientnetv2_arcface.onnx`)で作成されたものなのかは重要な要素です。
