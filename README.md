@@ -39,23 +39,6 @@ Audrey Hepburn
 
 ---
 
-📖 TOC
-- [About FACE01](#about-face01)
-- [ℹ️: Note](#ℹ️-note)
-  - [リポジトリについて](#リポジトリについて)
-  - [その他](#その他)
-- [インストール](#インストール)
-  - [Dockerイメージを使用する](#dockerイメージを使用する)
-  - [実働環境のPCにインストールする](#実働環境のpcにインストールする)
-- [豊富なエグザンプルコード](#豊富なエグザンプルコード)
-- [ドキュメント](#ドキュメント)
-- [設定ファイル: config.ini](#設定ファイル-configini)
-- [Update](#update)
-- [Acknowledgments](#acknowledgments)
-- [References](#references)
-
----
-
 ## About FACE01
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
 
@@ -138,6 +121,8 @@ bash -c ./INSTALL_FACE01.sh
 
 包括的なドキュメントは[こちら](https://ykesamaru.github.io/FACE01_DEV/)をご参照ください。
 
+---
+
 ## ドキュメント
 
 - 🧑‍💻 [Step-by-step to use FACE01 library](https://ykesamaru.github.io/FACE01_DEV/step_by_step.html)
@@ -150,11 +135,14 @@ bash -c ./INSTALL_FACE01.sh
 
     <img src="docs/img/document.png" width="400px" >
 
+---
+
 ## 設定ファイル: config.ini
 
 高い柔軟性を備えた使いやすい設定ファイルで自由自在に設定しましょう！
 詳しくは[こちら](https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id5)をご覧ください。
 
+---
 
 ## Update
 
@@ -186,6 +174,8 @@ bash -c ./INSTALL_FACE01.sh
 7. [PINTO_model_zoo](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3) / Katsuya Hyodo (PINTO0309)
 8. [FaceDetection-Anti-Spoof-Demo](https://github.com/Kazuhito00/FaceDetection-Anti-Spoof-Demo) / KazuhitoTakahashi (Kazuhito00)
 9. Some images from [Pakutaso](https://www.pakutaso.com/), [pixabay](https://pixabay.com/ja/)
+
+---
 
 ## References
 
