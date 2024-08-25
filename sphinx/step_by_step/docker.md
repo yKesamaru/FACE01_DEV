@@ -15,16 +15,11 @@
 ## `Docker image`をプル
 `Dockerイメージ`をダウンロード（プル）しましょう。
 
-![](assets/2024-08-18-12-56-10.png)
+![](https://ykesamaru.github.io/FACE01_DEV/_images/2024-08-18-12-56-10.png)
 
 ```bash
 docker pull tokaikaoninsho/face01_gpu
 ```
-
-> ![NOTE]:
-> 
-> 
-
 
 <br />
 <div style="display: flex; align-items: center;">
