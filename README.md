@@ -40,7 +40,7 @@ Audrey Hepburn
 
 ---
 
-## About FACE01
+## FACE01とは
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-23_07-55.png)
@@ -59,6 +59,52 @@ Audrey Hepburn
 - ...and many others!
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-24_16-42.png)
+
+---
+
+
+## なぜFACE01を開発したの？
+
+顔認証システムはあらゆるシーンで使用されるのにも関わらず、AIのコアである学習モデルはほとんどが**アメリカか中国で開発**されています。
+
+AIコアが外国産である場合、肝心なところで「**偽陽性**」、つまり誤判定が発生することがあります。この問題は発生頻度が少ないこともあり、再現性が取りづらく、その反面、発生した場合は重大なアクシデントとなり得ます。
+
+<!-- <br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">東アジアだけに絞っても<span style="background-color: yellow;">日本人、漢民族、満州族、回族、ウイグル人、チベット人、モンゴル人、チワン族、チャン族、ミャオ族、トゥチャ族、韓民族、カザフ人、ザイ族</span>が存在します⭐️''</p>
+        <p style="margin: 10;">日本人以外の顔データで学習されたモデルを日本人だけに使うのは想定されてないはずです⭐️''</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br /> -->
+![](assets/2024-08-25-13-52-23.png)
+
+このため**日本人だけの大規模顔顔データセット**から学習した「JAPANESE FACE V1」を開発し、顔認証アプリケーションに必要なクラスを揃えました。
+
+
+
+---
+
+## モデル性能
+
+日本人の顔認証に特化したAI学習モデルは、一般的な顔認証システムが抱える問題(**若年日本人女性に対する偽陽性**)を解決しました。
+
+たとえば、一般的な学習モデルの場合、以下に示すような若年日本人女性の判別が難しい場合があります。
+
+![](assets/2024-08-25-12-55-59.png)
+<p align="center"><em>dlib学習モデルで偽陽性を出す例</em></p>
+
+これに対し、新しく学習されたモデル「`JAPANESE FACE`」（下のグラフでは`JAPANESE_FACE_V1.onnx`））では、精度を落とすことなく判別できていることが示されました。
+
+![](assets/2024-08-25-13-01-14.png)
+
+若年日本人女性の顔画像に対して、**DlibのAUCが0.94に対し、JAPANESE FACEは0.98を達成**しています⭐️''。
+
+既存の顔認証モデルと比べて性能が向上してるのが分かりますね⭐️''。
+
+くわしくは、「[Dlib顔学習モデルの、若年日本人女性データセットにおける性能評価](https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/dlib%e9%a1%94%e5%ad%a6%e7%bf%92%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e3%80%81%e8%8b%a5%e5%b9%b4%e6%97%a5%e6%9c%ac%e4%ba%ba%e5%a5%b3%e6%80%a7%e3%83%87%e3%83%bc%e3%82%bf%e3%82%bb%e3%83%83%e3%83%88/) 」からご覧いただけます。
 
 ---
 
@@ -125,23 +171,17 @@ bash -c ./INSTALL_FACE01.sh
 ---
 
 ## ドキュメント
+🧑‍💻 [丁寧で包括的なドキュメント](https://ykesamaru.github.io/FACE01_DEV/step_by_step.html)が付属します⭐️''
 
-- 🧑‍💻 [Step-by-step to use FACE01 library](https://ykesamaru.github.io/FACE01_DEV/step_by_step.html)
-  - 初心者向け
+初心者にとっても優しい！！💗
 
-    <img src="docs/img/step-by-step.png" width="400px" >
+![](assets/2024-08-25-13-56-56.png)
 
-- 🧑‍💻 [Comprehensive and detailed documentation](https://ykesamaru.github.io/FACE01_DEV/face01lib.html)
-  - 中級者以上向けの包括的なリソース
+全てのクラスとメソッドをまとめたリファレンスも！！
 
-    <img src="docs/img/document.png" width="400px" >
+開発者にもとっても優しい💗
 
----
-
-## 設定ファイル: config.ini
-
-高い柔軟性を備えた使いやすい設定ファイルで自由自在に設定しましょう！
-詳しくは[こちら](https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id5)をご覧ください。
+![](assets/2024-08-25-14-00-26.png)
 
 ---
 
