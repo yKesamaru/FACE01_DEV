@@ -1,7 +1,7 @@
 <div align="center">
 
 
-![](assets/images/eye-catch.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/eye-catch.png)
 
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、<br />
 Pythonで書かれたオープンソースのリファレンス実装**です。
@@ -79,7 +79,7 @@ AIコアが外国産である場合、肝心なところで「**偽陽性**」�
     </div>
 </div>
 <br /> -->
-![](assets/2024-08-25-13-52-23.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-13-52-23.png)
 
 このため**日本人だけの大規模顔顔データセット**から学習した「JAPANESE FACE V1」を開発し、顔認証アプリケーションに必要なクラスを揃えました。
 
@@ -89,16 +89,16 @@ AIコアが外国産である場合、肝心なところで「**偽陽性**」�
 
 ## モデル性能
 
-日本人の顔認証に特化したAI学習モデルは、一般的な顔認証システムが抱える問題(**若年日本人女性に対する偽陽性**)を解決しました。
+日本人の顔認証に特化した学習モデルは、一般的な顔認証システムが抱える問題(**若年日本人女性に対する偽陽性**)を解決しました。
 
 たとえば、一般的な学習モデルの場合、以下に示すような若年日本人女性の判別が難しい場合があります。
 
-![](assets/2024-08-25-12-55-59.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-12-55-59.png)
 <p align="center"><em>dlib学習モデルで偽陽性を出す例</em></p>
 
 これに対し、新しく学習されたモデル「`JAPANESE FACE`」（下のグラフでは`JAPANESE_FACE_V1.onnx`））では、精度を落とすことなく判別できていることが示されました。
 
-![](assets/2024-08-25-13-01-14.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-13-01-14.png)
 
 若年日本人女性の顔画像に対して、**DlibのAUCが0.94に対し、JAPANESE FACEは0.98を達成**しています⭐️''。
 
@@ -175,13 +175,13 @@ bash -c ./INSTALL_FACE01.sh
 
 初心者にとっても優しい！！💗
 
-![](assets/2024-08-25-13-56-56.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-13-56-56.png)
 
 全てのクラスとメソッドをまとめたリファレンスも！！
 
 開発者にもとっても優しい💗
 
-![](assets/2024-08-25-14-00-26.png)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-14-00-26.png)
 
 ---
 
