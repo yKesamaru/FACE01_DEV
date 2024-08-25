@@ -75,6 +75,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#nvidia-jetsondlib"><code class="docutils literal notranslate"><span class="pre">Nvidia</span> <span class="pre">jetson</span></code>にて<code class="docutils literal notranslate"><span class="pre">dlib</span></code>が動作しない</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dlib-dlib-use-cudafalse">dlib.DLIB_USE_CUDAがFalseの場合の対処法</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#libcudart-so-11-0"><code class="docutils literal notranslate"><span class="pre">libcudart.so.11.0</span></code>などが見つからないエラーが出力される</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Pythonのパスを設定する</a></li>
 </ul>
 </li>
 </ul>
@@ -395,6 +396,15 @@ pip<span class="w"> </span>install<span class="w"> </span>onnxruntime-gpu<span c
 <code class="docutils literal notranslate"><span class="pre">Docker</span></code>を利用すると簡単に環境構築ができます。</p>
 </div></blockquote>
 </section>
+</section>
+<section id="id15">
+<h3>Pythonのパスを設定する<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>システムによってはPythonのパスを毎回設定しなければならない場合もあります。（環境に依存します）
+パスが通っていない場合は以下のコマンドを実行してください。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:/path/to/your/project/FACE01_IOT_dev
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/path/to/your/project/</span></code>部分は個々の環境で修正してください。</p>
 </section>
 </section>
 </section>

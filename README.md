@@ -1,6 +1,5 @@
 <div align="center">
 
-
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/eye-catch.png)
 
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、<br />
@@ -19,10 +18,10 @@ FACE01 -- さあ、始めましょう！
 ___
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
-![](https://img.shields.io/badge/Release-v3.0-blue)
-![](https://img.shields.io/badge/Python-%3E%3D3.10.12-blue)
+![](https://img.shields.io/badge/Release-v3.0.03-green)
+![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
 
-![](docs/img/ROMAN_HOLIDAY.GIF?raw=true)
+![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
 </div>
 
@@ -160,10 +159,10 @@ bash -c ./INSTALL_FACE01.sh
 [ステップ・バイ・ステップ](https://ykesamaru.github.io/FACE01_DEV/step_by_step.html)でEXAMPLEを試してみましょう！
 
 <div>
-<img src="docs/img/benchmark_GUI.png" width="300px" >
-<img src="docs/img/distort_barrel.png" width="300px" >
-<img src="docs/img/benchmark_GUI_window.png" width="300px" >
-<img src="docs/img/20_times.png" width="300px" >
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/benchmark_GUI.png" width="300px" >
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/distort_barrel.png" width="300px" >
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/benchmark_GUI_window.png" width="300px" >
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/20_times.png" width="300px" >
 </div>
 
 包括的なドキュメントは[こちら](https://ykesamaru.github.io/FACE01_DEV/)をご参照ください。
