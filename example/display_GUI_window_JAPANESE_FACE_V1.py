@@ -11,20 +11,20 @@ Example:
 
 Results:
 
-    .. image:: ../example/img/display_GUI_window_JAPANESE_FACE_V1.png
-        :scale: 50%
-        :alt: Screenshot of the GUI output
+.. image:: ../example/img/display_GUI_window_JAPANESE_FACE_V1.png
+    :scale: 70%
+    :alt: Screenshot of the GUI output
 
-    コンソール出力は以下のようになります。
+コンソール出力は以下のようになります。
 
-    .. code-block:: console
+.. code-block:: console
 
-        岸田文雄
-                similarity              94.1%
-                coordinate              (161, 711, 376, 496)
-                time                    2024,08,17,14,16,05,135247
-                output                  output/岸田文雄_2024,08,17,14,16,05,141640_0.55.png
-        -------
+    岸田文雄
+            similarity              94.1%
+            coordinate              (161, 711, 376, 496)
+            time                    2024,08,17,14,16,05,135247
+            output                  output/岸田文雄_2024,08,17,14,16,05,141640_0.55.png
+    -------
 
 
 Source code:

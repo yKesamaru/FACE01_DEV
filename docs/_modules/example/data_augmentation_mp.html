@@ -82,17 +82,15 @@
            <div itemprop="articleBody">
              
   <h1>example.data_augmentation_mp のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;DNNをマルチプロセスで用いる際のデータ拡張のコード例.</span>
+<span></span><span class="sd">&quot;&quot;&quot;データ拡張をマルチプロセスで行うコード例.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    In this example you can learn how to augment data for DNN using multi process.</span>
-<span class="sd">    このエグザンプルコードでは、DNNをマルチプロセスで用いる際のデータ拡張について学びます。</span>
+<span class="sd">    このエグザンプルコードでは、時間のかかるデータ拡張においてマルチプロセス処理を行います。</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python3 example/data_augmentation.py \</span>
-<span class="sd">            &quot;/path/to/dir&quot; &quot;&quot; &quot;lens&quot; 224 10 -0.1 0.1 0.01 4</span>
+<span class="sd">        python3 example/data_augmentation.py &quot;/path/to/dir&quot; &quot;&quot; &quot;lens&quot; 224 10 -0.1 0.1 0.01 4</span>
 
 <span class="sd">Source code:</span>
 <span class="sd">    `data_augmentation_mp.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_augmentation_mp.py&gt;`_</span>
@@ -119,8 +117,6 @@
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
-<span class="sd">When coding a program that uses FACE01, code initialize and logger first.</span>
-<span class="sd">This will read the configuration file config.ini and log errors etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>

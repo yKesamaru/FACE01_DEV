@@ -389,7 +389,15 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.Calc.Cal.cal_specify_date">
 <span class="sig-name descname"><span class="pre">cal_specify_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/face01lib/Calc.html#Cal.cal_specify_date"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Calc.Cal.cal_specify_date" title="Link to this definition"></a></dt>
-<dd><p>廃止</p>
+<dd><p>終了期間を指定します</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>プログラム使用制限を日付で指定します
+呼び出されるモジュール内にこのメソッドを呼び出すことで、モジュールを使用不可にします。
+アプリケーションを期限付きで運用する場合に有用です。</p>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>このメソッドを使用する場合は'Cython'でバイナリ化しておくと良いですね⭐️''</p>
 </dd></dl>
 
 <dl class="py method">
@@ -461,7 +469,7 @@
 <dl class="simple">
 <dt>deep_learning_model:</dt><dd><p>0:dlib_face_recognition_resnet_model_v1.dat,
 1:JAPANESE_FACE_V1.onnx,
-2:mobilefacenet.onnx</p>
+2:mobilefacenet.onnx（実装未定）</p>
 </dd>
 </dl>
 </div>
@@ -1838,23 +1846,34 @@ spoof_obj.make_qr_code()</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>以下のリンクに論文と数式をまとめました⭐️''</p>
+<p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/f10804a8fcc81d">まばたきを検知するPythonコードの解説</a></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.spoof.Spoof.make_qr_code">
 <span class="sig-name descname"><span class="pre">make_qr_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/spoof.html#Spoof.make_qr_code"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.spoof.Spoof.make_qr_code" title="Link to this definition"></a></dt>
 <dd><p>make_qr_code QRCodeを作成するメソッド.
-.. note:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>入力される映像には1人のみ映っているようにしてください。
-preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。
-</pre></div>
+Summary:</p>
+<blockquote>
+<div><p>QRCode&quot;だけ&quot;を作成します。</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>入力される映像には1人のみ映っているようにしてください。
+preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。</p>
 </div>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>exampleディレクトリの'make_ID_card.py'も参考にしてください⭐️''</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.spoof.Spoof.obj_detect">
 <span class="sig-name descname"><span class="pre">obj_detect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/spoof.html#Spoof.obj_detect"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.spoof.Spoof.obj_detect" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>mediapipeのテストのためのメソッド
+オブジェクト検出を行います。（この場合は「靴」）</p>
+</dd></dl>
 
 </dd></dl>
 

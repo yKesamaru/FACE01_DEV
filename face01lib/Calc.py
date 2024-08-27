@@ -98,23 +98,35 @@ class Cal:
         return wrapper
 
     def cal_specify_date(self, logger) -> None:
-        """廃止"""
-        # self.logger = logger
-        # limit_date = datetime(2025, 12, 1, 0, 0, 0)   # 指定日付
-        # today = datetime.now()
+        """終了期間を指定します
 
-        # if today >= limit_date:
-        #     self.logger.warning("Trial period expired")
-        #     self.logger.warning("If you wish to continue using FACE01, please contact us.")
-        #     self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
-        #     exit(0)
-        # elif today < limit_date:
-        #     remaining_days = limit_date - today
-        #     if remaining_days.days < 30:
-        #         self.logger.info("Remaining days of use: ", str(remaining_days.days))
-        #         self.logger.warning(
-        #             "If you wish to continue using FACE01, please contact us.")
-        #         self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
+        Summary:
+            プログラム使用制限を日付で指定します
+            呼び出されるモジュール内にこのメソッドを呼び出すことで、モジュールを使用不可にします。
+            アプリケーションを期限付きで運用する場合に有用です。
+
+        .. image:: ../assets/images/one_point_L.png
+            :width: 70%
+            :alt: one point
+
+        このメソッドを使用する場合は'Cython'でバイナリ化しておくと良いですね⭐️''
+        """
+        self.logger = logger
+        limit_date = datetime(2100, 12, 1, 0, 0, 0)   # 指定日付
+        today = datetime.now()
+
+        if today >= limit_date:
+            self.logger.warning("Trial period expired")
+            self.logger.warning("If you wish to continue using FACE01, please contact us.")
+            self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
+            exit(0)
+        elif today < limit_date:
+            remaining_days = limit_date - today
+            if remaining_days.days < 30:
+                self.logger.info("Remaining days of use: ", str(remaining_days.days))
+                self.logger.warning(
+                    "If you wish to continue using FACE01, please contact us.")
+                self.logger.warning("email: y.kesamaru@tokai-kaoninsho.com")
 
     def cal_resized_telop_image(
         self,
@@ -291,8 +303,8 @@ class Cal:
         self.error_messg_rectangle_right = error_messg_rectangle_right
         self.error_messg_rectangle_fontsize = error_messg_rectangle_fontsize
         self.error_messg_rectangle_messg = error_messg_rectangle_messg
-        error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right)/2)
-        error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg)/2)
+        error_messg_rectangle_center = int((self.error_messg_rectangle_left + self.error_messg_rectangle_right) / 2)
+        error_messg_rectangle_chaCenter = int(len(self.error_messg_rectangle_messg) / 2)
         error_messg_rectangle_pos = error_messg_rectangle_center - (error_messg_rectangle_chaCenter * self.error_messg_rectangle_fontsize) - int(self.error_messg_rectangle_fontsize / 2)
         error_messg_rectangle_position = (error_messg_rectangle_pos + self.error_messg_rectangle_fontsize, self.error_messg_rectangle_bottom - (self.error_messg_rectangle_fontsize * 2))
 
@@ -331,7 +343,7 @@ class Cal:
             deep_learning_model:
                 0:dlib_face_recognition_resnet_model_v1.dat,
                 1:JAPANESE_FACE_V1.onnx,
-                2:mobilefacenet.onnx
+                2:mobilefacenet.onnx（実装未定）
 
         Example:
             >>> percentage = Cal().return_percentage(distance, deep_learning_model)

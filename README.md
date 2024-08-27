@@ -137,6 +137,8 @@ FACE01開発環境のセッティングは本当に簡単です！
 
 [こちら](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html)で丁寧な導入手順を解説をしていますのでぜひご覧ください。
 
+![](assets/2024-08-26-15-20-01.png)
+
 ---
 
 ### 実働環境のPCにインストールする

@@ -96,6 +96,20 @@
 <span class="sd">    このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。</span>
 <span class="sd">    複数人を対象とすることはできません。</span>
 
+<span class="sd">.. image:: ../assets/images/2024-08-27_20-02.png</span>
+<span class="sd">    :width: 100%</span>
+<span class="sd">    :alt: eye blink</span>
+
+<span class="sd">.. image:: ../assets/images/one_point_R.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">注目すべきは瞬きの検出が1行で済んでいるところです！⭐️&#39;&#39;</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    blink_detected: bool = self.spoof.detect_eye_blinks(self.current_frame_datas_array, CONFIG)</span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `detect_eye_blink.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/detect_eye_blink.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>

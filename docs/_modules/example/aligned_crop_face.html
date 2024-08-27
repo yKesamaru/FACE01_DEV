@@ -127,10 +127,14 @@
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;初期化とloggerのセットアップ.</span>
+
+<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
 <span class="sd">FACE01を使用してコーディングするときは、`initialize`と`logger`を最初にコードします。</span>
 <span class="sd">When coding a program that uses FACE01, code `initialize` and `logger` first.</span>
 <span class="sd">これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。</span>
-<span class="sd">This will read the configuration file `config.ini` and log errors etc.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
@@ -138,17 +142,15 @@
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../example.html#example.aligned_crop_face.main">[ドキュメント]</a>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;簡単な例.</span>
-
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">padding</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    このシンプルなコード例では、png, jpg, jpegの拡張子を持つ複数のファイルが存在するディレクトリのパスをとります。</span>
-<span class="sd">    This simple example script takes a path which contained png, jpg, jpeg files in the directory,</span>
-<span class="sd">    extracts the face, aligns, crops and saves them.</span>
+<span class="sd">    それらから顔を抽出し、位置合わせし、トリミングして保存します。</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path (str): Directory path where images containing faces exist</span>
 <span class="sd">        padding (float): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4</span>
-<span class="sd">        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.</span>
+<span class="sd">        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 224px.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
@@ -157,7 +159,7 @@
         <span class="n">path</span><span class="p">,</span>
         <span class="n">upper_limit_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
         <span class="n">padding</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
-        <span class="n">size</span><span class="o">=</span><span class="mi">200</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">224</span>
     <span class="p">)</span></div>
 
 

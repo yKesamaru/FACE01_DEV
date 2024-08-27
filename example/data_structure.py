@@ -1,16 +1,15 @@
-"""Data structure of FACE01.
-
+"""
 Summary:
-    In this example, you can learn data structure of FACE01.
+    FACE01を使う上で知っておくべきデータ構造について学びます。
 
 Example:
     .. code-block:: bash
-    
+
         python3 example data_structure.py
-    
+
 Config.ini setting:
-    Data structure of FACE01 is closely related to what you set in config.ini.
-    The contents of config.ini described below are the settings for face-detection and face-recognition. GUI windows are not displayed.
+    FACE01においてデータ構造は'config.ini'の設定に深く関係しています。
+    以下に記述された'config.ini'では、GUIウィンドウは描画しないface-detectionとface-recognition用です。
 
     .. code-block:: bash
 
@@ -38,8 +37,8 @@ Config.ini setting:
         same_time_recognize = 2
         set_area = NONE
         movie = assets/test.mp4
-        user = 
-        passwd = 
+        user =
+        passwd =
         rectangle = False
         target_rectangle = False
         draw_telop_and_logo = False
@@ -60,39 +59,45 @@ Config.ini setting:
         show_video = False
         number_of_crops = 0
 
+.. image:: ../assets/images/one_point_R.png
+    :width: 70%
+    :alt: one point
+
+1行目の'headless'が'True'なら、CUIで動作します⭐️''
+
 Result:
-    Executing this example script will output the following contents.
+    以下に示す出力が得られます。
     (The output string has been formatted to make it easier to read.)
 
     .. code-block:: python
 
-        frame_datas: 
+        frame_datas:
         {
-            'img': array([[[0, 0, 0], [0, 0, 0], ..., [0, 0, 0], dtype=uint8), 
-            'face_location_list': [(165, 449, 287, 327), (240, 435, 391, 284)], 
-            'overlay': array([[[  0,   0,  70],  ..., [ 88, 169, 127]], dtype=uint8), 
-            'person_data_list': 
+            'img': array([[[0, 0, 0], [0, 0, 0], ..., [0, 0, 0], dtype=uint8),
+            'face_location_list': [(165, 449, 287, 327), (240, 435, 391, 284)],
+            'overlay': array([[[  0,   0,  70],  ..., [ 88, 169, 127]], dtype=uint8),
+            'person_data_list':
             [
                 {
-                    'name': '安倍晋三', 
-                    'pict': 'output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png', 
-                    'date': '2022,10,08,19,17,41,344598', 
-                    'location': (165, 449, 287, 327), 
+                    'name': '安倍晋三',
+                    'pict': 'output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png',
+                    'date': '2022,10,08,19,17,41,344598',
+                    'location': (165, 449, 287, 327),
                     'percentage_and_symbol': '99.7%'
-                }, 
+                },
                 {
-                    'name': 'Unknown', 
-                    'pict': 'output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png', 
-                    'date': '2022,10,08,19,17,41,344598', 
-                    'location': (240, 435, 391, 284), 
+                    'name': 'Unknown',
+                    'pict': 'output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png',
+                    'date': '2022,10,08,19,17,41,344598',
+                    'location': (240, 435, 391, 284),
                     'percentage_and_symbol': ''
                 }
             ]
         }
 
-Data structure:
-    The `frame_datas_array` variable is a dictionary-like variable that contains the variables described below.
-    
+データ構造:
+    `frame_datas_array`は以下に記述するような様々な情報を持つ辞書に似た変数です。
+
     * Dictionary
 
         * img: NDArray of a frame
@@ -101,17 +106,17 @@ Data structure:
         * person_data_list: List of person-coordinate which is included in `face_location_list`
 
     In addition, the `person_data_list` variable is an array that contains the variables described below.
-    
+
     * List
 
         * Dictionary
 
             * name: name
             * pict: Saved image's file name which is cropped by face-coordinate in a frame
-            * date: 
+            * date:
             * location: Face-coordinate
             * percentage_and_symbol: xx%
-        
+
 Source code:
     `data_structure.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_structure.py>`_
 """
@@ -140,14 +145,12 @@ def main(exec_times: int = 50) -> None:
 
     Returns:
         None
-    """    
+    """
     # Initialize
-    CONFIG: Dict =  Initialize('DEFAULT', 'info').initialize()
-
+    CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 
     # Make generator
     gen = Core().common_process(CONFIG)
-
 
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
@@ -161,4 +164,4 @@ def main(exec_times: int = 50) -> None:
 
 if __name__ == '__main__':
     # Call main function.
-    main(exec_times = 1)
+    main(exec_times=1)

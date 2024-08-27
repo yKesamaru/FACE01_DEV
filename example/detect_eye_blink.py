@@ -12,6 +12,20 @@ Note:
     このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。
     複数人を対象とすることはできません。
 
+.. image:: ../assets/images/2024-08-27_20-02.png
+    :width: 100%
+    :alt: eye blink
+
+.. image:: ../assets/images/one_point_R.png
+    :width: 70%
+    :alt: one point
+
+注目すべきは瞬きの検出が1行で済んでいるところです！⭐️''
+
+.. code-block:: python
+
+    blink_detected: bool = self.spoof.detect_eye_blinks(self.current_frame_datas_array, CONFIG)
+
 Source code:
     `detect_eye_blink.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/detect_eye_blink.py>`_
 """

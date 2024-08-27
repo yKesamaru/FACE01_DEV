@@ -2,12 +2,11 @@
 
 Summary:
     Zennの記事のコード例です。
+    顔データセットの組み合わせ総数を計算します。
 
     `【faiss】なにこれすごい。顔データセットの間違い探し 成功編③ <https://zenn.dev/ykesamaru/articles/4e40e0285b0b66>`_
 
-    ここでは簡単でシンプルなコードを紹介しています。
-
-    npKnown.npzファイルが見つからない場合、そのまま終了します。
+    npKnown.npzファイルが見つからない場合、npKnown.npzファイルを作成します。
     詳しくは上記記事をご参照ください。
 
 Example:
@@ -29,8 +28,10 @@ dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
 
+from face01lib.load_preset_image import LoadPresetImage
+
+make_npKnown_obj = LoadPresetImage()
 root_dir: str = "assets/data"
-# root_dir: str = "/home/user/ドキュメント/find_similar_faces/test"
 
 if __name__ == '__main__':
     # ディレクトリのみを対象としたサブディレクトリの絶対パスのリストを取得
@@ -47,7 +48,14 @@ if __name__ == '__main__':
         npz_file = os.path.join(dir, "npKnown.npz")
         if not os.path.exists(npz_file):
             print(f"Error: npKnown.npzファイルが見つかりません: {dir}")
-            sys.exit(0)
+            known_face_encodings, known_face_names = make_npKnown_obj.load_preset_image(
+                deep_learning_model=1,
+                RootDir=dir,
+                preset_face_imagesDir=dir,
+                upsampling=0,
+                jitters=0,
+                mode='cnn',
+            )
         with np.load(npz_file) as data:
             name_list = data['name']
             element_counts.append(len(name_list))

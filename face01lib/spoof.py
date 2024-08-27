@@ -72,10 +72,10 @@ class Spoof():
         BLINKING = 3
 
     def __init__(self, log_level: str = 'info') -> None:
-        """init.
+        """初期化
 
         Args:
-            log_level (str, optional): Receive log level value. Defaults to 'info'.
+            log_level (str, optional): ログレベルを指定します。デフォルトは'info'です。
         """
         # Setup logger: common way
         self.log_level: str = log_level
@@ -86,7 +86,6 @@ class Spoof():
 
         self.logger = Logger(self.log_level).logger(name, parent_dir)
 
-        Cal_obj.cal_specify_date(self.logger)
         # 顔のランドマークを検出するためのモデルをロード
         mp_face_mesh = mp.solutions.face_mesh  # type: ignore
         self.face_mesh = mp_face_mesh.FaceMesh()
@@ -117,6 +116,14 @@ class Spoof():
 
         Returns:
             bool: If eye blink is detected, return True. Otherwise, return False.
+
+        .. image:: ../assets/images/one_point_L.png
+            :width: 70%
+            :alt: one point
+
+        以下のリンクに論文と数式をまとめました⭐️''
+
+        `まばたきを検知するPythonコードの解説 <https://zenn.dev/ykesamaru/articles/f10804a8fcc81d>`_
         """
         self.frame_datas_array = frame_datas_array
         self.CONFIG = CONFIG
@@ -160,46 +167,65 @@ class Spoof():
         return False  # それ以外の場合はFalseを返す
 
     def obj_detect(self):
-        # For webcam input:
+        """mediapipeのテストのためのメソッド
+        オブジェクト検出を行います。（この場合は「靴」）
+        """
+        # ウェブカメラからの入力をキャプチャするための設定
         cap = cv2.VideoCapture(0)
+
+        # MediaPipeのObjectronモジュールを使用してオブジェクト検出を行う
         with mp_objectron.Objectron(static_image_mode=False,
                                     max_num_objects=5,
                                     min_detection_confidence=0.5,
                                     min_tracking_confidence=0.99,
                                     model_name='Shoe') as objectron:
+            # ウェブカメラが開いている間、フレームを処理し続けるループ
             while cap.isOpened():
-                success, image = cap.read()
+                success, image = cap.read()  # カメラからフレームを取得
                 if not success:
-                    print("Ignoring empty camera frame.")
-                    # If loading a video, use 'break' instead of 'continue'.
+                    print("空のカメラフレームを無視します。")
+                    # ビデオを読み込む場合は 'continue' の代わりに 'break' を使用
                     continue
 
-                # To improve performance, optionally mark the image as not writeable to
-                # pass by reference.
+                # パフォーマンス向上のため、画像を書き込み不可に設定
                 image.flags.writeable = False
+                # 画像をBGRからRGBに変換（MediaPipeはRGB形式を使用）
                 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                # 画像内のオブジェクトを検出
                 results = objectron.process(image)
 
-                # Draw the box landmarks on the image.
-                image.flags.writeable = True
-                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+                # 画像に検出されたオブジェクトのランドマークを描画
+                image.flags.writeable = True  # 画像を書き込み可能に戻す
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # 画像をRGBからBGRに戻す
                 if results.detected_objects:
                     for detected_object in results.detected_objects:
+                        # 2Dランドマークを画像に描画
                         mp_drawing.draw_landmarks(
-                        image, detected_object.landmarks_2d, mp_objectron.BOX_CONNECTIONS)
+                            image, detected_object.landmarks_2d, mp_objectron.BOX_CONNECTIONS)
+                        # オブジェクトの姿勢（回転と位置）を表す軸を描画
                         mp_drawing.draw_axis(image, detected_object.rotation,
                                             detected_object.translation)
-                # Flip the image horizontally for a selfie-view display.
+                # 画像を左右反転してセルフィービューに表示
                 cv2.imshow('MediaPipe Objectron', cv2.flip(image, 1))
-                if cv2.waitKey(5) & 0xFF == 27:
+                if cv2.waitKey(5) & 0xFF == 27:  # Escキーが押されたらループを終了
                     break
+
+        # カメラを解放
         cap.release()
 
     def make_qr_code(self):
         """make_qr_code QRCodeを作成するメソッド.
+        Summary:
+            QRCode"だけ"を作成します。
         Note:
             入力される映像には1人のみ映っているようにしてください。
             preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。
+
+        .. image:: ../assets/images/one_point_L.png
+            :width: 70%
+            :alt: one point
+
+        exampleディレクトリの'make_ID_card.py'も参考にしてください⭐️''
         """
         import base64
         import zlib

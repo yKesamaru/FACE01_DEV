@@ -82,19 +82,18 @@
            <div itemprop="articleBody">
              
   <h1>example.data_structure のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Data structure of FACE01.</span>
-
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Summary:</span>
-<span class="sd">    In this example, you can learn data structure of FACE01.</span>
+<span class="sd">    FACE01を使う上で知っておくべきデータ構造について学びます。</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
-<span class="sd">    </span>
+
 <span class="sd">        python3 example data_structure.py</span>
-<span class="sd">    </span>
+
 <span class="sd">Config.ini setting:</span>
-<span class="sd">    Data structure of FACE01 is closely related to what you set in config.ini.</span>
-<span class="sd">    The contents of config.ini described below are the settings for face-detection and face-recognition. GUI windows are not displayed.</span>
+<span class="sd">    FACE01においてデータ構造は&#39;config.ini&#39;の設定に深く関係しています。</span>
+<span class="sd">    以下に記述された&#39;config.ini&#39;では、GUIウィンドウは描画しないface-detectionとface-recognition用です。</span>
 
 <span class="sd">    .. code-block:: bash</span>
 
@@ -122,8 +121,8 @@
 <span class="sd">        same_time_recognize = 2</span>
 <span class="sd">        set_area = NONE</span>
 <span class="sd">        movie = assets/test.mp4</span>
-<span class="sd">        user = </span>
-<span class="sd">        passwd = </span>
+<span class="sd">        user =</span>
+<span class="sd">        passwd =</span>
 <span class="sd">        rectangle = False</span>
 <span class="sd">        target_rectangle = False</span>
 <span class="sd">        draw_telop_and_logo = False</span>
@@ -144,39 +143,45 @@
 <span class="sd">        show_video = False</span>
 <span class="sd">        number_of_crops = 0</span>
 
+<span class="sd">.. image:: ../assets/images/one_point_R.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">1行目の&#39;headless&#39;が&#39;True&#39;なら、CUIで動作します⭐️&#39;&#39;</span>
+
 <span class="sd">Result:</span>
-<span class="sd">    Executing this example script will output the following contents.</span>
+<span class="sd">    以下に示す出力が得られます。</span>
 <span class="sd">    (The output string has been formatted to make it easier to read.)</span>
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">        frame_datas: </span>
+<span class="sd">        frame_datas:</span>
 <span class="sd">        {</span>
-<span class="sd">            &#39;img&#39;: array([[[0, 0, 0], [0, 0, 0], ..., [0, 0, 0], dtype=uint8), </span>
-<span class="sd">            &#39;face_location_list&#39;: [(165, 449, 287, 327), (240, 435, 391, 284)], </span>
-<span class="sd">            &#39;overlay&#39;: array([[[  0,   0,  70],  ..., [ 88, 169, 127]], dtype=uint8), </span>
-<span class="sd">            &#39;person_data_list&#39;: </span>
+<span class="sd">            &#39;img&#39;: array([[[0, 0, 0], [0, 0, 0], ..., [0, 0, 0], dtype=uint8),</span>
+<span class="sd">            &#39;face_location_list&#39;: [(165, 449, 287, 327), (240, 435, 391, 284)],</span>
+<span class="sd">            &#39;overlay&#39;: array([[[  0,   0,  70],  ..., [ 88, 169, 127]], dtype=uint8),</span>
+<span class="sd">            &#39;person_data_list&#39;:</span>
 <span class="sd">            [</span>
 <span class="sd">                {</span>
-<span class="sd">                    &#39;name&#39;: &#39;安倍晋三&#39;, </span>
-<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;, </span>
-<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;, </span>
-<span class="sd">                    &#39;location&#39;: (165, 449, 287, 327), </span>
+<span class="sd">                    &#39;name&#39;: &#39;安倍晋三&#39;,</span>
+<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;,</span>
+<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;,</span>
+<span class="sd">                    &#39;location&#39;: (165, 449, 287, 327),</span>
 <span class="sd">                    &#39;percentage_and_symbol&#39;: &#39;99.7%&#39;</span>
-<span class="sd">                }, </span>
+<span class="sd">                },</span>
 <span class="sd">                {</span>
-<span class="sd">                    &#39;name&#39;: &#39;Unknown&#39;, </span>
-<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;, </span>
-<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;, </span>
-<span class="sd">                    &#39;location&#39;: (240, 435, 391, 284), </span>
+<span class="sd">                    &#39;name&#39;: &#39;Unknown&#39;,</span>
+<span class="sd">                    &#39;pict&#39;: &#39;output/安倍晋三_2022,10,08,19,17,41,346789_0.2.png&#39;,</span>
+<span class="sd">                    &#39;date&#39;: &#39;2022,10,08,19,17,41,344598&#39;,</span>
+<span class="sd">                    &#39;location&#39;: (240, 435, 391, 284),</span>
 <span class="sd">                    &#39;percentage_and_symbol&#39;: &#39;&#39;</span>
 <span class="sd">                }</span>
 <span class="sd">            ]</span>
 <span class="sd">        }</span>
 
-<span class="sd">Data structure:</span>
-<span class="sd">    The `frame_datas_array` variable is a dictionary-like variable that contains the variables described below.</span>
-<span class="sd">    </span>
+<span class="sd">データ構造:</span>
+<span class="sd">    `frame_datas_array`は以下に記述するような様々な情報を持つ辞書に似た変数です。</span>
+
 <span class="sd">    * Dictionary</span>
 
 <span class="sd">        * img: NDArray of a frame</span>
@@ -185,17 +190,17 @@
 <span class="sd">        * person_data_list: List of person-coordinate which is included in `face_location_list`</span>
 
 <span class="sd">    In addition, the `person_data_list` variable is an array that contains the variables described below.</span>
-<span class="sd">    </span>
+
 <span class="sd">    * List</span>
 
 <span class="sd">        * Dictionary</span>
 
 <span class="sd">            * name: name</span>
 <span class="sd">            * pict: Saved image&#39;s file name which is cropped by face-coordinate in a frame</span>
-<span class="sd">            * date: </span>
+<span class="sd">            * date:</span>
 <span class="sd">            * location: Face-coordinate</span>
 <span class="sd">            * percentage_and_symbol: xx%</span>
-<span class="sd">        </span>
+
 <span class="sd">Source code:</span>
 <span class="sd">    `data_structure.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_structure.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -226,14 +231,12 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialize</span>
-    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 
     <span class="c1"># Make generator</span>
     <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
-
 
     <span class="c1"># Repeat &#39;exec_times&#39; times</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
@@ -248,7 +251,7 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># Call main function.</span>
-    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
            </div>
