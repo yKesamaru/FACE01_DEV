@@ -130,7 +130,7 @@ class Dlib_api:
             self.logger.error("-" * 20)
             exit(0)
 
-        # Cal().cal_specify_date(self.logger)  # 日付による使用停止処理は廃止
+        # Cal().cal_specify_date(self.logger)  # 日付による使用停止処理
 
         self.face_detector = dlib.get_frontal_face_detector()  # type: ignore
 
@@ -218,7 +218,6 @@ class Dlib_api:
             None, {input_name: image})[0]  # 'input'をinput_nameに変更
         return embedding
 
-    # type: ignore
     def _rect_to_css(self, rect: dlib.rectangle) -> Tuple[int, int, int, int]:
         """Convert a dlib 'rect' object to a plain tuple in (top, right, bottom, left) order.
 
@@ -233,7 +232,6 @@ class Dlib_api:
         self.rect: dlib.rectangle = rect  # type: ignore
         return self.rect.top(), self.rect.right(), self.rect.bottom(), self.rect.left()
 
-    # type: ignore
     def _css_to_rect(self, css: Tuple[int, int, int, int]) -> dlib.rectangle:
         self.css: Tuple[int, int, int, int] = css
         """Convert a tuple in (top, right, bottom, left) order to a dlib 'rect' object

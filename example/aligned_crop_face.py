@@ -43,26 +43,28 @@ CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """初期化とloggerのセットアップ.
+
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
 FACE01を使用してコーディングするときは、`initialize`と`logger`を最初にコードします。
 When coding a program that uses FACE01, code `initialize` and `logger` first.
 これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。
-This will read the configuration file `config.ini` and log errors etc.
 """
 
 utils = Utils(CONFIG['log_level'])
 
 
-def main(path: str, padding: float = 0.4, size: int = 200) -> None:
-    """簡単な例.
-
+def main(path: str, padding: float = 0.4, size: int = 224) -> None:
+    """
     このシンプルなコード例では、png, jpg, jpegの拡張子を持つ複数のファイルが存在するディレクトリのパスをとります。
-    This simple example script takes a path which contained png, jpg, jpeg files in the directory,
-    extracts the face, aligns, crops and saves them.
+    それらから顔を抽出し、位置合わせし、トリミングして保存します。
 
     Args:
         path (str): Directory path where images containing faces exist
         padding (float): Padding around the face. Large = 0.8, Medium = 0.4, Small = 0.25. Default = 0.4
-        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.
+        size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 224px.
 
     Returns:
         None
@@ -71,7 +73,7 @@ def main(path: str, padding: float = 0.4, size: int = 200) -> None:
         path,
         upper_limit_length=1024,
         padding=0.4,
-        size=200
+        size=224
     )
 
 

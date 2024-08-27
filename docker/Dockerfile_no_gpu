@@ -2,11 +2,11 @@ FROM ubuntu:20.04
 LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
 # ########################################################
-# GPU **CANNOT** be used for the docker image 
+# GPU **CANNOT** be used for the docker image
 # created by this docker file.
-# Therefore, the execution speed is slow and the GUI cannot 
+# Therefore, the execution speed is slow and the GUI cannot
 # be displayed.
-# If you want native processing speed, build using 
+# If you want native processing speed, build using
 # 'Dockerfile_gpu'.
 # ########################################################
 

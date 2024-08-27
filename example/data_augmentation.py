@@ -1,7 +1,7 @@
-"""DNNのためのデータ拡張コード例.
+"""データセットのデータ拡張コード例.
 
 Summary:
-    このエグザンプルコードでは、DNNのためのデータ拡張する方法に
+    このエグザンプルコードでは、データセットのデータ拡張する方法に
     ついて学びます。
 
 Example:
@@ -38,8 +38,6 @@ CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code initialize and logger first.
-This will read the configuration file config.ini and log errors etc.
 """
 
 utils = Utils(CONFIG['log_level'])
@@ -53,27 +51,34 @@ def main(
     closing_value: float = 0.1,
     step_value: float = 0.01,
 ):
-    """簡単な例.
+    """
+    この簡単なコード例では、与えられたディレクトリパスから再帰的に
+    ファイルを読み込み、それらに対してデータ拡張を行います。
+    この例でのデータ拡張は、FACE01のUtilsモジュールから、
+    樽型歪みとジッターを呼び出します。
 
-        この簡単なコード例では、与えられたディレクトリパスから再帰的に
-        ファイルを読み込み、それらに対してデータ拡張を行います。
-        この例でのデータ拡張は、FACE01のUtilsモジュールから、
-        樽型歪みとジッターを呼び出します。
+    Args:
+        dir_path (str): ターゲットディレクトリの絶対パス.
+        size (int, optional): 作成するイメージサイズ. Defaults to 224.
+        num_jitters (int, optional): ジッター回数. Defaults to 10.
+        initial_value (float, optional): 樽型歪みの初期値. Defaults to -0.1.
+        closing_value (float, optional): 終わり値. Defaults to 0.1.
+        step_value (float, optional): ステップ値. Defaults to 0.01.
 
-        Args:
-            dir_path (str): ターゲットディレクトリの絶対パス.
-            size (int, optional): 作成するイメージサイズ. Defaults to 224.
-            num_jitters (int, optional): ジッター回数. Defaults to 10.
-            initial_value (float, optional): 樽型歪みの初期値. Defaults to -0.1.
-            closing_value (float, optional): 終わり値. Defaults to 0.1.
-            step_value (float, optional): ステップ値. Defaults to 0.01.
+    Return:
+        ターゲットディレクトリから再帰的に読み込んだディレクトリごとに
+        データ拡張したファイルを保存します。
 
-        Return:
-            ターゲットディレクトリから再帰的に読み込んだディレクトリごとに
-            データ拡張したファイルを保存します。
+    .. image:: ../assets/images/one_point_R.png
+        :width: 70%
+        :alt: one point
 
-        See Also:
-            `dlib.jitter_image <http://dlib.net/python/index.html#dlib_pybind11.jitter_image>`_
+    樽型歪みをデータセットに加えることで、カメラのキャリブレーションが出来ない環境への耐性を高めます⭐️''
+    `レンズの歪曲収差と対応方法 <https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%95/>`_
+    をご参照ください。
+
+    See Also:
+        `dlib.jitter_image <http://dlib.net/python/index.html#dlib_pybind11.jitter_image>`_
     """
     data_dir = dir_path
     directory_list = []

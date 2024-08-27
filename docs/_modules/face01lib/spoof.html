@@ -161,10 +161,10 @@
 
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;init.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;初期化</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            log_level (str, optional): Receive log level value. Defaults to &#39;info&#39;.</span>
+<span class="sd">            log_level (str, optional): ログレベルを指定します。デフォルトは&#39;info&#39;です。</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Setup logger: common way</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">log_level</span>
@@ -175,7 +175,6 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
 
-        <span class="n">Cal_obj</span><span class="o">.</span><span class="n">cal_specify_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
         <span class="c1"># 顔のランドマークを検出するためのモデルをロード</span>
         <span class="n">mp_face_mesh</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">solutions</span><span class="o">.</span><span class="n">face_mesh</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">face_mesh</span> <span class="o">=</span> <span class="n">mp_face_mesh</span><span class="o">.</span><span class="n">FaceMesh</span><span class="p">()</span>
@@ -208,6 +207,14 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: If eye blink is detected, return True. Otherwise, return False.</span>
+
+<span class="sd">        .. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">            :width: 70%</span>
+<span class="sd">            :alt: one point</span>
+
+<span class="sd">        以下のリンクに論文と数式をまとめました⭐️&#39;&#39;</span>
+
+<span class="sd">        `まばたきを検知するPythonコードの解説 &lt;https://zenn.dev/ykesamaru/articles/f10804a8fcc81d&gt;`_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">frame_datas_array</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">CONFIG</span>
@@ -254,39 +261,50 @@
 <div class="viewcode-block" id="Spoof.obj_detect">
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.obj_detect">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">obj_detect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># For webcam input:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;mediapipeのテストのためのメソッド</span>
+<span class="sd">        オブジェクト検出を行います。（この場合は「靴」）</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ウェブカメラからの入力をキャプチャするための設定</span>
         <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># MediaPipeのObjectronモジュールを使用してオブジェクト検出を行う</span>
         <span class="k">with</span> <span class="n">mp_objectron</span><span class="o">.</span><span class="n">Objectron</span><span class="p">(</span><span class="n">static_image_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                     <span class="n">max_num_objects</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                     <span class="n">min_detection_confidence</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                                     <span class="n">min_tracking_confidence</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span>
                                     <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;Shoe&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">objectron</span><span class="p">:</span>
+            <span class="c1"># ウェブカメラが開いている間、フレームを処理し続けるループ</span>
             <span class="k">while</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
-                <span class="n">success</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">success</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># カメラからフレームを取得</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ignoring empty camera frame.&quot;</span><span class="p">)</span>
-                    <span class="c1"># If loading a video, use &#39;break&#39; instead of &#39;continue&#39;.</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;空のカメラフレームを無視します。&quot;</span><span class="p">)</span>
+                    <span class="c1"># ビデオを読み込む場合は &#39;continue&#39; の代わりに &#39;break&#39; を使用</span>
                     <span class="k">continue</span>
 
-                <span class="c1"># To improve performance, optionally mark the image as not writeable to</span>
-                <span class="c1"># pass by reference.</span>
+                <span class="c1"># パフォーマンス向上のため、画像を書き込み不可に設定</span>
                 <span class="n">image</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="c1"># 画像をBGRからRGBに変換（MediaPipeはRGB形式を使用）</span>
                 <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+                <span class="c1"># 画像内のオブジェクトを検出</span>
                 <span class="n">results</span> <span class="o">=</span> <span class="n">objectron</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-                <span class="c1"># Draw the box landmarks on the image.</span>
-                <span class="n">image</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+                <span class="c1"># 画像に検出されたオブジェクトのランドマークを描画</span>
+                <span class="n">image</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># 画像を書き込み可能に戻す</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>  <span class="c1"># 画像をRGBからBGRに戻す</span>
                 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">detected_objects</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">detected_object</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">detected_objects</span><span class="p">:</span>
+                        <span class="c1"># 2Dランドマークを画像に描画</span>
                         <span class="n">mp_drawing</span><span class="o">.</span><span class="n">draw_landmarks</span><span class="p">(</span>
-                        <span class="n">image</span><span class="p">,</span> <span class="n">detected_object</span><span class="o">.</span><span class="n">landmarks_2d</span><span class="p">,</span> <span class="n">mp_objectron</span><span class="o">.</span><span class="n">BOX_CONNECTIONS</span><span class="p">)</span>
+                            <span class="n">image</span><span class="p">,</span> <span class="n">detected_object</span><span class="o">.</span><span class="n">landmarks_2d</span><span class="p">,</span> <span class="n">mp_objectron</span><span class="o">.</span><span class="n">BOX_CONNECTIONS</span><span class="p">)</span>
+                        <span class="c1"># オブジェクトの姿勢（回転と位置）を表す軸を描画</span>
                         <span class="n">mp_drawing</span><span class="o">.</span><span class="n">draw_axis</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">detected_object</span><span class="o">.</span><span class="n">rotation</span><span class="p">,</span>
                                             <span class="n">detected_object</span><span class="o">.</span><span class="n">translation</span><span class="p">)</span>
-                <span class="c1"># Flip the image horizontally for a selfie-view display.</span>
+                <span class="c1"># 画像を左右反転してセルフィービューに表示</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;MediaPipe Objectron&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>  <span class="c1"># Escキーが押されたらループを終了</span>
                     <span class="k">break</span>
+
+        <span class="c1"># カメラを解放</span>
         <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
 
 
@@ -294,9 +312,17 @@
 <a class="viewcode-back" href="../../face01lib.html#face01lib.spoof.Spoof.make_qr_code">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">make_qr_code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;make_qr_code QRCodeを作成するメソッド.</span>
+<span class="sd">        Summary:</span>
+<span class="sd">            QRCode&quot;だけ&quot;を作成します。</span>
 <span class="sd">        Note:</span>
 <span class="sd">            入力される映像には1人のみ映っているようにしてください。</span>
 <span class="sd">            preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。</span>
+
+<span class="sd">        .. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">            :width: 70%</span>
+<span class="sd">            :alt: one point</span>
+
+<span class="sd">        exampleディレクトリの&#39;make_ID_card.py&#39;も参考にしてください⭐️&#39;&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">base64</span>
         <span class="kn">import</span> <span class="nn">zlib</span>

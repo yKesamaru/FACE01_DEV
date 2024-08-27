@@ -1,14 +1,12 @@
-"""DNNをマルチプロセスで用いる際のデータ拡張のコード例.
+"""データ拡張をマルチプロセスで行うコード例.
 
 Summary:
-    In this example you can learn how to augment data for DNN using multi process.
-    このエグザンプルコードでは、DNNをマルチプロセスで用いる際のデータ拡張について学びます。
+    このエグザンプルコードでは、時間のかかるデータ拡張においてマルチプロセス処理を行います。
 
 Example:
     .. code-block:: bash
 
-        python3 example/data_augmentation.py \
-            "/path/to/dir" "" "lens" 224 10 -0.1 0.1 0.01 4
+        python3 example/data_augmentation.py "/path/to/dir" "" "lens" 224 10 -0.1 0.1 0.01 4
 
 Source code:
     `data_augmentation_mp.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_augmentation_mp.py>`_
@@ -35,8 +33,6 @@ CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code initialize and logger first.
-This will read the configuration file config.ini and log errors etc.
 """
 
 utils = Utils(CONFIG['log_level'])

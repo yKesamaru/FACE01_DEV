@@ -37,8 +37,19 @@ CONFIG: Dict = Initialize(
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
+
+.. code-block:: python
+
+    CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL_GUI', 'info').initialize()
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
+この2行はお約束ですね⭐️''
+
+1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗
 """
 
 utils = Utils(CONFIG['log_level'])
@@ -53,11 +64,11 @@ def main(
     closing_value: float = 0.1,
     step_value: float = 0.1
 ) -> None:
-    """Simple example.
-
+    """
     このシンプルなコード例では、拡張子がpng, jpg, jpeg画像を含むディレクトリのパスを受け取り、樽型歪み処理をして、それらを保存します。
 
-    See `Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) <https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/>`_
+    See also:
+    `Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) <https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/>`_
 
     Args:
         path (str): 絶対パス: 例えば"~/bin/FACE01_DEV/assets/data"
@@ -78,7 +89,7 @@ def main(
 
     Result:
         .. image:: ../docs/img/distort_barrel.png
-            :scale: 100%
+            :scale: 70%
             :alt: distort_barrel
 
     Image:

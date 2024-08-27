@@ -1,22 +1,20 @@
-"""Example of benchmark for face recognition.
-
+"""
 Summary:
-    In this example, you can learn about log functions.
+    このエグザンプルコードではログ機能について学びます。
 
-    You can choose from two types of log_level,
+    You can choose from two types of log_level:
         - info
         - debug
-    in CONFIG: Dict =  Initialize('DEFAULT', 'log_level').initialize().
+    in CONFIG: Dict = Initialize('DEFAULT', 'log_level').initialize().
 
 Example:
     .. code-block:: python
 
         # Initialize
-        CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
+        CONFIG: Dict = Initialize('DEFAULT', 'debug').initialize()
         # Set up logger
         logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 
-Example:
     .. code-block:: bash
 
         python3 example/logging.py
@@ -34,43 +32,44 @@ parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
 
 
+import os.path
 from typing import Dict
 
 from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
-import os.path
-
 
 name: str = __name__
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 
 # Initialize
-CONFIG: Dict =  Initialize('DEFAULT', 'debug').initialize()
+CONFIG: Dict = Initialize('DEFAULT', 'debug').initialize()
 # Set up logger
 logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 """Initialize and Setup logger.
-When coding a program that uses FACE01, code initialize and logger first.
-This will read the configuration file config.ini and log errors etc.
 """
 
 
 def main(exec_times: int = 50) -> None:
     """Setup logger example.
 
-    Output log with define log-level.
+    Output log with defined log-level.
 
     Args:
         exec_times (int, optional): Number of frames for process. Defaults to 50 times.
 
-    Returns:
-        None
+    Output example:
 
+    .. code-block:: bash
+
+        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] 安倍晋三
+        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] 99.4%
+        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] (148, 342, 272, 217)
+        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] -----------------
     """
     # Make generator
     gen = Core().common_process(CONFIG)
-
 
     # Repeat 'exec_times' times
     for i in range(0, exec_times):
@@ -89,4 +88,4 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    main(exec_times = 10)
+    main(exec_times=10)

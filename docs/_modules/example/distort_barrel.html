@@ -121,8 +121,19 @@
 <span class="c1"># Set up logger</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 <span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
-<span class="sd">When coding a program that uses FACE01, code `initialize` and `logger` first.</span>
-<span class="sd">This will read the configuration file `config.ini` and log errors etc.</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    CONFIG: Dict = Initialize(&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;, &#39;info&#39;).initialize()</span>
+<span class="sd">    logger = Logger(CONFIG[&#39;log_level&#39;]).logger(__file__, CONFIG[&#39;RootDir&#39;])</span>
+
+<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">この2行はお約束ですね⭐️&#39;&#39;</span>
+
+<span class="sd">1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
@@ -139,11 +150,11 @@
     <span class="n">closing_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="n">step_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple example.</span>
-
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    このシンプルなコード例では、拡張子がpng, jpg, jpeg画像を含むディレクトリのパスを受け取り、樽型歪み処理をして、それらを保存します。</span>
 
-<span class="sd">    See `Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) &lt;https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/&gt;`_</span>
+<span class="sd">    See also:</span>
+<span class="sd">    `Tokai-kaoninsho:レンズの歪曲収差と対応方法(6) &lt;https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%956/&gt;`_</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path (str): 絶対パス: 例えば&quot;~/bin/FACE01_DEV/assets/data&quot;</span>
@@ -164,7 +175,7 @@
 
 <span class="sd">    Result:</span>
 <span class="sd">        .. image:: ../docs/img/distort_barrel.png</span>
-<span class="sd">            :scale: 100%</span>
+<span class="sd">            :scale: 70%</span>
 <span class="sd">            :alt: distort_barrel</span>
 
 <span class="sd">    Image:</span>

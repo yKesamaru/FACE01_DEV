@@ -1,4 +1,4 @@
-"""Example of GUI display and face recognition data output.
+"""GUI表示と顔認識データ出力の例。
 
 Summary:
     In this example you can learn how to display GUI and output
@@ -9,6 +9,18 @@ Example:
 
         python3 example/display_GUI_window.py
 
+Results:
+
+.. image:: ../assets/images/2024-08-27_20-16.png
+    :scale: 70%
+    :alt: Screenshot of the GUI output
+
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
+'Core().common_process(self.CONFIG)'で得られたジェネレーターを'for'で回すだけで全ての情報が取得できるんです！⭐️''
+
 Source code:
     `display_GUI_window.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window.py>`_
 
@@ -16,8 +28,6 @@ See also:
     ttkbootstrap
     https://ttkbootstrap.readthedocs.io/en/version-0.5/themes.html
 
-Copyright Owner: Yoshitsugu Kesamaru
-Please refer to the separate license file for the license of the code.
 """
 # Operate directory: Common to all examples
 import os.path
