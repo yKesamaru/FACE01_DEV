@@ -49,11 +49,6 @@ from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
-# Initialize
-CONFIG: Dict = Initialize('LIGHTWEIGHT_GUI', 'info').initialize()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-
 
 class App:
     def __init__(self, root, exec_times=500):
@@ -97,6 +92,10 @@ class App:
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize('LIGHTWEIGHT_GUI', 'info').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
     root = tk.Tk()
     app = App(root, exec_times=500)
     root.mainloop()

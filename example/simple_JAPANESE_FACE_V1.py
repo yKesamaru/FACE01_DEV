@@ -26,22 +26,9 @@ from face01lib.Core import Core
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 
-# Initialize
-CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL', 'info').initialize()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-This will read the configuration file `config.ini` and log errors etc.
-"""
-
-# Make generator
-gen = Core().common_process(CONFIG)
-
 
 def main(exec_times: int = 50) -> None:
-    """Simple example.
-
+    """
     This simple example script prints out results of face recognition process.
 
     Args:
@@ -72,4 +59,10 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL', 'info').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+    # Make generator
+    gen = Core().common_process(CONFIG)
     main(exec_times=100)
