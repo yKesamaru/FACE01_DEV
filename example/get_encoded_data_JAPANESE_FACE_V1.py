@@ -1,9 +1,6 @@
-"""JAPANESE_FACE_V1学習モデルを使用して顔特徴ベクトルを取得するシンプルな例.
+"""JAPANESE_FACE_V1学習モデルを使用して顔特徴ベクトルを取得する例.
 
 Summary:
-    In this example, you can learn how to execute FACE01 as simple to use "JAPANESE_FACE_V1.onnx" model.
-    This script loads a face image file and outputs the feature vector of the face image.
-    The feature vector is 512-dimensional vector, which is from `JAPANESE_FACE_V1.onnx` model.
     この例では、「JAPANESE_FACE_V1.onnx」モデルを使用して、シンプルに特徴ベクトルを取得する方法を学ぶことができます。
     このスクリプトは顔画像ファイルを読み込み、その顔画像の特徴ベクトルを標準出力に出力します。
     特徴ベクトルは「JAPANESE_FACE_V1.onnx」モデルから生成される512次元のベクトルです。

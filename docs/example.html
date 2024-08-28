@@ -67,7 +67,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.aligned_crop_face">example.aligned_crop_face module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -101,7 +100,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.data_structure.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-detect-eye-blink-module">example.detect_eye_blink module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.detect_eye_blink">example.detect_eye_blink module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.detect_eye_blink.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.terminate"><code class="docutils literal notranslate"><span class="pre">App.terminate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.detect_eye_blink.App.update_image"><code class="docutils literal notranslate"><span class="pre">App.update_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window">example.display_GUI_window module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#example.display_GUI_window.App.start"><code class="docutils literal notranslate"><span class="pre">App.start()</span></code></a></li>
@@ -117,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.distort_barrel">example.distort_barrel module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -126,10 +131,19 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.draw_datas.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-example-logging-module">example.example_logging module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-face-coordinates-module">example.face_coordinates module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.example_logging">example.example_logging module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.example_logging.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.face_coordinates">example.face_coordinates module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.face_coordinates.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.faiss_combination_similarity">example.faiss_combination_similarity module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-get-encoded-data-module">example.get_encoded_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data">example.get_encoded_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.get_encoded_data.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.get_encoded_data_JAPANESE_FACE_V1">example.get_encoded_data_JAPANESE_FACE_V1 module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.jitter">example.jitter module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.jitter.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
@@ -277,21 +291,23 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 </dd>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" /></a>
 </dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="c1"># Set up logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>初期化とloggerのセットアップ.
+FACE01を使用してコーディングするときは、'initialize'と'logger'を最初にコードします。
+これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します⭐️''</p>
+<dl class="simple">
 <dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20230104005post-42856.html">Pakutaso 笑顔でスマホ操作を教えてくれる女性の無料写真素材</a></p>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/aligned_crop_face.py">aligned_crop_face.py</a></p>
 </dd>
 </dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.aligned_crop_face.logger">
-<span class="sig-prename descclassname"><span class="pre">example.aligned_crop_face.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/aligned_crop_face.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.aligned_crop_face.logger" title="Link to this definition"></a></dt>
-<dd><p>初期化とloggerのセットアップ.</p>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
-<p>FACE01を使用してコーディングするときは、<cite>initialize`と`logger`を最初にコードします。
-When coding a program that uses FACE01, code `initialize</cite> and <cite>logger</cite> first.
-これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。</p>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="example.aligned_crop_face.main">
 <span class="sig-prename descclassname"><span class="pre">example.aligned_crop_face.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/aligned_crop_face.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.aligned_crop_face.main" title="Link to this definition"></a></dt>
@@ -349,7 +365,7 @@ When coding a program that uses FACE01, code `initialize</cite> and <cite>logger
 </div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a href="#id10"><span class="problematic" id="id11">`average_face.py &lt;&lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py&gt;`_</span></a></p>
+<dt>Source code:</dt><dd><p><a href="#id8"><span class="problematic" id="id9">`average_face.py &lt;&lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py&gt;`_</span></a></p>
 </dd>
 </dl>
 <dl class="py function">
@@ -696,7 +712,7 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </pre></div>
 </div>
 </dd>
-<dt>データ構造:</dt><dd><p><a href="#id3"><span class="problematic" id="id4">`</span></a>frame_datas_array`は以下に記述するような様々な情報を持つ辞書に似た変数です。</p>
+<dt>データ構造:</dt><dd><p>'frame_datas_array'は以下に記述するような様々な情報を持つ辞書に似た変数です。</p>
 <ul>
 <li><p>Dictionary</p>
 <blockquote>
@@ -704,12 +720,12 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <li><p>img: NDArray of a frame</p></li>
 <li><p>face_location_list: List of face-coordinates</p></li>
 <li><p>overlay: Shallow copy of img</p></li>
-<li><p>person_data_list: List of person-coordinate which is included in <cite>face_location_list</cite></p></li>
+<li><p>person_data_list: List of person-coordinate which is included in 'face_location_list'</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<p>In addition, the <cite>person_data_list</cite> variable is an array that contains the variables described below.</p>
+<p>In addition, the 'person_data_list' variable is an array that contains the variables described below.</p>
 <ul>
 <li><p>List</p>
 <blockquote>
@@ -749,8 +765,50 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </dd></dl>
 
 </section>
-<section id="example-detect-eye-blink-module">
-<h2>example.detect_eye_blink module<a class="headerlink" href="#example-detect-eye-blink-module" title="Link to this heading"></a></h2>
+<section id="module-example.detect_eye_blink">
+<span id="example-detect-eye-blink-module"></span><h2>example.detect_eye_blink module<a class="headerlink" href="#module-example.detect_eye_blink" title="Link to this heading"></a></h2>
+<p>まばたきを検出するコード例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>このエグザンプルでは、目の瞬き検出を扱うコード例を示します。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/detect_eye_blink.py
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。
+複数人を対象とすることはできません。</p>
+</div>
+<a class="reference internal image-reference" href="_images/2024-08-27_20-02.png"><img alt="eye blink" src="_images/2024-08-27_20-02.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>注目すべきは瞬きの検出が1行で済んでいるところです！⭐️''</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blink_detected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spoof</span><span class="o">.</span><span class="n">detect_eye_blinks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame_datas_array</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/detect_eye_blink.py">detect_eye_blink.py</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.detect_eye_blink.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App.terminate">
+<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.terminate"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.terminate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.detect_eye_blink.App.update_image">
+<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/detect_eye_blink.html#App.update_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.detect_eye_blink.App.update_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-example.display_GUI_window">
 <span id="example-display-gui-window-module"></span><h2>example.display_GUI_window module<a class="headerlink" href="#module-example.display_GUI_window" title="Link to this heading"></a></h2>
@@ -861,23 +919,16 @@ face recognition.</p>
 </section>
 <section id="module-example.distort_barrel">
 <span id="example-distort-barrel-module"></span><h2>example.distort_barrel module<a class="headerlink" href="#module-example.distort_barrel" title="Link to this heading"></a></h2>
-<p>樽型歪み画像をシミュレートするコード例.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to get distorted images.</p>
+<dt>Summary:</dt><dd><p>樽型歪み画像をシミュレートするコード例です。</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">param path<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Directory path where images containing faces exist</p>
+<dd class="field-odd"><p>顔画像ファイルが含まれる対象ディレクトリへのパス。</p>
 </dd>
-<dt class="field-even">type path<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-<dt class="field-odd">param size<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Specify the number of px for the extracted face image with an integer. Default is 200px.</p>
-</dd>
-<dt class="field-even">type size<span class="colon">:</span></dt>
-<dd class="field-even"><p>int, optional</p>
+<dt class="field-even">param size<span class="colon">:</span></dt>
+<dd class="field-even"><p>解像度の指定。Default is 224px.</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -886,23 +937,19 @@ face recognition.</p>
 </pre></div>
 </div>
 </div>
-<dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/distort_barrel.py">distort_barrel.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.distort_barrel.logger">
-<span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/distort_barrel.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.distort_barrel.logger" title="Link to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 初期化</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="c1"># ロガーの設定</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
 <p>この2行はお約束ですね⭐️''</p>
 <p>1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗</p>
-</dd></dl>
-
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/distort_barrel.py">distort_barrel.py</a></p>
+</dd>
+</dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.distort_barrel.main">
 <span class="sig-prename descclassname"><span class="pre">example.distort_barrel.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">align_and_resize_bool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">224</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closing_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/distort_barrel.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.distort_barrel.main" title="Link to this definition"></a></dt>
@@ -1001,40 +1048,195 @@ face recognition.</p>
 </dd></dl>
 
 </section>
-<section id="example-example-logging-module">
-<h2>example.example_logging module<a class="headerlink" href="#example-example-logging-module" title="Link to this heading"></a></h2>
-</section>
-<section id="example-face-coordinates-module">
-<h2>example.face_coordinates module<a class="headerlink" href="#example-face-coordinates-module" title="Link to this heading"></a></h2>
-</section>
-<section id="module-example.faiss_combination_similarity">
-<span id="example-faiss-combination-similarity-module"></span><h2>example.faiss_combination_similarity module<a class="headerlink" href="#module-example.faiss_combination_similarity" title="Link to this heading"></a></h2>
-<p>指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出するコードの例.</p>
+<section id="module-example.example_logging">
+<span id="example-example-logging-module"></span><h2>example.example_logging module<a class="headerlink" href="#module-example.example_logging" title="Link to this heading"></a></h2>
 <dl>
-<dt>Summary:</dt><dd><p>この例では、指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。</p>
+<dt>Summary:</dt><dd><p>このエグザンプルコードではログ機能について学びます。</p>
+<dl class="simple">
+<dt>You can choose from two types of log_level:</dt><dd><ul class="simple">
+<li><p>info</p></li>
+<li><p>debug</p></li>
+</ul>
 </dd>
-<dt>Usage:</dt><dd><p>この例では必要になるデータ（ディレクトリ）を予めダウンロードしておく必要があります。</p>
-<p>git clone <a class="reference external" href="https://github.com/yKesamaru/FACE01_IOT_dev_assets.git">https://github.com/yKesamaru/FACE01_IOT_dev_assets.git</a></p>
-<p>FACE01_IOT_devフォルダが作成されます。これを確認した後にこのエグザんプルコードを実行してください。</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/faiss_combination_similarity.py
+</dl>
+<p>in CONFIG: Dict = Initialize('DEFAULT', 'log_level').initialize().</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
+<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<span class="c1"># Set up logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/logging.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/example_logging.py">example_logging.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.example_logging.main">
+<span class="sig-prename descclassname"><span class="pre">example.example_logging.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/example_logging.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.example_logging.main" title="Link to this definition"></a></dt>
+<dd><p>Setup logger example.</p>
+<p>Output log with defined log-level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
+</dd>
+</dl>
+<p>Output example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2024</span>-08-27<span class="w"> </span><span class="m">21</span>:18:34,678<span class="o">]</span><span class="w"> </span><span class="o">[</span>/home/terms/bin/FACE01_DEV/example/example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span>安倍晋三
+<span class="o">[</span><span class="m">2024</span>-08-27<span class="w"> </span><span class="m">21</span>:18:34,678<span class="o">]</span><span class="w"> </span><span class="o">[</span>/home/terms/bin/FACE01_DEV/example/example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span><span class="m">99</span>.4%
+<span class="o">[</span><span class="m">2024</span>-08-27<span class="w"> </span><span class="m">21</span>:18:34,678<span class="o">]</span><span class="w"> </span><span class="o">[</span>/home/terms/bin/FACE01_DEV/example/example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="m">148</span>,<span class="w"> </span><span class="m">342</span>,<span class="w"> </span><span class="m">272</span>,<span class="w"> </span><span class="m">217</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2024</span>-08-27<span class="w"> </span><span class="m">21</span>:18:34,678<span class="o">]</span><span class="w"> </span><span class="o">[</span>/home/terms/bin/FACE01_DEV/example/example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span>-----------------
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<p>ログとして出力させたい場合に使うと良いですね⭐️''</p>
+<p>ログとして出力すると、どのPythonファイルがどのログレベルで出力したのか一目瞭然です！💗</p>
+</dd></dl>
+
+</section>
+<section id="module-example.face_coordinates">
+<span id="example-face-coordinates-module"></span><h2>example.face_coordinates module<a class="headerlink" href="#module-example.face_coordinates" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>このエグザンプルコードでは、顔座標の取得と顔画像として保存する方法を学びます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/face_coordinates.py
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Config.ini setting:</dt><dd><p>config.iniを以下のように記述して、顔座標と顔画像の保存を設定します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>FACE-COORDINATE<span class="o">]</span>
+<span class="nv">headless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="nv">crop_face_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="nv">frequency_crop_image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<span class="nv">crop_with_multithreading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<span class="nv">number_of_crops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 </pre></div>
 </div>
 </dd>
+<dt>Result:</dt><dd><p>以下のような出力が得られます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">face</span> <span class="n">coordinates</span><span class="p">:</span> <span class="p">[(</span><span class="mi">156</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">304</span><span class="p">,</span> <span class="mi">85</span><span class="p">),</span> <span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">593</span><span class="p">,</span> <span class="mi">276</span><span class="p">,</span> <span class="mi">431</span><span class="p">),</span> <span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">485</span><span class="p">),</span> <span class="p">(</span><span class="mi">319</span><span class="p">,</span> <span class="mi">334</span><span class="p">,</span> <span class="mi">449</span><span class="p">,</span> <span class="mi">204</span><span class="p">),</span> <span class="p">(</span><span class="mi">281</span><span class="p">,</span> <span class="mi">645</span><span class="p">,</span> <span class="mi">405</span><span class="p">,</span> <span class="mi">521</span><span class="p">),</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">810</span><span class="p">,</span> <span class="mi">313</span><span class="p">,</span> <span class="mi">520</span><span class="p">),</span> <span class="p">(</span><span class="mi">349</span><span class="p">,</span> <span class="mi">394</span><span class="p">,</span> <span class="mi">573</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span> <span class="p">(</span><span class="mi">244</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="mi">408</span><span class="p">,</span> <span class="mi">138</span><span class="p">),</span> <span class="p">(</span><span class="mi">344</span><span class="p">,</span> <span class="mi">692</span><span class="p">,</span> <span class="mi">514</span><span class="p">,</span> <span class="mi">522</span><span class="p">),</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">62</span><span class="p">)]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<p>顔画像の保存はデータセットを作成する時、役立ちます⭐️''</p>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/face_coordinates.py">face_coordinates.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.face_coordinates.main">
+<span class="sig-prename descclassname"><span class="pre">example.face_coordinates.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/face_coordinates.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.face_coordinates.main" title="Link to this definition"></a></dt>
+<dd><p>Output face coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-example.faiss_combination_similarity">
+<span id="example-faiss-combination-similarity-module"></span><h2>example.faiss_combination_similarity module<a class="headerlink" href="#module-example.faiss_combination_similarity" title="Link to this heading"></a></h2>
+<p>指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出するコードの例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>この例では、指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。</p>
+</dd>
+<dt>Results:</dt><dd><p>プロジェクトルートディレクトリにoutput.csvが作成されます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/faiss_combination_similarity.py
+</pre></div>
+</div>
+</div>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<p>この例では扱う顔画像ファイル数が非常に少ないためfaissには向いていないです💦</p>
+<p>学習モデルの大規模データセットに用いると良いでしょう⭐️'' （その場合はnlistの値を変えてくださいね💗）</p>
+<dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/faiss_combination_similarity.py">faiss_combination_similarity.py</a></p>
 </dd>
 </dl>
 </section>
-<section id="example-get-encoded-data-module">
-<h2>example.get_encoded_data module<a class="headerlink" href="#example-get-encoded-data-module" title="Link to this heading"></a></h2>
+<section id="module-example.get_encoded_data">
+<span id="example-get-encoded-data-module"></span><h2>example.get_encoded_data module<a class="headerlink" href="#module-example.get_encoded_data" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>このエグザンプルコードでは、顔の特徴量（エンコーディングされたデータ）を取得する方法を学びます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/get_encoded_data.py
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>このコードでは、かならず一人が映っている映像を使用してください。</p>
+</div>
+<p>Results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>face<span class="w"> </span>encoded<span class="w"> </span>data:<span class="w"> </span><span class="o">[</span>-0.01199415<span class="w">  </span><span class="m">0</span>.01052003<span class="w">  </span><span class="m">0</span>.07660526<span class="w">  </span><span class="m">0</span>.06551921<span class="w"> </span>-0.07496994<span class="w"> </span>-0.12972911
+-0.05913385<span class="w"> </span>-0.14237705<span class="w">  </span><span class="m">0</span>.05547058<span class="w"> </span>-0.13777749<span class="w">  </span><span class="m">0</span>.13601969<span class="w"> </span>-0.12244888
+-0.15050077<span class="w">  </span><span class="m">0</span>.00519788<span class="w"> </span>-0.03569282<span class="w">  </span><span class="m">0</span>.17992854<span class="w"> </span>-0.08323735<span class="w"> </span>-0.08283503
+-0.10274227<span class="w"> </span>-0.07727417<span class="w">  </span><span class="m">0</span>.08088023<span class="w">  </span><span class="m">0</span>.01752477<span class="w"> </span>-0.05877539<span class="w">  </span><span class="m">0</span>.02624322
+-0.0077478<span class="w">  </span>-0.25635812<span class="w"> </span>-0.13101193<span class="w"> </span>-0.09281664<span class="w">  </span><span class="m">0</span>.05218935<span class="w"> </span>-0.04231806
+-0.06299889<span class="w">  </span><span class="m">0</span>.04474396<span class="w"> </span>-0.19532356<span class="w"> </span>-0.12053486<span class="w">  </span><span class="m">0</span>.02230695<span class="w">  </span><span class="m">0</span>.06118448
+-0.06408831<span class="w"> </span>-0.05561456<span class="w">  </span><span class="m">0</span>.19666338<span class="w"> </span>-0.00320839<span class="w"> </span>-0.16399916<span class="w">  </span><span class="m">0</span>.10793754
+<span class="m">0</span>.09513831<span class="w">  </span><span class="m">0</span>.19015315<span class="w">  </span><span class="m">0</span>.1805291<span class="w">   </span><span class="m">0</span>.06770462<span class="w">  </span><span class="m">0</span>.04203921<span class="w"> </span>-0.13319662
+<span class="m">0</span>.14975622<span class="w"> </span>-0.17903461<span class="w"> </span>-0.0205469<span class="w">   </span><span class="m">0</span>.12766521<span class="w">  </span><span class="m">0</span>.23538746<span class="w">  </span><span class="m">0</span>.1532644
+<span class="m">0</span>.03183981<span class="w"> </span>-0.04921352<span class="w">  </span><span class="m">0</span>.12409633<span class="w">  </span><span class="m">0</span>.0604726<span class="w">  </span>-0.21282698<span class="w">  </span><span class="m">0</span>.0895256
+<span class="m">0</span>.1691601<span class="w">  </span>-0.07778979<span class="w">  </span><span class="m">0</span>.01881283<span class="w">  </span><span class="m">0</span>.05160358<span class="w">  </span><span class="m">0</span>.2315844<span class="w">   </span><span class="m">0</span>.05034623
+-0.04736616<span class="w"> </span>-0.10536997<span class="w">  </span><span class="m">0</span>.15513012<span class="w"> </span>-0.20276567<span class="w"> </span>-0.11107794<span class="w">  </span><span class="m">0</span>.02522913
+-0.07532144<span class="w"> </span>-0.1432429<span class="w">  </span>-0.28969032<span class="w">  </span><span class="m">0</span>.03757014<span class="w">  </span><span class="m">0</span>.41931418<span class="w">  </span><span class="m">0</span>.1212881
+-0.1964694<span class="w">   </span><span class="m">0</span>.06237716<span class="w"> </span>-0.05123742<span class="w"> </span>-0.04189032<span class="w">  </span><span class="m">0</span>.14579299<span class="w">  </span><span class="m">0</span>.06779657
+-0.04064779<span class="w"> </span>-0.05232659<span class="w"> </span>-0.07283606<span class="w">  </span><span class="m">0</span>.02151246<span class="w">  </span><span class="m">0</span>.25605643<span class="w"> </span>-0.08359357
+<span class="m">0</span>.03513885<span class="w">  </span><span class="m">0</span>.15748617<span class="w">  </span><span class="m">0</span>.05288177<span class="w">  </span><span class="m">0</span>.03470919<span class="w">  </span><span class="m">0</span>.0150839<span class="w">   </span><span class="m">0</span>.04732724
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<p>dlibでは128次元、JAPANESE FACE V1では512次元のNDArrayデータが取得されます⭐️''</p>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/get_encoded_data.py">get_encoded_data.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.get_encoded_data.main">
+<span class="sig-prename descclassname"><span class="pre">example.get_encoded_data.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/get_encoded_data.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.get_encoded_data.main" title="Link to this definition"></a></dt>
+<dd><p>Simple example.</p>
+<p>This simple example script prints out results of face encoded datas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-example.get_encoded_data_JAPANESE_FACE_V1">
 <span id="example-get-encoded-data-japanese-face-v1-module"></span><h2>example.get_encoded_data_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.get_encoded_data_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
-<p>JAPANESE_FACE_V1学習モデルを使用して顔特徴ベクトルを取得するシンプルな例.</p>
+<p>JAPANESE_FACE_V1学習モデルを使用して顔特徴ベクトルを取得する例.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>In this example, you can learn how to execute FACE01 as simple to use &quot;JAPANESE_FACE_V1.onnx&quot; model.
-This script loads a face image file and outputs the feature vector of the face image.
-The feature vector is 512-dimensional vector, which is from <cite>JAPANESE_FACE_V1.onnx</cite> model.
-この例では、「JAPANESE_FACE_V1.onnx」モデルを使用して、シンプルに特徴ベクトルを取得する方法を学ぶことができます。
+<dt>Summary:</dt><dd><p>この例では、「JAPANESE_FACE_V1.onnx」モデルを使用して、シンプルに特徴ベクトルを取得する方法を学ぶことができます。
 このスクリプトは顔画像ファイルを読み込み、その顔画像の特徴ベクトルを標準出力に出力します。
 特徴ベクトルは「JAPANESE_FACE_V1.onnx」モデルから生成される512次元のベクトルです。</p>
 </dd>
@@ -1139,9 +1341,9 @@ Spoof().make_qr_code()
 </section>
 <section id="module-example.make_npKnown_file">
 <span id="example-make-npknown-file-module"></span><h2>example.make_npKnown_file module<a class="headerlink" href="#module-example.make_npKnown_file" title="Link to this heading"></a></h2>
-<p><a href="#id6"><span class="problematic" id="id7">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
+<p><a href="#id4"><span class="problematic" id="id5">`</span></a>npKnown.npz`ファイルを作成するコードの例.</p>
 <dl>
-<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id8"><span class="problematic" id="id9">`</span></a>npKnown.npz`ファイルの作成手順を学びます。
+<dt>Summary:</dt><dd><p>このエグザンプルでは、<a href="#id6"><span class="problematic" id="id7">`</span></a>npKnown.npz`ファイルの作成手順を学びます。
 ディレクトリを選択すると、そのディレクトリに含まれる顔画像ファイルを全て読み込み、人物名とその512次元特徴量データをデータセットとして保存します。</p>
 <p>ディレクトリ選択ダイアログでは'preset_face_images'ディレクトリ、あるいはこちらで用意したデータセット（&quot;assets/data/&quot;以下のディレクトリ）を選択してください。
 それ以外の場合はエラーが発生します。</p>

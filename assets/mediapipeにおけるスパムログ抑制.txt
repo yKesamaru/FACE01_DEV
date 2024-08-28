@@ -1,0 +1,28 @@
+# 出力ログの抑制 #################################
+# import os
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = DEBUG, 1 = INFO, 2 = WARNING, 3 = ERROR
+
+# os.environ['GLOG_minloglevel'] = '2'  # INFOレベル以下のログを抑制
+# os.environ['GLOG_logtostderr'] = '1'  # 標準エラーに出力
+
+# # 標準出力をファイルにリダイレクト
+# sys.stdout = open('output.log', 'w')
+
+# # 標準エラーをファイルにリダイレクト
+# sys.stderr = open('error.log', 'w')
+
+# import os
+# import onnxruntime as ort
+
+# # 現在のスクリプトのディレクトリを基準にして、モデルファイルへのパスを設定
+# model_path = os.path.join(os.path.dirname(__file__), "../face01lib/models/JAPANESE_FACE_V1.onnx")
+
+# # ログレベルの設定
+# sess_options = ort.SessionOptions()
+# sess_options.log_severity_level = 3  # ログレベルをERRORに設定
+
+# # ONNXモデルのセッションを作成
+# session = ort.InferenceSession(model_path, sess_options, providers=['CPUExecutionProvider'])
+
+# sys.stderr = open('error.log', 'w')
+# #################################################

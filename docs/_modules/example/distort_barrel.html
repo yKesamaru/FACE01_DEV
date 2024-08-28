@@ -82,19 +82,33 @@
            <div itemprop="articleBody">
              
   <h1>example.distort_barrel のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;樽型歪み画像をシミュレートするコード例.</span>
-
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Summary:</span>
-<span class="sd">    In this example, you can learn how to get distorted images.</span>
+<span class="sd">    樽型歪み画像をシミュレートするコード例です。</span>
 
 <span class="sd">Args:</span>
-<span class="sd">    path (str): Directory path where images containing faces exist</span>
-<span class="sd">    size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.</span>
+<span class="sd">    path: 顔画像ファイルが含まれる対象ディレクトリへのパス。</span>
+<span class="sd">    size: 解像度の指定。Default is 224px.</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
 <span class="sd">        python3 example/distort_barrel.py path size</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    # 初期化</span>
+<span class="sd">    CONFIG: Dict = Initialize(&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;, &#39;info&#39;).initialize()</span>
+<span class="sd">    # ロガーの設定</span>
+<span class="sd">    logger = Logger(CONFIG[&#39;log_level&#39;]).logger(__file__, CONFIG[&#39;RootDir&#39;])</span>
+
+<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">この2行はお約束ですね⭐️&#39;&#39;</span>
+
+<span class="sd">1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗</span>
 
 <span class="sd">Source code:</span>
 <span class="sd">    `distort_barrel.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/distort_barrel.py&gt;`_</span>
@@ -114,29 +128,6 @@
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">from</span> <span class="nn">face01lib.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
-
-<span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span>
-    <span class="s1">&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="c1"># Set up logger</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
-<span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
-
-<span class="sd">.. code-block:: python</span>
-
-<span class="sd">    CONFIG: Dict = Initialize(&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;, &#39;info&#39;).initialize()</span>
-<span class="sd">    logger = Logger(CONFIG[&#39;log_level&#39;]).logger(__file__, CONFIG[&#39;RootDir&#39;])</span>
-
-<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
-<span class="sd">    :width: 70%</span>
-<span class="sd">    :alt: one point</span>
-
-<span class="sd">この2行はお約束ですね⭐️&#39;&#39;</span>
-
-<span class="sd">1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="main">
@@ -198,6 +189,14 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Initialize</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span>
+        <span class="s1">&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="c1"># Set up logger</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+
+    <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
+
     <span class="n">args</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">main</span><span class="p">(</span>

@@ -43,13 +43,6 @@ name: str = __name__
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 
-# Initialize
-CONFIG: Dict = Initialize('DEFAULT', 'debug').initialize()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-"""
-
 
 def main(exec_times: int = 50) -> None:
     """Setup logger example.
@@ -67,6 +60,14 @@ def main(exec_times: int = 50) -> None:
         [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] 99.4%
         [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] (148, 342, 272, 217)
         [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] -----------------
+
+    .. image:: ../assets/images/one_point_L.png
+        :width: 70%
+        :alt: one point
+
+    ログとして出力させたい場合に使うと良いですね⭐️''
+
+    ログとして出力すると、どのPythonファイルがどのログレベルで出力したのか一目瞭然です！💗
     """
     # Make generator
     gen = Core().common_process(CONFIG)
@@ -88,4 +89,11 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize('DEFAULT', 'debug').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+    """Initialize and Setup logger.
+    """
+
     main(exec_times=10)

@@ -1,16 +1,30 @@
-"""樽型歪み画像をシミュレートするコード例.
-
+"""
 Summary:
-    In this example, you can learn how to get distorted images.
+    樽型歪み画像をシミュレートするコード例です。
 
 Args:
-    path (str): Directory path where images containing faces exist
-    size (int, optional): Specify the number of px for the extracted face image with an integer. Default is 200px.
+    path: 顔画像ファイルが含まれる対象ディレクトリへのパス。
+    size: 解像度の指定。Default is 224px.
 
 Example:
     .. code-block:: bash
 
         python3 example/distort_barrel.py path size
+
+.. code-block:: python
+
+    # 初期化
+    CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL_GUI', 'info').initialize()
+    # ロガーの設定
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
+この2行はお約束ですね⭐️''
+
+1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗
 
 Source code:
     `distort_barrel.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/distort_barrel.py>`_
@@ -30,29 +44,6 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 # Operate directory: Common to all examples
 from face01lib.utils import Utils
-
-# Initialize
-CONFIG: Dict = Initialize(
-    'JAPANESE_FACE_V1_MODEL_GUI', 'info').initialize()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""Initialize and Setup logger.
-
-.. code-block:: python
-
-    CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL_GUI', 'info').initialize()
-    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-
-.. image:: ../assets/images/one_point_L.png
-    :width: 70%
-    :alt: one point
-
-この2行はお約束ですね⭐️''
-
-1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗
-"""
-
-utils = Utils(CONFIG['log_level'])
 
 
 def main(
@@ -111,6 +102,14 @@ def main(
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize(
+        'JAPANESE_FACE_V1_MODEL_GUI', 'info').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
+    utils = Utils(CONFIG['log_level'])
+
     args: list = sys.argv
     os.chdir(args[1])
     main(

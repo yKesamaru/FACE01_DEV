@@ -17,6 +17,21 @@ Result:
         :scale: 50%
         :alt: face_alignment
 
+.. code-block:: python
+
+    # Initialize
+    CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
+初期化とloggerのセットアップ.
+FACE01を使用してコーディングするときは、'initialize'と'logger'を最初にコードします。
+これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します⭐️''
+
 Image:
     `Pakutaso 笑顔でスマホ操作を教えてくれる女性の無料写真素材 <https://www.pakutaso.com/20230104005post-42856.html>`_
 
@@ -37,23 +52,6 @@ from typing import Dict
 from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.utils import Utils
-
-# Initialize
-CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
-"""初期化とloggerのセットアップ.
-
-.. image:: ../assets/images/one_point_L.png
-    :width: 70%
-    :alt: one point
-
-FACE01を使用してコーディングするときは、`initialize`と`logger`を最初にコードします。
-When coding a program that uses FACE01, code `initialize` and `logger` first.
-これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。
-"""
-
-utils = Utils(CONFIG['log_level'])
 
 
 def main(path: str, padding: float = 0.4, size: int = 224) -> None:
@@ -78,6 +76,13 @@ def main(path: str, padding: float = 0.4, size: int = 224) -> None:
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize('DEFAULT', 'info').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
+    utils = Utils(CONFIG['log_level'])
+
     args: list = sys.argv
     if 2 == len(args):
         main(args[1])

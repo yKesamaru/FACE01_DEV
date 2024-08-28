@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.example_logging &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>example.face_coordinates &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
-      <li class="breadcrumb-item active">example.example_logging</li>
+      <li class="breadcrumb-item active">example.face_coordinates</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,32 +81,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>example.example_logging のソースコード</h1><div class="highlight"><pre>
+  <h1>example.face_coordinates のソースコード</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Summary:</span>
-<span class="sd">    このエグザンプルコードではログ機能について学びます。</span>
-
-<span class="sd">    You can choose from two types of log_level:</span>
-<span class="sd">        - info</span>
-<span class="sd">        - debug</span>
-<span class="sd">    in CONFIG: Dict = Initialize(&#39;DEFAULT&#39;, &#39;log_level&#39;).initialize().</span>
+<span class="sd">    このエグザンプルコードでは、顔座標の取得と顔画像として保存する方法を学びます。</span>
 
 <span class="sd">Example:</span>
-<span class="sd">    .. code-block:: python</span>
+<span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        # Initialize</span>
-<span class="sd">        CONFIG: Dict = Initialize(&#39;DEFAULT&#39;, &#39;debug&#39;).initialize()</span>
-<span class="sd">        # Set up logger</span>
-<span class="sd">        logger = Logger(CONFIG[&#39;log_level&#39;]).logger(__file__, CONFIG[&#39;RootDir&#39;])</span>
+<span class="sd">        python3 example/face_coordinates.py</span>
+
+<span class="sd">Config.ini setting:</span>
+<span class="sd">    config.iniを以下のように記述して、顔座標と顔画像の保存を設定します。</span>
 
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python3 example/logging.py</span>
+<span class="sd">        [FACE-COORDINATE]</span>
+<span class="sd">        headless = True</span>
+<span class="sd">        crop_face_image = True</span>
+<span class="sd">        frequency_crop_image = 5</span>
+<span class="sd">        crop_with_multithreading = False</span>
+<span class="sd">        number_of_crops = 0</span>
+
+<span class="sd">Result:</span>
+<span class="sd">    以下のような出力が得られます。</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        face coordinates: [(156, 233, 304, 85), (114, 593, 276, 431), (130, 704, 349, 485), (319, 334, 449, 204), (281, 645, 405, 521), (23, 810, 313, 520), (349, 394, 573, 170), (244, 302, 408, 138), (344, 692, 514, 522), (21, 256, 215, 62)]</span>
+<span class="sd">        }</span>
+
+
+<span class="sd">.. image:: ../assets/images/one_point_R.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">顔画像の保存はデータセットを作成する時、役立ちます⭐️&#39;&#39;</span>
 
 <span class="sd">Source code:</span>
-<span class="sd">    `example_logging.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/example_logging.py&gt;`_</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    `face_coordinates.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/face_coordinates.py&gt;`_</span>
 
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -116,74 +131,55 @@
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
 
-<span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
-
-<span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="vm">__name__</span>
-<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../example.html#example.example_logging.main">[ドキュメント]</a>
+<a class="viewcode-back" href="../../example.html#example.face_coordinates.main">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup logger example.</span>
-
-<span class="sd">    Output log with defined log-level.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output face coordinates.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        exec_times (int, optional): Number of frames for process. Defaults to 50 times.</span>
 
-<span class="sd">    Output example:</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
 
-<span class="sd">    .. code-block:: bash</span>
-
-<span class="sd">        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] 安倍晋三</span>
-<span class="sd">        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] 99.4%</span>
-<span class="sd">        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] (148, 342, 272, 217)</span>
-<span class="sd">        [2024-08-27 21:18:34,678] [/home/terms/bin/FACE01_DEV/example/example_logging.py] [example_logging.py] [DEBUG] -----------------</span>
-
-<span class="sd">    .. image:: ../assets/images/one_point_L.png</span>
-<span class="sd">        :width: 70%</span>
-<span class="sd">        :alt: one point</span>
-
-<span class="sd">    ログとして出力させたい場合に使うと良いですね⭐️&#39;&#39;</span>
-
-<span class="sd">    ログとして出力すると、どのPythonファイルがどのログレベルで出力したのか一目瞭然です！💗</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Make generator</span>
-    <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+    <span class="n">frame_generator_obj</span> <span class="o">=</span> <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+    <span class="c1"># Make generator</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 
     <span class="c1"># Repeat &#39;exec_times&#39; times</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
 
         <span class="c1"># Call __next__() from the generator object</span>
-        <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+        <span class="n">resized_frame</span> <span class="o">=</span> <span class="n">frame_generator_obj</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+
+        <span class="n">VidCap</span><span class="p">()</span><span class="o">.</span><span class="n">frame_imshow_for_debug</span><span class="p">(</span><span class="n">resized_frame</span><span class="p">)</span>
+
+        <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">,</span><span class="n">resized_frame</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
-
-            <span class="k">for</span> <span class="n">person_data</span> <span class="ow">in</span> <span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">]:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;percentage_and_symbol&#39;</span><span class="p">])</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">])</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;-----------------&quot;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;face coordinates: </span><span class="si">{</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;face_location_list&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># Initialize</span>
-    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;FACE-COORDINATE&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
     <span class="c1"># Set up logger</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize and Setup logger.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># Call main function.</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
            </div>

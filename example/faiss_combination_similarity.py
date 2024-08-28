@@ -1,19 +1,25 @@
-"""指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出するコードの例.
+"""指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出するコードの例.
 
 Summary:
-    この例では、指定されたディレクトリ内のすべての npKnown.npz ファイルを読み込み、faiss を使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。
+    この例では、指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。
 
-Usage:
-    この例では必要になるデータ（ディレクトリ）を予めダウンロードしておく必要があります。
+Results:
+    プロジェクトルートディレクトリにoutput.csvが作成されます。
 
-    git clone https://github.com/yKesamaru/FACE01_IOT_dev_assets.git
-
-    FACE01_IOT_devフォルダが作成されます。これを確認した後にこのエグザんプルコードを実行してください。
-
-
+Example:
     .. code-block:: bash
 
         python3 example/faiss_combination_similarity.py
+
+.. image:: ../assets/images/one_point_R.png
+    :width: 70%
+    :alt: one point
+
+この例では扱う顔画像ファイル数が非常に少ないためfaissには向いていないです💦
+
+学習モデルの大規模データセットに用いると良いでしょう⭐️'' （その場合はnlistの値を変えてくださいね💗）
+
+
 
 Source code:
     `faiss_combination_similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/faiss_combination_similarity.py>`_
@@ -33,40 +39,60 @@ import time
 import faiss
 import numpy as np
 
+from face01lib.load_preset_image import LoadPresetImage
+
 if __name__ == '__main__':
 
     # 処理開始時刻を記録
     start_time = time.time()
 
+    load_preset_image_obj = LoadPresetImage()
+
     # FAISSインデックスの設定
     dimension = 512  # ベクトルの次元数
-    nlist = 100  # クラスタ数
+    nlist = 4  # クラスタ数（Default: 100）
     # 量子化器を作成（内積を使用）
     quantizer = faiss.IndexFlatIP(dimension)
     # IVFフラットインデックスを作成
     index = faiss.IndexIVFFlat(
         quantizer, dimension, nlist, faiss.METRIC_INNER_PRODUCT)
 
+    # DEBUG:
+    # print(os.getcwd())
+
     # データのルートディレクトリ
-    root_dir = "../FACE01_IOT_dev_assets/data"
+    root_dir = os.getcwd()
     # カレントディレクトリを変更
-    os.chdir(root_dir)
+    data_dir = os.path.join(root_dir, 'assets/data/')
+    # DEBUG:
+    # print(os.getcwd())
 
     # サブディレクトリのリストを作成
-    sub_dir_path_list = [
-        os.path.join(root_dir, sub_dir)
-        for sub_dir in os.listdir(root_dir)
-        if os.path.isdir(os.path.join(root_dir, sub_dir))
-    ]
+    sub_dir_path_list = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
 
     # データ格納用のリスト
     all_model_data = []
     all_name_list = []
     all_dir_list = []  # ディレクトリ情報も保存
 
+    # サブディレクトリにnpKnown.npzがあれば削除し、再度作成する
+    for sub_dir in sub_dir_path_list:
+        npz_file = os.path.join(sub_dir, "npKnown.npz")
+        if os.path.exists(npz_file):
+            os.remove(npz_file)
+            print(f"Deleted: {npz_file}")
+        else:
+            print(f"File not found: {npz_file}")
+
+        load_preset_image_obj.load_preset_image(
+            deep_learning_model=1,
+            RootDir=os.path.join(data_dir, sub_dir),  # npKnown.npzを作成するディレクトリ
+            preset_face_imagesDir=os.path.join(data_dir, sub_dir)  # 顔画像が格納されているディレクトリ
+        )
+
     # 各サブディレクトリからデータを読み込む
     for dir in sub_dir_path_list:
-        npz_file = os.path.join(dir, "npKnown.npz")
+        npz_file = os.path.join(data_dir, dir, "npKnown.npz")
         with np.load(npz_file) as data:
             model_data = data['efficientnetv2_arcface']
             name_list = data['name']
@@ -96,8 +122,8 @@ if __name__ == '__main__':
             for j in range(D.shape[1]):
                 # ペアをアルファベット順にソートしてタプルとして保存
                 sorted_pair = tuple(sorted([all_name_list[i], all_name_list[I[i, j]]]))
-                # コサイン類似度が0.7以上で、同じディレクトリでない場合、かつ、まだ処理されていないペアの場合に出力
-                if D[i, j] >= 0.7 and all_dir_list[i] != all_dir_list[I[i, j]] and sorted_pair not in processed_pairs:
+                # コサイン類似度が0.4以上で、同じディレクトリでない場合、かつ、まだ処理されていないペアの場合に出力
+                if D[i, j] >= 0.4 and all_dir_list[i] != all_dir_list[I[i, j]] and sorted_pair not in processed_pairs:
                     f.write(f"{all_name_list[i]},{all_name_list[I[i, j]]},{D[i, j]}\n")
                     processed_pairs.add(sorted_pair)  # ペアを処理済みとしてセットに追加
 
