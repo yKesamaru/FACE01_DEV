@@ -79,11 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.benchmark_CUI.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.benchmark_GUI_window">example.benchmark_GUI_window module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example.benchmark_GUI_window.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-benchmark-gui-window-module">example.benchmark_GUI_window module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_counter">example.combination_counter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.combination_similarity">example.combination_similarity module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.data_augmentation">example.data_augmentation module</a><ul>
@@ -150,7 +146,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.jitter.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#example-lightweight-gui-module">example.lightweight_GUI module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.lightweight_GUI">example.lightweight_GUI module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.lightweight_GUI.App"><code class="docutils literal notranslate"><span class="pre">App</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example.lightweight_GUI.App.terminate"><code class="docutils literal notranslate"><span class="pre">App.terminate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example.lightweight_GUI.App.update_image"><code class="docutils literal notranslate"><span class="pre">App.update_image()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.make_ID_card">example.make_ID_card module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_file">example.make_npKnown_file module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_file.select_directory"><code class="docutils literal notranslate"><span class="pre">select_directory()</span></code></a></li>
@@ -414,55 +417,8 @@ FACE01を使用してコーディングするときは、'initialize'と'logger'
 </dd></dl>
 
 </section>
-<section id="module-example.benchmark_GUI_window">
-<span id="example-benchmark-gui-window-module"></span><h2>example.benchmark_GUI_window module<a class="headerlink" href="#module-example.benchmark_GUI_window" title="Link to this heading"></a></h2>
-<p>顔認証におけるベンチマークコード例.</p>
-<dl>
-<dt>Summary:</dt><dd><p>このエグザンプルコードでは、GUIウィンドウを作成したときの顔認証ベンチマークを取得する方法を学びます。
-このベンチマークテストを行うには開発用パッケージを追加インストールする必要があります。
-具体的にはrequirements_dev.txtをインストールしてください。</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements_dev.txt
-</pre></div>
-</div>
-<p>起動後、自動的にベンチマーク結果がブラウザ表示されます。
-終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</p>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/benchmark_GUI_window.py
-</pre></div>
-</div>
-</div>
-<dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" /></a>
-<a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
-</dd>
-<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/benchmark_GUI_window.py">benchmark_GUI_window.py</a></p>
-</dd>
-</dl>
-<dl class="py data">
-<dt class="sig sig-object py" id="example.benchmark_GUI_window.logger">
-<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">/home/terms/bin/FACE01_DEV/example/benchmark_GUI_window.py</span> <span class="pre">(INFO)&gt;</span></em><a class="headerlink" href="#example.benchmark_GUI_window.logger" title="Link to this definition"></a></dt>
-<dd><p>Initialize and Setup logger.
-When coding a program that uses FACE01, code <cite>initialize</cite> and <cite>logger</cite> first.
-This will read the configuration file <cite>config.ini</cite> and log errors etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="example.benchmark_GUI_window.main">
-<span class="sig-prename descclassname"><span class="pre">example.benchmark_GUI_window.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/benchmark_GUI_window.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.benchmark_GUI_window.main" title="Link to this definition"></a></dt>
-<dd><p>Make GUI window and benchmark on your own browser.</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of frames for process. Defaults to 50 times.</p>
-</dd>
-<dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-benchmark-gui-window-module">
+<h2>example.benchmark_GUI_window module<a class="headerlink" href="#example-benchmark-gui-window-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.combination_counter">
 <span id="example-combination-counter-module"></span><h2>example.combination_counter module<a class="headerlink" href="#module-example.combination_counter" title="Link to this heading"></a></h2>
@@ -1312,8 +1268,52 @@ jitter and saves them.</p>
 </dd></dl>
 
 </section>
-<section id="example-lightweight-gui-module">
-<h2>example.lightweight_GUI module<a class="headerlink" href="#example-lightweight-gui-module" title="Link to this heading"></a></h2>
+<section id="module-example.lightweight_GUI">
+<span id="example-lightweight-gui-module"></span><h2>example.lightweight_GUI module<a class="headerlink" href="#module-example.lightweight_GUI" title="Link to this heading"></a></h2>
+<p>シンプルで軽量なGUIアプリケーションの作成例.</p>
+<dl class="simple">
+<dt>Summary:</dt><dd><p>この例では、シンプルで軽量なGUIアプリケーションの作成方法を学びます。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/lightweight_GUI.py
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Results:</dt><dd><p>スクリーンショットは作成されるウィンドウを示しています。</p>
+<a class="reference internal image-reference" href="_images/lightweight_GUI.png"><img alt="Screenshot of the lightweight GUI output" src="_images/lightweight_GUI.png" style="width: 386.0px; height: 269.0px;" /></a>
+<p>コンソール出力は以下のようになります。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[2023-01-23 22:33:18,752] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz</span>
+<span class="go">安倍晋三</span>
+<span class="go">        similarity              99.7%</span>
+<span class="go">        coordinate              (134, 431, 248, 317)</span>
+<span class="go">        time                    2023,01,23,22,33,23,445574</span>
+<span class="go">        output                  output/安倍晋三_2023,01,23,22,33,23,446640_0.19.png</span>
+<span class="go">-------</span>
+</pre></div>
+</div>
+</dd>
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/lightweight_GUI.py">lightweight_GUI.py</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="example.lightweight_GUI.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">example.lightweight_GUI.</span></span><span class="sig-name descname"><span class="pre">App</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/lightweight_GUI.html#App"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.lightweight_GUI.App" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="example.lightweight_GUI.App.terminate">
+<span class="sig-name descname"><span class="pre">terminate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/lightweight_GUI.html#App.terminate"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.lightweight_GUI.App.terminate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="example.lightweight_GUI.App.update_image">
+<span class="sig-name descname"><span class="pre">update_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/lightweight_GUI.html#App.update_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.lightweight_GUI.App.update_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-example.make_ID_card">
 <span id="example-make-id-card-module"></span><h2>example.make_ID_card module<a class="headerlink" href="#module-example.make_ID_card" title="Link to this heading"></a></h2>
