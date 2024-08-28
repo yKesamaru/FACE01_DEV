@@ -96,16 +96,16 @@ Result:
         }
 
 データ構造:
-    `frame_datas_array`は以下に記述するような様々な情報を持つ辞書に似た変数です。
+    'frame_datas_array'は以下に記述するような様々な情報を持つ辞書に似た変数です。
 
     * Dictionary
 
         * img: NDArray of a frame
         * face_location_list: List of face-coordinates
         * overlay: Shallow copy of img
-        * person_data_list: List of person-coordinate which is included in `face_location_list`
+        * person_data_list: List of person-coordinate which is included in 'face_location_list'
 
-    In addition, the `person_data_list` variable is an array that contains the variables described below.
+    In addition, the 'person_data_list' variable is an array that contains the variables described below.
 
     * List
 

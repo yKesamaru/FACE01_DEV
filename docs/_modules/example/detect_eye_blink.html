@@ -100,7 +100,7 @@
 <span class="sd">    :width: 100%</span>
 <span class="sd">    :alt: eye blink</span>
 
-<span class="sd">.. image:: ../assets/images/one_point_R.png</span>
+<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
 <span class="sd">    :width: 70%</span>
 <span class="sd">    :alt: one point</span>
 
@@ -134,46 +134,10 @@
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">face01lib.spoof</span> <span class="kn">import</span> <span class="n">Spoof</span>
 
-<span class="c1"># 出力ログの抑制 #################################</span>
-<span class="c1"># import os</span>
-<span class="c1"># os.environ[&#39;TF_CPP_MIN_LOG_LEVEL&#39;] = &#39;3&#39;  # 0 = DEBUG, 1 = INFO, 2 = WARNING, 3 = ERROR</span>
-
-<span class="c1"># os.environ[&#39;GLOG_minloglevel&#39;] = &#39;2&#39;  # INFOレベル以下のログを抑制</span>
-<span class="c1"># os.environ[&#39;GLOG_logtostderr&#39;] = &#39;1&#39;  # 標準エラーに出力</span>
-
-<span class="c1"># # 標準出力をファイルにリダイレクト</span>
-<span class="c1"># sys.stdout = open(&#39;output.log&#39;, &#39;w&#39;)</span>
-
-<span class="c1"># # 標準エラーをファイルにリダイレクト</span>
-<span class="c1"># sys.stderr = open(&#39;error.log&#39;, &#39;w&#39;)</span>
-
-<span class="c1"># import os</span>
-<span class="c1"># import onnxruntime as ort</span>
-
-<span class="c1"># # 現在のスクリプトのディレクトリを基準にして、モデルファイルへのパスを設定</span>
-<span class="c1"># model_path = os.path.join(os.path.dirname(__file__), &quot;../face01lib/models/JAPANESE_FACE_V1.onnx&quot;)</span>
-
-<span class="c1"># # ログレベルの設定</span>
-<span class="c1"># sess_options = ort.SessionOptions()</span>
-<span class="c1"># sess_options.log_severity_level = 3  # ログレベルをERRORに設定</span>
-
-<span class="c1"># # ONNXモデルのセッションを作成</span>
-<span class="c1"># session = ort.InferenceSession(model_path, sess_options, providers=[&#39;CPUExecutionProvider&#39;])</span>
-
-<span class="c1"># sys.stderr = open(&#39;error.log&#39;, &#39;w&#39;)</span>
-<span class="c1"># #################################################</span>
-
-
 <span class="c1"># Operate directory: Common to all examples</span>
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
-
-<span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DETECT_EYE_BLINKS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-
-<span class="c1"># Set up logger</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="App">
@@ -236,6 +200,11 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Initialize</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DETECT_EYE_BLINKS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="c1"># Set up logger</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+
     <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">exec_times</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>

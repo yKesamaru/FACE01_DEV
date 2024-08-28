@@ -16,7 +16,7 @@ Note:
     :width: 100%
     :alt: eye blink
 
-.. image:: ../assets/images/one_point_R.png
+.. image:: ../assets/images/one_point_L.png
     :width: 70%
     :alt: one point
 
@@ -50,46 +50,10 @@ from face01lib.Initialize import Initialize
 from face01lib.logger import Logger
 from face01lib.spoof import Spoof
 
-# 出力ログの抑制 #################################
-# import os
-# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0 = DEBUG, 1 = INFO, 2 = WARNING, 3 = ERROR
-
-# os.environ['GLOG_minloglevel'] = '2'  # INFOレベル以下のログを抑制
-# os.environ['GLOG_logtostderr'] = '1'  # 標準エラーに出力
-
-# # 標準出力をファイルにリダイレクト
-# sys.stdout = open('output.log', 'w')
-
-# # 標準エラーをファイルにリダイレクト
-# sys.stderr = open('error.log', 'w')
-
-# import os
-# import onnxruntime as ort
-
-# # 現在のスクリプトのディレクトリを基準にして、モデルファイルへのパスを設定
-# model_path = os.path.join(os.path.dirname(__file__), "../face01lib/models/JAPANESE_FACE_V1.onnx")
-
-# # ログレベルの設定
-# sess_options = ort.SessionOptions()
-# sess_options.log_severity_level = 3  # ログレベルをERRORに設定
-
-# # ONNXモデルのセッションを作成
-# session = ort.InferenceSession(model_path, sess_options, providers=['CPUExecutionProvider'])
-
-# sys.stderr = open('error.log', 'w')
-# #################################################
-
-
 # Operate directory: Common to all examples
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
 sys.path.append(parent_dir)
-
-# Initialize
-CONFIG: Dict = Initialize('DETECT_EYE_BLINKS').initialize()
-
-# Set up logger
-logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
 
 
 class App:
@@ -143,6 +107,11 @@ class App:
 
 
 if __name__ == '__main__':
+    # Initialize
+    CONFIG: Dict = Initialize('DETECT_EYE_BLINKS').initialize()
+    # Set up logger
+    logger = Logger(CONFIG['log_level']).logger(__file__, CONFIG['RootDir'])
+
     root = tk.Tk()
     app = App(root, exec_times=200)
     root.mainloop()

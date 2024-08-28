@@ -101,6 +101,21 @@
 <span class="sd">        :scale: 50%</span>
 <span class="sd">        :alt: face_alignment</span>
 
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    # Initialize</span>
+<span class="sd">    CONFIG: Dict = Initialize(&#39;DEFAULT&#39;, &#39;info&#39;).initialize()</span>
+<span class="sd">    # Set up logger</span>
+<span class="sd">    logger = Logger(CONFIG[&#39;log_level&#39;]).logger(__file__, CONFIG[&#39;RootDir&#39;])</span>
+
+<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
+<span class="sd">    :width: 70%</span>
+<span class="sd">    :alt: one point</span>
+
+<span class="sd">初期化とloggerのセットアップ.</span>
+<span class="sd">FACE01を使用してコーディングするときは、&#39;initialize&#39;と&#39;logger&#39;を最初にコードします。</span>
+<span class="sd">これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します⭐️&#39;&#39;</span>
+
 <span class="sd">Image:</span>
 <span class="sd">    `Pakutaso 笑顔でスマホ操作を教えてくれる女性の無料写真素材 &lt;https://www.pakutaso.com/20230104005post-42856.html&gt;`_</span>
 
@@ -121,23 +136,6 @@
 <span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
 <span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="kn">from</span> <span class="nn">face01lib.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
-
-<span class="c1"># Initialize</span>
-<span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<span class="c1"># Set up logger</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
-<span class="sd">&quot;&quot;&quot;初期化とloggerのセットアップ.</span>
-
-<span class="sd">.. image:: ../assets/images/one_point_L.png</span>
-<span class="sd">    :width: 70%</span>
-<span class="sd">    :alt: one point</span>
-
-<span class="sd">FACE01を使用してコーディングするときは、`initialize`と`logger`を最初にコードします。</span>
-<span class="sd">When coding a program that uses FACE01, code `initialize` and `logger` first.</span>
-<span class="sd">これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します。</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="main">
@@ -165,6 +163,13 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Initialize</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;DEFAULT&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="c1"># Set up logger</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
+
+    <span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span>
+
     <span class="n">args</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
     <span class="k">if</span> <span class="mi">2</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
         <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
