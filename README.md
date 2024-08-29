@@ -42,16 +42,38 @@ Audrey Hepburn
 ## FACE01とは
 ✨ `FACE01`は**日本人の顔に最適化された顔学習モデルJAPANESE FACEと、Pythonで書かれたオープンソースのリファレンス実装**です。
 
+### なにが便利？
+#### 優れポイント①
+`FACE01`を使うと入力映像の1フレームごとに、「**いつ・誰が・どの座標で**」映っているかの情報を**1行で取得できます**！
+
+```python
+Core().common_process(CONFIG).__next__()
+```
+取得されるデータは以下のとおりです。
+1. 映像のNDArrayデータ
+2. 顔の座標（複数人可）
+3. 名前（複数人可）
+4. 日付時刻
+5. 確度（%）
+
+また顔画像を各フレームごとにディスクへ保存します。
+
+#### 優れポイント②
+##### 優れた顔学習モデル
+日本人専用の顔学習モデル「JAPANESE FACE V1」が使えます！（後述）
+
+#### 優れポイント③
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-23_07-55.png)
 
 - 🎉 LICENSEが「もっと使いやすく」なりました！実稼動以外はアパッチライセンスV2です！
 - 🎉 `v3.0.0`よりオープンソースとして公開いたしました。（[LICENSE](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/why_apache_license.md)に従ってください）
+- 🎉 [エグザンプルコード集とドキュメント](https://ykesamaru.github.io/FACE01_DEV/example.html)が更に充実しました！（後述）
 - 🎉 [JAPANESE FACE V1](https://github.com/yKesamaru/FACE01_trained_models) が利用可能になりました！
   - `JAPANESE FACE V1` は日本人の顔認証に特化したモデルです。
 - **10,000人以上**の顔データからリアルタイムで顔認証が可能です
 - 超高速の顔座標出力機能
 - 日付と時刻情報付きの顔画像保存機能
-- 出力フレーム画像を修正する設定が可能
+- 出力フレーム画像を修正する設定が可能（モザイク・ロゴ挿入など）
 - 設定ファイルによる機能の集中管理
 - RTSP、HTTP、USBなどの入力プロトコルを選択可能
 - `顔認識` や `画像処理` のための多くの機能が利用可能です（詳細は[Useful FACE01 library](https://ykesamaru.github.io/FACE01_DEV/)をご覧ください）
@@ -60,7 +82,6 @@ Audrey Hepburn
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-24_16-42.png)
 
 ---
-
 
 ## なぜFACE01を開発したの？
 
@@ -107,25 +128,6 @@ AIコアが外国産である場合、肝心なところで「**偽陽性**」�
 
 ---
 
-## ℹ️: Note
-### リポジトリについて
-今後の開発は`FACE01_DEV`リポジトリ（このリポジトリ）で行われます。
-
-`FACE01_SAMPLE`リポジトリは旧バージョンのため閉鎖されました。
-
-`FACE01_DEV`リポジトリをご使用ください。
-
-### その他
-- このリポジトリが提供するファイルは、無料でお使いいただけます。
-教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
-  詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/why_apache_license.md)をご覧ください。
-- 商用利用では実稼動のみライセンスが必要です。（[LICENSEファイル](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/LICENSE)をご参照ください。）
-- YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
-  - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/YouTube_license.md)をご参照ください。
-- このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
-- JAPANESE FACE（日本人に最適化された顔学習モデル）だけを使用したい場合は、[FACE01_trained_models](https://github.com/yKesamaru/FACE01_trained_models)リポジトリをご使用ください。
-
----
 
 ## インストール
 
@@ -202,6 +204,26 @@ bash -c ./INSTALL_FACE01.sh
   - `YouTube`で使用する際のライセンスを追加しました。
 - 🔖 v2.1.05
   - Add `EfficientNetV2 Arcface Model`
+
+---
+
+## ℹ️: Note
+### リポジトリについて
+今後の開発は`FACE01_DEV`リポジトリ（このリポジトリ）で行われます。
+
+`FACE01_SAMPLE`リポジトリは旧バージョンのため閉鎖されました。
+
+`FACE01_DEV`リポジトリをご使用ください。
+
+### その他
+- このリポジトリが提供するファイルは、無料でお使いいただけます。
+教育機関でご利用の場合、ソースコードを研究・教育にご利用できます。
+  詳しくは[日本のAI教育を支援する、顔認識ライブラリ`FACE01`の提供について](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/why_apache_license.md)をご覧ください。
+- 商用利用では実稼動のみライセンスが必要です。（[LICENSEファイル](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/LICENSE)をご参照ください。）
+- YouTubeにおけるJAPANESE FACE V1の使用ライセンスを追加しました。
+  - VTuverにおける顔追従用のONNXモデルとして無料で使用できます。詳しくは[YouTube用ライセンス](https://github.com/yKesamaru/FACE01_DEV/blob/master/LICENSE/YouTube_license.md)をご参照ください。
+- このリポジトリには`UBUNTU 22.04`用の`FACE01`モジュール、および`顔学習モデル`が含まれています。`Windows`ユーザーの方は、提供している`Docker`上でご利用ください。
+- JAPANESE FACE（日本人に最適化された顔学習モデル）だけを使用したい場合は、[FACE01_trained_models](https://github.com/yKesamaru/FACE01_trained_models)リポジトリをご使用ください。
 
 ---
 
