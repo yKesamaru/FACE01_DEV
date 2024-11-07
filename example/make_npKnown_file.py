@@ -10,7 +10,7 @@ Example:
         python3 example/make_npKnown_file.py
 
 Source code:
-    `make_npKnown_file.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py>`_
+    `make_npKnown_file.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py>`__
 """
 
 import os

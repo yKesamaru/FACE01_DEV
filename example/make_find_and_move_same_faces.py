@@ -17,7 +17,7 @@ Example:
         python3 example/make_find_and_move_same_faces.py /path/to/root_dir --threshold 0.95
 
 Source code:
-    `make_find_and_move_same_faces.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_find_and_move_same_faces.py>`_
+    `make_find_and_move_same_faces.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_find_and_move_same_faces.py>`__
 """
 
 import argparse
