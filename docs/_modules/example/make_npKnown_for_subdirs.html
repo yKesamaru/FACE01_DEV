@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.make_npKnown_file &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>example.make_npKnown_for_subdirs &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
-      <li class="breadcrumb-item active">example.make_npKnown_file</li>
+      <li class="breadcrumb-item active">example.make_npKnown_for_subdirs</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,20 +81,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>example.make_npKnown_file のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;プリセット画像をロードし、npKnown.npzファイルの存在を確認するコードの例.</span>
+  <h1>example.make_npKnown_for_subdirs のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;npKnown.npzファイルを指定したディレクトリとそのサブディレクトリごとに作成するスクリプト.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    このコードは、ディレクトリ選択ダイアログを表示し、選択したディレクトリに`npKnown.npz`ファイルが存在するか確認します。</span>
-<span class="sd">    ファイルが存在しない場合は、プリセット画像を使用して`npKnown.npz`ファイルを作成します。</span>
+<span class="sd">    このスクリプトは、ユーザーが指定したディレクトリとそのサブディレクトリ内にある顔画像ファイルに対して</span>
+<span class="sd">    512次元特徴量データを用いたnpKnown.npzファイルを生成します。</span>
+<span class="sd">    選択されたディレクトリ以下の各サブディレクトリについて、npKnown.npzファイルが既に存在する場合はスキップし、</span>
+<span class="sd">    存在しない場合にのみ新たに作成します。</span>
+
+<span class="sd">Requirements:</span>
+<span class="sd">    - ttkbootstrap</span>
+<span class="sd">    - face01lib.load_preset_image</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    ターミナルで以下のコマンドを実行してスクリプトを起動します。</span>
+
+<span class="sd">    ```bash</span>
+<span class="sd">    python3 example/make_npKnown_for_subdirs.py</span>
+<span class="sd">    ```</span>
 
 <span class="sd">Example:</span>
-<span class="sd">    .. code-block:: bash</span>
-
-<span class="sd">        python3 example/make_npKnown_file.py</span>
+<span class="sd">    実行後、ディレクトリ選択ダイアログが表示され、処理対象のディレクトリを選択できます。</span>
+<span class="sd">    選択したディレクトリ内のサブディレクトリごとにnpKnown.npzファイルが作成されます。</span>
 
 <span class="sd">Source code:</span>
-<span class="sd">    `make_npKnown_file.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py&gt;`__</span>
+<span class="sd">    `make_npKnown_for_subdirs.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_for_subdirs.py&gt;`__</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -111,15 +124,53 @@
 
 
 <div class="viewcode-block" id="select_directory">
-<a class="viewcode-back" href="../../example.html#example.make_npKnown_file.select_directory">[ドキュメント]</a>
+<a class="viewcode-back" href="../../example.html#example.make_npKnown_for_subdirs.select_directory">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">select_directory</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;ディレクトリ選択ダイアログを表示し、選択したディレクトリを返す&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ディレクトリ選択ダイアログを表示し、ユーザーが選択したディレクトリのパスを返します。</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: 選択されたディレクトリのパス。選択されなかった場合は空文字列を返します。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="n">themename</span><span class="o">=</span><span class="s2">&quot;minty&quot;</span><span class="p">)</span>
     <span class="n">root</span><span class="o">.</span><span class="n">withdraw</span><span class="p">()</span>  <span class="c1"># ウィンドウを非表示にする</span>
     <span class="n">selected_directory</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askdirectory</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ディレクトリを選択。`assets/data/a`を選択してみましょう。&quot;</span><span class="p">,</span> <span class="n">initialdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
     <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># ウィンドウを破棄する</span>
     <span class="k">return</span> <span class="n">selected_directory</span></div>
+
+
+
+<div class="viewcode-block" id="create_npz_for_all_subdirs">
+<a class="viewcode-back" href="../../example.html#example.make_npKnown_for_subdirs.create_npz_for_all_subdirs">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    指定したディレクトリ以下のすべてのサブディレクトリに対して、</span>
+<span class="sd">    npKnown.npzファイルを作成します。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        root_dir (str): ルートディレクトリのパス。</span>
+<span class="sd">        load_preset_image_obj (LoadPresetImage): 画像読み込み用のオブジェクト。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+        <span class="n">npz_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">)</span>
+        <span class="c1"># npKnown.npz ファイルが存在する場合は処理をスキップ</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> は既に存在します。処理をスキップします。&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ディレクトリ内に画像ファイルが存在するか確認</span>
+        <span class="n">image_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">image_files</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> を作成します...&quot;</span><span class="p">)</span>
+            <span class="n">load_preset_image_obj</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
+                <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">RootDir</span><span class="o">=</span><span class="n">dirpath</span><span class="p">,</span>               <span class="c1"># npKnown.npzを作成するディレクトリ</span>
+                <span class="n">preset_face_imagesDir</span><span class="o">=</span><span class="n">dirpath</span>  <span class="c1"># 顔画像が格納されているディレクトリ</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> を作成しました。&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dirpath</span><span class="si">}</span><span class="s2"> に画像ファイルが見つかりませんでした。処理をスキップします。&quot;</span><span class="p">)</span></div>
 
 
 
@@ -132,23 +183,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ディレクトリが選択されませんでした。プログラムを終了します。&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
-    <span class="c1"># 選択したディレクトリ内の全てのサブディレクトリを取得</span>
-    <span class="k">for</span> <span class="n">subdir_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
-        <span class="n">subdir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">subdir_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">subdir_path</span><span class="p">):</span>
-            <span class="c1"># npKnown.npz ファイルが存在するか確認</span>
-            <span class="n">npz_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subdir_path</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">):</span>
-                <span class="c1"># npKnown.npz ファイルが存在しない場合のみ処理を実行</span>
-                <span class="n">load_preset_image_obj</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
-                    <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                    <span class="n">RootDir</span><span class="o">=</span><span class="n">subdir_path</span><span class="p">,</span>  <span class="c1"># npKnown.npzを作成するディレクトリ</span>
-                    <span class="n">preset_face_imagesDir</span><span class="o">=</span><span class="n">subdir_path</span>  <span class="c1"># 顔画像が格納されているディレクトリ</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;npKnown.npz ファイルは既に存在するため、ディレクトリ </span><span class="si">{</span><span class="n">subdir_name</span><span class="si">}</span><span class="s2"> をスキップします。&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subdir_name</span><span class="si">}</span><span class="s2"> はディレクトリではないため、スキップします。&quot;</span><span class="p">)</span>
+    <span class="c1"># サブディレクトリごとにnpKnown.npzを作成</span>
+    <span class="n">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">)</span>
 </pre></div>
 
            </div>

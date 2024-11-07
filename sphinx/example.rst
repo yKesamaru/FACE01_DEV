@@ -196,10 +196,26 @@ example.make\_ID\_card module
    :undoc-members:
    :show-inheritance:
 
+example.make\_find\_and\_move\_same\_faces module
+-------------------------------------------------
+
+.. automodule:: example.make_find_and_move_same_faces
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 example.make\_npKnown\_file module
 ----------------------------------
 
 .. automodule:: example.make_npKnown_file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+example.make\_npKnown\_for\_subdirs module
+------------------------------------------
+
+.. automodule:: example.make_npKnown_for_subdirs
    :members:
    :undoc-members:
    :show-inheritance:
