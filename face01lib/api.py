@@ -164,9 +164,9 @@ class Dlib_api:
         size: int = 224,
         _PADDING: float = 0.1
     ) -> npt.NDArray[np.float32]:
-        """EfficientNetV2とArcFaceモデルを使用して顔の特徴量を計算します。
+        """JAPANESE FACE V1モデルを使用して顔の特徴量を計算します。
 
-        この関数は、与えられた顔の画像データから、EfficientNetV2とArcFaceモデルを使用して顔の特徴量（embedding）を計算します。
+        この関数は、与えられた顔の画像データから、JAPANESE FACE V1モデルを使用して顔の特徴量（embedding）を計算します。
 
         Args:
             resized_frame (npt.NDArray[np.uint8]): リサイズされたフレームの画像データ。
