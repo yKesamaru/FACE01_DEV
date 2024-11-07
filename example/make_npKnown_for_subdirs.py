@@ -21,6 +21,9 @@ Example:
     実行後、ディレクトリ選択ダイアログが表示され、処理対象のディレクトリを選択できます。
     選択したディレクトリ内のサブディレクトリごとにnpKnown.npzファイルが作成されます。
 
+Source code:
+    `make_npKnown_for_subdirs.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_for_subdirs.py>`__
+
 """
 
 import os
