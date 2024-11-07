@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.load_preset_image &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>face01lib.load_preset_image &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
@@ -15,13 +16,13 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.02 ドキュメント 内を検索"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -291,10 +292,27 @@
                         <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">))</span>
                         <span class="k">continue</span>
-            <span class="c1"># 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する</span>
+            <span class="c1"># # 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する</span>
+            <span class="c1"># elif len(face_location_list) &gt; 1:</span>
+            <span class="c1">#     self.logger.info(f&quot;Multiple faces detected in registered face image {face_image}.  Move it to the &#39;multipleFaces&#39; folder&quot;)</span>
+            <span class="c1">#     shutil.move(face_image, os.path.join(self.RootDir, &#39;multipleFaces&#39;))  # 既にファイルが存在する場合は上書きされる</span>
+            <span class="c1">#     continue</span>
+            <span class="c1"># 複数の顔が検出された場合の処理</span>
+            <span class="c1"># 上記のコード（エスケープされている箇所）だと異なるドライブに対しての操作ができない。（無効なクロスデバイスリンク）この場合はshutil.moveではなく、shutil.copyとos.removeを組み合わせて処理を行う。</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple faces detected in registered face image </span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">.  Move it to the &#39;multipleFaces&#39; folder&quot;</span><span class="p">)</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">))</span>  <span class="c1"># 既にファイルが存在する場合は上書きされる</span>
+
+                <span class="c1"># 移動先のパスを設定</span>
+                <span class="n">destination_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RootDir</span><span class="p">,</span> <span class="s1">&#39;multipleFaces&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">face_image</span><span class="p">))</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># ファイルをコピーし、その後元のファイルを削除することで移動と同じ処理を実現</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">)</span>  <span class="c1"># コピーを実行</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">face_image</span><span class="p">)</span>  <span class="c1"># 元ファイルを削除して移動を完了</span>
+                <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">face_image</span><span class="si">}</span><span class="s2">が存在しません。ファイル名を確認してください。&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ファイルの移動中にエラーが発生しました: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">continue</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_location_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1"># ログ出力</span>
