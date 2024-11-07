@@ -206,10 +206,27 @@ class LoadPresetImage:
                         shutil.move(face_image, os.path.join(
                             self.RootDir, 'multipleFaces'))
                         continue
-            # 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する
+            # # 複数の顔が検出された場合はmultipleFacesフォルダへファイルを移動する
+            # elif len(face_location_list) > 1:
+            #     self.logger.info(f"Multiple faces detected in registered face image {face_image}.  Move it to the 'multipleFaces' folder")
+            #     shutil.move(face_image, os.path.join(self.RootDir, 'multipleFaces'))  # 既にファイルが存在する場合は上書きされる
+            #     continue
+            # 複数の顔が検出された場合の処理
+            # 上記のコード（エスケープされている箇所）だと異なるドライブに対しての操作ができない。（無効なクロスデバイスリンク）この場合はshutil.moveではなく、shutil.copyとos.removeを組み合わせて処理を行う。
             elif len(face_location_list) > 1:
                 self.logger.info(f"Multiple faces detected in registered face image {face_image}.  Move it to the 'multipleFaces' folder")
-                shutil.move(face_image, os.path.join(self.RootDir, 'multipleFaces'))  # 既にファイルが存在する場合は上書きされる
+
+                # 移動先のパスを設定
+                destination_path = os.path.join(self.RootDir, 'multipleFaces', os.path.basename(face_image))
+
+                try:
+                    # ファイルをコピーし、その後元のファイルを削除することで移動と同じ処理を実現
+                    shutil.copy(face_image, destination_path)  # コピーを実行
+                    os.remove(face_image)  # 元ファイルを削除して移動を完了
+                except FileNotFoundError:
+                    self.logger.error(f"{face_image}が存在しません。ファイル名を確認してください。")
+                except OSError as e:
+                    self.logger.error(f"ファイルの移動中にエラーが発生しました: {e}")
                 continue
             elif len(face_location_list) == 1:
                 # ログ出力

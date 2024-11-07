@@ -45,14 +45,20 @@ if __name__ == '__main__':
         print("ディレクトリが選択されませんでした。プログラムを終了します。")
         sys.exit()
 
-    # npKnown.npz ファイルが存在するか確認
-    npz_file_path = os.path.join(root_dir, 'npKnown.npz')
-    if not os.path.exists(npz_file_path):
-        # npKnown.npz ファイルが存在しない場合のみ処理を実行
-        load_preset_image_obj.load_preset_image(
-            deep_learning_model=1,
-            RootDir=root_dir,  # npKnown.npzを作成するディレクトリ
-            preset_face_imagesDir=root_dir  # 顔画像が格納されているディレクトリ
-        )
-    else:
-        print("npKnown.npz ファイルは既に存在するため、処理を終了します。")
+    # 選択したディレクトリ内の全てのサブディレクトリを取得
+    for subdir_name in os.listdir(root_dir):
+        subdir_path = os.path.join(root_dir, subdir_name)
+        if os.path.isdir(subdir_path):
+            # npKnown.npz ファイルが存在するか確認
+            npz_file_path = os.path.join(subdir_path, 'npKnown.npz')
+            if not os.path.exists(npz_file_path):
+                # npKnown.npz ファイルが存在しない場合のみ処理を実行
+                load_preset_image_obj.load_preset_image(
+                    deep_learning_model=1,
+                    RootDir=subdir_path,  # npKnown.npzを作成するディレクトリ
+                    preset_face_imagesDir=subdir_path  # 顔画像が格納されているディレクトリ
+                )
+            else:
+                print(f"npKnown.npz ファイルは既に存在するため、ディレクトリ {subdir_name} をスキップします。")
+        else:
+            print(f"{subdir_name} はディレクトリではないため、スキップします。")
