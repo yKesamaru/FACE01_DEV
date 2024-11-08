@@ -12,6 +12,22 @@ example.CTKtest module
    :undoc-members:
    :show-inheritance:
 
+example.Faiss\_Outlier\_Detection module
+----------------------------------------
+
+.. automodule:: example.Faiss_Outlier_Detection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+example.LOF\_Outlier\_Detection module
+--------------------------------------
+
+.. automodule:: example.LOF_Outlier_Detection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 example.aligned\_crop\_face module
 ----------------------------------
 
