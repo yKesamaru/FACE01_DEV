@@ -66,6 +66,11 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.Faiss_Outlier_Detection">example.Faiss_Outlier_Detection module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.Faiss_Outlier_Detection.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-lof-outlier-detection-module">example.LOF_Outlier_Detection module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.aligned_crop_face">example.aligned_crop_face module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.aligned_crop_face.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -282,6 +287,38 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 </dd></dl>
 
 </section>
+<section id="module-example.Faiss_Outlier_Detection">
+<span id="example-faiss-outlier-detection-module"></span><h2>example.Faiss_Outlier_Detection module<a class="headerlink" href="#module-example.Faiss_Outlier_Detection" title="Link to this heading"></a></h2>
+<p>FAISSによる外れ値検出スクリプト.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このスクリプトは、指定したディレクトリ内の512次元ベクトルデータ（npKnown.npz形式）を読み込み、FAISSライブラリを使用して外れ値検出を行います。
+コサイン類似度を基準に、類似度が低いデータを外れ値として分類し、指定のディレクトリに移動します。
+顔認証データセットの一貫性を検証するためのツールとして利用できます。</p>
+<p>このスクリプトは、FAISSによるベクトルのインデックス化と検索、データの正規化、外れ値の検出とファイルの移動を行います。</p>
+<p>このコードは`Zenn`の記事のコード例です。</p>
+<p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/bc10aa51772130">コサイン類似度データの中の外れ値をもつファイルを見つける方法</a></p>
+<p>詳しくは上記記事をご参照ください。</p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/Faiss_Outlier_Detection.py<span class="w"> </span>/path/to/dataset
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/Faiss_Outlier_Detection.py">Faiss_Outlier_Detection.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.Faiss_Outlier_Detection.main">
+<span class="sig-prename descclassname"><span class="pre">example.Faiss_Outlier_Detection.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/Faiss_Outlier_Detection.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.Faiss_Outlier_Detection.main" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="example-lof-outlier-detection-module">
+<h2>example.LOF_Outlier_Detection module<a class="headerlink" href="#example-lof-outlier-detection-module" title="Link to this heading"></a></h2>
+</section>
 <section id="module-example.aligned_crop_face">
 <span id="example-aligned-crop-face-module"></span><h2>example.aligned_crop_face module<a class="headerlink" href="#module-example.aligned_crop_face" title="Link to this heading"></a></h2>
 <p>顔画像を検出、回転、クロップするコード例.</p>
@@ -384,7 +421,7 @@ FACE01を使用してコーディングするときは、'initialize'と'logger'
 </div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a href="#id6"><span class="problematic" id="id7">`average_face.py &lt;&lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py&gt;`_</span></a></p>
+<dt>Source code:</dt><dd><p><a href="#id7"><span class="problematic" id="id8">`average_face.py &lt;&lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py&gt;`_</span></a></p>
 </dd>
 </dl>
 <dl class="py function">
@@ -1409,7 +1446,7 @@ Spoof().make_qr_code()
 <dt>Summary:</dt><dd><p>このスクリプトは、指定したディレクトリとそのサブディレクトリ内にある`npKnown.npz`ファイルを読み込み、
 512次元の顔認識ベクトルのコサイン類似度に基づいて同一の顔画像を検出し、
 同一と判断された画像ファイルを各サブディレクトリごとの`same_face`フォルダに移動します。
-<a href="#id4"><span class="problematic" id="id5">`</span></a>same_face`フォルダは各サブディレクトリに存在しない場合は自動で作成されます。</p>
+<a href="#id5"><span class="problematic" id="id6">`</span></a>same_face`フォルダは各サブディレクトリに存在しない場合は自動で作成されます。</p>
 <p>各`npKnown.npz`ファイルには、人物名とその512次元の特徴量データが含まれており、このデータを基に
 類似性を評価します。類似度が閾値以上のものは同一とみなし、重複する顔画像を`same_face`フォルダに集約します。</p>
 <p>このコードを実行するには、numpyやshutilといったライブラリが必要です。</p>
