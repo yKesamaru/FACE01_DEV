@@ -13,6 +13,18 @@ Summary:
 
     詳しくは上記記事をご参照ください。
 
+.. image:: ../assets/images/faces.png
+    :width: 100%
+    :alt: faces
+
+すべての顔画像ファイル
+
+.. image:: ../assets/images/lof.png
+    :width: 100%
+    :alt: lof
+
+外れ値の顔画像ファイル
+
 Example:
     .. code-block:: bash
 
