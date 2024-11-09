@@ -13,7 +13,7 @@ Example:
         python3 example/average_face.py
 
 Source code:
-    `average_face.py <<https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py>`_
+    `average_face.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/average_face.py>`_
 """
 import glob
 

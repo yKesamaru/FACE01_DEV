@@ -9,6 +9,12 @@ Example:
 
         python3 example/make_npKnown_file.py
 
+.. image:: ../assets/images/npKnown.png
+    :width: 50%
+    :alt: npKnown.npz
+
+コードを実行するとnpKnown.npzファイルが作成されます⭐️''
+
 Source code:
     `make_npKnown_file.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py>`__
 """

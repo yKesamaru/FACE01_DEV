@@ -3,3 +3,18 @@
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
+/* h2 タグのカスタムスタイル（上下にラインを引く） */
+h2 {
+    font-size: 2em;           /* フォントサイズを調整 */
+    color: #333333;             /* フォント色を指定 */
+    font-weight: bold;          /* 太字に設定 */
+    text-align: left;           /* 左揃え（必要に応じて変更） */
+
+    /* 上下にラインを引く */
+    border-top: 2px solid #1a3e5c;    /* 上のラインの色と太さ */
+    border-bottom: 1px solid #cccccc; /* 下のラインの色と太さ */
+    padding-top: 0.5em;         /* 上のラインからの余白 */
+    padding-bottom: 0.5em;      /* 下のラインからの余白 */
+    margin-top: 4em;            /* 上マージン */
+    margin-bottom: 1em;         /* 下マージン */
+}

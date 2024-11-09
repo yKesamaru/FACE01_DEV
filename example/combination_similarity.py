@@ -8,7 +8,7 @@ Summary:
 
     このコードは`Zenn`の記事のコード例です。
 
-    `【faiss】なにこれすごい。顔データセットの間違い探し 成功編③ <https://zenn.dev/ykesamaru/articles/4e40e0285b0b66>`_
+    `【faiss】なにこれすごい。顔データセットの間違い探し 成功編③ <https://zenn.dev/ykesamaru/articles/4e40e0285b0b66>`__
 
     詳しくは上記記事をご参照ください。
     このコード例では組み合わせパターンが爆発的に大きくなると処理時間もそれに応じて爆発的に大きくなるコード例を示しています。
@@ -31,7 +31,7 @@ Example:
 しかしデータセットが大きくなると、リンク先のように'faiss'を使う必要が出てきます。
 
 Source code:
-    `combination_similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/combination_similarity.py>`_
+    `combination_similarity.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/combination_similarity.py>`__
 """
 
 import os
