@@ -172,6 +172,14 @@ example.faiss\_combination\_similarity module
    :undoc-members:
    :show-inheritance:
 
+example.faiss\_gpu\_test module
+-------------------------------
+
+.. automodule:: example.faiss_gpu_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 example.get\_encoded\_data module
 ---------------------------------
 

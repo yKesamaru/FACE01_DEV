@@ -35,14 +35,23 @@ source_suffix = {
     '.md': 'markdown'
 }
 
-source_parsers = {
-    '.md': 'recommonmark.parser.CommonMarkParser',
-}
+# 削除推奨
+# source_parsers = {
+#     '.md': 'recommonmark.parser.CommonMarkParser',
+# }
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
     'NumPy': ('https://numpy.org/doc/stable/reference/index.html#reference', None)
 }
+
+# autodoc_mock_imports = ["faiss-gpu", "scikit-learn"]
+# autodoc用モック
+autodoc_mock_imports = ["faiss", "sklearn"]
+
+# モジュール名をタイトルに含めないようにする設定
+add_module_names = False
+
 
 language = 'ja'
 

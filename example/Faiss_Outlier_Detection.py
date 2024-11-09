@@ -9,7 +9,7 @@ Summary:
 
     このコードは`Zenn`の記事のコード例です。
 
-    `コサイン類似度データの中の外れ値をもつファイルを見つける方法 <https://zenn.dev/ykesamaru/articles/bc10aa51772130>`_
+    `コサイン類似度データの中の外れ値をもつファイルを見つける方法 <https://zenn.dev/ykesamaru/articles/bc10aa51772130>`__
 
     詳しくは上記記事をご参照ください。
 
@@ -19,7 +19,7 @@ Example:
         python3 example/Faiss_Outlier_Detection.py /path/to/dataset
 
 Source code:
-    `Faiss_Outlier_Detection.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/Faiss_Outlier_Detection.py>`_
+    `Faiss_Outlier_Detection.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/Faiss_Outlier_Detection.py>`__
 """
 
 

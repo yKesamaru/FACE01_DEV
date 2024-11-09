@@ -21,9 +21,20 @@ Example:
     実行後、ディレクトリ選択ダイアログが表示され、処理対象のディレクトリを選択できます。
     選択したディレクトリ内のサブディレクトリごとにnpKnown.npzファイルが作成されます。
 
+.. image:: ../assets/images/one_point_L.png
+    :width: 70%
+    :alt: one point
+
+ディレクトリを再帰的に捜査してnpKnown.npzを作成します⭐️''
+
+.. image:: ../assets/images/npKnown.png
+    :width: 50%
+    :alt: npKnown.npz
+
+
+
 Source code:
     `make_npKnown_for_subdirs.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_for_subdirs.py>`__
-
 """
 
 import os

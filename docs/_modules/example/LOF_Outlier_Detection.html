@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>example.Faiss_Outlier_Detection &mdash; FACE01 3.0.03 ドキュメント</title>
+  <title>example.LOF_Outlier_Detection &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
@@ -72,7 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
-      <li class="breadcrumb-item active">example.Faiss_Outlier_Detection</li>
+      <li class="breadcrumb-item active">example.LOF_Outlier_Detection</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,29 +81,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>example.Faiss_Outlier_Detection のソースコード</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;FAISSによる外れ値検出スクリプト.</span>
+  <h1>example.LOF_Outlier_Detection のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;LOFによる外れ値検出スクリプト.</span>
 
 <span class="sd">Summary:</span>
-<span class="sd">    このスクリプトは、指定したディレクトリ内の512次元ベクトルデータ（npKnown.npz形式）を読み込み、FAISSライブラリを使用して外れ値検出を行います。</span>
-<span class="sd">    コサイン類似度を基準に、類似度が低いデータを外れ値として分類し、指定のディレクトリに移動します。</span>
-<span class="sd">    顔認証データセットの一貫性を検証するためのツールとして利用できます。</span>
+<span class="sd">    このスクリプトは、指定したディレクトリ内の512次元ベクトルデータ（npKnown.npz形式）を読み込み、Local Outlier Factor（LOF）アルゴリズムを使用して外れ値検出を行います。</span>
+<span class="sd">    コサイン類似度を基準にして各データの異常スコアを計算し、スコアが閾値を超えるデータを外れ値として判定し、指定のディレクトリに移動します。</span>
+<span class="sd">    顔認証データセットの一貫性を保つためのツールとして利用できます。</span>
 
-<span class="sd">    このスクリプトは、FAISSによるベクトルのインデックス化と検索、データの正規化、外れ値の検出とファイルの移動を行います。</span>
+<span class="sd">    このスクリプトは、データの正規化、LOFによるスコア計算、外れ値の判定とファイルの移動を行います。</span>
 
 <span class="sd">    このコードは`Zenn`の記事のコード例です。</span>
 
-<span class="sd">    `コサイン類似度データの中の外れ値をもつファイルを見つける方法 &lt;https://zenn.dev/ykesamaru/articles/bc10aa51772130&gt;`__</span>
+<span class="sd">    `コサイン類似度データの中の外れ値をもつファイルを見つける方法 &lt;https://zenn.dev/ykesamaru/articles/bc10aa51772130&gt;`_</span>
 
 <span class="sd">    詳しくは上記記事をご参照ください。</span>
 
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python3 example/Faiss_Outlier_Detection.py /path/to/dataset</span>
+<span class="sd">        python3 example/LOF_Outlier_Detection.py /path/to/dataset</span>
 
 <span class="sd">Source code:</span>
-<span class="sd">    `Faiss_Outlier_Detection.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/Faiss_Outlier_Detection.py&gt;`__</span>
+<span class="sd">    `LOF_Outlier_Detection.py &lt;https://github.com/yKesamaru/FACE01_DEV/blob/master/example/LOF_Outlier_Detection.py&gt;`_</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -112,18 +112,18 @@
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">import</span> <span class="nn">faiss</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../example.html#example.Faiss_Outlier_Detection.main">[ドキュメント]</a>
+<a class="viewcode-back" href="../../example.html#example.LOF_Outlier_Detection.main">[ドキュメント]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
     <span class="c1"># 処理開始時刻を記録</span>
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-    <span class="c1"># FAISSインデックスの設定</span>
-    <span class="n">dimension</span> <span class="o">=</span> <span class="mi">512</span>  <span class="c1"># ベクトルの次元数</span>
+    <span class="c1"># ベクトルの次元数</span>
+    <span class="n">dimension</span> <span class="o">=</span> <span class="mi">512</span>
 
     <span class="c1"># データ格納用のリスト</span>
     <span class="n">all_model_data</span> <span class="o">=</span> <span class="p">[]</span>
@@ -169,7 +169,7 @@
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ゼロノルムのベクトルが含まれています。&quot;</span><span class="p">)</span>
 
                 <span class="c1"># L2正規化を行う</span>
-                <span class="n">faiss</span><span class="o">.</span><span class="n">normalize_L2</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span>
+                <span class="n">model_data</span> <span class="o">=</span> <span class="n">model_data</span> <span class="o">/</span> <span class="n">norms</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
 
                 <span class="c1"># 正規化後のデータの最大値・最小値を確認</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;正規化後のデータの最大値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span><span class="si">}</span><span class="s2">, 最小値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">model_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -191,53 +191,36 @@
     <span class="c1"># データ数を確認</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;データ数: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># クラスタ数をデータに基づいて調整</span>
-    <span class="c1"># 小規模データセットのため、IndexFlatIPを使用</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;IndexFlatIPを使用します。&quot;</span><span class="p">)</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">faiss</span><span class="o">.</span><span class="n">IndexFlatIP</span><span class="p">(</span><span class="n">dimension</span><span class="p">)</span>
+    <span class="c1"># LOFによる外れ値検出</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOFによる外れ値検出を行います。&quot;</span><span class="p">)</span>
 
-    <span class="c1"># データを追加</span>
-    <span class="n">index</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">)</span>
+    <span class="c1"># LOFモデルの作成</span>
+    <span class="n">n_neighbors</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># データ数に応じて近傍数を設定</span>
+    <span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">)</span>
 
-    <span class="c1"># クエリデータの外れ値検出</span>
-    <span class="n">top_k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">))</span>  <span class="c1"># 近傍点数を指定</span>
-    <span class="n">D</span><span class="p">,</span> <span class="n">I</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">,</span> <span class="n">top_k</span><span class="p">)</span>
+    <span class="c1"># LOFスコアの計算（negative_outlier_factor_属性を取得）</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">all_model_data</span><span class="p">)</span>
+    <span class="n">lof_scores</span> <span class="o">=</span> <span class="o">-</span><span class="n">lof</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>
 
-    <span class="c1"># 類似度行列 D の値を確認</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;D の最大値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="si">}</span><span class="s2">, 最小値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># LOFスコアの最大値・最小値を確認</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOFスコアの最大値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">lof_scores</span><span class="p">)</span><span class="si">}</span><span class="s2">, 最小値: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">lof_scores</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># D に異常値が含まれていないかチェック</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">D</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;類似度行列 D に NaN または無限大の値が含まれています。&quot;</span><span class="p">)</span>
-
-    <span class="c1"># D の値を [-1, 1] の範囲にクリッピング</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-
-    <span class="c1"># 外れ値を判定する閾値を設定（例：コサイン類似度が0.3未満を外れ値とする）</span>
-    <span class="n">outlier_threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="c1"># 外れ値を判定する閾値を設定（例：LOFスコアが1.5以上を外れ値とする）</span>
+    <span class="n">outlier_threshold</span> <span class="o">=</span> <span class="mf">1.5</span>
 
     <span class="c1"># 外れ値のリスト</span>
     <span class="n">outliers</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># 各データ点について外れ値かどうかを判定</span>
-    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)):</span>
-        <span class="c1"># 近傍点の類似度の平均を計算（自分自身を除く）</span>
-        <span class="n">similarities</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="c1"># 有効な類似度のみを使用</span>
-        <span class="n">valid_similarities</span> <span class="o">=</span> <span class="n">similarities</span><span class="p">[(</span><span class="n">similarities</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">similarities</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_similarities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;データインデックス </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> の有効な類似度がありません。&quot;</span><span class="p">)</span>
-            <span class="k">continue</span>
-        <span class="n">avg_similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">valid_similarities</span><span class="p">)</span>
-        <span class="c1"># 平均類似度の値を確認</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;データインデックス </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> の平均類似度: </span><span class="si">{</span><span class="n">avg_similarity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1"># 類似度が閾値を下回る場合は外れ値として記録</span>
-        <span class="k">if</span> <span class="n">avg_similarity</span> <span class="o">&lt;</span> <span class="n">outlier_threshold</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lof_scores</span><span class="p">):</span>
+        <span class="c1"># LOFスコアが閾値を超える場合は外れ値として記録</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">outlier_threshold</span><span class="p">:</span>
             <span class="n">outliers</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
                 <span class="s2">&quot;名前&quot;</span><span class="p">:</span> <span class="n">all_name_list</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
                 <span class="s2">&quot;ディレクトリ&quot;</span><span class="p">:</span> <span class="n">all_dir_list</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
-                <span class="s2">&quot;平均類似度&quot;</span><span class="p">:</span> <span class="n">avg_similarity</span>
+                <span class="s2">&quot;LOFスコア&quot;</span><span class="p">:</span> <span class="n">score</span>
             <span class="p">})</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;外れ値検出: 名前: </span><span class="si">{</span><span class="n">all_name_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">}</span><span class="s2">, ディレクトリ: </span><span class="si">{</span><span class="n">all_dir_list</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">}</span><span class="s2">, LOFスコア: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># 外れ値ファイルを保存するディレクトリを作成（同名のディレクトリがない場合のみ）</span>
     <span class="n">outlier_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s2">&quot;外れ値ファイル&quot;</span><span class="p">)</span>
@@ -249,10 +232,8 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">)</span>
 
-    <span class="c1"># 外れ値を出力および移動</span>
+    <span class="c1"># 外れ値を移動</span>
     <span class="k">for</span> <span class="n">outlier</span> <span class="ow">in</span> <span class="n">outliers</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;外れ値検出: 名前: </span><span class="si">{</span><span class="n">outlier</span><span class="p">[</span><span class="s1">&#39;名前&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, ディレクトリ: </span><span class="si">{</span><span class="n">outlier</span><span class="p">[</span><span class="s1">&#39;ディレクトリ&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, 平均類似度: </span><span class="si">{</span><span class="n">outlier</span><span class="p">[</span><span class="s1">&#39;平均類似度&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
         <span class="c1"># 外れ値ファイルのパスを生成</span>
         <span class="n">src_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outlier</span><span class="p">[</span><span class="s2">&quot;ディレクトリ&quot;</span><span class="p">],</span> <span class="n">outlier</span><span class="p">[</span><span class="s2">&quot;名前&quot;</span><span class="p">])</span>
         <span class="n">dst_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outlier_dir</span><span class="p">,</span> <span class="n">outlier</span><span class="p">[</span><span class="s2">&quot;名前&quot;</span><span class="p">])</span>
@@ -269,7 +250,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;FAISSによる外れ値検出&quot;</span><span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;LOFによる外れ値検出&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;root_dir&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;データのルートディレクトリのパスを指定してください&quot;</span><span class="p">)</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
