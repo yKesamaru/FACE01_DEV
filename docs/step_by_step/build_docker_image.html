@@ -132,6 +132,16 @@ REPOSITORY<span class="w">   </span>TAG<span class="w">        </span>IMAGE<span
 face01_gpu<span class="w">   </span><span class="m">3</span>.0.03_1<span class="w">   </span>abd4c0896c00<span class="w">   </span><span class="m">48</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span><span class="m">21</span>.9GB
 </pre></div>
 </div>
+<blockquote>
+<div><p>[!NOTE]
+以下の内容は<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01">Dockerを使ってFACE01を使う</a>と内容が重複します。詳細は<a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01">Dockerを使ってFACE01を使う</a>をご参照ください。</p>
+</div></blockquote>
+</section>
+<section id="dockerguixhost">
+<h2>DockerでGUIが使えるようにxhostの設定をする<a class="headerlink" href="#dockerguixhost" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xhost<span class="w"> </span>+local:
+</pre></div>
+</div>
 </section>
 <section id="face01-dev">
 <h2><code class="docutils literal notranslate"><span class="pre">FACE01_DEV</span></code>のコンテナを起動する<a class="headerlink" href="#face01-dev" title="Link to this heading"></a></h2>
@@ -149,6 +159,16 @@ face01_gpu<span class="w">   </span><span class="m">3</span>.0.03_1<span class="
 <span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>ホストとフォルダを共有する場合<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/path/to/host/folder:/path/to/container/folder<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
 </section>
@@ -217,8 +237,8 @@ combination_counter.py<span class="w">   </span>draw_datas.py<span class="w">   
 コンテナ内の``Python仮想環境<code class="docutils literal notranslate"><span class="pre">を起動しないと、</span></code>FACE01`は動作しません</p>
 </div></blockquote>
 </section>
-<section id="id5">
-<h2>エグザンプルコードを実行する<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="id6">
+<h2>エグザンプルコードを実行する<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
 <p>動作確認のためにエグザンプルコードを実行してみましょう。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>FACE01_DEV<span class="o">)</span><span class="w"> </span>docker@02926f2467b4:~/FACE01_DEV$<span class="w"> </span>python3<span class="w"> </span>example/lightweight_GUI.py
 Copyright<span class="w"> </span>Owner:<span class="w"> </span>Yoshitsugu<span class="w"> </span>Kesamaru
