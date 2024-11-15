@@ -51,8 +51,8 @@ REPOSITORY   TAG        IMAGE ID       CREATED          SIZE
 face01_gpu   3.0.03_1   abd4c0896c00   48 minutes ago   21.9GB
 ```
 
-> [!NOTE]
-> 以下の内容は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)と内容が重複します。詳細は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)をご参照ください。
+
+**以下の内容は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)と内容が重複します。詳細は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)をご参照ください。**
 
 ## DockerでGUIが使えるようにxhostの設定をする
 ```bash
