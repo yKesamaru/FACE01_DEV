@@ -51,6 +51,13 @@ REPOSITORY   TAG        IMAGE ID       CREATED          SIZE
 face01_gpu   3.0.03_1   abd4c0896c00   48 minutes ago   21.9GB
 ```
 
+> [!NOTE]
+> 以下の内容は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)と内容が重複します。詳細は[Dockerを使ってFACE01を使う](https://ykesamaru.github.io/FACE01_DEV/step_by_step/docker.html#dockerface01)をご参照ください。
+
+## DockerでGUIが使えるようにxhostの設定をする
+```bash
+xhost +local:
+```
 
 ## `FACE01_DEV`のコンテナを起動する
 ### カメラを**接続しない**場合
@@ -65,6 +72,15 @@ docker run --rm -it \
   --gpus all -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
   -v /tmp/.X11-unix:/tmp/.X11-unix <image id>
+```
+
+### ホストとフォルダを共有する場合
+```bash
+docker run -it \
+    --gpus all -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /path/to/host/folder:/path/to/container/folder \
+    <image id>
 ```
 
 # `nvidia-smi`でチェック
