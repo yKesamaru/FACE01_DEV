@@ -9,15 +9,14 @@
 ## cuda11: https://hub.docker.com/r/nvidia/cuda/tags?page=&page_size=&ordering=&name=11
 # FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 # 開発版。全てのパッケージを含む。: https://hub.docker.com/layers/nvidia/cuda/11.6.1-devel-ubuntu20.04/images/sha256-2732cd07ffb34d73621a12de8ecea08a1caa7b87d43ccbca34112de189824c20?context=explore
-FROM nvidia/cuda:11.6.1-devel-ubuntu20.04
+# 軽量なベースイメージを選択
+FROM nvidia/cuda:11.6.1-runtime-ubuntu20.04
 
 LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
-# ベースイメージにあるのでいらない
-# ENV NVIDIA_VISIBLE_DEVICES all
-# ENV NVIDIA_DRIVER_CAPABILITIES utility,compute
-
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=ja_JP.UTF-8
+ENV TZ=Asia/Tokyo
 
 # deb http://archive.canonical.com/ubuntu focal partnerを有効化
 RUN sed -i "s@# deb http://archive.canonical.com/ubuntu focal partner@deb http://archive.canonical.com/ubuntu focal partner@" /etc/apt/sources.list
@@ -65,14 +64,11 @@ RUN apt-get install -y firefox
 RUN rm -rf /var/lib/apt/lists/*
 
 
-# configure
-RUN locale-gen ja_JP.UTF-8
-ENV LANG=ja_JP.UTF-8
-ENV TZ=Asia/Tokyo
 # add user
 ARG DOCKER_UID=1000
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
+
 RUN useradd -m \
   --uid ${DOCKER_UID} --groups sudo,video --shell /bin/bash ${DOCKER_USER} \
   && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd

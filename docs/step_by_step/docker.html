@@ -169,6 +169,17 @@
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
+<section id="id2">
+<h4>具体例<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>コンテナIDが<code class="docutils literal notranslate"><span class="pre">ce2952ad62d6</span></code>、<code class="docutils literal notranslate"><span class="pre">/home/user/ドキュメント/FACE01_mnt_Folder</span></code>を<code class="docutils literal notranslate"><span class="pre">/home/docker/test/</span></code>に接続する場合は以下のようになります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@user:~$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/home/user/ドキュメント/FACE01_mnt_Folder:/home/docker/test/<span class="w"> </span>ce2952ad62d6
+</pre></div>
+</div>
+<p>注意点として、例えばコンテナ内の<code class="docutils literal notranslate"><span class="pre">/home/docker/</span></code>に接続してしまうと、<code class="docutils literal notranslate"><span class="pre">/home/docker/FACE01_DEV/</span></code>ディレクトリが消えてしまいます。<code class="docutils literal notranslate"><span class="pre">/home/docker/</span></code>ディレクトリに接続する場合は、<code class="docutils literal notranslate"><span class="pre">/home/docker/test/</span></code>などのように新しいディレクトリにするようにしましょう。</p>
+</section>
 <section id="note">
 <h4><strong>NOTE</strong><a class="headerlink" href="#note" title="Link to this heading"></a></h4>
 <p>Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。
@@ -186,8 +197,8 @@
 </section>
 </section>
 </section>
-<section id="id2">
-<h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <section id="python">
 <h3>Python仮想環境をアクティベート<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
 <p>Python仮想環境を起動してください。</p>
@@ -272,8 +283,8 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 <code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">-local:</span></code></p>
 </section>
 </section>
-<section id="id3">
-<h2>トラブルシューティング<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h2>トラブルシューティング<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <section id="docker">
 <h3>Dockerコンテナを機動したがエグザンプルコードが動かない<a class="headerlink" href="#docker" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -282,8 +293,8 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 <li><p><code class="docutils literal notranslate"><span class="pre">xhost</span></code>の<code class="docutils literal notranslate"><span class="pre">local</span></code>を追加したか確認してください</p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Nvidia GPUを搭載したPCかどうかを確認してください</p></li>
 <li><p>コンテナとホストのCUDAドライバを確認してください</p>
@@ -304,12 +315,12 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 </div>
 <br />
 </section>
-<section id="id5">
-<h3>その他<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>その他<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id12">こちらのトラブルシューティング</a>も参考にしてください。</p>
 </section>
-<section id="id6">
-<h3>それでも解決しない時<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>それでも解決しない時<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/issues">Issue</a>に投稿してください</p></li>
 </ul>
