@@ -474,6 +474,7 @@ class Core:
 
     # 顔部分の領域をクロップ画像ファイルとして出力
     # @profile()
+    # TODO: Utils.align_and_resize_maintain_aspect_ratio()と被るし、こちらにalign機能がない。
     def _make_crop_face_image(
         self,
         anti_spoof,
@@ -499,10 +500,10 @@ class Core:
         self.frequency_crop_image = frequency_crop_image
         date = datetime.now().strftime("%Y,%m,%d,%H,%M,%S,%f")
         # TODO: CROPする時の余白を設定可能にする
-        margin = 50
+        margin = 100  # 後にalign処理用にマージンを大きくとっておく
         imgCroped = \
             self.pil_img_obj_rgb.crop(
-                (self.left - margin, self.top - margin, self.right + margin, self.bottom + margin)).resize((400, 400)
+                (self.left - margin, self.top - margin, self.right + margin, self.bottom + margin)).resize((600, 600)
                                                                                                            )
         # TODO: outputのファイル名にanti_spoof結果を入れる
         if self.anti_spoof is True:

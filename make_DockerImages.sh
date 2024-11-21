@@ -1,110 +1,60 @@
 #!/usr/bin/env bash
-set -Ceux -o pipefail
+
+: <<'DOCSTRING'
+このスクリプトは、2種類のDockerイメージ（GPU対応版と非対応版）をビルドし、
+Docker Hubにプッシュするプロセスを自動化します。
+
+- ビルド対象:
+    1. face01_gpu
+    2. face01_no_gpu
+- 主な操作:
+    - Dockerイメージのビルド
+    - Docker Hubへのログイン
+    - Dockerイメージのプッシュ
+- 注意:
+    - ビルド中にCPU使用率が高くなるため、他の作業への影響を考慮してください。
+DOCSTRING
+
+set -euo pipefail
 IFS=$'\n\t'
 
-# License for the Code.
-# 
-# Copyright Owner: Yoshitsugu Kesamaru
-# Please refer to the separate license file for the license of the code.
+# 定数設定
+WORKDIR=~/bin/FACE01_DEV  # 作業ディレクトリ
+DOCKER_REPO=tokaikaoninsho
+TAG=3.03.04
 
+# Dockerイメージをビルドしてプッシュする関数
+build_and_push_image() {
+    local image_name=$1   # イメージ名
+    local dockerfile=$2   # 使用するDockerfile
 
-# Automation docker operation from local build to push to DockerHub.
+    echo "Building Docker image: ${image_name}:${TAG}"
+    docker build -t "${DOCKER_REPO}/${image_name}:${TAG}" -f "${dockerfile}" . --network host
 
-# TODO: face01_gpuとface01_no_gpuをfor loopでまわすこと
-
-# -----------------------------------------------------------------
-# サマリー:
-# このスクリプトは、DockerイメージのビルドおよびDocker Hubへのプッシュを自動化します。
-# face01_gpuとface01_no_gpuの2種類のイメージを作成し、それぞれをDocker Hubにプッシュします。
-# -----------------------------------------------------------------
-
-function my_command() {
-
-# cd: FACE01_DEV/
-cd ~/bin/FACE01_DEV
-
-
-# ////////////////////////////////////////
-
-# face01_gpu
-
-# ////////////////////////////////////////
-
-# docker build: CPU100%になるので他の作業との兼ね合いに注意すること
-docker build -t tokaikaoninsho/face01_gpu:3.0.03_3 -f docker/Dockerfile_gpu . --network host
-# dockerを起動
-# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_gpu:3.0.03_3
-# # get `container-id`
-# face01_gpu_container-id = docker ps -a | grep face01_gpu:3.0.03_3 | awk '{print $1}'
-# # commit
-# # docker container commit "${face01_gpu_container-id}" tokaikaoninsho/face01_gpu:3.0.03_3
-# # get `image-id`
-# face01_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_gpu\s+3.0.03_3.*" | awk '{print $3}'
-# # add tag
-# docker tag "${face01_gpu_image-id}" face01_gpu
-# # login
-docker login
-# docker push
-docker push tokaikaoninsho/face01_gpu:3.0.03_3
-
-
-# ////////////////////////////////////////
-
-# face01_no_gpu
-
-# ////////////////////////////////////////
-
-# docker build: CPU100%になるので他の作業との兼ね合いに注意すること
-docker build -t tokaikaoninsho/face01_no_gpu:3.0.03_3 -f docker/Dockerfile_no_gpu . --network host
-# # dockerを起動
-# docker run --rm -it   -e DISPLAY=$DISPLAY   -v /tmp/.X11-unix/:/tmp/.X11-unix: face01_no_gpu:3.0.03_3
-# # get `container-id`
-# face01_no_gpu-container-id = docker ps -a | grep face01_no_gpu:3.0.03_3 | awk '{print $1}'
-# # commit
-# docker container commit "${face01_no_gpu_container-id}" tokaikaoninsho/face01_no_gpu:3.0.03_3
-# # get `image-id`
-# face01_no_gpu_image-id = docker images | grep -E "tokaikaoninsho/face01_no_gpu\s+3.0.03_3.*" | awk '{print $3}'
-# # add tag
-# docker tag "${face01_no_gpu_image-id}" face01_no_gpu
-# login
-docker login
-# docker push
-docker push tokaikaoninsho/face01_no_gpu:3.0.03_3
-
-
-    return 0
+    echo "Pushing Docker image: ${DOCKER_REPO}/${image_name}:${TAG}"
+    # ログイン
+    docker login
+    docker push "${DOCKER_REPO}/${image_name}:${TAG}"
 }
 
+# メイン処理
+main() {
+    # 作業ディレクトリに移動
+    cd "${WORKDIR}"
 
-function my_error() {
-    zenity --error --text="\
-    失敗しました。
-    "
+    # GPU対応版のイメージ
+    build_and_push_image "face01_gpu" "docker/Dockerfile_gpu"
+
+    # 非GPU対応版のイメージ
+    build_and_push_image "face01_no_gpu" "docker/Dockerfile_no_gpu"
+}
+
+# エラー時の処理
+error_handler() {
+    echo "エラーが発生しました。" >&2
     exit 1
 }
 
-my_command || my_error
-
-
-# ////////////////////////////////////////
-# REFERENCE:
-
-#   Docker
-#       [docker push 手順](https://zenn.dev/katan/articles/1d5ff92fd809e7)
-#       [grep, awkによる抽出](https://zenn.dev/sickleaf/articles/99884a12b0489cf21d45)
-#   google style guide
-#       [Shell Style Guide](https://github.com/google/styleguide/blob/gh-pages/shellguide.md)
-#       [Googleの肩に乗ってShellコーディングしちゃおう](https://qiita.com/ma91n/items/5f72ca668f1c58176644)
-
-
-# ////////////////////////////////////////
-# MEMORANDUM:
-
-# set
-#   C: リダイレクトで既存のファイルを上書きしない
-#   e: exit status not equal 0 -> terminate script
-#   u: 初期化していない変数があるとエラー(特殊パラメーターである「@」と「*」は除く）
-#   x: 実行するコマンドを出力して何をしたらどうなったかがログに残る(トレース情報として、シェルが実行したコマンドとその引数を出力する。情報の先頭にはシェル変数PS4の値を使用)
-#   o: when error occurred on pipeline, terminate the script
-#   -o pipefail: パイプの途中で発生したエラーがexit codeとなる。デフォルトではパイプ最後のコマンドのexit code。
-#   IFS=$'\n\t': 引数の区切り文字は改行とタブのみに指定。（空白は区切り文字に含めない）
+# 実行
+trap error_handler ERR
+main
