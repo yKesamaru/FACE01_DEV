@@ -71,12 +71,16 @@ lspci | grep -i nvidia
 <br />
 
 ### ディスプレイマネージャとして`wayland`を使用している場合
-ご用意している`docker イメージ`は`X11`環境で作成しております。ですのでお使いのディスプレイマネージャが`X11`あるいは`XWayland`であれば使用できますが、`Wayland`には対応していません。この場合はご自身でイメージをビルドしていただく必要があります。[build_docker_image.md](build_docker_image.md)をご参照ください。
+- ご用意している`docker イメージ`は`X11`環境で作成しております。ですのでお使いのディスプレイマネージャが`X11`あるいは`XWayland`であれば使用できますが、`Wayland`には対応していません。
+
+- 様々な事情によりご自身でイメージをビルドしていただく必要がある場合は[Docker imageをビルドする](build_docker_image.md)をご参照ください。
 
 ### `image id`を指定してコンテナを起動します
+- NVIDIA製GPUがない場合は`--gpu all`を省略してください。
 ```bash
 docker run --rm -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     <image id>
 ```
@@ -84,7 +88,8 @@ docker run --rm -it \
 例えば以下のようにします。（必要に応じて細部を変更してください。）
 ```bash
 docker run -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /path/to/host/folder:/path/to/container/folder \
     <image id>
@@ -94,7 +99,8 @@ docker run -it \
 例えば、ホストの'/home/user/dataフォルダ'をコンテナ内の'/mnt/data'にマウントしたい場合は、以下のようになります。
 ```bash
 docker run -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/user/data:/mnt/data \
     <image id>
@@ -104,7 +110,8 @@ docker run -it \
 コンテナIDが`ce2952ad62d6`、`/home/user/ドキュメント/FACE01_mnt_Folder`を`/home/docker/test/`に接続する場合は以下のようになります。
 ```bash
 user@user:~$ docker run -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/user/ドキュメント/FACE01_mnt_Folder:/home/docker/test/ ce2952ad62d6
 ```
@@ -115,7 +122,8 @@ Webカメラなどを接続して使用する場合、以下のコマンドを�
 この場合`/dev/video0`を指定していますが、ご利用の環境によってはパスがちがう可能性があります。
 ```bash
 docker run --rm -it \
-  --gpus all -e DISPLAY=$DISPLAY \
+  --gpus all \
+  -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
   -v /tmp/.X11-unix/:/tmp/.X11-unix: <image id>
 ```
