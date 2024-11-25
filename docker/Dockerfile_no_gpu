@@ -58,10 +58,14 @@ RUN useradd -m --uid ${DOCKER_UID} --home-dir ${USER_HOME} --groups sudo,video -
 USER ${DOCKER_USER}
 WORKDIR ${USER_HOME}/FACE01_DEV
 
-# 必要なファイルをコピー
-COPY face01lib output noFace pyproject.toml requirements_dev.txt config.ini \
-     example assets preset_face_images \
-     ${USER_HOME}/FACE01_DEV/
+# 必要なフォルダとファイルをコピー
+COPY --chown=docker:docker face01lib /home/docker/FACE01_DEV/face01lib
+COPY --chown=docker:docker output /home/docker/FACE01_DEV/output
+COPY --chown=docker:docker noFace /home/docker/FACE01_DEV/noFace
+COPY --chown=docker:docker example /home/docker/FACE01_DEV/example
+COPY --chown=docker:docker assets /home/docker/FACE01_DEV/assets
+COPY --chown=docker:docker preset_face_images /home/docker/FACE01_DEV/preset_face_images
+COPY --chown=docker:docker pyproject.toml requirements_dev.txt config.ini /home/docker/FACE01_DEV/
 
 # スクリプトのコピーと実行
 COPY --chmod=0755 docker/Docker_INSTALL_FACE01_CPU.sh ${USER_HOME}/FACE01_DEV/
