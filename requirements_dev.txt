@@ -1,6 +1,7 @@
 # sphinx-wagtail-theme
 customtkinter
 faiss-gpu
+GPUtil
 myst-parser
 recommonmark
 snakeviz
