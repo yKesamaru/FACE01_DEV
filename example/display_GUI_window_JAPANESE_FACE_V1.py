@@ -116,4 +116,4 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    main(exec_times=20000)
+    main(exec_times=2000)

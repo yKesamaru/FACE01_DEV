@@ -2,19 +2,30 @@ FROM ubuntu:20.04
 LABEL maintainer="y.kesamaru@tokai-kaoninsho.com"
 
 # 環境変数の設定
+## USE_GPU: Docker_INSTALL_FACE01.shで使用
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=ja_JP.UTF-8 \
     TZ=Asia/Tokyo \
+    USE_GPU=0 \
     USER_HOME=/home/docker
 
 # 必要なパッケージのインストールとロケール設定
 RUN apt-get update && apt-get install -y \
     # 線形代数関連
-    liblapack3 \
-    libopenblas-base \
+    # liblapack3 \
+    # libopenblas-base \
     # dlib build
-    build-essential \
-    cmake \
+    # build-essential \
+    # cmake \
+    # python3-dev \
+    # libopenblas-dev \
+    # liblapack-dev \
+    # libboost-all-dev \
+    # libeigen3-dev \
+    # libx11-dev \
+    # pkg-config \
+    # cuda-toolkit-11-6 \
+    # libcublas-dev \
     # 必要なツール
     wget \
     sudo \
@@ -25,7 +36,7 @@ RUN apt-get update && apt-get install -y \
     # Python関連
     python3 \
     python3-tk \
-    python3-pkg-resources \
+    python3-pip \
     python3-venv \
     # メディア関連
     ffmpeg \
@@ -62,11 +73,14 @@ WORKDIR ${USER_HOME}/FACE01_DEV
 COPY --chown=docker:docker face01lib /home/docker/FACE01_DEV/face01lib
 COPY --chown=docker:docker output /home/docker/FACE01_DEV/output
 COPY --chown=docker:docker noFace /home/docker/FACE01_DEV/noFace
+COPY --chown=docker:docker multipleFaces /home/docker/FACE01_DEV/multipleFaces
 COPY --chown=docker:docker example /home/docker/FACE01_DEV/example
 COPY --chown=docker:docker assets /home/docker/FACE01_DEV/assets
 COPY --chown=docker:docker preset_face_images /home/docker/FACE01_DEV/preset_face_images
-COPY --chown=docker:docker pyproject.toml requirements_dev.txt config.ini /home/docker/FACE01_DEV/
+COPY --chown=docker:docker --chmod=0755 docker /home/docker/FACE01_DEV/docker
+COPY --chown=docker:docker pyproject.toml requirements_dev.txt config.ini dlib-19.24.tar.bz2 /home/docker/FACE01_DEV/
 
 # スクリプトのコピーと実行
-COPY --chmod=0755 docker/Docker_INSTALL_FACE01_CPU.sh ${USER_HOME}/FACE01_DEV/
-RUN /bin/bash -c ${USER_HOME}/FACE01_DEV/Docker_INSTALL_FACE01_CPU.sh
+# COPY --chmod=0755 docker/Docker_INSTALL_FACE01_CPU.sh ${USER_HOME}/FACE01_DEV/
+RUN /bin/bash -c "${USER_HOME}/FACE01_DEV/docker/Docker_INSTALL_FACE01_CPU.sh"
+RUN pip uninstall -y onnxruntime-gpu && pip install onnxruntime
