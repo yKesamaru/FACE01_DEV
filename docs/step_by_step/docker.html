@@ -94,6 +94,16 @@
     <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00129-2005948764.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
 </div>
 <br />
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">M1, M2 Mac用のDockerイメージは用意されていません。<span style="background-color: yellow;">FACE01_DEV/docker/Dockerfile_no_gpuファイルを使ってDockerイメージを作成</span>してください。</p>
+        <p style="margin: 10;">詳しくは<a https://github.com/yKesamaru/FACE01_DEV/issues/5>ISSUE#5</a>を参照してください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
 <section id="docker-image">
 <h2><code class="docutils literal notranslate"><span class="pre">Docker</span> <span class="pre">image</span></code>をプル<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Dockerイメージ</span></code>をダウンロード（プル）しましょう。</p>
@@ -141,12 +151,19 @@
 </section>
 <section id="wayland">
 <h3>ディスプレイマネージャとして<code class="docutils literal notranslate"><span class="pre">wayland</span></code>を使用している場合<a class="headerlink" href="#wayland" title="Link to this heading"></a></h3>
-<p>ご用意している<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">イメージ</span></code>は<code class="docutils literal notranslate"><span class="pre">X11</span></code>環境で作成しております。ですのでお使いのディスプレイマネージャが<code class="docutils literal notranslate"><span class="pre">X11</span></code>あるいは<code class="docutils literal notranslate"><span class="pre">XWayland</span></code>であれば使用できますが、<code class="docutils literal notranslate"><span class="pre">Wayland</span></code>には対応していません。この場合はご自身でイメージをビルドしていただく必要があります。<a class="reference internal" href="build_docker_image.html"><span class="std std-doc">build_docker_image.md</span></a>をご参照ください。</p>
+<ul class="simple">
+<li><p>ご用意している<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">イメージ</span></code>は<code class="docutils literal notranslate"><span class="pre">X11</span></code>環境で作成しております。ですのでお使いのディスプレイマネージャが<code class="docutils literal notranslate"><span class="pre">X11</span></code>あるいは<code class="docutils literal notranslate"><span class="pre">XWayland</span></code>であれば使用できますが、<code class="docutils literal notranslate"><span class="pre">Wayland</span></code>には対応していません。</p></li>
+<li><p>様々な事情によりご自身でイメージをビルドしていただく必要がある場合は<a class="reference internal" href="build_docker_image.html"><span class="std std-doc">Docker imageをビルドする</span></a>をご参照ください。</p></li>
+</ul>
 </section>
 <section id="image-id">
 <h3><code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">id</span></code>を指定してコンテナを起動します<a class="headerlink" href="#image-id" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>NVIDIA製GPUがない場合は<code class="docutils literal notranslate"><span class="pre">--gpu</span> <span class="pre">all</span></code>を省略してください。</p></li>
+</ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
@@ -154,7 +171,8 @@
 <p>開発用としてコンテナを起動させたい場合には、<code class="docutils literal notranslate"><span class="pre">--rm</span></code>を除去し、永続化のためのフォルダを指定してください。
 例えば以下のようにします。（必要に応じて細部を変更してください。）</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/path/to/host/folder:/path/to/container/folder<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
@@ -163,18 +181,32 @@
 <p>ここで、'/path/to/host/folder'はホスト側の永続化したいデータを保存するフォルダパスを指定し、'/path/to/container/folder'はコンテナ内でそのデータを利用するためのフォルダパスを指定します。</p>
 <p>例えば、ホストの'/home/user/dataフォルダ'をコンテナ内の'/mnt/data'にマウントしたい場合は、以下のようになります。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-v<span class="w"> </span>/home/user/data:/mnt/data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
 </div>
+<section id="id2">
+<h4>具体例<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>コンテナIDが<code class="docutils literal notranslate"><span class="pre">ce2952ad62d6</span></code>、<code class="docutils literal notranslate"><span class="pre">/home/user/ドキュメント/FACE01_mnt_Folder</span></code>を<code class="docutils literal notranslate"><span class="pre">/home/docker/test/</span></code>に接続する場合は以下のようになります。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@user:~$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/tmp/.X11-unix:/tmp/.X11-unix<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>/home/user/ドキュメント/FACE01_mnt_Folder:/home/docker/test/<span class="w"> </span>ce2952ad62d6
+</pre></div>
+</div>
+<p>注意点として、例えばコンテナ内の<code class="docutils literal notranslate"><span class="pre">/home/docker/</span></code>に接続してしまうと、<code class="docutils literal notranslate"><span class="pre">/home/docker/FACE01_DEV/</span></code>ディレクトリが消えてしまいます。<code class="docutils literal notranslate"><span class="pre">/home/docker/</span></code>ディレクトリに接続する場合は、<code class="docutils literal notranslate"><span class="pre">/home/docker/test/</span></code>などのように新しいディレクトリにするようにしましょう。</p>
+</section>
 <section id="note">
 <h4><strong>NOTE</strong><a class="headerlink" href="#note" title="Link to this heading"></a></h4>
 <p>Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。
 この場合<code class="docutils literal notranslate"><span class="pre">/dev/video0</span></code>を指定していますが、ご利用の環境によってはパスがちがう可能性があります。</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--gpus<span class="w"> </span>all<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--device<span class="w"> </span>/dev/video0:/dev/video0:mwr<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>/tmp/.X11-unix/:/tmp/.X11-unix:<span class="w"> </span>&lt;image<span class="w"> </span>id&gt;
 </pre></div>
@@ -186,8 +218,8 @@
 </section>
 </section>
 </section>
-<section id="id2">
-<h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h2><strong>絶対に忘れてはいけないポイント</strong><a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <section id="python">
 <h3>Python仮想環境をアクティベート<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
 <p>Python仮想環境を起動してください。</p>
@@ -272,8 +304,8 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 <code class="docutils literal notranslate"><span class="pre">xhost</span> <span class="pre">-local:</span></code></p>
 </section>
 </section>
-<section id="id3">
-<h2>トラブルシューティング<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h2>トラブルシューティング<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <section id="docker">
 <h3>Dockerコンテナを機動したがエグザンプルコードが動かない<a class="headerlink" href="#docker" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -282,8 +314,8 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 <li><p><code class="docutils literal notranslate"><span class="pre">xhost</span></code>の<code class="docutils literal notranslate"><span class="pre">local</span></code>を追加したか確認してください</p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>エグザンプルコードは起動したが処理がおそすぎる<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Nvidia GPUを搭載したPCかどうかを確認してください</p></li>
 <li><p>コンテナとホストのCUDAドライバを確認してください</p>
@@ -304,12 +336,12 @@ docker@bb030de27861:~/FACE01_DEV$<span class="w"> </span>.<span class="w"> </spa
 </div>
 <br />
 </section>
-<section id="id5">
-<h3>その他<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>その他<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://ykesamaru.github.io/FACE01_DEV/step_by_step/index.html#id12">こちらのトラブルシューティング</a>も参考にしてください。</p>
 </section>
-<section id="id6">
-<h3>それでも解決しない時<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>それでも解決しない時<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/issues">Issue</a>に投稿してください</p></li>
 </ul>

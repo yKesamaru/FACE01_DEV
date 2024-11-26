@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.Core &mdash; FACE01 3.0.02 ドキュメント</title>
+  <title>face01lib.Core &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
@@ -15,13 +16,13 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=ebc0197d"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.02 ドキュメント 内を検索"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -565,6 +566,7 @@
 
     <span class="c1"># 顔部分の領域をクロップ画像ファイルとして出力</span>
     <span class="c1"># @profile()</span>
+    <span class="c1"># TODO: Utils.align_and_resize_maintain_aspect_ratio()と被るし、こちらにalign機能がない。</span>
     <span class="k">def</span> <span class="nf">_make_crop_face_image</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">anti_spoof</span><span class="p">,</span>
@@ -590,10 +592,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">frequency_crop_image</span> <span class="o">=</span> <span class="n">frequency_crop_image</span>
         <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y,%m,</span><span class="si">%d</span><span class="s2">,%H,%M,%S,</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="c1"># TODO: CROPする時の余白を設定可能にする</span>
-        <span class="n">margin</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># 後にalign処理用にマージンを大きくとっておく</span>
         <span class="n">imgCroped</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">pil_img_obj_rgb</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span>
-                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">-</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">+</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">+</span> <span class="n">margin</span><span class="p">))</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">-</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">+</span> <span class="n">margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">+</span> <span class="n">margin</span><span class="p">))</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">600</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
                                                                                                            <span class="p">)</span>
         <span class="c1"># TODO: outputのファイル名にanti_spoof結果を入れる</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">anti_spoof</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
