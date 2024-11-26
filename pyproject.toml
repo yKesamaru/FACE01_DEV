@@ -7,9 +7,7 @@ name = "FACE01"
 version = "2.2.02"
 requires-python = ">=3.8"
 dependencies = [
-    "GPUtil",
     "Pillow",
-    "dlib==19.24.0",
     "mediapipe",
     "memory-profiler",
     "mojimoji",
@@ -27,7 +25,6 @@ dependencies = [
     "torch",
     "torchvision",
     "tqdm",
-    "tk",
     "typing_extensions",
     "urllib3",
 ]

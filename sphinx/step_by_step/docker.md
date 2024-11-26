@@ -12,6 +12,17 @@
 </div>
 <br />
 
+<br />
+<div style="display: flex; align-items: center; justify-content: flex-end;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative; margin-right: 10px;">
+        <p style="margin: 10;">M1, M2 Mac用のDockerイメージは用意されていません。<span style="background-color: yellow;">FACE01_DEV/docker/Dockerfile_no_gpuファイルを使ってDockerイメージを作成</span>してください。</p>
+        <p style="margin: 10;">詳しくは<a https://github.com/yKesamaru/FACE01_DEV/issues/5>ISSUE#5</a>を参照してください。</p>
+        <div style="position: absolute; top: 50%; right: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/image835.png" alt="説明文" width="200" style="border-radius: 50%; object-fit: cover;">
+</div>
+<br />
+
 ## `Docker image`をプル
 `Dockerイメージ`をダウンロード（プル）しましょう。
 
@@ -60,12 +71,16 @@ lspci | grep -i nvidia
 <br />
 
 ### ディスプレイマネージャとして`wayland`を使用している場合
-ご用意している`docker イメージ`は`X11`環境で作成しております。ですのでお使いのディスプレイマネージャが`X11`あるいは`XWayland`であれば使用できますが、`Wayland`には対応していません。この場合はご自身でイメージをビルドしていただく必要があります。[build_docker_image.md](build_docker_image.md)をご参照ください。
+- ご用意している`docker イメージ`は`X11`環境で作成しております。ですのでお使いのディスプレイマネージャが`X11`あるいは`XWayland`であれば使用できますが、`Wayland`には対応していません。
+
+- 様々な事情によりご自身でイメージをビルドしていただく必要がある場合は[Docker imageをビルドする](build_docker_image.md)をご参照ください。
 
 ### `image id`を指定してコンテナを起動します
+- NVIDIA製GPUがない場合は`--gpu all`を省略してください。
 ```bash
 docker run --rm -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     <image id>
 ```
@@ -73,7 +88,8 @@ docker run --rm -it \
 例えば以下のようにします。（必要に応じて細部を変更してください。）
 ```bash
 docker run -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /path/to/host/folder:/path/to/container/folder \
     <image id>
@@ -83,18 +99,31 @@ docker run -it \
 例えば、ホストの'/home/user/dataフォルダ'をコンテナ内の'/mnt/data'にマウントしたい場合は、以下のようになります。
 ```bash
 docker run -it \
-    --gpus all -e DISPLAY=$DISPLAY \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/user/data:/mnt/data \
     <image id>
 ```
+
+#### 具体例
+コンテナIDが`ce2952ad62d6`、`/home/user/ドキュメント/FACE01_mnt_Folder`を`/home/docker/test/`に接続する場合は以下のようになります。
+```bash
+user@user:~$ docker run -it \
+    --gpus all \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /home/user/ドキュメント/FACE01_mnt_Folder:/home/docker/test/ ce2952ad62d6
+```
+注意点として、例えばコンテナ内の`/home/docker/`に接続してしまうと、`/home/docker/FACE01_DEV/`ディレクトリが消えてしまいます。`/home/docker/`ディレクトリに接続する場合は、`/home/docker/test/`などのように新しいディレクトリにするようにしましょう。
 
 #### **NOTE**
 Webカメラなどを接続して使用する場合、以下のコマンドを実行してください。
 この場合`/dev/video0`を指定していますが、ご利用の環境によってはパスがちがう可能性があります。
 ```bash
 docker run --rm -it \
-  --gpus all -e DISPLAY=$DISPLAY \
+  --gpus all \
+  -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
   -v /tmp/.X11-unix/:/tmp/.X11-unix: <image id>
 ```

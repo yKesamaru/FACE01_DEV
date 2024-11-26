@@ -70,8 +70,8 @@ def main(path: str, padding: float = 0.4, size: int = 224) -> None:
     utils.align_and_resize_maintain_aspect_ratio(
         path,
         upper_limit_length=1024,
-        padding=0.4,
-        size=224
+        padding=0.1,
+        size=400
     )
 
 
