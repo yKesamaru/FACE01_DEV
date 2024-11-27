@@ -11,21 +11,21 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # 必要なパッケージのインストールとロケール設定
 RUN apt-get update && apt-get install -y \
-    # 線形代数関連
-    # liblapack3 \
-    # libopenblas-base \
-    # dlib build
-    # build-essential \
-    # cmake \
-    # python3-dev \
-    # libopenblas-dev \
-    # liblapack-dev \
-    # libboost-all-dev \
-    # libeigen3-dev \
-    # libx11-dev \
-    # pkg-config \
-    # cuda-toolkit-11-6 \
-    # libcublas-dev \
+    pkg-config \
+    cmake \
+    build-essential \
+    python3-dev \
+    libboost-all-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    libx11-dev \
+    libgtk-3-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
     # 必要なツール
     wget \
     sudo \
@@ -34,15 +34,11 @@ RUN apt-get update && apt-get install -y \
     vim \
     gedit \
     # Python関連
-    python3 \
     python3-tk \
     python3-pip \
     python3-venv \
     # メディア関連
     ffmpeg \
-    libavcodec58 \
-    libavformat58 \
-    libswscale5 \
     # X11ライブラリ関連
     libx11-6 \
     libsm6 \
