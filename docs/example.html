@@ -969,40 +969,44 @@ face recognition.</p>
 </section>
 <section id="module-example.display_GUI_window_JAPANESE_FACE_V1">
 <span id="example-display-gui-window-japanese-face-v1-module"></span><h2>example.display_GUI_window_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.display_GUI_window_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
-<p>顔認識モデルとしてJAPANESE FACE V1を使用したGUIアプリケーションのコード例.</p>
-<dl class="simple">
-<dt>Summary:</dt><dd><p>In this example you can learn how to display GUI and output
-face recognition.</p>
+<p>顔画像を検出し、回転・クロップ・表示するウィンドウアプリケーション.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このプログラムは、顔認識モデルを使用して動画フレーム内の顔を検出し、
+データを解析、ウィンドウにリアルタイムで表示します。
+また、指定された回数分フレームを処理します。</p>
+</dd>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py<span class="w"> </span>&lt;exec_times&gt;
+</pre></div>
+</div>
+</dd>
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>顔認識モデルを使用して顔をリアルタイムで検出</p></li>
+<li><p>検出結果をターミナルに表示 (類似度、座標、時刻など)</p></li>
+<li><p>検出されたフレームをGUIウィンドウで表示</p></li>
+<li><p>処理回数または検出件数に応じて終了</p></li>
+</ul>
 </dd>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py
 </pre></div>
 </div>
-</div>
-<p>Results:</p>
-<a class="reference internal image-reference" href="_images/display_GUI_window_JAPANESE_FACE_V1.png"><img alt="Screenshot of the GUI output" src="_images/display_GUI_window_JAPANESE_FACE_V1.png" style="width: 574.0px; height: 458.49999999999994px;" /></a>
-<p>コンソール出力は以下のようになります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">岸田文雄</span>
-<span class="go">        similarity              94.1%</span>
-<span class="go">        coordinate              (161, 711, 376, 496)</span>
-<span class="go">        time                    2024,08,17,14,16,05,135247</span>
-<span class="go">        output                  output/岸田文雄_2024,08,17,14,16,05,141640_0.55.png</span>
-<span class="go">-------</span>
-</pre></div>
 </div>
 <dl class="simple">
-<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window_JAPANESE_FACE_V1.py">display_GUI_window_JAPANESE_FACE_V1.py</a></p>
+<dt>Result:</dt><dd><ul class="simple">
+<li><p>GUIウィンドウにリアルタイムで処理結果を表示</p></li>
+<li><p>ターミナルに検出データを詳細表示</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="example.display_GUI_window_JAPANESE_FACE_V1.main">
 <span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/display_GUI_window_JAPANESE_FACE_V1.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window_JAPANESE_FACE_V1.main" title="Link to this definition"></a></dt>
-<dd><p>Display window.</p>
+<dd><p>ウィンドウを表示するメイン関数.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) -- Receive value of number which is processed. Defaults to 50 times.</p>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) -- 処理を実行する回数を受け取る. デフォルトは50回.</p>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>

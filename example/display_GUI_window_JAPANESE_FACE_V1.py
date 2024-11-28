@@ -5,11 +5,10 @@ Summary:
     データを解析、ウィンドウにリアルタイムで表示します。
     また、指定された回数分フレームを処理します。
 
-Args:
-    exec_times (int, optional): 処理を実行するフレーム数の上限を指定します。デフォルトは50回。
-
 Usage:
-    python example/display_GUI_window_JAPANESE_FACE_V1.py <exec_times>
+    .. code-block:: bash
+
+        python example/display_GUI_window_JAPANESE_FACE_V1.py <exec_times>
 
 Features:
     - 顔認識モデルを使用して顔をリアルタイムで検出
@@ -26,6 +25,7 @@ Result:
     - GUIウィンドウにリアルタイムで処理結果を表示
     - ターミナルに検出データを詳細表示
 """
+
 import os.path
 import sys
 
