@@ -1,36 +1,31 @@
-"""顔認識モデルとしてJAPANESE FACE V1を使用したGUIアプリケーションのコード例.
+"""顔画像を検出し、回転・クロップ・表示するウィンドウアプリケーション.
 
 Summary:
-    In this example you can learn how to display GUI and output
-    face recognition.
+    このプログラムは、顔認識モデルを使用して動画フレーム内の顔を検出し、
+    データを解析、ウィンドウにリアルタイムで表示します。
+    また、指定された回数分フレームを処理します。
+
+Args:
+    exec_times (int, optional): 処理を実行するフレーム数の上限を指定します。デフォルトは50回。
+
+Usage:
+    python example/display_GUI_window_JAPANESE_FACE_V1.py <exec_times>
+
+Features:
+    - 顔認識モデルを使用して顔をリアルタイムで検出
+    - 検出結果をターミナルに表示 (類似度、座標、時刻など)
+    - 検出されたフレームをGUIウィンドウで表示
+    - 処理回数または検出件数に応じて終了
 
 Example:
     .. code-block:: bash
 
-        python3 example/display_GUI_window_JAPANESE_FACE_V1.py
+        python example/display_GUI_window_JAPANESE_FACE_V1.py
 
-Results:
-
-.. image:: ../example/img/display_GUI_window_JAPANESE_FACE_V1.png
-    :scale: 70%
-    :alt: Screenshot of the GUI output
-
-コンソール出力は以下のようになります。
-
-.. code-block:: console
-
-    岸田文雄
-            similarity              94.1%
-            coordinate              (161, 711, 376, 496)
-            time                    2024,08,17,14,16,05,135247
-            output                  output/岸田文雄_2024,08,17,14,16,05,141640_0.55.png
-    -------
-
-
-Source code:
-    `display_GUI_window_JAPANESE_FACE_V1.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window_JAPANESE_FACE_V1.py>`_
+Result:
+    - GUIウィンドウにリアルタイムで処理結果を表示
+    - ターミナルに検出データを詳細表示
 """
-# Operate directory: Common to all examples
 import os.path
 import sys
 
@@ -50,70 +45,91 @@ from face01lib.Initialize import Initialize
 
 
 def main(exec_times: int = 50) -> None:
-    """Display window.
+    """ウィンドウを表示するメイン関数.
 
     Args:
-        exec_times (int, optional): Receive value of number which is processed. Defaults to 50 times.
+        exec_times (int, optional): 処理を実行する回数を受け取る. デフォルトは50回.
 
     Returns:
         None
     """
-    # Initialize
+    # 初期化処理
     CONFIG: Dict = Initialize('JAPANESE_FACE_V1_MODEL_GUI').initialize()
 
-    # Create tkinter window
+    # tkinterウィンドウの作成
     root = tk.Tk()
     root.title('FACE01 example with JAPANESE_FACE_V1 model')
     root.geometry('800x600')
 
-    # Label for displaying images
+    # 画像を表示するためのラベル
     display_label = Label(root)
     display_label.pack()
 
-    # Terminate button
+    # 終了ボタンの設定
     def terminate():
         root.destroy()
 
     terminate_button = Button(root, text="terminate", command=terminate)
     terminate_button.pack(pady=10)
 
-    # Make generator
+    # ジェネレータを生成
     gen = Core().common_process(CONFIG)
 
-    # Repeat 'exec_times' times
-    for i in range(0, exec_times):
+    try:
+        # カウント変数を初期化
+        count = 0  # フレーム全体でカウントを維持
+        max_count = 200  # 最大回数を設定
 
-        # Call __next__() from the generator object
-        frame_datas_array = gen.__next__()
+        # 'exec_times' 回処理を繰り返す
+        for i in range(0, exec_times):
 
-        for frame_datas in frame_datas_array:
+            # ジェネレータオブジェクトから次の値を取得
+            frame_datas_array = gen.__next__()
 
-            for person_data in frame_datas['person_data_list']:
-                if not person_data['name'] == 'Unknown':
-                    print(
-                        person_data['name'], "\n",
-                        "\t", "similarity\t\t", person_data['percentage_and_symbol'], "\n",
-                        "\t", "coordinate\t\t", person_data['location'], "\n",
-                        "\t", "time\t\t\t", person_data['date'], "\n",
-                        "\t", "output\t\t\t", person_data['pict'], "\n",
-                        "-------\n"
-                    )
+            for frame_datas in frame_datas_array:
 
-            # Convert the image to PIL format
-            img = cv2.cvtColor(frame_datas['img'], cv2.COLOR_BGR2RGB)  # OpenCVのBGRからRGBに変換
-            img = Image.fromarray(img)  # OpenCVの画像をPIL画像に変換
-            img = ImageTk.PhotoImage(img)  # PIL画像をImageTkに変換
+                # フレーム内の各人物データを処理
+                for person_data in frame_datas['person_data_list']:
+                    if not person_data['name'] == 'Unknown':
+                        print(
+                            person_data['name'], "\n",
+                            "\t", "類似度\t\t", person_data['percentage_and_symbol'], "\n",
+                            "\t", "座標\t\t", person_data['location'], "\n",
+                            "\t", "時刻\t\t\t", person_data['date'], "\n",
+                            "\t", "出力\t\t\t", person_data['pict'], "\n",
+                            "-------\n"
+                        )
+                    count += 1  # カウントをインクリメント
 
-            # Update the display label with the new image
-            display_label.config(image=img)
-            display_label.image = img
+                    if count >= max_count:  # カウントが200に達したらループを抜ける
+                        raise StopIteration  # 外側のループも終了するために例外を送出
 
-        # Update the window
-        root.update_idletasks()
-        root.update()
+                # 画像をPIL形式に変換
+                img = cv2.cvtColor(frame_datas['img'], cv2.COLOR_BGR2RGB)  # OpenCVのBGRをRGBに変換
+                img = Image.fromarray(img)  # OpenCVの画像をPIL画像に変換
+                img = ImageTk.PhotoImage(img)  # PIL画像をImageTkに変換
 
-    root.mainloop()
+                # 新しい画像でラベルを更新
+                display_label.config(image=img)
+                display_label.image = img
+
+            # ウィンドウを更新
+            root.update_idletasks()
+            root.update()
+
+    except StopIteration:
+        # 動画の供給が終了、またはカウントが最大に達した場合の処理
+        print("処理が完了しました。プログラムを終了します。")
+        root.destroy()  # ウィンドウを閉じる
+    except Exception as e:
+        # その他の予期しないエラーが発生した場合の処理
+        print(f"予期しないエラーが発生しました: {e}")
+        root.destroy()  # エラーが発生した場合もウィンドウを閉じる
+    finally:
+        # 終了処理
+        print("終了処理を行っています...")
 
 
 if __name__ == '__main__':
+    # メイン関数を呼び出す
     main(exec_times=2000)
