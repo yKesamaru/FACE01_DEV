@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal package &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=91613774"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="face01lib.damo_yolo.damo_internal.apis package" href="face01lib.damo_yolo.damo_internal.apis.html" />
+    <link rel="prev" title="face01lib.damo_yolo package" href="face01lib.damo_yolo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="face01lib.html">face01lib package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="face01lib.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="face01lib.damo_yolo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo.base">face01lib.damo_yolo.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Calc">face01lib.Calc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Core">face01lib.Core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Initialize">face01lib.Initialize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.LoadImage">face01lib.LoadImage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.api">face01lib.api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.combine">face01lib.combine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.load_preset_image">face01lib.load_preset_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.load_preset_image_bk">face01lib.load_preset_image_bk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.logger">face01lib.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.return_face_image">face01lib.return_face_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.spoof">face01lib.spoof module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.utils">face01lib.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.video_capture">face01lib.video_capture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="face01lib.html">face01lib package</a></li>
+          <li class="breadcrumb-item"><a href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="face01lib-damo-yolo-damo-internal-package">
+<h1>face01lib.damo_yolo.damo_internal package<a class="headerlink" href="#face01lib-damo-yolo-damo-internal-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html">face01lib.damo_yolo.damo_internal.apis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#module-face01lib.damo_yolo.damo_internal.apis.detector_inference">face01lib.damo_yolo.damo_internal.apis.detector_inference module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_inference.compute_on_dataset"><code class="docutils literal notranslate"><span class="pre">compute_on_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_inference.inference"><code class="docutils literal notranslate"><span class="pre">inference()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib-damo-yolo-damo-internal-apis-detector-inference-trt-module">face01lib.damo_yolo.damo_internal.apis.detector_inference_trt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#module-face01lib.damo_yolo.damo_internal.apis.detector_trainer">face01lib.damo_yolo.damo_internal.apis.detector_trainer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.build_optimizer"><code class="docutils literal notranslate"><span class="pre">Trainer.build_optimizer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.get_data_loader"><code class="docutils literal notranslate"><span class="pre">Trainer.get_data_loader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.resume_model"><code class="docutils literal notranslate"><span class="pre">Trainer.resume_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.save_ckpt"><code class="docutils literal notranslate"><span class="pre">Trainer.save_ckpt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.setup_iters"><code class="docutils literal notranslate"><span class="pre">Trainer.setup_iters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.Trainer.train"><code class="docutils literal notranslate"><span class="pre">Trainer.train()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.cosine_scheduler"><code class="docutils literal notranslate"><span class="pre">cosine_scheduler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.cosine_scheduler.get_lr"><code class="docutils literal notranslate"><span class="pre">cosine_scheduler.get_lr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.ema_model"><code class="docutils literal notranslate"><span class="pre">ema_model</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.ema_model.update"><code class="docutils literal notranslate"><span class="pre">ema_model.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.mkdir"><code class="docutils literal notranslate"><span class="pre">mkdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_trainer.set_seed"><code class="docutils literal notranslate"><span class="pre">set_seed()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.apis.html#module-face01lib.damo_yolo.damo_internal.apis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html">face01lib.damo_yolo.damo_internal.augmentations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#module-face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.box_level_augs">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.box_level_augs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#module-face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#module-face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.gaussian_maps">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.gaussian_maps module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#module-face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.geometric_augs">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.geometric_augs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#module-face01lib.damo_yolo.damo_internal.augmentations.box_level_augs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html#module-face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug">face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html#face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug.SA_Aug"><code class="docutils literal notranslate"><span class="pre">SA_Aug</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.augmentations.html#module-face01lib.damo_yolo.damo_internal.augmentations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.html">face01lib.damo_yolo.damo_internal.base_models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html">face01lib.damo_yolo.damo_internal.base_models.backbones package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html#module-face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_csp">face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_csp module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html#module-face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob">face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html#module-face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_res">face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_res module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.backbones.html#module-face01lib.damo_yolo.damo_internal.base_models.backbones">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.heads.html">face01lib.damo_yolo.damo_internal.base_models.heads package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.heads.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.heads.html#module-face01lib.damo_yolo.damo_internal.base_models.heads.zero_head">face01lib.damo_yolo.damo_internal.base_models.heads.zero_head module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.heads.html#module-face01lib.damo_yolo.damo_internal.base_models.heads">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.necks.html">face01lib.damo_yolo.damo_internal.base_models.necks package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.necks.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.necks.html#module-face01lib.damo_yolo.damo_internal.base_models.necks.giraffe_fpn_btn">face01lib.damo_yolo.damo_internal.base_models.necks.giraffe_fpn_btn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.necks.html#module-face01lib.damo_yolo.damo_internal.base_models.necks">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.base_models.html#module-face01lib.damo_yolo.damo_internal.base_models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html">face01lib.damo_yolo.damo_internal.config package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#module-face01lib.damo_yolo.damo_internal.config.augmentations">face01lib.damo_yolo.damo_internal.config.augmentations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#module-face01lib.damo_yolo.damo_internal.config.base">face01lib.damo_yolo.damo_internal.config.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.Config.get_data"><code class="docutils literal notranslate"><span class="pre">Config.get_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.Config.merge"><code class="docutils literal notranslate"><span class="pre">Config.merge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.Config.read_structure"><code class="docutils literal notranslate"><span class="pre">Config.read_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.get_config_by_file"><code class="docutils literal notranslate"><span class="pre">get_config_by_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.base.parse_config"><code class="docutils literal notranslate"><span class="pre">parse_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#module-face01lib.damo_yolo.damo_internal.config.paths_catalog">face01lib.damo_yolo.damo_internal.config.paths_catalog module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.paths_catalog.DatasetCatalog"><code class="docutils literal notranslate"><span class="pre">DatasetCatalog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.paths_catalog.DatasetCatalog.DATASETS"><code class="docutils literal notranslate"><span class="pre">DatasetCatalog.DATASETS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.paths_catalog.DatasetCatalog.DATA_DIR"><code class="docutils literal notranslate"><span class="pre">DatasetCatalog.DATA_DIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#face01lib.damo_yolo.damo_internal.config.paths_catalog.DatasetCatalog.get"><code class="docutils literal notranslate"><span class="pre">DatasetCatalog.get()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.config.html#module-face01lib.damo_yolo.damo_internal.config">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html">face01lib.damo_yolo.damo_internal.dataset package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html">face01lib.damo_yolo.damo_internal.dataset.datasets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html#module-face01lib.damo_yolo.damo_internal.dataset.datasets.coco">face01lib.damo_yolo.damo_internal.dataset.datasets.coco module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html#module-face01lib.damo_yolo.damo_internal.dataset.datasets.mosaic_wrapper">face01lib.damo_yolo.damo_internal.dataset.datasets.mosaic_wrapper module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.datasets.html#module-face01lib.damo_yolo.damo_internal.dataset.datasets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html">face01lib.damo_yolo.damo_internal.dataset.samplers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html#module-face01lib.damo_yolo.damo_internal.dataset.samplers.distributed">face01lib.damo_yolo.damo_internal.dataset.samplers.distributed module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html#module-face01lib.damo_yolo.damo_internal.dataset.samplers.grouped_batch_sampler">face01lib.damo_yolo.damo_internal.dataset.samplers.grouped_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html#module-face01lib.damo_yolo.damo_internal.dataset.samplers.iteration_based_batch_sampler">face01lib.damo_yolo.damo_internal.dataset.samplers.iteration_based_batch_sampler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.samplers.html#module-face01lib.damo_yolo.damo_internal.dataset.samplers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html">face01lib.damo_yolo.damo_internal.dataset.transforms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#module-face01lib.damo_yolo.damo_internal.dataset.transforms.build">face01lib.damo_yolo.damo_internal.dataset.transforms.build module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#module-face01lib.damo_yolo.damo_internal.dataset.transforms.transforms">face01lib.damo_yolo.damo_internal.dataset.transforms.transforms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#module-face01lib.damo_yolo.damo_internal.dataset.transforms.transforms_keepratio">face01lib.damo_yolo.damo_internal.dataset.transforms.transforms_keepratio module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#face01lib-damo-yolo-damo-internal-dataset-transforms-tta-aug-module">face01lib.damo_yolo.damo_internal.dataset.transforms.tta_aug module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.transforms.html#module-face01lib.damo_yolo.damo_internal.dataset.transforms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#module-face01lib.damo_yolo.damo_internal.dataset.build">face01lib.damo_yolo.damo_internal.dataset.build module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.build.build_dataloader"><code class="docutils literal notranslate"><span class="pre">build_dataloader()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.build.build_dataset"><code class="docutils literal notranslate"><span class="pre">build_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.build.make_batch_sampler"><code class="docutils literal notranslate"><span class="pre">make_batch_sampler()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.build.make_data_sampler"><code class="docutils literal notranslate"><span class="pre">make_data_sampler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#module-face01lib.damo_yolo.damo_internal.dataset.collate_batch">face01lib.damo_yolo.damo_internal.dataset.collate_batch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.collate_batch.BatchCollator"><code class="docutils literal notranslate"><span class="pre">BatchCollator</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#face01lib.damo_yolo.damo_internal.dataset.collate_batch.TTACollator"><code class="docutils literal notranslate"><span class="pre">TTACollator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.dataset.html#module-face01lib.damo_yolo.damo_internal.dataset">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html">face01lib.damo_yolo.damo_internal.structures package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#module-face01lib.damo_yolo.damo_internal.structures.bounding_box">face01lib.damo_yolo.damo_internal.structures.bounding_box module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList"><code class="docutils literal notranslate"><span class="pre">BoxList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.add_field"><code class="docutils literal notranslate"><span class="pre">BoxList.add_field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.area"><code class="docutils literal notranslate"><span class="pre">BoxList.area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.clip_to_image"><code class="docutils literal notranslate"><span class="pre">BoxList.clip_to_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.convert"><code class="docutils literal notranslate"><span class="pre">BoxList.convert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.copy_with_fields"><code class="docutils literal notranslate"><span class="pre">BoxList.copy_with_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.crop"><code class="docutils literal notranslate"><span class="pre">BoxList.crop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.fields"><code class="docutils literal notranslate"><span class="pre">BoxList.fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.get_field"><code class="docutils literal notranslate"><span class="pre">BoxList.get_field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.has_field"><code class="docutils literal notranslate"><span class="pre">BoxList.has_field()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.resize"><code class="docutils literal notranslate"><span class="pre">BoxList.resize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.to"><code class="docutils literal notranslate"><span class="pre">BoxList.to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.transpose"><code class="docutils literal notranslate"><span class="pre">BoxList.transpose()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#module-face01lib.damo_yolo.damo_internal.structures.boxlist_ops">face01lib.damo_yolo.damo_internal.structures.boxlist_ops module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.boxlist_iou"><code class="docutils literal notranslate"><span class="pre">boxlist_iou()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.cat_boxlist"><code class="docutils literal notranslate"><span class="pre">cat_boxlist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.remove_small_boxes"><code class="docutils literal notranslate"><span class="pre">remove_small_boxes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#module-face01lib.damo_yolo.damo_internal.structures.image_list">face01lib.damo_yolo.damo_internal.structures.image_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.ImageList"><code class="docutils literal notranslate"><span class="pre">ImageList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.ImageList.to"><code class="docutils literal notranslate"><span class="pre">ImageList.to()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.to_image_list"><code class="docutils literal notranslate"><span class="pre">to_image_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.structures.html#module-face01lib.damo_yolo.damo_internal.structures">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html">face01lib.damo_yolo.damo_internal.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.boxes">face01lib.damo_yolo.damo_internal.utils.boxes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.adjust_box_anns"><code class="docutils literal notranslate"><span class="pre">adjust_box_anns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.bboxes_iou"><code class="docutils literal notranslate"><span class="pre">bboxes_iou()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.filter_box"><code class="docutils literal notranslate"><span class="pre">filter_box()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.matrix_iou"><code class="docutils literal notranslate"><span class="pre">matrix_iou()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.postprocess"><code class="docutils literal notranslate"><span class="pre">postprocess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2cxcywh"><code class="docutils literal notranslate"><span class="pre">xyxy2cxcywh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2xywh"><code class="docutils literal notranslate"><span class="pre">xyxy2xywh()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.checkpoint">face01lib.damo_yolo.damo_internal.utils.checkpoint module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.checkpoint.load_ckpt"><code class="docutils literal notranslate"><span class="pre">load_ckpt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.checkpoint.save_checkpoint"><code class="docutils literal notranslate"><span class="pre">save_checkpoint()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.debug_utils">face01lib.damo_yolo.damo_internal.utils.debug_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.debug_utils.debug_input_vis"><code class="docutils literal notranslate"><span class="pre">debug_input_vis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.demo_utils">face01lib.damo_yolo.damo_internal.utils.demo_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.demo_utils.demo_postprocess"><code class="docutils literal notranslate"><span class="pre">demo_postprocess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.demo_utils.mkdir"><code class="docutils literal notranslate"><span class="pre">mkdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.demo_utils.multiclass_nms"><code class="docutils literal notranslate"><span class="pre">multiclass_nms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.demo_utils.nms"><code class="docutils literal notranslate"><span class="pre">nms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.demo_utils.transform_img"><code class="docutils literal notranslate"><span class="pre">transform_img()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.dist">face01lib.damo_yolo.damo_internal.utils.dist module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.all_gather"><code class="docutils literal notranslate"><span class="pre">all_gather()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.gather"><code class="docutils literal notranslate"><span class="pre">gather()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_local_rank"><code class="docutils literal notranslate"><span class="pre">get_local_rank()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_local_size"><code class="docutils literal notranslate"><span class="pre">get_local_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_num_devices"><code class="docutils literal notranslate"><span class="pre">get_num_devices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_rank"><code class="docutils literal notranslate"><span class="pre">get_rank()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_world_size"><code class="docutils literal notranslate"><span class="pre">get_world_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.is_main_process"><code class="docutils literal notranslate"><span class="pre">is_main_process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.synchronize"><code class="docutils literal notranslate"><span class="pre">synchronize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.time_synchronized"><code class="docutils literal notranslate"><span class="pre">time_synchronized()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.wait_for_the_master"><code class="docutils literal notranslate"><span class="pre">wait_for_the_master()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.imports">face01lib.damo_yolo.damo_internal.utils.imports module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.imports.import_file"><code class="docutils literal notranslate"><span class="pre">import_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.logger">face01lib.damo_yolo.damo_internal.utils.logger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru"><code class="docutils literal notranslate"><span class="pre">StreamToLoguru</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.flush"><code class="docutils literal notranslate"><span class="pre">StreamToLoguru.flush()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.write"><code class="docutils literal notranslate"><span class="pre">StreamToLoguru.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.get_caller_name"><code class="docutils literal notranslate"><span class="pre">get_caller_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.redirect_sys_output"><code class="docutils literal notranslate"><span class="pre">redirect_sys_output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.logger.setup_logger"><code class="docutils literal notranslate"><span class="pre">setup_logger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.metric">face01lib.damo_yolo.damo_internal.utils.metric module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter"><code class="docutils literal notranslate"><span class="pre">AverageMeter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.avg"><code class="docutils literal notranslate"><span class="pre">AverageMeter.avg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.clear"><code class="docutils literal notranslate"><span class="pre">AverageMeter.clear()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.global_avg"><code class="docutils literal notranslate"><span class="pre">AverageMeter.global_avg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.latest"><code class="docutils literal notranslate"><span class="pre">AverageMeter.latest</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.median"><code class="docutils literal notranslate"><span class="pre">AverageMeter.median</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.reset"><code class="docutils literal notranslate"><span class="pre">AverageMeter.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.total"><code class="docutils literal notranslate"><span class="pre">AverageMeter.total</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.update"><code class="docutils literal notranslate"><span class="pre">AverageMeter.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer"><code class="docutils literal notranslate"><span class="pre">MeterBuffer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.clear_meters"><code class="docutils literal notranslate"><span class="pre">MeterBuffer.clear_meters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.get_filtered_meter"><code class="docutils literal notranslate"><span class="pre">MeterBuffer.get_filtered_meter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.reset"><code class="docutils literal notranslate"><span class="pre">MeterBuffer.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.update"><code class="docutils literal notranslate"><span class="pre">MeterBuffer.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.get_total_and_free_memory_in_Mb"><code class="docutils literal notranslate"><span class="pre">get_total_and_free_memory_in_Mb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.metric.gpu_mem_usage"><code class="docutils literal notranslate"><span class="pre">gpu_mem_usage()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.model_utils">face01lib.damo_yolo.damo_internal.utils.model_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_conv_and_bn"><code class="docutils literal notranslate"><span class="pre">fuse_conv_and_bn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_model"><code class="docutils literal notranslate"><span class="pre">fuse_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.model_utils.get_model_info"><code class="docutils literal notranslate"><span class="pre">get_model_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.model_utils.make_divisible"><code class="docutils literal notranslate"><span class="pre">make_divisible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.model_utils.replace_module"><code class="docutils literal notranslate"><span class="pre">replace_module()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.timer">face01lib.damo_yolo.damo_internal.utils.timer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer"><code class="docutils literal notranslate"><span class="pre">Timer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.add"><code class="docutils literal notranslate"><span class="pre">Timer.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.average_time"><code class="docutils literal notranslate"><span class="pre">Timer.average_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.avg_time_str"><code class="docutils literal notranslate"><span class="pre">Timer.avg_time_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.reset"><code class="docutils literal notranslate"><span class="pre">Timer.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.tic"><code class="docutils literal notranslate"><span class="pre">Timer.tic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.Timer.toc"><code class="docutils literal notranslate"><span class="pre">Timer.toc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.timer.get_time_str"><code class="docutils literal notranslate"><span class="pre">get_time_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils.visualize">face01lib.damo_yolo.damo_internal.utils.visualize module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.visualize.vis"><code class="docutils literal notranslate"><span class="pre">vis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.damo_yolo.damo_internal.utils.html#module-face01lib.damo_yolo.damo_internal.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="face01lib.damo_yolo.html" class="btn btn-neutral float-left" title="face01lib.damo_yolo package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="face01lib.damo_yolo.damo_internal.apis.html" class="btn btn-neutral float-right" title="face01lib.damo_yolo.damo_internal.apis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

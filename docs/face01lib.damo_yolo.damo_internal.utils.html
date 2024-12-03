@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.utils package &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=91613774"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="face01lib.models package" href="face01lib.models.html" />
+    <link rel="prev" title="face01lib.damo_yolo.damo_internal.structures package" href="face01lib.damo_yolo.damo_internal.structures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">example package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="face01lib.html">face01lib package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="face01lib.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="face01lib.damo_yolo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo.base">face01lib.damo_yolo.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="face01lib.models.html">face01lib.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Calc">face01lib.Calc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Core">face01lib.Core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.Initialize">face01lib.Initialize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.LoadImage">face01lib.LoadImage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.api">face01lib.api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.combine">face01lib.combine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.load_preset_image">face01lib.load_preset_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.load_preset_image_bk">face01lib.load_preset_image_bk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.logger">face01lib.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.return_face_image">face01lib.return_face_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.spoof">face01lib.spoof module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.utils">face01lib.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib.video_capture">face01lib.video_capture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="face01lib.html#module-face01lib">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="face01lib.html">face01lib package</a></li>
+          <li class="breadcrumb-item"><a href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a></li>
+          <li class="breadcrumb-item"><a href="face01lib.damo_yolo.damo_internal.html">face01lib.damo_yolo.damo_internal package</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="face01lib-damo-yolo-damo-internal-utils-package">
+<h1>face01lib.damo_yolo.damo_internal.utils package<a class="headerlink" href="#face01lib-damo-yolo-damo-internal-utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.boxes">
+<span id="face01lib-damo-yolo-damo-internal-utils-boxes-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.boxes module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.boxes" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.adjust_box_anns">
+<span class="sig-name descname"><span class="pre">adjust_box_anns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#adjust_box_anns"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.adjust_box_anns" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.bboxes_iou">
+<span class="sig-name descname"><span class="pre">bboxes_iou</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bboxes_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bboxes_b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyxy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#bboxes_iou"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.bboxes_iou" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.filter_box">
+<span class="sig-name descname"><span class="pre">filter_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_range</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#filter_box"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.filter_box" title="Link to this definition"></a></dt>
+<dd><p>output: (N, 5+class) shape</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.matrix_iou">
+<span class="sig-name descname"><span class="pre">matrix_iou</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#matrix_iou"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.matrix_iou" title="Link to this definition"></a></dt>
+<dd><p>return iou of a and b, numpy version for data augenmentation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.postprocess">
+<span class="sig-name descname"><span class="pre">postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf_thre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_thre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#postprocess"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.postprocess" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2cxcywh">
+<span class="sig-name descname"><span class="pre">xyxy2cxcywh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bboxes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#xyxy2cxcywh"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2cxcywh" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2xywh">
+<span class="sig-name descname"><span class="pre">xyxy2xywh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bboxes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/boxes.html#xyxy2xywh"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2xywh" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.checkpoint">
+<span id="face01lib-damo-yolo-damo-internal-utils-checkpoint-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.checkpoint module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.checkpoint" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.checkpoint.load_ckpt">
+<span class="sig-name descname"><span class="pre">load_ckpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ckpt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/checkpoint.html#load_ckpt"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.checkpoint.load_ckpt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.checkpoint.save_checkpoint">
+<span class="sig-name descname"><span class="pre">save_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_best</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/checkpoint.html#save_checkpoint"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.checkpoint.save_checkpoint" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.debug_utils">
+<span id="face01lib-damo-yolo-damo-internal-utils-debug-utils-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.debug_utils module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.debug_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.debug_utils.debug_input_vis">
+<span class="sig-name descname"><span class="pre">debug_input_vis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loader</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/debug_utils.html#debug_input_vis"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.debug_utils.debug_input_vis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.demo_utils">
+<span id="face01lib-damo-yolo-damo-internal-utils-demo-utils-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.demo_utils module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.demo_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.demo_postprocess">
+<span class="sig-name descname"><span class="pre">demo_postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p6</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#demo_postprocess"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.demo_postprocess" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.mkdir">
+<span class="sig-name descname"><span class="pre">mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#mkdir"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.mkdir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.multiclass_nms">
+<span class="sig-name descname"><span class="pre">multiclass_nms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_thr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_thr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#multiclass_nms"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.multiclass_nms" title="Link to this definition"></a></dt>
+<dd><p>Multiclass NMS implemented in Numpy</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.nms">
+<span class="sig-name descname"><span class="pre">nms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_thr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#nms"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.nms" title="Link to this definition"></a></dt>
+<dd><p>Single class NMS implemented in Numpy.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.transform_img">
+<span class="sig-name descname"><span class="pre">transform_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_divisibility</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_max_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#transform_img"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.transform_img" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.dist">
+<span id="face01lib-damo-yolo-damo-internal-utils-dist-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.dist module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.dist" title="Link to this heading"></a></h2>
+<p>This file contains primitives for multi-gpu communication.
+This is useful when doing distributed training.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.all_gather">
+<span class="sig-name descname"><span class="pre">all_gather</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#all_gather"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.all_gather" title="Link to this definition"></a></dt>
+<dd><p>Run all_gather on arbitrary picklable data (not necessarily tensors).
+:param data: any picklable object
+:param group: a torch process group. By default, will use a group which</p>
+<blockquote>
+<div><p>contains all ranks on gloo backend.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of data gathered from each rank</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[data]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.gather">
+<span class="sig-name descname"><span class="pre">gather</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#gather"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.gather" title="Link to this definition"></a></dt>
+<dd><p>Run gather on arbitrary picklable data (not necessarily tensors).
+:param data: any picklable object
+:param dst: destination rank
+:type dst: int
+:param group: a torch process group. By default, will use a group which</p>
+<blockquote>
+<div><p>contains all ranks on gloo backend.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>on dst, a list of data gathered from each rank. Otherwise,</dt><dd><p>an empty list.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[data]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.get_local_rank">
+<span class="sig-name descname"><span class="pre">get_local_rank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#get_local_rank"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.get_local_rank" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rank of the current process within the
+local (per-machine) process group.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.get_local_size">
+<span class="sig-name descname"><span class="pre">get_local_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#get_local_size"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.get_local_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The size of the per-machine process group,
+i.e. the number of processes per machine.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.get_num_devices">
+<span class="sig-name descname"><span class="pre">get_num_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#get_num_devices"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.get_num_devices" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.get_rank">
+<span class="sig-name descname"><span class="pre">get_rank</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#get_rank"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.get_rank" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.get_world_size">
+<span class="sig-name descname"><span class="pre">get_world_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#get_world_size"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.get_world_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.is_main_process">
+<span class="sig-name descname"><span class="pre">is_main_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#is_main_process"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.is_main_process" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.synchronize">
+<span class="sig-name descname"><span class="pre">synchronize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#synchronize"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.synchronize" title="Link to this definition"></a></dt>
+<dd><p>Helper function to synchronize (barrier)
+among all processes when using distributed training</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.time_synchronized">
+<span class="sig-name descname"><span class="pre">time_synchronized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#time_synchronized"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.time_synchronized" title="Link to this definition"></a></dt>
+<dd><p>pytorch-accurate time</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.dist.wait_for_the_master">
+<span class="sig-name descname"><span class="pre">wait_for_the_master</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/dist.html#wait_for_the_master"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.dist.wait_for_the_master" title="Link to this definition"></a></dt>
+<dd><p>Make all processes waiting for the master to do some task.</p>
+</dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.imports">
+<span id="face01lib-damo-yolo-damo-internal-utils-imports-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.imports module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.imports" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.imports.import_file">
+<span class="sig-name descname"><span class="pre">import_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_importable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/imports.html#import_file"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.imports.import_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.logger">
+<span id="face01lib-damo-yolo-damo-internal-utils-logger-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.logger module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.logger" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StreamToLoguru</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'INFO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caller_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('apex',</span> <span class="pre">'pycocotools')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#StreamToLoguru"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>stream object that redirects writes to a logger instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#StreamToLoguru.flush"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.flush" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#StreamToLoguru.write"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.StreamToLoguru.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.get_caller_name">
+<span class="sig-name descname"><span class="pre">get_caller_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#get_caller_name"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.get_caller_name" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) -- Depth of caller conext, use 0 for caller depth.</p></li>
+<li><p><strong>value</strong> (<em>Default</em>) -- <ol class="arabic simple" start="0">
+<li></li>
+</ol>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>module name of the caller</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.redirect_sys_output">
+<span class="sig-name descname"><span class="pre">redirect_sys_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'INFO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#redirect_sys_output"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.redirect_sys_output" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.logger.setup_logger">
+<span class="sig-name descname"><span class="pre">setup_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distributed_rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/logger.html#setup_logger"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.logger.setup_logger" title="Link to this definition"></a></dt>
+<dd><p>setup logger for training and testing.
+:param save_dir: location to save log file
+:type save_dir: str
+:param distributed_rank: device rank when multi-gpu environment
+:type distributed_rank: int
+:param mode: log file write mode, <cite>append</cite> or <cite>override</cite>. default is <cite>a</cite>.
+:type mode: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logger instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.metric">
+<span id="face01lib-damo-yolo-damo-internal-utils-metric-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.metric module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.metric" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AverageMeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#AverageMeter"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Track a series of values and provide access to smoothed values over a
+window or the global series average.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.avg">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">avg</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.avg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#AverageMeter.clear"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.clear" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.global_avg">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">global_avg</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.global_avg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.latest">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">latest</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.latest" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.median">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">median</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.median" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#AverageMeter.reset"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.total">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">total</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.total" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#AverageMeter.update"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.AverageMeter.update" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeterBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#MeterBuffer"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.defaultdict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">defaultdict</span></code></a></p>
+<p>Computes and stores the average and current value</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.clear_meters">
+<span class="sig-name descname"><span class="pre">clear_meters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#MeterBuffer.clear_meters"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.clear_meters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.get_filtered_meter">
+<span class="sig-name descname"><span class="pre">get_filtered_meter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'time'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#MeterBuffer.get_filtered_meter"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.get_filtered_meter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#MeterBuffer.reset"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">**F</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span>&#160; <span class="pre">Update</span> <span class="pre">D</span> <span class="pre">from</span> <span class="pre">dict/iterable</span> <span class="pre">E</span> <span class="pre">and</span> <span class="pre">F.</span></span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#MeterBuffer.update"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.MeterBuffer.update" title="Link to this definition"></a></dt>
+<dd><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.get_total_and_free_memory_in_Mb">
+<span class="sig-name descname"><span class="pre">get_total_and_free_memory_in_Mb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cuda_device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#get_total_and_free_memory_in_Mb"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.get_total_and_free_memory_in_Mb" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.metric.gpu_mem_usage">
+<span class="sig-name descname"><span class="pre">gpu_mem_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/metric.html#gpu_mem_usage"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.metric.gpu_mem_usage" title="Link to this definition"></a></dt>
+<dd><p>Compute the GPU memory usage for the current device (MB).</p>
+</dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.model_utils">
+<span id="face01lib-damo-yolo-damo-internal-utils-model-utils-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.model_utils module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.model_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_conv_and_bn">
+<span class="sig-name descname"><span class="pre">fuse_conv_and_bn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/model_utils.html#fuse_conv_and_bn"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_conv_and_bn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_model">
+<span class="sig-name descname"><span class="pre">fuse_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/model_utils.html#fuse_model"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.model_utils.fuse_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.model_utils.get_model_info">
+<span class="sig-name descname"><span class="pre">get_model_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsize</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/model_utils.html#get_model_info"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.model_utils.get_model_info" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.model_utils.make_divisible">
+<span class="sig-name descname"><span class="pre">make_divisible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/model_utils.html#make_divisible"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.model_utils.make_divisible" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.model_utils.replace_module">
+<span class="sig-name descname"><span class="pre">replace_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaced_module_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_module_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/model_utils.html#replace_module"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.model_utils.replace_module" title="Link to this definition"></a></dt>
+<dd><p>Replace given type in module to a new type. mostly used in deploy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>nn.Module</em>) -- model to apply replace operation.</p></li>
+<li><p><strong>replaced_module_type</strong> (<em>Type</em>) -- module type to be replaced.</p></li>
+<li><p><strong>new_module_type</strong> (<em>Type</em>)</p></li>
+<li><p><strong>replace_func</strong> (<em>function</em>) -- python function to describe replace logic.
+Defalut value None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>module that already been replaced.</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p>model (nn.Module)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.timer">
+<span id="face01lib-damo-yolo-damo-internal-utils-timer-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.timer module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.timer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Timer</span></span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer" title="Link to this definition"></a></dt>
+<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_diff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer.add"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.add" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.average_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">average_time</span></span><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.average_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.avg_time_str">
+<span class="sig-name descname"><span class="pre">avg_time_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer.avg_time_str"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.avg_time_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer.reset"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.tic">
+<span class="sig-name descname"><span class="pre">tic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer.tic"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.tic" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.Timer.toc">
+<span class="sig-name descname"><span class="pre">toc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#Timer.toc"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.Timer.toc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.timer.get_time_str">
+<span class="sig-name descname"><span class="pre">get_time_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_diff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/timer.html#get_time_str"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.timer.get_time_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils.visualize">
+<span id="face01lib-damo-yolo-damo-internal-utils-visualize-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.visualize module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.visualize" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.visualize.vis">
+<span class="sig-name descname"><span class="pre">vis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/visualize.html#vis"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.visualize.vis" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-face01lib.damo_yolo.damo_internal.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="face01lib.damo_yolo.damo_internal.structures.html" class="btn btn-neutral float-left" title="face01lib.damo_yolo.damo_internal.structures package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="face01lib.models.html" class="btn btn-neutral float-right" title="face01lib.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

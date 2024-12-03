@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.utils.dist &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.utils.dist</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.utils.dist のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># This file mainly comes from</span>
+<span class="c1"># https://github.com/facebookresearch/detectron2/blob/master/detectron2/utils/comm.py</span>
+<span class="c1"># Copyright (c) Facebook, Inc. and its affiliates.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This file contains primitives for multi-gpu communication.</span>
+<span class="sd">This is useful when doing distributed training.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">distributed</span> <span class="k">as</span> <span class="n">dist</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;get_num_devices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wait_for_the_master&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;is_main_process&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;synchronize&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_world_size&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_rank&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_local_rank&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;get_local_size&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;time_synchronized&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gather&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;all_gather&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">_LOCAL_PROCESS_GROUP</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="get_num_devices">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_num_devices">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">get_num_devices</span><span class="p">():</span>
+    <span class="n">gpu_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;CUDA_VISIBLE_DEVICES&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gpu_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">gpu_list</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">devices_list_info</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;nvidia-smi -L&#39;</span><span class="p">)</span>
+        <span class="n">devices_list_info</span> <span class="o">=</span> <span class="n">devices_list_info</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">devices_list_info</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="wait_for_the_master">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.wait_for_the_master">[ドキュメント]</a>
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">wait_for_the_master</span><span class="p">(</span><span class="n">local_rank</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make all processes waiting for the master to do some task.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">local_rank</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    <span class="k">yield</span>
+    <span class="k">if</span> <span class="n">local_rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dist</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="synchronize">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.synchronize">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">synchronize</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to synchronize (barrier)</span>
+<span class="sd">    among all processes when using distributed training</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+        <span class="k">return</span>
+    <span class="n">world_size</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">world_size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">dist</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_world_size">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_world_size">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">get_world_size</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_rank">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_rank">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">get_rank</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_local_rank">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_local_rank">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">get_local_rank</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The rank of the current process within the</span>
+<span class="sd">        local (per-machine) process group.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">assert</span> <span class="n">_LOCAL_PROCESS_GROUP</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">_LOCAL_PROCESS_GROUP</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_local_size">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.get_local_size">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">get_local_size</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The size of the per-machine process group,</span>
+<span class="sd">        i.e. the number of processes per machine.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">_LOCAL_PROCESS_GROUP</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="is_main_process">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.is_main_process">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">is_main_process</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">get_rank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span></div>
+
+
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">_get_global_gloo_group</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a process group based on gloo backend, containing all the ranks</span>
+<span class="sd">    The result is cached.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;nccl&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">new_group</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;gloo&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">WORLD</span>
+
+
+<span class="k">def</span> <span class="nf">_serialize_to_tensor</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">backend</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;gloo&#39;</span><span class="p">,</span> <span class="s1">&#39;nccl&#39;</span><span class="p">]</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span> <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;gloo&#39;</span> <span class="k">else</span> <span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s1">&#39;Rank </span><span class="si">{}</span><span class="s1"> trying to all-gather </span><span class="si">{:.2f}</span><span class="s1"> GB of data on device </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span>
+            <span class="nb">format</span><span class="p">(</span><span class="n">get_rank</span><span class="p">(),</span>
+                   <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="n">device</span><span class="p">))</span>
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ByteStorage</span><span class="o">.</span><span class="n">from_buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ByteTensor</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tensor</span>
+
+
+<span class="k">def</span> <span class="nf">_pad_to_largest_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list[int]: size of the tensor, on each rank</span>
+<span class="sd">        Tensor: padded tensor that has the max size</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">world_size</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">world_size</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+    <span class="p">),</span> <span class="s1">&#39;comm.gather/all_gather must be called from ranks within the group!&#39;</span>
+    <span class="n">local_size</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tensor</span><span class="o">.</span><span class="n">numel</span><span class="p">()],</span>
+                              <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span>
+                              <span class="n">device</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">size_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">world_size</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">dist</span><span class="o">.</span><span class="n">all_gather</span><span class="p">(</span><span class="n">size_list</span><span class="p">,</span> <span class="n">local_size</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+    <span class="n">size_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">item</span><span class="p">())</span> <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">size_list</span><span class="p">]</span>
+
+    <span class="n">max_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">size_list</span><span class="p">)</span>
+
+    <span class="c1"># we pad the tensor because torch all_gather does not support</span>
+    <span class="c1"># gathering tensors of different shapes</span>
+    <span class="k">if</span> <span class="n">local_size</span> <span class="o">!=</span> <span class="n">max_size</span><span class="p">:</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">max_size</span> <span class="o">-</span> <span class="n">local_size</span><span class="p">,</span> <span class="p">),</span>
+                              <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span>
+                              <span class="n">device</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">tensor</span><span class="p">,</span> <span class="n">padding</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">size_list</span><span class="p">,</span> <span class="n">tensor</span>
+
+
+<div class="viewcode-block" id="all_gather">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.all_gather">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">all_gather</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run all_gather on arbitrary picklable data (not necessarily tensors).</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data: any picklable object</span>
+<span class="sd">        group: a torch process group. By default, will use a group which</span>
+<span class="sd">            contains all ranks on gloo backend.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list[data]: list of data gathered from each rank</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">get_world_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">group</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">_get_global_gloo_group</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">_serialize_to_tensor</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+
+    <span class="n">size_list</span><span class="p">,</span> <span class="n">tensor</span> <span class="o">=</span> <span class="n">_pad_to_largest_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+    <span class="n">max_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">size_list</span><span class="p">)</span>
+
+    <span class="c1"># receiving Tensor from all ranks</span>
+    <span class="n">tensor_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_size</span><span class="p">,</span> <span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">size_list</span>
+    <span class="p">]</span>
+    <span class="n">dist</span><span class="o">.</span><span class="n">all_gather</span><span class="p">(</span><span class="n">tensor_list</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+
+    <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">size</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">size_list</span><span class="p">,</span> <span class="n">tensor_list</span><span class="p">):</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()[:</span><span class="n">size</span><span class="p">]</span>
+        <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">data_list</span></div>
+
+
+
+<div class="viewcode-block" id="gather">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.gather">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">gather</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run gather on arbitrary picklable data (not necessarily tensors).</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data: any picklable object</span>
+<span class="sd">        dst (int): destination rank</span>
+<span class="sd">        group: a torch process group. By default, will use a group which</span>
+<span class="sd">            contains all ranks on gloo backend.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list[data]: on dst, a list of data gathered from each rank. Otherwise,</span>
+<span class="sd">            an empty list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">get_world_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">group</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">_get_global_gloo_group</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_rank</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">_serialize_to_tensor</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+    <span class="n">size_list</span><span class="p">,</span> <span class="n">tensor</span> <span class="o">=</span> <span class="n">_pad_to_largest_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+
+    <span class="c1"># receiving Tensor from all ranks</span>
+    <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="n">dst</span><span class="p">:</span>
+        <span class="n">max_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">size_list</span><span class="p">)</span>
+        <span class="n">tensor_list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_size</span><span class="p">,</span> <span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">tensor</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">size_list</span>
+        <span class="p">]</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">tensor_list</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">dst</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+
+        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">size</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">size_list</span><span class="p">,</span> <span class="n">tensor_list</span><span class="p">):</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()[:</span><span class="n">size</span><span class="p">]</span>
+            <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">data_list</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="p">[],</span> <span class="n">dst</span><span class="o">=</span><span class="n">dst</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">shared_random_seed</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        int: a random number that is the same across all workers.</span>
+<span class="sd">            If workers need a shared RNG, they can use this shared seed to</span>
+<span class="sd">            create one.</span>
+<span class="sd">    All workers must call this function, otherwise it will deadlock.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">31</span><span class="p">)</span>
+    <span class="n">all_ints</span> <span class="o">=</span> <span class="n">all_gather</span><span class="p">(</span><span class="n">ints</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_ints</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="time_synchronized">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.dist.time_synchronized">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">time_synchronized</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;pytorch-accurate time&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

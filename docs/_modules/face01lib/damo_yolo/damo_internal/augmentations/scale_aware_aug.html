@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file mainly comes from</span>
+<span class="c1"># https://github.com/dvlab-research/SA-AutoAug/blob/master/FCOS/fcos_core/augmentations/scale_aware_aug.py</span>
+<span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">from</span> <span class="nn">..augmentations.box_level_augs.box_level_augs</span> <span class="kn">import</span> <span class="n">Box_augs</span>
+<span class="kn">from</span> <span class="nn">..augmentations.box_level_augs.color_augs</span> <span class="kn">import</span> <span class="n">color_aug_func</span>
+<span class="kn">from</span> <span class="nn">..augmentations.box_level_augs.geometric_augs</span> <span class="kn">import</span> <span class="n">geometric_aug_func</span>
+
+
+<div class="viewcode-block" id="SA_Aug">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.augmentations.html#face01lib.damo_yolo.damo_internal.augmentations.scale_aware_aug.SA_Aug">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">SA_Aug</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iters_per_epoch</span><span class="p">,</span> <span class="n">start_epoch</span><span class="p">,</span> <span class="n">total_epochs</span><span class="p">,</span>
+                 <span class="n">no_aug_epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">,</span> <span class="n">sada_cfg</span><span class="p">):</span>
+
+        <span class="n">autoaug_list</span> <span class="o">=</span> <span class="n">sada_cfg</span><span class="o">.</span><span class="n">autoaug_params</span>
+        <span class="n">num_policies</span> <span class="o">=</span> <span class="n">sada_cfg</span><span class="o">.</span><span class="n">num_subpolicies</span>
+        <span class="n">scale_splits</span> <span class="o">=</span> <span class="n">sada_cfg</span><span class="o">.</span><span class="n">scale_splits</span>
+        <span class="n">box_prob</span> <span class="o">=</span> <span class="n">sada_cfg</span><span class="o">.</span><span class="n">box_prob</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span> <span class="o">/</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span> <span class="o">=</span> <span class="n">num_workers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_epochs</span> <span class="o">-</span> <span class="n">no_aug_epochs</span><span class="p">)</span> <span class="o">*</span> <span class="n">iters_per_epoch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">start_epoch</span> <span class="o">*</span> <span class="n">iters_per_epoch</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">box_aug_list</span> <span class="o">=</span> <span class="n">autoaug_list</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="n">color_aug_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">color_aug_func</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">geometric_aug_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">geometric_aug_func</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">policies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_policies</span><span class="p">):</span>
+            <span class="n">_start_pos</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">6</span>
+            <span class="n">sub_policy</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span>
+                    <span class="n">color_aug_types</span><span class="p">[</span><span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="o">%</span>
+                                    <span class="nb">len</span><span class="p">(</span><span class="n">color_aug_types</span><span class="p">)],</span>
+                    <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">,</span>
+                    <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="p">),</span>  <span class="c1"># box_color policy</span>
+                <span class="p">(</span><span class="n">geometric_aug_types</span><span class="p">[</span><span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">%</span>
+                                     <span class="nb">len</span><span class="p">(</span><span class="n">geometric_aug_types</span><span class="p">)],</span>
+                 <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">5</span><span class="p">])</span>
+            <span class="p">]</span>  <span class="c1"># box_geometric policy</span>
+            <span class="n">policies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_policy</span><span class="p">)</span>
+
+        <span class="n">_start_pos</span> <span class="o">=</span> <span class="n">num_policies</span> <span class="o">*</span> <span class="mi">6</span>
+        <span class="n">scale_ratios</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;area&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">0</span><span class="p">],</span> <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;prob&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">3</span><span class="p">],</span> <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">4</span><span class="p">],</span>
+                <span class="n">box_aug_list</span><span class="p">[</span><span class="n">_start_pos</span> <span class="o">+</span> <span class="mi">5</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+
+        <span class="n">box_augs_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;policies&#39;</span><span class="p">:</span> <span class="n">policies</span><span class="p">,</span> <span class="s1">&#39;scale_ratios&#39;</span><span class="p">:</span> <span class="n">scale_ratios</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">box_augs</span> <span class="o">=</span> <span class="n">Box_augs</span><span class="p">(</span><span class="n">box_augs_dict</span><span class="o">=</span><span class="n">box_augs_dict</span><span class="p">,</span>
+                                 <span class="n">max_iters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span><span class="p">,</span>
+                                 <span class="n">scale_splits</span><span class="o">=</span><span class="n">scale_splits</span><span class="p">,</span>
+                                 <span class="n">box_prob</span><span class="o">=</span><span class="n">box_prob</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">iteration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span>
+        <span class="n">tensor</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">tensor</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_augs</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="n">iteration</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">target</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

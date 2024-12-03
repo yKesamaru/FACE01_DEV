@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.apis.detector_inference &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.apis.detector_inference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.apis.detector_inference のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.</span>
+<span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">..dataset.datasets.evaluation</span> <span class="kn">import</span> <span class="n">evaluate</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">all_gather</span><span class="p">,</span> <span class="n">get_world_size</span><span class="p">,</span> <span class="n">is_main_process</span><span class="p">,</span> <span class="n">synchronize</span>
+<span class="kn">from</span> <span class="nn">..utils.timer</span> <span class="kn">import</span> <span class="n">Timer</span><span class="p">,</span> <span class="n">get_time_str</span>
+
+
+<div class="viewcode-block" id="compute_on_dataset">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_inference.compute_on_dataset">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">compute_on_dataset</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tta</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">cpu_device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">data_loader</span><span class="p">)):</span>
+        <span class="n">images</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">image_ids</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">timer</span><span class="p">:</span>
+                <span class="n">timer</span><span class="o">.</span><span class="n">tic</span><span class="p">()</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">timer</span><span class="p">:</span>
+                <span class="c1"># torch.cuda.synchronize() # consume much time</span>
+                <span class="n">timer</span><span class="o">.</span><span class="n">toc</span><span class="p">()</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cpu_device</span><span class="p">)</span> <span class="k">if</span> <span class="n">o</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">output</span><span class="p">]</span>
+        <span class="n">results_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">img_id</span><span class="p">:</span> <span class="n">result</span>
+             <span class="k">for</span> <span class="n">img_id</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_ids</span><span class="p">,</span> <span class="n">output</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">results_dict</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_accumulate_predictions_from_multiple_gpus</span><span class="p">(</span><span class="n">predictions_per_gpu</span><span class="p">,</span>
+                                               <span class="n">multi_gpu_infer</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">multi_gpu_infer</span><span class="p">:</span>
+        <span class="n">all_predictions</span> <span class="o">=</span> <span class="n">all_gather</span><span class="p">(</span><span class="n">predictions_per_gpu</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">all_predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">predictions_per_gpu</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_main_process</span><span class="p">():</span>
+        <span class="k">return</span>
+    <span class="c1"># merge the list of dicts</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">all_predictions</span><span class="p">:</span>
+        <span class="n">predictions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="c1"># convert a dict where the key is the index in a list</span>
+    <span class="n">image_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_ids</span><span class="p">)</span> <span class="o">!=</span> <span class="n">image_ids</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s1">&#39;Number of images that were gathered from multiple processes is&#39;</span>
+            <span class="s1">&#39;not a contiguous set. Some images might be missing from the&#39;</span>
+            <span class="s1">&#39;evaluation&#39;</span><span class="p">)</span>
+
+    <span class="c1"># convert to a list</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">predictions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">image_ids</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">predictions</span>
+
+
+<div class="viewcode-block" id="inference">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.apis.html#face01lib.damo_yolo.damo_internal.apis.detector_inference.inference">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">inference</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">data_loader</span><span class="p">,</span>
+    <span class="n">dataset_name</span><span class="p">,</span>
+    <span class="n">iou_types</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;bbox&#39;</span><span class="p">,</span> <span class="p">),</span>
+    <span class="n">box_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span>
+    <span class="n">expected_results</span><span class="o">=</span><span class="p">(),</span>
+    <span class="n">expected_results_sigma_tol</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">output_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">multi_gpu_infer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># convert to a torch.device for efficiency</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">num_devices</span> <span class="o">=</span> <span class="n">get_world_size</span><span class="p">()</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">dataset</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Start evaluation on </span><span class="si">{}</span><span class="s1"> dataset(</span><span class="si">{}</span><span class="s1"> images).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">dataset_name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
+    <span class="n">total_timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">()</span>
+    <span class="n">inference_timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">()</span>
+    <span class="n">total_timer</span><span class="o">.</span><span class="n">tic</span><span class="p">()</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">compute_on_dataset</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span>
+                                     <span class="n">inference_timer</span><span class="p">)</span>
+    <span class="c1"># wait for all processes to complete before measuring the time</span>
+    <span class="k">if</span> <span class="n">multi_gpu_infer</span><span class="p">:</span>
+        <span class="n">synchronize</span><span class="p">()</span>
+    <span class="n">total_time</span> <span class="o">=</span> <span class="n">total_timer</span><span class="o">.</span><span class="n">toc</span><span class="p">()</span>
+    <span class="n">total_time_str</span> <span class="o">=</span> <span class="n">get_time_str</span><span class="p">(</span><span class="n">total_time</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s1">&#39;Total run time: </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1"> s / img per device, on </span><span class="si">{}</span><span class="s1"> devices)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">total_time_str</span><span class="p">,</span> <span class="n">total_time</span> <span class="o">*</span> <span class="n">num_devices</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span>
+            <span class="n">num_devices</span><span class="p">))</span>
+    <span class="n">total_infer_time</span> <span class="o">=</span> <span class="n">get_time_str</span><span class="p">(</span><span class="n">inference_timer</span><span class="o">.</span><span class="n">total_time</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s1">&#39;Model inference time: </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1"> s / img per device, on </span><span class="si">{}</span><span class="s1"> devices)&#39;</span><span class="o">.</span>
+        <span class="nb">format</span><span class="p">(</span>
+            <span class="n">total_infer_time</span><span class="p">,</span>
+            <span class="n">inference_timer</span><span class="o">.</span><span class="n">total_time</span> <span class="o">*</span> <span class="n">num_devices</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">),</span>
+            <span class="n">num_devices</span><span class="p">,</span>
+        <span class="p">))</span>
+
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">_accumulate_predictions_from_multiple_gpus</span><span class="p">(</span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">multi_gpu_infer</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_main_process</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">output_folder</span><span class="p">:</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s1">&#39;predictions.pth&#39;</span><span class="p">))</span>
+
+    <span class="n">extra_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">box_only</span><span class="o">=</span><span class="n">box_only</span><span class="p">,</span>
+        <span class="n">iou_types</span><span class="o">=</span><span class="n">iou_types</span><span class="p">,</span>
+        <span class="n">expected_results</span><span class="o">=</span><span class="n">expected_results</span><span class="p">,</span>
+        <span class="n">expected_results_sigma_tol</span><span class="o">=</span><span class="n">expected_results_sigma_tol</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+                    <span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span>
+                    <span class="n">output_folder</span><span class="o">=</span><span class="n">output_folder</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">extra_args</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">顔画像と物体を検出し、回転・クロップ・表示するウィンドウアプリケーション.</span>
+
+<span class="sd">Summary:</span>
+<span class="sd">    このプログラムは、顔認識モデルとDAMO-YOLO物体検出モデルを使用して、</span>
+<span class="sd">    動画フレーム内の顔と物体を検出し、それらの情報をリアルタイムで表示します。</span>
+<span class="sd">    GUIウィンドウ上に処理結果を表示し、詳細情報をターミナルに出力します。</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        python display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py &lt;exec_times&gt;</span>
+
+<span class="sd">Features:</span>
+<span class="sd">    - 顔認識と物体検出をリアルタイムで実行</span>
+<span class="sd">    - 検出結果（類似度、座標、物体名など）をターミナルに表示</span>
+<span class="sd">    - GUIウィンドウ上で処理結果を更新表示</span>
+<span class="sd">    - 処理回数または検出件数に応じてプログラムを終了</span>
+
+<span class="sd">Example:</span>
+<span class="sd">    .. code-block:: bash</span>
+
+<span class="sd">        python display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py</span>
+
+<span class="sd">Result:</span>
+<span class="sd">    - GUIウィンドウで処理結果をリアルタイム表示</span>
+<span class="sd">    - ターミナルに検出データの詳細を出力</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Label</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.base</span> <span class="kn">import</span> <span class="n">Infer</span><span class="p">,</span> <span class="n">COCO_CLASSES</span>  <span class="c1"># base.pyをモジュールとして使用</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.config.base</span> <span class="kn">import</span> <span class="n">parse_config</span>
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../example.html#example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ウィンドウを表示し、顔と物体を検出するメイン関数.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        exec_times (int, optional): 処理を実行する回数. デフォルトは50回.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 初期化処理</span>
+    <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;JAPANESE_FACE_V1_MODEL_GUI&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+    <span class="c1"># DAMO-YOLOモデルの設定</span>
+    <span class="n">config_file</span> <span class="o">=</span> <span class="s2">&quot;face01lib/damo_yolo/configs/damoyolo_tinynasL20_T.py&quot;</span>
+    <span class="n">ckpt_path</span> <span class="o">=</span> <span class="s2">&quot;face01lib/damo_yolo/pretrained_models/damoyolo_tinynasL20_T_420.pth&quot;</span>
+    <span class="c1"># 設定ファイルを解析してconfigを作成</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">parse_config</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+    <span class="n">damo_infer</span> <span class="o">=</span> <span class="n">Infer</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="o">=</span><span class="n">ckpt_path</span><span class="p">)</span>
+
+    <span class="c1"># tkinterウィンドウの作成</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;FACE01 example with JAPANESE_FACE_V1 and DAMO-YOLO&#39;</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">&#39;800x600&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 画像を表示するためのラベル</span>
+    <span class="n">display_label</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">display_label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+    <span class="c1"># 終了ボタンの設定</span>
+    <span class="k">def</span> <span class="nf">terminate</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ウィンドウを終了する関数.&quot;&quot;&quot;</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="n">terminate_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;terminate&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">terminate</span><span class="p">)</span>
+    <span class="n">terminate_button</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">pady</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># ジェネレータを生成</span>
+    <span class="n">gen</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">common_process</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># カウント変数を初期化</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># フレーム全体でカウントを維持</span>
+        <span class="n">max_count</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># 最大回数を設定</span>
+
+        <span class="c1"># &#39;exec_times&#39; 回処理を繰り返す</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">exec_times</span><span class="p">):</span>
+            <span class="c1"># ジェネレータオブジェクトから次の値を取得</span>
+            <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">frame_datas</span> <span class="ow">in</span> <span class="n">frame_datas_array</span><span class="p">:</span>
+                <span class="c1"># 顔認識結果をターミナルに出力</span>
+                <span class="k">for</span> <span class="n">person_data</span> <span class="ow">in</span> <span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;person_data_list&#39;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;類似度</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;percentage_and_symbol&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;座標</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;時刻</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;出力</span><span class="se">\t\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">person_data</span><span class="p">[</span><span class="s1">&#39;pict&#39;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;-------</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># カウントをインクリメント</span>
+
+                    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">max_count</span><span class="p">:</span>  <span class="c1"># カウントが最大に達したらループを抜ける</span>
+                        <span class="k">raise</span> <span class="ne">StopIteration</span>  <span class="c1"># 外側のループも終了するために例外を送出</span>
+
+                <span class="c1"># DAMO-YOLOで物体検出を実行</span>
+                <span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span> <span class="o">=</span> <span class="n">damo_infer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">])</span>
+
+                <span class="c1"># 検出結果をターミナルに表示</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;物体検出結果:&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">cls_ind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># スコアが0.5以上の物体のみ出力</span>
+                        <span class="n">class_name</span> <span class="o">=</span> <span class="n">COCO_CLASSES</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cls_ind</span><span class="p">)]</span>  <span class="c1"># クラス名を取得</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;物体: </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">, スコア: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, バウンディングボックス: </span><span class="si">{</span><span class="n">bbox</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># 画像をPIL形式に変換</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">],</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>  <span class="c1"># OpenCVのBGRをRGBに変換</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># OpenCVの画像をPIL画像に変換</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># PIL画像をImageTkに変換</span>
+
+                <span class="c1"># 新しい画像でラベルを更新</span>
+                <span class="n">display_label</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
+                <span class="n">display_label</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">img</span>
+
+            <span class="c1"># ウィンドウを更新</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">update_idletasks</span><span class="p">()</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+        <span class="c1"># 動画の供給が終了、またはカウントが最大に達した場合の処理</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;処理が完了しました。プログラムを終了します。&quot;</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># ウィンドウを閉じる</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># その他の予期しないエラーが発生した場合の処理</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;予期しないエラーが発生しました: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>  <span class="c1"># エラーが発生した場合もウィンドウを閉じる</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># 終了処理</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;終了処理を行っています...&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># メイン関数を呼び出す</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">exec_times</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

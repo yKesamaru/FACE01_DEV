@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.utils.boxes &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.utils.boxes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.utils.boxes のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># Copyright (c) OpenMMLab. All rights reserved.</span>
+<span class="c1"># Copyright (c) Megvii Inc. All rights reserved.</span>
+<span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="kn">from</span> <span class="nn">..structures.bounding_box</span> <span class="kn">import</span> <span class="n">BoxList</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;filter_box&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;postprocess&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;bboxes_iou&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;matrix_iou&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;adjust_box_anns&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;xyxy2xywh&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;xyxy2cxcywh&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">multiclass_nms</span><span class="p">(</span><span class="n">multi_bboxes</span><span class="p">,</span>
+                   <span class="n">multi_scores</span><span class="p">,</span>
+                   <span class="n">score_thr</span><span class="p">,</span>
+                   <span class="n">iou_thr</span><span class="p">,</span>
+                   <span class="n">max_num</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                   <span class="n">score_factors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NMS for multi-class bboxes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        multi_bboxes (Tensor): shape (n, #class*4) or (n, 4)</span>
+<span class="sd">        multi_scores (Tensor): shape (n, #class), where the last column</span>
+<span class="sd">            contains scores of the background class, but this will be ignored.</span>
+<span class="sd">        score_thr (float): bbox threshold, bboxes with scores lower than it</span>
+<span class="sd">            will not be considered.</span>
+<span class="sd">        nms_thr (float): NMS IoU threshold</span>
+<span class="sd">        max_num (int): if there are more than max_num bboxes after NMS,</span>
+<span class="sd">            only top max_num will be kept.</span>
+<span class="sd">        score_factors (Tensor): The factors multiplied to scores before</span>
+<span class="sd">            applying NMS</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (bboxes, labels), tensors of shape (k, 5) and (k, 1). Labels \</span>
+<span class="sd">            are 0-based.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_classes</span> <span class="o">=</span> <span class="n">multi_scores</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># exclude background category</span>
+    <span class="k">if</span> <span class="n">multi_bboxes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">bboxes</span> <span class="o">=</span> <span class="n">multi_bboxes</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">multi_scores</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bboxes</span> <span class="o">=</span> <span class="n">multi_bboxes</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">multi_scores</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                                              <span class="n">num_classes</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">multi_scores</span>
+    <span class="c1"># filter out boxes with low scores</span>
+    <span class="n">valid_mask</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">&gt;</span> <span class="n">score_thr</span>  <span class="c1"># 1000 * 80 bool</span>
+
+    <span class="c1"># We use masked_select for ONNX exporting purpose,</span>
+    <span class="c1"># which is equivalent to bboxes = bboxes[valid_mask]</span>
+    <span class="c1"># (TODO): as ONNX does not support repeat now,</span>
+    <span class="c1"># we have to use this ugly code</span>
+    <span class="c1"># bboxes -&gt; 1000, 4</span>
+    <span class="n">bboxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">masked_select</span><span class="p">(</span>
+        <span class="n">bboxes</span><span class="p">,</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">valid_mask</span><span class="p">,</span> <span class="n">valid_mask</span><span class="p">,</span> <span class="n">valid_mask</span><span class="p">,</span> <span class="n">valid_mask</span><span class="p">),</span>
+                    <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># mask-&gt;  1000*80*4, 80000*4</span>
+    <span class="k">if</span> <span class="n">score_factors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">*</span> <span class="n">score_factors</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">masked_select</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">valid_mask</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">valid_mask</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">as_tuple</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">bboxes</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bboxes</span> <span class="o">=</span> <span class="n">multi_bboxes</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">multi_bboxes</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">multi_bboxes</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span>
+
+    <span class="n">keep</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">batched_nms</span><span class="p">(</span><span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">iou_thr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">max_num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">keep</span><span class="p">[:</span><span class="n">max_num</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">bboxes</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="filter_box">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.filter_box">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">filter_box</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">scale_range</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    output: (N, 5+class) shape</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_scale</span><span class="p">,</span> <span class="n">max_scale</span> <span class="o">=</span> <span class="n">scale_range</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">output</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">output</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">min_scale</span> <span class="o">*</span> <span class="n">min_scale</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="n">max_scale</span> <span class="o">*</span> <span class="n">max_scale</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">filter_results</span><span class="p">(</span><span class="n">boxlist</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">,</span> <span class="n">nms_thre</span><span class="p">):</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="n">boxlist</span><span class="o">.</span><span class="n">bbox</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">boxlist</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">)</span>
+    <span class="bp">cls</span> <span class="o">=</span> <span class="n">boxlist</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+    <span class="n">nms_out_index</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">batched_nms</span><span class="p">(</span>
+        <span class="n">boxes</span><span class="p">,</span>
+        <span class="n">scores</span><span class="p">,</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">nms_thre</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">boxlist</span> <span class="o">=</span> <span class="n">boxlist</span><span class="p">[</span><span class="n">nms_out_index</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">boxlist</span>
+
+
+<div class="viewcode-block" id="postprocess">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.postprocess">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="n">cls_scores</span><span class="p">,</span>
+                <span class="n">bbox_preds</span><span class="p">,</span>
+                <span class="n">num_classes</span><span class="p">,</span>
+                <span class="n">conf_thre</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                <span class="n">nms_thre</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span>
+                <span class="n">imgs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">bbox_preds</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+        <span class="c1"># If none are remaining =&gt; process next image</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">bbox_preds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">detections</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">multiclass_nms</span><span class="p">(</span><span class="n">bbox_preds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                    <span class="n">cls_scores</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">conf_thre</span><span class="p">,</span>
+                                                    <span class="n">nms_thre</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="n">detections</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">detections</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span>
+            <span class="n">scores</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]),</span> <span class="n">scores</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">labels</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]),</span>
+                               <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">detections</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">detections</span><span class="p">))</span>
+
+    <span class="c1"># transfer to BoxList</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">imgs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">boxlist</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;objectness&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">img_h</span><span class="p">,</span> <span class="n">img_w</span> <span class="o">=</span> <span class="n">imgs</span><span class="o">.</span><span class="n">image_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">boxlist</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">res</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="p">(</span><span class="n">img_w</span><span class="p">,</span> <span class="n">img_h</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;objectness&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">])</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">])</span>
+            <span class="n">boxlist</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">[:,</span> <span class="mi">6</span><span class="p">])</span>
+        <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxlist</span>
+
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+
+<div class="viewcode-block" id="bboxes_iou">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.bboxes_iou">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">bboxes_iou</span><span class="p">(</span><span class="n">bboxes_a</span><span class="p">,</span> <span class="n">bboxes_b</span><span class="p">,</span> <span class="n">xyxy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bboxes_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">bboxes_b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span>
+
+    <span class="k">if</span> <span class="n">xyxy</span><span class="p">:</span>
+        <span class="n">tl</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">bboxes_b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">br</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">:],</span> <span class="n">bboxes_b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:])</span>
+        <span class="n">area_a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">bboxes_a</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">area_b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">bboxes_b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">bboxes_b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tl</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">bboxes_b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes_b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">br</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxes_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">bboxes_b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxes_b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">area_a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">bboxes_a</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">area_b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">bboxes_b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">en</span> <span class="o">=</span> <span class="p">(</span><span class="n">tl</span> <span class="o">&lt;</span> <span class="n">br</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">type</span><span class="p">())</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">area_i</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">br</span> <span class="o">-</span> <span class="n">tl</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">en</span>  <span class="c1"># * ((tl &lt; br).all())</span>
+    <span class="k">return</span> <span class="n">area_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">area_a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">area_b</span> <span class="o">-</span> <span class="n">area_i</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="matrix_iou">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.matrix_iou">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">matrix_iou</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return iou of a and b, numpy version for data augenmentation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">:],</span> <span class="n">b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:])</span>
+
+    <span class="n">area_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">rb</span> <span class="o">-</span> <span class="n">lt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lt</span> <span class="o">&lt;</span> <span class="n">rb</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">area_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">area_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">b</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">area_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">area_a</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">+</span> <span class="n">area_b</span> <span class="o">-</span> <span class="n">area_i</span> <span class="o">+</span> <span class="mf">1e-12</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="adjust_box_anns">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.adjust_box_anns">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">adjust_box_anns</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">scale_ratio</span><span class="p">,</span> <span class="n">padw</span><span class="p">,</span> <span class="n">padh</span><span class="p">,</span> <span class="n">w_max</span><span class="p">,</span> <span class="n">h_max</span><span class="p">):</span>
+    <span class="n">bbox</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_ratio</span> <span class="o">+</span> <span class="n">padw</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w_max</span><span class="p">)</span>
+    <span class="n">bbox</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale_ratio</span> <span class="o">+</span> <span class="n">padh</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h_max</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bbox</span></div>
+
+
+
+<div class="viewcode-block" id="xyxy2xywh">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2xywh">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">xyxy2xywh</span><span class="p">(</span><span class="n">bboxes</span><span class="p">):</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">bboxes</span></div>
+
+
+
+<div class="viewcode-block" id="xyxy2cxcywh">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.utils.html#face01lib.damo_yolo.damo_internal.utils.boxes.xyxy2cxcywh">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">xyxy2cxcywh</span><span class="p">(</span><span class="n">bboxes</span><span class="p">):</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bboxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">bboxes</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

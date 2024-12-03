@@ -132,6 +132,14 @@ example.display\_GUI\_window\_JAPANESE\_FACE\_V1 module
    :undoc-members:
    :show-inheritance:
 
+example.display\_GUI\_window\_JAPANESE\_FACE\_V1\_with\_YOLO module
+-------------------------------------------------------------------
+
+.. automodule:: example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 example.distort\_barrel module
 ------------------------------
 

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">モジュールコード</a></li>
+          <li class="breadcrumb-item"><a href="../backbones.html">face01lib.damo_yolo.damo_internal.base_models.backbones</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">from</span> <span class="nn">..core.ops</span> <span class="kn">import</span> <span class="n">Focus</span><span class="p">,</span> <span class="n">RepConv</span><span class="p">,</span> <span class="n">SPPBottleneck</span><span class="p">,</span> <span class="n">get_activation</span><span class="p">,</span> <span class="n">DepthwiseConv</span>
+<span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="n">make_divisible</span>
+
+
+<div class="viewcode-block" id="Hsigmoid">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.Hsigmoid">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">Hsigmoid</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hsigmoid</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
+
+<div class="viewcode-block" id="Hsigmoid.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.Hsigmoid.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">relu6</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">3.</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6.</span></div>
+</div>
+
+
+<div class="viewcode-block" id="SEModule">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.SEModule">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">SEModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SEModule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avg_pool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">channel</span> <span class="o">//</span> <span class="n">reduction</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">channel</span> <span class="o">//</span> <span class="n">reduction</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">Hsigmoid</span><span class="p">()</span>
+            <span class="c1"># nn.Sigmoid()</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SEModule.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.SEModule.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ConvKXBN">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.ConvKXBN">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">ConvKXBN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_c</span><span class="p">,</span> <span class="n">out_c</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">depthwise</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ConvKXBN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">depthwise</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">DepthwiseConv</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_c</span><span class="p">,</span>
+                                       <span class="n">out_channels</span><span class="o">=</span><span class="n">out_c</span><span class="p">,</span>
+                                       <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+                                       <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span>
+                                       <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                                       <span class="n">norm_cfg</span><span class="o">=</span><span class="s2">&quot;bn&quot;</span><span class="p">,</span>
+                                       <span class="n">act</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+                                       <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;depthwise&quot;</span><span class="p">,</span><span class="s2">&quot;pointwise&quot;</span><span class="p">)</span>
+                                       <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_c</span><span class="p">,</span>
+                               <span class="n">out_c</span><span class="p">,</span>
+                               <span class="n">kernel_size</span><span class="p">,</span>
+                               <span class="n">stride</span><span class="p">,</span> <span class="p">(</span><span class="n">kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                               <span class="n">groups</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_c</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ConvKXBN.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.ConvKXBN.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ConvKXBN.fuseforward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.ConvKXBN.fuseforward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">fuseforward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ConvKXBNRELU">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.ConvKXBNRELU">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">ConvKXBNRELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_c</span><span class="p">,</span> <span class="n">out_c</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="s1">&#39;silu&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ConvKXBNRELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">ConvKXBN</span><span class="p">(</span><span class="n">in_c</span><span class="p">,</span> <span class="n">out_c</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">act</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span> <span class="o">=</span> <span class="n">get_activation</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ConvKXBNRELU.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.ConvKXBNRELU.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_function</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="depthwise_conv">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.depthwise_conv">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">depthwise_conv</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">i</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="channel_shuffle">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.channel_shuffle">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">channel_shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">groups</span><span class="p">):</span>
+    <span class="n">batchsize</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+    <span class="n">channels_per_group</span> <span class="o">=</span> <span class="n">num_channels</span> <span class="o">//</span> <span class="n">groups</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batchsize</span><span class="p">,</span> <span class="n">groups</span><span class="p">,</span> <span class="n">channels_per_group</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batchsize</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="MobileV3Block">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.MobileV3Block">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">MobileV3Block</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">in_c</span><span class="p">,</span>
+                 <span class="n">out_c</span><span class="p">,</span>
+                 <span class="n">btn_c</span><span class="p">,</span>
+                 <span class="n">kernel_size</span><span class="p">,</span>
+                 <span class="n">stride</span><span class="p">,</span>
+                 <span class="n">act</span><span class="o">=</span><span class="s1">&#39;silu&#39;</span><span class="p">,</span>
+                 <span class="n">reparam</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">block_type</span><span class="o">=</span><span class="s1">&#39;k1kx&#39;</span><span class="p">,</span>
+                 <span class="n">depthwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_se</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">block_pos</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MobileV3Block</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_ratio</span> <span class="o">=</span> <span class="mf">2.5</span>
+        <span class="k">if</span> <span class="n">block_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exp_ratio</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="o">+</span> <span class="p">(</span><span class="n">block_pos</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+
+        <span class="n">branch_features</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">out_c</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_ratio</span><span class="p">)</span>
+        <span class="n">branch_features</span> <span class="o">=</span> <span class="n">make_divisible</span><span class="p">(</span><span class="n">branch_features</span><span class="p">)</span>
+
+        <span class="c1"># assert (self.stride != 1) or (in_c == branch_features &lt;&lt; 1)</span>
+
+        <span class="k">if</span> <span class="n">use_se</span><span class="p">:</span>
+            <span class="n">SELayer</span> <span class="o">=</span> <span class="n">SEModule</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">SELayer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
+                <span class="n">in_c</span><span class="p">,</span>
+                <span class="n">branch_features</span><span class="p">,</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">branch_features</span><span class="p">),</span>
+            <span class="n">get_activation</span><span class="p">(</span><span class="n">act</span><span class="p">),</span>
+            <span class="n">depthwise_conv</span><span class="p">(</span>
+                <span class="n">branch_features</span><span class="p">,</span>
+                <span class="n">branch_features</span><span class="p">,</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">stride</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">branch_features</span><span class="p">),</span>
+            <span class="n">SELayer</span><span class="p">(</span><span class="n">branch_features</span><span class="p">),</span>
+            <span class="n">get_activation</span><span class="p">(</span><span class="n">act</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
+                <span class="n">branch_features</span><span class="p">,</span>
+                <span class="n">out_c</span><span class="p">,</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_c</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_shotcut</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">in_c</span> <span class="o">==</span> <span class="n">out_c</span>
+
+<div class="viewcode-block" id="MobileV3Block.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.MobileV3Block.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_shotcut</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SuperResStem">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.SuperResStem">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">SuperResStem</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">in_c</span><span class="p">,</span>
+                 <span class="n">out_c</span><span class="p">,</span>
+                 <span class="n">btn_c</span><span class="p">,</span>
+                 <span class="n">kernel_size</span><span class="p">,</span>
+                 <span class="n">stride</span><span class="p">,</span>
+                 <span class="n">num_blocks</span><span class="p">,</span>
+                 <span class="n">with_spp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">act</span><span class="o">=</span><span class="s1">&#39;silu&#39;</span><span class="p">,</span>
+                 <span class="n">reparam</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">block_type</span><span class="o">=</span><span class="s1">&#39;k1kx&#39;</span><span class="p">,</span>
+                 <span class="n">depthwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_se</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">block_pos</span><span class="o">=</span><span class="kc">None</span><span class="p">,):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SuperResStem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">act</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">act</span> <span class="o">=</span> <span class="n">get_activation</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="n">basic_block</span> <span class="o">=</span> <span class="n">MobileV3Block</span>
+        <span class="k">for</span> <span class="n">block_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_blocks</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">block_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_c</span>
+                <span class="n">out_channels</span> <span class="o">=</span> <span class="n">out_c</span>
+                <span class="n">this_stride</span> <span class="o">=</span> <span class="n">stride</span>
+                <span class="n">this_kernel_size</span> <span class="o">=</span> <span class="n">kernel_size</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">in_channels</span> <span class="o">=</span> <span class="n">out_c</span>
+                <span class="n">out_channels</span> <span class="o">=</span> <span class="n">out_c</span>
+                <span class="n">this_stride</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">this_kernel_size</span> <span class="o">=</span> <span class="n">kernel_size</span>
+            <span class="n">the_block</span> <span class="o">=</span> <span class="n">basic_block</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span>
+                                     <span class="n">out_channels</span><span class="p">,</span>
+                                     <span class="n">btn_c</span><span class="p">,</span>
+                                     <span class="n">this_kernel_size</span><span class="p">,</span>
+                                     <span class="n">this_stride</span><span class="p">,</span>
+                                     <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">,</span>
+                                     <span class="n">reparam</span><span class="o">=</span><span class="n">reparam</span><span class="p">,</span>
+                                     <span class="n">block_type</span><span class="o">=</span><span class="n">block_type</span><span class="p">,</span>
+                                     <span class="n">depthwise</span><span class="o">=</span><span class="n">depthwise</span><span class="p">,</span>
+                                     <span class="n">use_se</span><span class="o">=</span><span class="n">use_se</span><span class="p">,</span>
+                                     <span class="n">block_pos</span><span class="o">=</span><span class="n">block_pos</span><span class="p">,)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">the_block</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">block_id</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">with_spp</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">SPPBottleneck</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">))</span>
+
+<div class="viewcode-block" id="SuperResStem.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.SuperResStem.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TinyNAS">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.TinyNAS">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">TinyNAS</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">structure_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">out_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+                 <span class="n">with_spp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_focus</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">act</span><span class="o">=</span><span class="s1">&#39;silu&#39;</span><span class="p">,</span>
+                 <span class="n">reparam</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">depthwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">use_se</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TinyNAS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_indices</span> <span class="o">=</span> <span class="n">out_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">block_info</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">structure_info</span><span class="p">):</span>
+            <span class="n">the_block_class</span> <span class="o">=</span> <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">the_block_class</span> <span class="o">==</span> <span class="s1">&#39;ConvKXBNRELU&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">use_focus</span><span class="p">:</span>
+                    <span class="n">the_block</span> <span class="o">=</span> <span class="n">Focus</span><span class="p">(</span><span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">],</span>
+                                      <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+                                      <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span>
+                                      <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">the_block</span> <span class="o">=</span> <span class="n">ConvKXBNRELU</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span>
+                                             <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+                                             <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span>
+                                             <span class="mi">2</span><span class="p">,</span>
+                                             <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">the_block</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">the_block_class</span> <span class="o">==</span> <span class="s1">&#39;SuperResConvK1KX&#39;</span><span class="p">:</span>
+                <span class="n">spp</span> <span class="o">=</span> <span class="n">with_spp</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure_info</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">False</span>
+                <span class="n">the_block</span> <span class="o">=</span> <span class="n">SuperResStem</span><span class="p">(</span><span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;btn&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">],</span>
+                                         <span class="n">spp</span><span class="p">,</span>
+                                         <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">,</span>
+                                         <span class="n">reparam</span><span class="o">=</span><span class="n">reparam</span><span class="p">,</span>
+                                         <span class="n">block_type</span><span class="o">=</span><span class="s1">&#39;k1kx&#39;</span><span class="p">,</span>
+                                         <span class="n">depthwise</span><span class="o">=</span><span class="n">depthwise</span><span class="p">,</span>
+                                         <span class="n">use_se</span><span class="o">=</span><span class="n">use_se</span><span class="p">,</span>
+                                         <span class="n">block_pos</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">the_block</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">the_block_class</span> <span class="o">==</span> <span class="s1">&#39;SuperResConvKXKX&#39;</span><span class="p">:</span>
+                <span class="n">spp</span> <span class="o">=</span> <span class="n">with_spp</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure_info</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">False</span>
+                <span class="n">the_block</span> <span class="o">=</span> <span class="n">SuperResStem</span><span class="p">(</span><span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;btn&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span>
+                                         <span class="n">block_info</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">],</span>
+                                         <span class="n">spp</span><span class="p">,</span>
+                                         <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">,</span>
+                                         <span class="n">reparam</span><span class="o">=</span><span class="n">reparam</span><span class="p">,</span>
+                                         <span class="n">block_type</span><span class="o">=</span><span class="s1">&#39;kxkx&#39;</span><span class="p">,</span>
+                                         <span class="n">depthwise</span><span class="o">=</span><span class="n">depthwise</span><span class="p">,</span>
+                                         <span class="n">use_se</span><span class="o">=</span><span class="n">use_se</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">the_block</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<div class="viewcode-block" id="TinyNAS.init_weights">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.TinyNAS.init_weights">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">init_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_modules</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">):</span>
+                <span class="k">if</span> <span class="s2">&quot;first&quot;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+                    <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">):</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">running_mean</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TinyNAS.forward">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.TinyNAS.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">stage_feature_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">block</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block_list</span><span class="p">):</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">block</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_indices</span><span class="p">:</span>
+                <span class="n">stage_feature_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stage_feature_list</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="load_tinynas_net">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.base_models.backbones.html#face01lib.damo_yolo.damo_internal.base_models.backbones.tinynas_mob.load_tinynas_net">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">load_tinynas_net</span><span class="p">(</span><span class="n">backbone_cfg</span><span class="p">):</span>
+    <span class="c1"># load masternet model to path</span>
+    <span class="kn">import</span> <span class="nn">ast</span>
+
+    <span class="n">struct_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">backbone_cfg</span><span class="o">.</span><span class="n">net_structure_str</span><span class="p">])</span>
+    <span class="n">struct_info</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">struct_str</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">struct_info</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;nbitsA&#39;</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">layer</span><span class="p">[</span><span class="s1">&#39;nbitsA&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;nbitsW&#39;</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">layer</span><span class="p">[</span><span class="s1">&#39;nbitsW&#39;</span><span class="p">]</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TinyNAS</span><span class="p">(</span><span class="n">structure_info</span><span class="o">=</span><span class="n">struct_info</span><span class="p">,</span>
+                    <span class="n">out_indices</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">out_indices</span><span class="p">,</span>
+                    <span class="n">with_spp</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">with_spp</span><span class="p">,</span>
+                    <span class="n">use_focus</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">use_focus</span><span class="p">,</span>
+                    <span class="n">act</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">act</span><span class="p">,</span>
+                    <span class="n">reparam</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">reparam</span><span class="p">,</span>
+                    <span class="n">depthwise</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">depthwise</span><span class="p">,</span>
+                    <span class="n">use_se</span><span class="o">=</span><span class="n">backbone_cfg</span><span class="o">.</span><span class="n">use_se</span><span class="p">,)</span>
+
+    <span class="k">return</span> <span class="n">model</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
