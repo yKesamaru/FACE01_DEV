@@ -1,6 +1,4 @@
-GPUtil
 Pillow
-dlib==19.24.0
 mediapipe
 memory-profiler
 mojimoji
@@ -18,6 +16,5 @@ scipy
 torch
 torchvision
 tqdm
-ttkbootstrap
 typing_extensions
 urllib3
