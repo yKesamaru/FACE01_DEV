@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.structures.bounding_box &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.structures.bounding_box</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.structures.bounding_box のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># transpose</span>
+<span class="n">FLIP_LEFT_RIGHT</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">FLIP_TOP_BOTTOM</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<div class="viewcode-block" id="BoxList">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">BoxList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents a set of bounding boxes.</span>
+<span class="sd">    The bounding boxes are represented as a Nx4 Tensor.</span>
+<span class="sd">    In order to uniquely determine the bounding boxes with respect</span>
+<span class="sd">    to an image, we also store the corresponding image dimensions.</span>
+<span class="sd">    They can contain extra information that is specific to each bounding box,</span>
+<span class="sd">    such as labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">image_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">device</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">bbox</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bbox</span><span class="o">.</span><span class="n">ndimension</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bbox should have 2 dimensions, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">bbox</span><span class="o">.</span><span class="n">ndimension</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="n">bbox</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;last dimension of bbox should have a &#39;</span>
+                             <span class="s1">&#39;size of 4, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;xyxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xywh&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode should be &#39;xyxy&#39; or &#39;xywh&#39;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span> <span class="o">=</span> <span class="n">bbox</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">image_size</span>  <span class="c1"># (image_width, image_height)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="BoxList.add_field">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.add_field">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">add_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">field_data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_data</span></div>
+
+
+<div class="viewcode-block" id="BoxList.get_field">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.get_field">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">get_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="p">[</span><span class="n">field</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BoxList.has_field">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.has_field">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">has_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span></div>
+
+
+<div class="viewcode-block" id="BoxList.fields">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.fields">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_copy_extra_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bbox</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bbox</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+<div class="viewcode-block" id="BoxList.convert">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.convert">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;xyxy&#39;</span><span class="p">,</span> <span class="s1">&#39;xywh&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mode should be &#39;xyxy&#39; or &#39;xywh&#39;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="c1"># we only have two modes, so don&#39;t need to check</span>
+        <span class="c1"># self.mode</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_into_xyxy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;xyxy&#39;</span><span class="p">:</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span> <span class="o">+</span> <span class="n">TO_REMOVE</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span> <span class="o">+</span> <span class="n">TO_REMOVE</span><span class="p">),</span>
+                <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">bbox</span><span class="o">.</span><span class="n">_copy_extra_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bbox</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_split_into_xyxy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;xyxy&#39;</span><span class="p">:</span>
+            <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;xywh&#39;</span><span class="p">:</span>
+            <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">xmin</span><span class="p">,</span>
+                <span class="n">ymin</span><span class="p">,</span>
+                <span class="n">xmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">ymin</span> <span class="o">+</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Should not be here&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BoxList.resize">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.resize">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a resized copy of this bounding box</span>
+<span class="sd">        :param size: The requested size in pixels, as a 2-tuple:</span>
+<span class="sd">            (width, height).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ratios</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">s_orig</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">s_orig</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ratios</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">scaled_box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span> <span class="o">*</span> <span class="n">ratio</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">scaled_box</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">bbox</span>
+
+        <span class="n">ratio_width</span><span class="p">,</span> <span class="n">ratio_height</span> <span class="o">=</span> <span class="n">ratios</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_into_xyxy</span><span class="p">()</span>
+        <span class="n">scaled_xmin</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">*</span> <span class="n">ratio_width</span>
+        <span class="n">scaled_xmax</span> <span class="o">=</span> <span class="n">xmax</span> <span class="o">*</span> <span class="n">ratio_width</span>
+        <span class="n">scaled_ymin</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">*</span> <span class="n">ratio_height</span>
+        <span class="n">scaled_ymax</span> <span class="o">=</span> <span class="n">ymax</span> <span class="o">*</span> <span class="n">ratio_height</span>
+        <span class="n">scaled_box</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">scaled_xmin</span><span class="p">,</span> <span class="n">scaled_ymin</span><span class="p">,</span> <span class="n">scaled_xmax</span><span class="p">,</span> <span class="n">scaled_ymax</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">scaled_box</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">bbox</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BoxList.transpose">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.transpose">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transpose bounding box (flip or rotate in 90 degree steps)</span>
+<span class="sd">        :param method: One of :py:attr:`PIL.Image.FLIP_LEFT_RIGHT`,</span>
+<span class="sd">          :py:attr:`PIL.Image.FLIP_TOP_BOTTOM`, :py:attr:`PIL.Image.ROTATE_90`,</span>
+<span class="sd">          :py:attr:`PIL.Image.ROTATE_180`, :py:attr:`PIL.Image.ROTATE_270`,</span>
+<span class="sd">          :py:attr:`PIL.Image.TRANSPOSE` or :py:attr:`PIL.Image.TRANSVERSE`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">FLIP_LEFT_RIGHT</span><span class="p">,</span> <span class="n">FLIP_TOP_BOTTOM</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s1">&#39;Only FLIP_LEFT_RIGHT and FLIP_TOP_BOTTOM implemented&#39;</span><span class="p">)</span>
+
+        <span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_into_xyxy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="n">FLIP_LEFT_RIGHT</span><span class="p">:</span>
+            <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">transposed_xmin</span> <span class="o">=</span> <span class="n">image_width</span> <span class="o">-</span> <span class="n">xmax</span> <span class="o">-</span> <span class="n">TO_REMOVE</span>
+            <span class="n">transposed_xmax</span> <span class="o">=</span> <span class="n">image_width</span> <span class="o">-</span> <span class="n">xmin</span> <span class="o">-</span> <span class="n">TO_REMOVE</span>
+            <span class="n">transposed_ymin</span> <span class="o">=</span> <span class="n">ymin</span>
+            <span class="n">transposed_ymax</span> <span class="o">=</span> <span class="n">ymax</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="n">FLIP_TOP_BOTTOM</span><span class="p">:</span>
+            <span class="n">transposed_xmin</span> <span class="o">=</span> <span class="n">xmin</span>
+            <span class="n">transposed_xmax</span> <span class="o">=</span> <span class="n">xmax</span>
+            <span class="n">transposed_ymin</span> <span class="o">=</span> <span class="n">image_height</span> <span class="o">-</span> <span class="n">ymax</span>
+            <span class="n">transposed_ymax</span> <span class="o">=</span> <span class="n">image_height</span> <span class="o">-</span> <span class="n">ymin</span>
+
+        <span class="n">transposed_boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">transposed_xmin</span><span class="p">,</span> <span class="n">transposed_ymin</span><span class="p">,</span>
+                                      <span class="n">transposed_xmax</span><span class="p">,</span> <span class="n">transposed_ymax</span><span class="p">),</span>
+                                     <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">transposed_boxes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bbox</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BoxList.crop">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.crop">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cropss a rectangular region from this bounding box. The box is a</span>
+<span class="sd">        4-tuple defining the left, upper, right, and lower pixel</span>
+<span class="sd">        coordinate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_into_xyxy</span><span class="p">()</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">cropped_xmin</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmin</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">cropped_ymin</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymin</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">cropped_xmax</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">cropped_ymax</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">h</span><span class="p">)</span>
+
+        <span class="n">cropped_box</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">cropped_xmin</span><span class="p">,</span> <span class="n">cropped_ymin</span><span class="p">,</span> <span class="n">cropped_xmax</span><span class="p">,</span> <span class="n">cropped_ymax</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">cropped_box</span><span class="p">,</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bbox</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Tensor-like methods</span>
+
+<div class="viewcode-block" id="BoxList.to">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.to">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bbox</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">bbox</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="BoxList.clip_to_image">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.clip_to_image">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">clip_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">clamp_</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clamp_</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">clamp_</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">clamp_</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">TO_REMOVE</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">remove_empty</span><span class="p">:</span>
+            <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span>
+            <span class="n">keep</span> <span class="o">=</span> <span class="p">(</span><span class="n">box</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">box</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="BoxList.area">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.area">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bbox</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;xyxy&#39;</span><span class="p">:</span>
+            <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">box</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span>
+                    <span class="n">TO_REMOVE</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">box</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">TO_REMOVE</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;xywh&#39;</span><span class="p">:</span>
+            <span class="n">area</span> <span class="o">=</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Should not be here&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">area</span></div>
+
+
+<div class="viewcode-block" id="BoxList.copy_with_fields">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.bounding_box.BoxList.copy_with_fields">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">copy_with_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">skip_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_field</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+                <span class="n">bbox</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">skip_missing</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Field &#39;</span><span class="si">{}</span><span class="s2">&#39; not found in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">bbox</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">&#39;(&#39;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;num_boxes=</span><span class="si">{}</span><span class="s1">, &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;image_width=</span><span class="si">{}</span><span class="s1">, &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;image_height=</span><span class="si">{}</span><span class="s1">, &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;mode=</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

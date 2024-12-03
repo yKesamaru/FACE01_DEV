@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file mainly comes from</span>
+<span class="c1"># https://github.com/dvlab-research/SA-AutoAug/blob/master/FCOS/fcos_core/augmentations/box_level_augs/color_augs.py</span>
+<span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="kn">from</span> <span class="nn">...augmentations.box_level_augs.gaussian_maps</span> <span class="kn">import</span> <span class="n">_merge_gaussian</span>
+
+<span class="n">_MAX_LEVEL</span> <span class="o">=</span> <span class="mf">10.0</span>
+
+
+<div class="viewcode-block" id="blend">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.blend">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">blend</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Blend image1 and image2 using &#39;factor&#39;.</span>
+<span class="sd">    Factor can be above 0.0.  A value of 0.0 means only image1 is used.</span>
+<span class="sd">    A value of 1.0 means only image2 is used.  A value between 0.0 and</span>
+<span class="sd">    1.0 means we linearly interpolate the pixel values between the two</span>
+<span class="sd">    images.  A value greater than 1.0 &quot;extrapolates&quot; the difference</span>
+<span class="sd">    between the two pixel values, and we clip the results to values</span>
+<span class="sd">    between 0 and 1.0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">factor</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image1</span>
+    <span class="k">if</span> <span class="n">factor</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image2</span>
+
+    <span class="n">difference</span> <span class="o">=</span> <span class="n">image2</span> <span class="o">-</span> <span class="n">image1</span>
+    <span class="n">scaled</span> <span class="o">=</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">difference</span>
+
+    <span class="c1"># Do addition in float.</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">image1</span> <span class="o">+</span> <span class="n">scaled</span>
+
+    <span class="c1"># Interpolate</span>
+    <span class="k">if</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">factor</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="c1"># Interpolation means we always stay within 0 and 255.</span>
+        <span class="k">return</span> <span class="n">temp</span>
+
+    <span class="c1"># Extrapolate:</span>
+    <span class="c1">#</span>
+    <span class="c1"># We need to clip and then cast.</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="solarize">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.solarize">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">solarize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="c1"># For each pixel in the image, select the pixel</span>
+    <span class="c1"># if the value is less than the threshold.</span>
+    <span class="c1"># Otherwise, subtract 255 from the pixel.</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">image</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">image</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="solarize_add">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.solarize_add">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">solarize_add</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">addition</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="c1"># For each pixel in the image less than threshold</span>
+    <span class="c1"># we add &#39;addition&#39; amount to it and then clip the</span>
+    <span class="c1"># pixel value to be between 0 and 255. The value</span>
+    <span class="c1"># of &#39;addition&#39; is between -128 and 128.</span>
+    <span class="n">added_image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">+</span> <span class="n">addition</span>
+    <span class="n">added_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">added_image</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">image</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">added_image</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="rgb2gray">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.rgb2gray">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">rgb2gray</span><span class="p">(</span><span class="n">rgb</span><span class="p">):</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.2989</span> <span class="o">+</span> <span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.5870</span> <span class="o">+</span> <span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.1140</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">gray</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">gray</span></div>
+
+
+
+<div class="viewcode-block" id="color">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.color">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Equivalent of PIL Color.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img</span>
+
+    <span class="n">degenerate</span> <span class="o">=</span> <span class="n">rgb2gray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">blend</span><span class="p">(</span><span class="n">degenerate</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="contrast">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.contrast">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">contrast</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">dtype</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_floating_point</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">blend</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="brightness">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.brightness">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">brightness</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Equivalent of PIL Brightness.&quot;&quot;&quot;</span>
+    <span class="n">degenerate</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">blend</span><span class="p">(</span><span class="n">degenerate</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="sharpness">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.sharpness">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">sharpness</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements Sharpness function from PIL using TF ops.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mf">13.0</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">image_newaxis</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">image_pad</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">image_newaxis</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;reflect&#39;</span><span class="p">)</span>
+    <span class="n">degenerate</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">conv2d</span><span class="p">(</span><span class="n">image_pad</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">channels</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">blend</span><span class="p">(</span><span class="n">degenerate</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="equalize">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.equalize">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">equalize</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements Equalize function from PIL using PyTorch ops based on:</span>
+<span class="sd">    https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/</span>
+<span class="sd">    autoaugment.py#L352&quot;&quot;&quot;</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">*</span> <span class="mi">255</span>
+
+    <span class="k">def</span> <span class="nf">scale_channel</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scale the data in the channel to implement equalize.&quot;&quot;&quot;</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="c1"># Compute the histogram of the image channel.</span>
+        <span class="n">histo</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">histc</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>  <span class="c1"># .type(torch.int32)</span>
+        <span class="c1"># For the purposes of computing the step, filter out the nonzeros.</span>
+        <span class="n">nonzero_histo</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">histo</span><span class="p">[</span><span class="n">histo</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nonzero_histo</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonzero_histo</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="mi">255</span>
+
+        <span class="k">def</span> <span class="nf">build_lut</span><span class="p">(</span><span class="n">histo</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+            <span class="c1"># Compute the cumulative sum, shifting by step // 2</span>
+            <span class="c1"># and then normalization by step.</span>
+            <span class="n">lut</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">histo</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">step</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span> <span class="o">//</span> <span class="n">step</span>
+            <span class="c1"># Shift lut, prepending with 0.</span>
+            <span class="n">lut</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">lut</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="c1"># Clip the counts to be in range.  This is done</span>
+            <span class="c1"># in the C code for image.point.</span>
+            <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">lut</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+        <span class="c1"># If step is zero, return the original image.  Otherwise, build</span>
+        <span class="c1"># lut from the full histogram and step and then index from it.</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">im</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># can&#39;t index using 2d index. Have to flatten and then reshape</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">build_lut</span><span class="p">(</span><span class="n">histo</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span>
+                                  <span class="n">im</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape_as</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>  <span class="c1"># .type(torch.uint8)</span>
+
+    <span class="c1"># Assumes RGB for now.  Scales each channel independently</span>
+    <span class="c1"># and then stacks the result.</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s3</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+
+<div class="viewcode-block" id="autocontrast">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.autocontrast">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">autocontrast</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scale the 2D image using the autocontrast rule.&quot;&quot;&quot;</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="c1"># Scale the image, making the lowest value 0 and the highest value 1.</span>
+        <span class="k">def</span> <span class="nf">scale_values</span><span class="p">(</span><span class="n">im</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="p">)</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="n">lo</span> <span class="o">*</span> <span class="n">scale</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">im</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">+</span> <span class="n">offset</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">im</span>
+
+        <span class="k">if</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">lo</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">scale_values</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">image</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># Assumes RGB for now. Scales each channel independently</span>
+    <span class="c1"># and then stacks the result.</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="n">scale_channel</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s3</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+
+<div class="viewcode-block" id="posterize">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.html#face01lib.damo_yolo.damo_internal.augmentations.box_level_augs.color_augs.posterize">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">posterize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">bits</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Equivalent of PIL Posterize.&quot;&quot;&quot;</span>
+    <span class="n">image</span> <span class="o">*=</span> <span class="mi">255</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+    <span class="n">shift</span> <span class="o">=</span> <span class="n">bits</span>  <span class="c1"># 8 - bits</span>
+    <span class="n">image_rightshift</span> <span class="o">=</span> <span class="n">image</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span>
+    <span class="n">image_leftshift</span> <span class="o">=</span> <span class="n">image_rightshift</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
+    <span class="n">image_leftshift</span> <span class="o">=</span> <span class="n">image_leftshift</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">/</span> <span class="mf">255.0</span>
+    <span class="k">return</span> <span class="n">image_leftshift</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_color_aug_func</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">img_aug</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span>
+                    <span class="n">box_sample_probs</span><span class="p">):</span>
+    <span class="n">scale_ratios</span><span class="p">,</span> <span class="n">scale_splits</span> <span class="o">=</span> <span class="n">scale_ratios_splits</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">bbox</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">box_sample_probs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="p">]</span>
+    <span class="n">img_aug</span> <span class="o">=</span> <span class="n">_merge_gaussian</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">img_aug</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">scale_ratios</span><span class="p">,</span> <span class="n">scale_splits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img_aug</span>
+
+
+<span class="n">color_aug_func</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AutoContrast&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span>
+    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span> <span class="n">_color_aug_func</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">autocontrast</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;Equalize&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">leve</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span>
+    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span> <span class="n">_color_aug_func</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">equalize</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;SolarizeAdd&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span>
+    <span class="n">_color_aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">solarize_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">level</span> <span class="o">/</span> <span class="n">_MAX_LEVEL</span> <span class="o">*</span> <span class="mf">0.4296875</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span>
+                    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;Color&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span>
+    <span class="n">_color_aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">level</span> <span class="o">/</span> <span class="n">_MAX_LEVEL</span> <span class="o">*</span> <span class="mf">1.8</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span>
+                    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;Contrast&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span>
+    <span class="n">_color_aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">contrast</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">level</span> <span class="o">/</span> <span class="n">_MAX_LEVEL</span> <span class="o">*</span> <span class="mf">1.8</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span>
+                    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;Brightness&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span>
+    <span class="n">_color_aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">brightness</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">level</span> <span class="o">/</span> <span class="n">_MAX_LEVEL</span> <span class="o">*</span> <span class="mf">1.8</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span>
+                    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+    <span class="s1">&#39;Sharpness&#39;</span><span class="p">:</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">:</span>
+    <span class="n">_color_aug_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharpness</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">level</span> <span class="o">/</span> <span class="n">_MAX_LEVEL</span> <span class="o">*</span> <span class="mf">1.8</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">target</span><span class="p">,</span>
+                    <span class="n">scale_ratios_splits</span><span class="p">,</span> <span class="n">box_sample_probs</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.base &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.base のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Summary:</span>
+<span class="sd">    このスクリプトは、DAMO-YOLOを使用して画像内の物体を検出するプログラムです。</span>
+<span class="sd">    指定された画像をモデルに入力し、検出された物体のクラス、スコア、バウンディングボックスを出力します。</span>
+<span class="sd">    スコアが0.5以上の検出結果のみを表示します。</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.config.base</span> <span class="kn">import</span> <span class="n">parse_config</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.detectors.detector</span> <span class="kn">import</span> <span class="n">build_local_model</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.structures.bounding_box</span> <span class="kn">import</span> <span class="n">BoxList</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.utils</span> <span class="kn">import</span> <span class="n">postprocess</span>
+<span class="kn">from</span> <span class="nn">face01lib.damo_yolo.damo_internal.utils.demo_utils</span> <span class="kn">import</span> <span class="n">transform_img</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># クラスIDからクラス名へのマッピング</span>
+<span class="n">COCO_CLASSES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="s2">&quot;bicycle&quot;</span><span class="p">,</span> <span class="s2">&quot;car&quot;</span><span class="p">,</span> <span class="s2">&quot;motorcycle&quot;</span><span class="p">,</span> <span class="s2">&quot;airplane&quot;</span><span class="p">,</span> <span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;truck&quot;</span><span class="p">,</span> <span class="s2">&quot;boat&quot;</span><span class="p">,</span> <span class="s2">&quot;traffic light&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fire hydrant&quot;</span><span class="p">,</span> <span class="s2">&quot;stop sign&quot;</span><span class="p">,</span> <span class="s2">&quot;parking meter&quot;</span><span class="p">,</span> <span class="s2">&quot;bench&quot;</span><span class="p">,</span> <span class="s2">&quot;bird&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;horse&quot;</span><span class="p">,</span> <span class="s2">&quot;sheep&quot;</span><span class="p">,</span> <span class="s2">&quot;cow&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elephant&quot;</span><span class="p">,</span> <span class="s2">&quot;bear&quot;</span><span class="p">,</span> <span class="s2">&quot;zebra&quot;</span><span class="p">,</span> <span class="s2">&quot;giraffe&quot;</span><span class="p">,</span> <span class="s2">&quot;backpack&quot;</span><span class="p">,</span> <span class="s2">&quot;umbrella&quot;</span><span class="p">,</span> <span class="s2">&quot;handbag&quot;</span><span class="p">,</span> <span class="s2">&quot;tie&quot;</span><span class="p">,</span> <span class="s2">&quot;suitcase&quot;</span><span class="p">,</span> <span class="s2">&quot;frisbee&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;skis&quot;</span><span class="p">,</span> <span class="s2">&quot;snowboard&quot;</span><span class="p">,</span> <span class="s2">&quot;sports ball&quot;</span><span class="p">,</span> <span class="s2">&quot;kite&quot;</span><span class="p">,</span> <span class="s2">&quot;baseball bat&quot;</span><span class="p">,</span> <span class="s2">&quot;baseball glove&quot;</span><span class="p">,</span> <span class="s2">&quot;skateboard&quot;</span><span class="p">,</span> <span class="s2">&quot;surfboard&quot;</span><span class="p">,</span> <span class="s2">&quot;tennis racket&quot;</span><span class="p">,</span> <span class="s2">&quot;bottle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wine glass&quot;</span><span class="p">,</span> <span class="s2">&quot;cup&quot;</span><span class="p">,</span> <span class="s2">&quot;fork&quot;</span><span class="p">,</span> <span class="s2">&quot;knife&quot;</span><span class="p">,</span> <span class="s2">&quot;spoon&quot;</span><span class="p">,</span> <span class="s2">&quot;bowl&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;sandwich&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;broccoli&quot;</span><span class="p">,</span> <span class="s2">&quot;carrot&quot;</span><span class="p">,</span> <span class="s2">&quot;hot dog&quot;</span><span class="p">,</span> <span class="s2">&quot;pizza&quot;</span><span class="p">,</span> <span class="s2">&quot;donut&quot;</span><span class="p">,</span> <span class="s2">&quot;cake&quot;</span><span class="p">,</span> <span class="s2">&quot;chair&quot;</span><span class="p">,</span> <span class="s2">&quot;couch&quot;</span><span class="p">,</span> <span class="s2">&quot;potted plant&quot;</span><span class="p">,</span> <span class="s2">&quot;bed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dining table&quot;</span><span class="p">,</span> <span class="s2">&quot;toilet&quot;</span><span class="p">,</span> <span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="s2">&quot;laptop&quot;</span><span class="p">,</span> <span class="s2">&quot;mouse&quot;</span><span class="p">,</span> <span class="s2">&quot;remote&quot;</span><span class="p">,</span> <span class="s2">&quot;keyboard&quot;</span><span class="p">,</span> <span class="s2">&quot;cell phone&quot;</span><span class="p">,</span> <span class="s2">&quot;microwave&quot;</span><span class="p">,</span> <span class="s2">&quot;oven&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;toaster&quot;</span><span class="p">,</span> <span class="s2">&quot;sink&quot;</span><span class="p">,</span> <span class="s2">&quot;refrigerator&quot;</span><span class="p">,</span> <span class="s2">&quot;book&quot;</span><span class="p">,</span> <span class="s2">&quot;clock&quot;</span><span class="p">,</span> <span class="s2">&quot;vase&quot;</span><span class="p">,</span> <span class="s2">&quot;scissors&quot;</span><span class="p">,</span> <span class="s2">&quot;teddy bear&quot;</span><span class="p">,</span> <span class="s2">&quot;hair drier&quot;</span><span class="p">,</span> <span class="s2">&quot;toothbrush&quot;</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Infer">
+<a class="viewcode-back" href="../../../face01lib.damo_yolo.html#face01lib.damo_yolo.base.Infer">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">Infer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    画像内の物体を検出するための推論クラス。</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        config: モデルの設定ファイル。</span>
+<span class="sd">        ckpt_path: 学習済みモデルのチェックポイントのパス。</span>
+<span class="sd">        infer_size: 推論時の画像サイズ（デフォルトは640x640）。</span>
+<span class="sd">        device: 推論を行うデバイス（デフォルトはCUDA）。</span>
+<span class="sd">        engine_type: 推論に使用するエンジンタイプ（torch、onnx、tensorRTのいずれか）。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="p">,</span> <span class="n">infer_size</span><span class="o">=</span><span class="p">[</span><span class="mi">640</span><span class="p">,</span> <span class="mi">640</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">engine_type</span><span class="o">=</span><span class="s1">&#39;torch&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        初期化メソッド。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config: モデルの設定ファイル。</span>
+<span class="sd">            ckpt_path: 学習済みモデルのチェックポイントのパス。</span>
+<span class="sd">            infer_size: 推論時の画像サイズ（デフォルトは640x640）。</span>
+<span class="sd">            device: 推論を行うデバイス（デフォルトはCUDA）。</span>
+<span class="sd">            engine_type: 推論に使用するエンジンタイプ（torch、onnx、tensorRTのいずれか）。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infer_size</span> <span class="o">=</span> <span class="n">infer_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">=</span> <span class="n">engine_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_model</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        モデルを構築します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ckpt_path: 学習済みモデルのチェックポイントのパス。</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            構築されたモデル。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span><span class="si">}</span><span class="s1">エンジンを使用してモデルを構築中...&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">==</span> <span class="s1">&#39;torch&#39;</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">build_local_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">ckpt</span><span class="o">=</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="c1"># ckpt = torch.load(ckpt_path, map_location=self.device)</span>
+            <span class="n">ckpt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># モデルの重み（パラメータ）のみを使用し、その他のオブジェクト（トレーニングの状態やカスタムクラスのインスタンスなど）は読み込まない。標準出力の警告文回避。</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">ckpt</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">==</span> <span class="s1">&#39;onnx&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;この例ではONNXエンジンは未実装です。&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">==</span> <span class="s1">&#39;tensorRT&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;この例ではTensorRTエンジンは未実装です。&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;サポートされていないエンジンタイプです: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">model</span>
+
+<div class="viewcode-block" id="Infer.preprocess">
+<a class="viewcode-back" href="../../../face01lib.damo_yolo.html#face01lib.damo_yolo.base.Infer.preprocess">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        画像を前処理します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_path: 処理対象の画像ファイルのパス。</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            前処理後の画像テンソルと元画像の形状。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">origin_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">))</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">transform_img</span><span class="p">(</span><span class="n">origin_img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">augment</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">infer_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">infer_size</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">tensors</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">origin_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Infer.postprocess">
+<a class="viewcode-back" href="../../../face01lib.damo_yolo.html#face01lib.damo_yolo.base.Infer.postprocess">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">origin_shape</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        推論結果を後処理します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preds: モデルの推論結果。</span>
+<span class="sd">            origin_shape: 元画像の形状。</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            バウンディングボックス、スコア、クラスインデックスのリスト。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">==</span> <span class="s1">&#39;torch&#39;</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">preds</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span> <span class="o">==</span> <span class="s1">&#39;onnx&#39;</span><span class="p">:</span>
+            <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">bboxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">bboxes</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">num_classes</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">nms_conf_thre</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">nms_iou_thre</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;サポートされていないエンジンタイプです: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">origin_shape</span><span class="p">)</span>
+            <span class="n">bboxes</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">scores</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;scores&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">cls_inds</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="k">return</span> <span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span></div>
+
+
+<div class="viewcode-block" id="Infer.forward">
+<a class="viewcode-back" href="../../../face01lib.damo_yolo.html#face01lib.damo_yolo.base.Infer.forward">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        画像を推論します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image: 推論対象の画像（ファイルパスまたは numpy.ndarray）。</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            推論後のバウンディングボックス、スコア、クラスインデックスのリスト。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>  <span class="c1"># 推論時に勾配追跡を無効化</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># ファイルパスの場合</span>
+                <span class="n">origin_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>  <span class="c1"># numpy.ndarray の場合</span>
+                <span class="n">origin_img</span> <span class="o">=</span> <span class="n">image</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`image` はファイルパスまたは numpy.ndarray でなければなりません。&quot;</span><span class="p">)</span>
+
+            <span class="c1"># 前処理</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">transform_img</span><span class="p">(</span><span class="n">origin_img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">augment</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">infer_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">infer_size</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">tensors</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="c1"># 推論</span>
+            <span class="n">preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+            <span class="c1"># 後処理</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">origin_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span></div>
+</div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># モジュールが直接実行された場合のみ以下を実行</span>
+    <span class="c1"># モデルと設定のパス</span>
+    <span class="n">config_file</span> <span class="o">=</span> <span class="s2">&quot;configs/damoyolo_tinynasL20_T.py&quot;</span>
+    <span class="n">ckpt_path</span> <span class="o">=</span> <span class="s2">&quot;pretrained_models/damoyolo_tinynasL20_T_420.pth&quot;</span>
+
+    <span class="c1"># 設定の読み込み</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">parse_config</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+    <span class="n">infer</span> <span class="o">=</span> <span class="n">Infer</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="p">)</span>
+
+    <span class="c1"># 画像の推論</span>
+    <span class="c1"># image_path = &quot;assets/dog.jpg&quot;</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;assets/input.png&quot;</span>
+    <span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span> <span class="o">=</span> <span class="n">infer</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+    <span class="c1"># 出力結果をわかりやすく表示（スコアが0.5以上のもののみ出力）</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;スコアが0.5以上の検出された物体:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">cls_ind</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bboxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">cls_inds</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># スコアが0.5以上の場合のみ表示</span>
+            <span class="n">class_name</span> <span class="o">=</span> <span class="n">COCO_CLASSES</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cls_ind</span><span class="p">)]</span>  <span class="c1"># クラス名を取得</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;物体: </span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">, スコア: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, バウンディングボックス: </span><span class="si">{</span><span class="n">bbox</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

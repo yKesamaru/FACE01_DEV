@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   face01lib.damo_yolo
    face01lib.models
 
 Submodules

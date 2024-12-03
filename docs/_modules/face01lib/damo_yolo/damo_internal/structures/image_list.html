@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.structures.image_list &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.structures.image_list</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.structures.image_list のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<div class="viewcode-block" id="ImageList">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.ImageList">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">ImageList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Structure that holds a list of images (of possibly</span>
+<span class="sd">    varying sizes) as a single tensor.</span>
+<span class="sd">    This works by padding the images to the same size,</span>
+<span class="sd">    and storing in a field the original sizes of each image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">image_sizes</span><span class="p">,</span> <span class="n">pad_sizes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            tensors (tensor)</span>
+<span class="sd">            image_sizes (list[tuple[int, int]])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tensors</span> <span class="o">=</span> <span class="n">tensors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_sizes</span> <span class="o">=</span> <span class="n">image_sizes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_sizes</span> <span class="o">=</span> <span class="n">pad_sizes</span>
+
+<div class="viewcode-block" id="ImageList.to">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.ImageList.to">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">cast_tensor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensors</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ImageList</span><span class="p">(</span><span class="n">cast_tensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_sizes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_sizes</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="to_image_list">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.image_list.to_image_list">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">to_image_list</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">size_divisible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    tensors can be an ImageList, a torch.Tensor or</span>
+<span class="sd">    an iterable of Tensors. It can&#39;t be a numpy array.</span>
+<span class="sd">    When tensors is an iterable of Tensors, it pads</span>
+<span class="sd">    the Tensors with zeros so that they have the same</span>
+<span class="sd">    shape</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">and</span> <span class="n">size_divisible</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensors</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">ImageList</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tensors</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="c1"># single tensor shape can be inferred</span>
+        <span class="k">if</span> <span class="n">tensors</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">tensors</span> <span class="o">=</span> <span class="n">tensors</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">tensors</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="n">image_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">tensors</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ImageList</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">image_sizes</span><span class="p">,</span> <span class="n">image_sizes</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">max_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">tensors</span><span class="p">]))</span>
+        <span class="c1"># TODO Ideally, just remove this and let me model handle arbitrary</span>
+        <span class="c1"># input sizs</span>
+        <span class="k">if</span> <span class="n">size_divisible</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">math</span>
+
+            <span class="n">stride</span> <span class="o">=</span> <span class="n">size_divisible</span>
+            <span class="n">max_size</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">max_size</span><span class="p">)</span>
+            <span class="n">max_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">stride</span><span class="p">)</span> <span class="o">*</span> <span class="n">stride</span><span class="p">)</span>
+            <span class="n">max_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">stride</span><span class="p">)</span> <span class="o">*</span> <span class="n">stride</span><span class="p">)</span>
+            <span class="n">max_size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">max_size</span><span class="p">)</span>
+
+        <span class="n">batch_shape</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tensors</span><span class="p">),</span> <span class="p">)</span> <span class="o">+</span> <span class="n">max_size</span>
+        <span class="n">batched_imgs</span> <span class="o">=</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">*</span><span class="n">batch_shape</span><span class="p">)</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>  <span class="c1"># + 114</span>
+        <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">pad_img</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">batched_imgs</span><span class="p">):</span>
+            <span class="n">pad_img</span><span class="p">[:</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">copy_</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+        <span class="n">image_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">im</span> <span class="ow">in</span> <span class="n">tensors</span><span class="p">]</span>
+        <span class="n">pad_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">batched_imgs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="k">for</span> <span class="n">im</span> <span class="ow">in</span> <span class="n">batched_imgs</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">ImageList</span><span class="p">(</span><span class="n">batched_imgs</span><span class="p">,</span> <span class="n">image_sizes</span><span class="p">,</span> <span class="n">pad_sizes</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unsupported type for to_image_list: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">type</span><span class="p">(</span><span class="n">tensors</span><span class="p">)))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

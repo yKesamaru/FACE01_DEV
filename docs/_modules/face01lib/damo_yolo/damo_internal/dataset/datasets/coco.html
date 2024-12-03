@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.dataset.datasets.coco &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.dataset.datasets.coco</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.dataset.datasets.coco のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.</span>
+<span class="c1"># Copyright (C) Alibaba Group Holding Limited. All rights reserved.</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torchvision.datasets.coco</span> <span class="kn">import</span> <span class="n">CocoDetection</span>
+
+<span class="kn">from</span> <span class="nn">damo_yolo.damo_internal.structures.bounding_box</span> <span class="kn">import</span> <span class="n">BoxList</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">setNumThreads</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="COCODataset">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.dataset.datasets.html#face01lib.damo_yolo.damo_internal.dataset.datasets.coco.COCODataset">[ドキュメント]</a>
+<span class="k">class</span> <span class="nc">COCODataset</span><span class="p">(</span><span class="n">CocoDetection</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ann_file</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">COCODataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ann_file</span><span class="p">)</span>
+        <span class="c1"># sort indices for reproducible results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span><span class="n">class_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;plz provide class_names&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">contiguous_class2id</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">class_name</span><span class="p">:</span> <span class="n">i</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contiguous_id2class</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">i</span><span class="p">:</span> <span class="n">class_name</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coco</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;categories&#39;</span><span class="p">]</span>
+        <span class="n">cat_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">]</span>
+        <span class="n">cat_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ori_class2id</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">class_name</span><span class="p">:</span> <span class="n">i</span>
+            <span class="k">for</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">cat_ids</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ori_id2class</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">i</span><span class="p">:</span> <span class="n">class_name</span>
+            <span class="k">for</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cat_names</span><span class="p">,</span> <span class="n">cat_ids</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_to_img_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ids</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">inp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">inp</span>
+        <span class="n">img</span><span class="p">,</span> <span class="n">anno</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">COCODataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="c1"># filter crowd annotations</span>
+        <span class="c1"># TODO might be better to add an extra field</span>
+        <span class="n">anno</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span> <span class="k">if</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;iscrowd&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">]</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># guard against no boxes</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xywh&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">]</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contiguous_class2id</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ori_id2class</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> 
+                   <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">]</span>
+
+        <span class="n">classes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">classes</span><span class="p">)</span>
+
+
+        <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">clip_to_image</span><span class="p">(</span><span class="n">remove_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># PIL to numpy array</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># rgb</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transforms</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">idx</span>
+
+<div class="viewcode-block" id="COCODataset.pull_item">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.dataset.datasets.html#face01lib.damo_yolo.damo_internal.dataset.datasets.coco.COCODataset.pull_item">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">pull_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">img</span><span class="p">,</span> <span class="n">anno</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">COCODataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+        <span class="c1"># filter crowd annotations</span>
+        <span class="c1"># TODO might be better to add an extra field</span>
+        <span class="n">anno</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span> <span class="k">if</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;iscrowd&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">]</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># guard against no boxes</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;xywh&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;xyxy&#39;</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">clip_to_image</span><span class="p">(</span><span class="n">remove_empty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">]</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contiguous_class2id</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ori_id2class</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> 
+                   <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">]</span>
+
+        <span class="n">obj_masks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">:</span>
+            <span class="n">obj_mask</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="s1">&#39;segmentation&#39;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;segmentation&#39;</span><span class="p">]:</span>
+                    <span class="n">obj_mask</span> <span class="o">+=</span> <span class="n">mask</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_mask</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">obj_masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj_mask</span><span class="p">)</span>
+        <span class="n">seg_masks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obj_mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">obj_mask</span> <span class="ow">in</span> <span class="n">obj_masks</span>
+        <span class="p">]</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">bbox</span><span class="p">),</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">bbox</span><span class="p">)):</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># rgb</span>
+
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">seg_masks</span><span class="p">,</span> <span class="n">idx</span></div>
+
+
+<div class="viewcode-block" id="COCODataset.load_anno">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.dataset.datasets.html#face01lib.damo_yolo.damo_internal.dataset.datasets.coco.COCODataset.load_anno">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">load_anno</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">anno</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">COCODataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="n">anno</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span> <span class="k">if</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;iscrowd&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">anno</span><span class="p">]</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contiguous_class2id</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ori_id2class</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> 
+                   <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">classes</span></div>
+
+
+<div class="viewcode-block" id="COCODataset.get_img_info">
+<a class="viewcode-back" href="../../../../../../face01lib.damo_yolo.damo_internal.dataset.datasets.html#face01lib.damo_yolo.damo_internal.dataset.datasets.coco.COCODataset.get_img_info">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">get_img_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">img_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_to_img_map</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">img_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coco</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">img_id</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">img_data</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

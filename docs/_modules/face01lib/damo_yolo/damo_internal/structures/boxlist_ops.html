@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>face01lib.damo_yolo.damo_internal.structures.boxlist_ops &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../_static/translations.js?v=91613774"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../../../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="検索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">face01lib.damo_yolo.damo_internal.structures.boxlist_ops</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>face01lib.damo_yolo.damo_internal.structures.boxlist_ops のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">.bounding_box</span> <span class="kn">import</span> <span class="n">BoxList</span>
+
+
+<div class="viewcode-block" id="remove_small_boxes">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.remove_small_boxes">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">remove_small_boxes</span><span class="p">(</span><span class="n">boxlist</span><span class="p">,</span> <span class="n">min_size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Only keep boxes with both sides &gt;= min_size</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        boxlist (Boxlist)</span>
+<span class="sd">        min_size (int)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xywh_boxes</span> <span class="o">=</span> <span class="n">boxlist</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;xywh&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">bbox</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">hs</span> <span class="o">=</span> <span class="n">xywh_boxes</span><span class="o">.</span><span class="n">unbind</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="p">((</span><span class="n">ws</span> <span class="o">&gt;=</span> <span class="n">min_size</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">hs</span> <span class="o">&gt;=</span> <span class="n">min_size</span><span class="p">))</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">boxlist</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="boxlist_iou">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.boxlist_iou">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">boxlist_iou</span><span class="p">(</span><span class="n">boxlist1</span><span class="p">,</span> <span class="n">boxlist2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the intersection over union of two set of boxes.</span>
+<span class="sd">    The box order must be (xmin, ymin, xmax, ymax).</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">      box1: (BoxList) bounding boxes, sized [N,4].</span>
+<span class="sd">      box2: (BoxList) bounding boxes, sized [M,4].</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      (tensor) iou, sized [N,M].</span>
+<span class="sd">    Reference:</span>
+<span class="sd">      https://github.com/chainer/chainercv/blob/master/chainercv/utils/bbox/bbox_iou.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">boxlist1</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">boxlist2</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s1">&#39;boxlists should have same image size, got </span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">boxlist1</span><span class="p">,</span> <span class="n">boxlist2</span><span class="p">))</span>
+
+    <span class="n">area1</span> <span class="o">=</span> <span class="n">boxlist1</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+    <span class="n">area2</span> <span class="o">=</span> <span class="n">boxlist2</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+
+    <span class="n">box1</span><span class="p">,</span> <span class="n">box2</span> <span class="o">=</span> <span class="n">boxlist1</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span> <span class="n">boxlist2</span><span class="o">.</span><span class="n">bbox</span>
+
+    <span class="n">lt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">box1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">box2</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># [N,M,2]</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">box1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">:],</span> <span class="n">box2</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:])</span>  <span class="c1"># [N,M,2]</span>
+
+    <span class="n">TO_REMOVE</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">wh</span> <span class="o">=</span> <span class="p">(</span><span class="n">rb</span> <span class="o">-</span> <span class="n">lt</span> <span class="o">+</span> <span class="n">TO_REMOVE</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [N,M,2]</span>
+    <span class="n">inter</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">wh</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># [N,M]</span>
+
+    <span class="n">iou</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">/</span> <span class="p">(</span><span class="n">area1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">area2</span> <span class="o">-</span> <span class="n">inter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">iou</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_cat</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Efficient version of torch.cat that avoids a copy if there is only</span>
+<span class="sd">    a single element in a list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="cat_boxlist">
+<a class="viewcode-back" href="../../../../../face01lib.damo_yolo.damo_internal.structures.html#face01lib.damo_yolo.damo_internal.structures.boxlist_ops.cat_boxlist">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">cat_boxlist</span><span class="p">(</span><span class="n">bboxes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Concatenates a list of BoxList (having the same image size) into a</span>
+<span class="sd">    single BoxList</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        bboxes (list[BoxList])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bboxes</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">BoxList</span><span class="p">)</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">)</span>
+
+    <span class="n">size</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">size</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">)</span>
+
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">bboxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="n">mode</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">)</span>
+
+    <span class="n">fields</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">bboxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fields</span><span class="p">())</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">fields</span><span class="p">())</span> <span class="o">==</span> <span class="n">fields</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">)</span>
+
+    <span class="n">cat_boxes</span> <span class="o">=</span> <span class="n">BoxList</span><span class="p">(</span><span class="n">_cat</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">bbox</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span>
+                        <span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_cat</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">cat_boxes</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cat_boxes</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -130,6 +130,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_JAPANESE_FACE_V1.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO">example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.distort_barrel">example.distort_barrel module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -1007,6 +1011,54 @@ face recognition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) -- 処理を実行する回数を受け取る. デフォルトは50回.</p>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO">
+<span id="example-display-gui-window-japanese-face-v1-with-yolo-module"></span><h2>example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module<a class="headerlink" href="#module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO" title="Link to this heading"></a></h2>
+<p>顔画像と物体を検出し、回転・クロップ・表示するウィンドウアプリケーション.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このプログラムは、顔認識モデルとDAMO-YOLO物体検出モデルを使用して、
+動画フレーム内の顔と物体を検出し、それらの情報をリアルタイムで表示します。
+GUIウィンドウ上に処理結果を表示し、詳細情報をターミナルに出力します。</p>
+</dd>
+<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py<span class="w"> </span>&lt;exec_times&gt;
+</pre></div>
+</div>
+</dd>
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>顔認識と物体検出をリアルタイムで実行</p></li>
+<li><p>検出結果（類似度、座標、物体名など）をターミナルに表示</p></li>
+<li><p>GUIウィンドウ上で処理結果を更新表示</p></li>
+<li><p>処理回数または検出件数に応じてプログラムを終了</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Result:</dt><dd><ul class="simple">
+<li><p>GUIウィンドウで処理結果をリアルタイム表示</p></li>
+<li><p>ターミナルに検出データの詳細を出力</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/display_GUI_window_JAPANESE_FACE_V1_with_YOLO.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main" title="Link to this definition"></a></dt>
+<dd><p>ウィンドウを表示し、顔と物体を検出するメイン関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) -- 処理を実行する回数. デフォルトは50回.</p>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
