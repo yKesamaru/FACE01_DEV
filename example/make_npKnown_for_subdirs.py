@@ -67,7 +67,7 @@ def select_directory():
 
 def create_npz_for_all_subdirs(root_dir, load_preset_image_obj):
     """
-    指定したディレクトリ以下のすべてのサブディレクトリに対して、
+    指定したディレクトリ以下の1階層目のサブディレクトリに対して、
     npKnown.npzファイルを作成します。
 
     Args:
@@ -75,24 +75,28 @@ def create_npz_for_all_subdirs(root_dir, load_preset_image_obj):
         load_preset_image_obj (LoadPresetImage): 画像読み込み用のオブジェクト。
     """
     for dirpath, dirnames, filenames in os.walk(root_dir):
-        npz_file_path = os.path.join(dirpath, 'npKnown.npz')
-        # npKnown.npz ファイルが存在する場合は処理をスキップ
-        if os.path.exists(npz_file_path):
-            print(f"{npz_file_path} は既に存在します。処理をスキップします。")
-            continue
-
-        # ディレクトリ内に画像ファイルが存在するか確認
-        image_files = [file for file in filenames if file.lower().endswith('.png')]
-        if image_files:
-            print(f"{npz_file_path} を作成します...")
-            load_preset_image_obj.load_preset_image(
-                deep_learning_model=1,
-                RootDir=dirpath,               # npKnown.npzを作成するディレクトリ
-                preset_face_imagesDir=dirpath  # 顔画像が格納されているディレクトリ
-            )
-            print(f"{npz_file_path} を作成しました。")
-        else:
-            print(f"{dirpath} に画像ファイルが見つかりませんでした。処理をスキップします。")
+        for subdir in dirnames:
+            if subdir in ["not_me", "multipleFaces", "noFace", "same_default_files", "same_face"]:
+                continue
+            else:
+                # npKnown.npz ファイルが存在する場合は処理をスキップ
+                npz_file_path = os.path.join(dirpath, subdir, 'npKnown.npz')
+                if os.path.exists(npz_file_path):
+                    print(f"{npz_file_path} は既に存在します。処理をスキップします。")
+                    continue
+                else:
+                    # ディレクトリ内に画像ファイルが存在するか確認
+                    image_files = [file for file in filenames if file.lower().endswith('.png')]
+                    if image_files:
+                        print(f"{npz_file_path} を作成します...")
+                        load_preset_image_obj.load_preset_image(
+                            deep_learning_model=1,
+                            RootDir=dirpath,               # npKnown.npzを作成するディレクトリ
+                            preset_face_imagesDir=dirpath  # 顔画像が格納されているディレクトリ
+                        )
+                        print(f"{npz_file_path} を作成しました。")
+                    else:
+                        print(f"{dirpath} に画像ファイルが見つかりませんでした。処理をスキップします。")
 
 
 if __name__ == '__main__':
