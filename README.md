@@ -156,6 +156,17 @@ bash -c ./INSTALL_FACE01.sh
 
 ---
 
+### 実働環境のPC（Python仮想環境）にインストールする
+> [!NOTE]
+> 
+> この方法はテストをしておりません。
+
+```python
+# 仮想環境構築後
+pip install git+https://github.com/yKesamaru/FACE01_DEV.git
+```
+---
+
 ## 豊富なエグザンプルコード
 `example`フォルダには、様々なスクリプト例が収録されています。
 (全てのスクリプトが現在のバージョンに対応しているわけではないことに注意してください)
