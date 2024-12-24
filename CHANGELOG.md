@@ -4,6 +4,11 @@
 - テストのためのサンプルデータを追加（例: `tests/data`）
 ### 変更
 - プロジェクト構造に`tests`ディレクトリを追加
+- `face01lib.models.__init__.py`
+  - `pkg_resources.resource_filename`は非推奨な為、`importlib.resources`へ変更
+- `pip install git+https://github.com/yKesamaru/FACE01_DEV.git`
+  - `pyproject.toml`を修正
+  - `MANIFEST.ini`を修正
 
 ---
 
