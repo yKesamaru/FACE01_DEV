@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "FACE01"
-version = "2.2.02"
+version = "3.04.01"
 requires-python = ">=3.8"
 dependencies = [
     "Pillow",
@@ -38,12 +38,10 @@ keywords = ["face recognition"]
 
 [project.urls]
 Homepage = "https://tokai-kaoninsho.com/"
-Documentation = "https://ykesamaru.github.io/FACE01_SAMPLE/"
-Repository = "https://github.com/yKesamaru/FACE01_SAMPLE"
-
-[tool.setuptools]
-include-package-data = true
+Documentation = "https://ykesamaru.github.io/FACE01_DEV/"
+Repository = "https://github.com/yKesamaru/FACE01_DEV"
 
 [tool.setuptools.packages.find]
-where = ["face01lib"]
+where = ["."]
+include = ["face01lib*"]
 

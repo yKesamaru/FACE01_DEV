@@ -3,6 +3,7 @@ customtkinter
 faiss-gpu
 GPUtil
 myst-parser
+pytest
 recommonmark
 snakeviz
 sphinx
