@@ -60,7 +60,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="face01lib.damo_yolo.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo.base">face01lib.damo_yolo.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#face01lib-damo-yolo-base-module">face01lib.damo_yolo.base module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo">Module contents</a></li>
 </ul>
 </li>
@@ -180,35 +180,8 @@
 <dd></dd></dl>
 
 </section>
-<section id="module-face01lib.damo_yolo.damo_internal.utils.demo_utils">
-<span id="face01lib-damo-yolo-damo-internal-utils-demo-utils-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.demo_utils module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.demo_utils" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.demo_postprocess">
-<span class="sig-name descname"><span class="pre">demo_postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p6</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#demo_postprocess"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.demo_postprocess" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.mkdir">
-<span class="sig-name descname"><span class="pre">mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#mkdir"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.mkdir" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.multiclass_nms">
-<span class="sig-name descname"><span class="pre">multiclass_nms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_thr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_thr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#multiclass_nms"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.multiclass_nms" title="Link to this definition"></a></dt>
-<dd><p>Multiclass NMS implemented in Numpy</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.nms">
-<span class="sig-name descname"><span class="pre">nms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_thr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#nms"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.nms" title="Link to this definition"></a></dt>
-<dd><p>Single class NMS implemented in Numpy.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.utils.demo_utils.transform_img">
-<span class="sig-name descname"><span class="pre">transform_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_divisibility</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_max_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/utils/demo_utils.html#transform_img"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.utils.demo_utils.transform_img" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="face01lib-damo-yolo-damo-internal-utils-demo-utils-module">
+<h2>face01lib.damo_yolo.damo_internal.utils.demo_utils module<a class="headerlink" href="#face01lib-damo-yolo-damo-internal-utils-demo-utils-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-face01lib.damo_yolo.damo_internal.utils.dist">
 <span id="face01lib-damo-yolo-damo-internal-utils-dist-module"></span><h2>face01lib.damo_yolo.damo_internal.utils.dist module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.utils.dist" title="Link to this heading"></a></h2>

@@ -130,10 +130,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_JAPANESE_FACE_V1.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO">example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-display-gui-window-japanese-face-v1-with-yolo-module">example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.distort_barrel">example.distort_barrel module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.distort_barrel.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -183,6 +180,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_for_subdirs">example.make_npKnown_for_subdirs module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_for_subdirs.create_npz_for_all_subdirs"><code class="docutils literal notranslate"><span class="pre">create_npz_for_all_subdirs()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_for_subdirs.select_directory"><code class="docutils literal notranslate"><span class="pre">select_directory()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_for_subdirs_noGUI">example.make_npKnown_for_subdirs_noGUI module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_for_subdirs_noGUI.create_npz_for_all_subdirs"><code class="docutils literal notranslate"><span class="pre">create_npz_for_all_subdirs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.make_npKnown_parallel">example.make_npKnown_parallel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_parallel.create_npz_for_all_subdirs_parallel"><code class="docutils literal notranslate"><span class="pre">create_npz_for_all_subdirs_parallel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_parallel.process_subdir"><code class="docutils literal notranslate"><span class="pre">process_subdir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.make_npKnown_parallel.select_directory"><code class="docutils literal notranslate"><span class="pre">select_directory()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example.similarity">example.similarity module</a></li>
@@ -1019,53 +1026,8 @@ face recognition.</p>
 </dd></dl>
 
 </section>
-<section id="module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO">
-<span id="example-display-gui-window-japanese-face-v1-with-yolo-module"></span><h2>example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module<a class="headerlink" href="#module-example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO" title="Link to this heading"></a></h2>
-<p>顔画像と物体を検出し、回転・クロップ・表示するウィンドウアプリケーション.</p>
-<dl>
-<dt>Summary:</dt><dd><p>このプログラムは、顔認識モデルとDAMO-YOLO物体検出モデルを使用して、
-動画フレーム内の顔と物体を検出し、それらの情報をリアルタイムで表示します。
-GUIウィンドウ上に処理結果を表示し、詳細情報をターミナルに出力します。</p>
-</dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py<span class="w"> </span>&lt;exec_times&gt;
-</pre></div>
-</div>
-</dd>
-<dt>Features:</dt><dd><ul class="simple">
-<li><p>顔認識と物体検出をリアルタイムで実行</p></li>
-<li><p>検出結果（類似度、座標、物体名など）をターミナルに表示</p></li>
-<li><p>GUIウィンドウ上で処理結果を更新表示</p></li>
-<li><p>処理回数または検出件数に応じてプログラムを終了</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition- admonition">
-<p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py
-</pre></div>
-</div>
-</div>
-<dl class="simple">
-<dt>Result:</dt><dd><ul class="simple">
-<li><p>GUIウィンドウで処理結果をリアルタイム表示</p></li>
-<li><p>ターミナルに検出データの詳細を出力</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main">
-<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/example/display_GUI_window_JAPANESE_FACE_V1_with_YOLO.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO.main" title="Link to this definition"></a></dt>
-<dd><p>ウィンドウを表示し、顔と物体を検出するメイン関数.</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>exec_times</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) -- 処理を実行する回数. デフォルトは50回.</p>
-</dd>
-<dt class="field-even">戻り値<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="example-display-gui-window-japanese-face-v1-with-yolo-module">
+<h2>example.display_GUI_window_JAPANESE_FACE_V1_with_YOLO module<a class="headerlink" href="#example-display-gui-window-japanese-face-v1-with-yolo-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-example.distort_barrel">
 <span id="example-distort-barrel-module"></span><h2>example.distort_barrel module<a class="headerlink" href="#module-example.distort_barrel" title="Link to this heading"></a></h2>
@@ -1695,7 +1657,7 @@ Spoof().make_qr_code()
 <dl class="py function">
 <dt class="sig sig-object py" id="example.make_npKnown_for_subdirs.create_npz_for_all_subdirs">
 <span class="sig-name descname"><span class="pre">create_npz_for_all_subdirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_preset_image_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_for_subdirs.html#create_npz_for_all_subdirs"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_for_subdirs.create_npz_for_all_subdirs" title="Link to this definition"></a></dt>
-<dd><p>指定したディレクトリ以下のすべてのサブディレクトリに対して、
+<dd><p>指定したディレクトリ以下の1階層目のサブディレクトリに対して、
 npKnown.npzファイルを作成します。</p>
 <dl class="field-list simple">
 <dt class="field-odd">パラメータ<span class="colon">:</span></dt>
@@ -1720,6 +1682,89 @@ npKnown.npzファイルを作成します。</p>
 </dd>
 </dl>
 </dd></dl>
+
+</section>
+<section id="module-example.make_npKnown_for_subdirs_noGUI">
+<span id="example-make-npknown-for-subdirs-nogui-module"></span><h2>example.make_npKnown_for_subdirs_noGUI module<a class="headerlink" href="#module-example.make_npKnown_for_subdirs_noGUI" title="Link to this heading"></a></h2>
+<p>このスクリプトは、指定したディレクトリ配下のサブディレクトリにnpKnown.npzファイルを作成します。</p>
+<dl class="simple">
+<dt>変更点:</dt><dd><ul class="simple">
+<li><p>GUIによるディレクトリ選択を廃止し、コード中で指定します。</p></li>
+<li><p>指定ディレクトリ: /media/terms/2TB_Movie/face_data_backup/data</p></li>
+</ul>
+</dd>
+</dl>
+<p>ファイル名例: make_npKnown_for_subdirs_noGUI.py</p>
+<dl class="simple">
+<dt>実行方法:</dt><dd><p>python3 make_npKnown_for_subdirs_noGUI.py</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.make_npKnown_for_subdirs_noGUI.create_npz_for_all_subdirs">
+<span class="sig-name descname"><span class="pre">create_npz_for_all_subdirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_preset_image_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_for_subdirs_noGUI.html#create_npz_for_all_subdirs"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_for_subdirs_noGUI.create_npz_for_all_subdirs" title="Link to this definition"></a></dt>
+<dd><p>指定したディレクトリ以下の1階層目のサブディレクトリに対して、
+npKnown.npzファイルを作成します。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- ルートディレクトリのパス。</p></li>
+<li><p><strong>load_preset_image_obj</strong> (<a class="reference internal" href="face01lib.html#face01lib.load_preset_image.LoadPresetImage" title="face01lib.load_preset_image.LoadPresetImage"><em>LoadPresetImage</em></a>) -- 画像読み込み用のオブジェクト。</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-example.make_npKnown_parallel">
+<span id="example-make-npknown-parallel-module"></span><h2>example.make_npKnown_parallel module<a class="headerlink" href="#module-example.make_npKnown_parallel" title="Link to this heading"></a></h2>
+<p>npKnown.npzファイルを並列処理で作成するスクリプト.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このスクリプトは、指定されたディレクトリ以下のサブディレクトリを並列処理し、
+各サブディレクトリ内にnpKnown.npzファイルを効率的に作成します。
+並列処理を利用することで、従来の逐次処理よりも高速にファイルを生成できます。</p>
+</dd>
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>並列処理を使用して実行速度を向上。</p></li>
+<li><p>サブディレクトリごとにnpKnown.npzファイルを作成。</p></li>
+<li><p>既存のnpKnown.npzファイルをスキップする仕組み。</p></li>
+</ul>
+</dd>
+<dt>Requirements:</dt><dd><ul class="simple">
+<li><p>ttkbootstrap</p></li>
+<li><p>concurrent.futures</p></li>
+<li><p>face01lib.load_preset_image</p></li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><p>ターミナルで以下のコマンドを実行してスクリプトを起動します。</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python3</span> <span class="pre">example/make_npKnown_parallel.py</span>
+<span class="pre">`</span></code></p>
+</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<p>実行後、ディレクトリ選択ダイアログが表示されます。
+選択したディレクトリ内のすべてのサブディレクトリに対して、
+並列処理を利用してnpKnown.npzファイルが生成されます。</p>
+</div>
+<dl class="simple">
+<dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_parallel.py">make_npKnown_parallel.py</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.make_npKnown_parallel.create_npz_for_all_subdirs_parallel">
+<span class="sig-name descname"><span class="pre">create_npz_for_all_subdirs_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_parallel.html#create_npz_for_all_subdirs_parallel"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_parallel.create_npz_for_all_subdirs_parallel" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.make_npKnown_parallel.process_subdir">
+<span class="sig-name descname"><span class="pre">process_subdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_parallel.html#process_subdir"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_parallel.process_subdir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.make_npKnown_parallel.select_directory">
+<span class="sig-name descname"><span class="pre">select_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/make_npKnown_parallel.html#select_directory"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.make_npKnown_parallel.select_directory" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-example.similarity">
