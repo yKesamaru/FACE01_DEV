@@ -60,7 +60,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="face01lib.damo_yolo.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo.base">face01lib.damo_yolo.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#face01lib-damo-yolo-base-module">face01lib.damo_yolo.base module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo">Module contents</a></li>
 </ul>
 </li>
@@ -122,67 +122,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="module-face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval">
-<span id="face01lib-damo-yolo-damo-internal-dataset-datasets-evaluation-coco-coco-eval-module"></span><h2>face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">COCOResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">iou_types</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#COCOResults"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults" title="Link to this definition"></a></dt>
-<dd><p>ベースクラス: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults.METRICS">
-<span class="sig-name descname"><span class="pre">METRICS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'bbox':</span> <span class="pre">['AP',</span> <span class="pre">'AP50',</span> <span class="pre">'AP75',</span> <span class="pre">'APs',</span> <span class="pre">'APm',</span> <span class="pre">'APl'],</span> <span class="pre">'box_proposal':</span> <span class="pre">['AR&#64;100',</span> <span class="pre">'ARs&#64;100',</span> <span class="pre">'ARm&#64;100',</span> <span class="pre">'ARl&#64;100',</span> <span class="pre">'AR&#64;1000',</span> <span class="pre">'ARs&#64;1000',</span> <span class="pre">'ARm&#64;1000',</span> <span class="pre">'ARl&#64;1000'],</span> <span class="pre">'keypoints':</span> <span class="pre">['AP',</span> <span class="pre">'AP50',</span> <span class="pre">'AP75',</span> <span class="pre">'APm',</span> <span class="pre">'APl'],</span> <span class="pre">'segm':</span> <span class="pre">['AP',</span> <span class="pre">'AP50',</span> <span class="pre">'AP75',</span> <span class="pre">'APs',</span> <span class="pre">'APm',</span> <span class="pre">'APl']}</span></em><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults.METRICS" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coco_eval</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#COCOResults.update"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.COCOResults.update" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.check_expected_results">
-<span class="sig-name descname"><span class="pre">check_expected_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_tol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#check_expected_results"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.check_expected_results" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.compute_thresholds_for_classes">
-<span class="sig-name descname"><span class="pre">compute_thresholds_for_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coco_eval</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#compute_thresholds_for_classes"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.compute_thresholds_for_classes" title="Link to this definition"></a></dt>
-<dd><p>The function is used to compute the thresholds corresponding to best
-f-measure. The resulting thresholds are used in fcos_demo.py.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.do_coco_evaluation">
-<span class="sig-name descname"><span class="pre">do_coco_evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_only</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iou_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_results_sigma_tol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#do_coco_evaluation"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.do_coco_evaluation" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.evaluate_box_proposals">
-<span class="sig-name descname"><span class="pre">evaluate_box_proposals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#evaluate_box_proposals"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.evaluate_box_proposals" title="Link to this definition"></a></dt>
-<dd><p>Evaluate detection proposal recall metrics. This function is a much
-faster alternative to the official COCO API recall evaluation code.
-However, it produces slightly different results.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.evaluate_predictions_on_coco">
-<span class="sig-name descname"><span class="pre">evaluate_predictions_on_coco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coco_gt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coco_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_result_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iou_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bbox'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#evaluate_predictions_on_coco"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.evaluate_predictions_on_coco" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.prepare_for_coco_detection">
-<span class="sig-name descname"><span class="pre">prepare_for_coco_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco/coco_eval.html#prepare_for_coco_detection"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval.prepare_for_coco_detection" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="face01lib-damo-yolo-damo-internal-dataset-datasets-evaluation-coco-coco-eval-module">
+<h2>face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_eval module<a class="headerlink" href="#face01lib-damo-yolo-damo-internal-dataset-datasets-evaluation-coco-coco-eval-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_evaluation">
-<span class="sig-name descname"><span class="pre">coco_evaluation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_only</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iou_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_results_sigma_tol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/dataset/datasets/evaluation/coco.html#coco_evaluation"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.dataset.datasets.evaluation.coco.coco_evaluation" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 </section>
 </section>
 

@@ -252,6 +252,22 @@ example.make\_npKnown\_for\_subdirs module
    :undoc-members:
    :show-inheritance:
 
+example.make\_npKnown\_for\_subdirs\_noGUI module
+-------------------------------------------------
+
+.. automodule:: example.make_npKnown_for_subdirs_noGUI
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+example.make\_npKnown\_parallel module
+--------------------------------------
+
+.. automodule:: example.make_npKnown_parallel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 example.similarity module
 -------------------------
 

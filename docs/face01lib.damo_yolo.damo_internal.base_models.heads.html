@@ -60,7 +60,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="face01lib.damo_yolo.html">face01lib.damo_yolo package</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="face01lib.damo_yolo.html#subpackages">Subpackages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo.base">face01lib.damo_yolo.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#face01lib-damo-yolo-base-module">face01lib.damo_yolo.base module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="face01lib.damo_yolo.html#module-face01lib.damo_yolo">Module contents</a></li>
 </ul>
 </li>
@@ -120,115 +120,11 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="module-face01lib.damo_yolo.damo_internal.base_models.heads.zero_head">
-<span id="face01lib-damo-yolo-damo-internal-base-models-heads-zero-head-module"></span><h2>face01lib.damo_yolo.damo_internal.base_models.heads.zero_head module<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.base_models.heads.zero_head" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.Integral">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Integral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reg_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#Integral"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.Integral" title="Link to this definition"></a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>A fixed layer for calculating integral result from distribution.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.Integral.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#Integral.forward"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.Integral.forward" title="Link to this definition"></a></dt>
-<dd><p>Forward feature from the regression head to get integral result of
-bounding box location.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ZeroHead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stacked_convs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feat_channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strides</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[8,</span> <span class="pre">16,</span> <span class="pre">32]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">act</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_conf_thre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms_iou_thre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legacy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_with_post</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead" title="Link to this definition"></a></dt>
-<dd><p>ベースクラス: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<p>Ref to Generalized Focal Loss V2: Learning Reliable Localization Quality
-Estimation for Dense Object Detection.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_targets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.forward"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward" title="Link to this definition"></a></dt>
-<dd><p>Define the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">注釈</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_eval">
-<span class="sig-name descname"><span class="pre">forward_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.forward_eval"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_eval" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_single">
-<span class="sig-name descname"><span class="pre">forward_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_convs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_convs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gfl_cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gfl_reg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.forward_single"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_single" title="Link to this definition"></a></dt>
-<dd><p>Forward feature of a single scale level.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_train">
-<span class="sig-name descname"><span class="pre">forward_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imgs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aux_targets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.forward_train"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.forward_train" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_single_level_center_priors">
-<span class="sig-name descname"><span class="pre">get_single_level_center_priors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">featmap_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.get_single_level_center_priors"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_single_level_center_priors" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_target_single">
-<span class="sig-name descname"><span class="pre">get_target_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_priors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unmap_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes_ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.get_target_single"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_target_single" title="Link to this definition"></a></dt>
-<dd><p>Compute regression, classification targets for anchors in a single
-image.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_targets">
-<span class="sig-name descname"><span class="pre">get_targets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlvl_center_priors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_labels_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unmap_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.get_targets"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.get_targets" title="Link to this definition"></a></dt>
-<dd><p>Get targets for GFL head.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.init_weights">
-<span class="sig-name descname"><span class="pre">init_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.init_weights"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.init_weights" title="Link to this definition"></a></dt>
-<dd><p>Initialize weights of the head.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox_before_softmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlvl_center_priors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes_ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.loss"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.loss" title="Link to this definition"></a></dt>
-<dd><p>Compute losses of the head.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.sample">
-<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">assign_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_bboxes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#ZeroHead.sample"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.ZeroHead.sample" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.bbox2distance">
-<span class="sig-name descname"><span class="pre">bbox2distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_dis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#bbox2distance"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.bbox2distance" title="Link to this definition"></a></dt>
-<dd><p>Decode bounding box based on distances.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.distance2bbox">
-<span class="sig-name descname"><span class="pre">distance2bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads/zero_head.html#distance2bbox"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.zero_head.distance2bbox" title="Link to this definition"></a></dt>
-<dd><p>Decode distance prediction to bounding box.</p>
-</dd></dl>
-
+<section id="face01lib-damo-yolo-damo-internal-base-models-heads-zero-head-module">
+<h2>face01lib.damo_yolo.damo_internal.base_models.heads.zero_head module<a class="headerlink" href="#face01lib-damo-yolo-damo-internal-base-models-heads-zero-head-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-face01lib.damo_yolo.damo_internal.base_models.heads">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-face01lib.damo_yolo.damo_internal.base_models.heads" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.damo_yolo.damo_internal.base_models.heads.build_head">
-<span class="sig-name descname"><span class="pre">build_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/damo_yolo/damo_internal/base_models/heads.html#build_head"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.damo_yolo.damo_internal.base_models.heads.build_head" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 </section>
 </section>
 

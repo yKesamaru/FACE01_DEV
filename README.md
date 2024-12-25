@@ -18,7 +18,7 @@ FACE01 -- さあ、始めましょう！
 ___
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
-![](https://img.shields.io/badge/Release-v3.0.04-green)
+![](https://img.shields.io/badge/Release-v3.04.01-green)
 ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)

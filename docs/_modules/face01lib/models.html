@@ -3,25 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>face01lib.models &mdash; FACE01 3.0.01 ドキュメント</title>
+  <title>face01lib.models &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
 
   
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo.ico"/>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=469069b1"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="FACE01 3.0.01 ドキュメント 内を検索"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
           href="../../_static/opensearch.xml"/>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" /> 
@@ -37,7 +38,7 @@
           
           <a href="../../index.html" class="icon icon-home">
             FACE01
-              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_SAMPLE/master/images/Logo_dist.png" class="logo" alt="Logo"/>
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -47,8 +48,9 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
@@ -82,43 +84,47 @@
   <h1>face01lib.models のソースコード</h1><div class="highlight"><pre>
 <span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;y.kesamaru@tokai-kaoninsho.com&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;2.2.02&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;3.04.01&#39;</span>
 
-<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="kn">import</span> <span class="nn">importlib.resources</span>
 
 
 <div class="viewcode-block" id="Models">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models">[ドキュメント]</a>
 <span class="k">class</span> <span class="nc">Models</span><span class="p">:</span>
-    <span class="c1"># DATA_PATH = pkg_resources.resource_filename(&#39;&lt;package name&gt;&#39;, &#39;data/&#39;)</span>
 <div class="viewcode-block" id="Models.pose_predictor_five_point_model_location">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models.pose_predictor_five_point_model_location">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">pose_predictor_five_point_model_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;shape_predictor_5_face_landmarks.dat&quot;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;shape_predictor_5_face_landmarks.dat&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Models.dlib_resnet_model_location">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models.dlib_resnet_model_location">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">dlib_resnet_model_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;dlib_face_recognition_resnet_model_v1.dat&quot;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;dlib_face_recognition_resnet_model_v1.dat&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Models.cnn_face_detector_model_location">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models.cnn_face_detector_model_location">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">cnn_face_detector_model_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;mmod_human_face_detector.dat&quot;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;mmod_human_face_detector.dat&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Models.anti_spoof_model_location">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models.anti_spoof_model_location">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">anti_spoof_model_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;model_float32.onnx&quot;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;model_float32.onnx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Models.JAPANESE_FACE_V1_model_location">
 <a class="viewcode-back" href="../../face01lib.models.html#face01lib.models.Models.JAPANESE_FACE_V1_model_location">[ドキュメント]</a>
     <span class="k">def</span> <span class="nf">JAPANESE_FACE_V1_model_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;JAPANESE_FACE_V1.onnx&quot;</span><span class="p">)</span></div>
+        <span class="k">with</span> <span class="n">importlib</span><span class="o">.</span><span class="n">resources</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;JAPANESE_FACE_V1.onnx&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

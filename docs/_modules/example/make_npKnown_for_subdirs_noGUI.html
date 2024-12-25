@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>example.make_npKnown_for_subdirs_noGUI &mdash; FACE01 3.0.03 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
+
+  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="FACE01 3.0.03 ドキュメント 内を検索"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FACE01
+              <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo_dist.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ドキュメント:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../step_by_step.html">ステップ・バイ・ステップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">example package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../face01lib.html">face01lib package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://tokai-kaoninsho.com/">Tokai-kaoninsho</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FACE01</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">example.make_npKnown_for_subdirs_noGUI</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>example.make_npKnown_for_subdirs_noGUI のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">このスクリプトは、指定したディレクトリ配下のサブディレクトリにnpKnown.npzファイルを作成します。</span>
+
+<span class="sd">変更点:</span>
+<span class="sd">    - GUIによるディレクトリ選択を廃止し、コード中で指定します。</span>
+<span class="sd">    - 指定ディレクトリ: /media/terms/2TB_Movie/face_data_backup/data</span>
+
+<span class="sd">ファイル名例: make_npKnown_for_subdirs_noGUI.py</span>
+
+<span class="sd">実行方法:</span>
+<span class="sd">    python3 make_npKnown_for_subdirs_noGUI.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>  <span class="c1"># osモジュールをインポート</span>
+<span class="kn">import</span> <span class="nn">sys</span>  <span class="c1"># sysモジュールをインポート</span>
+
+<span class="c1"># 現在のスクリプトファイルがあるディレクトリを取得</span>
+<span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># 現在のファイルのディレクトリ</span>
+<span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>    <span class="c1"># 親ディレクトリを取得</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>           <span class="c1"># 親ディレクトリをパスに追加</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.load_preset_image</span> <span class="kn">import</span> <span class="n">LoadPresetImage</span>  <span class="c1"># LoadPresetImageクラスのインポート</span>
+
+
+<div class="viewcode-block" id="create_npz_for_all_subdirs">
+<a class="viewcode-back" href="../../example.html#example.make_npKnown_for_subdirs_noGUI.create_npz_for_all_subdirs">[ドキュメント]</a>
+<span class="k">def</span> <span class="nf">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    指定したディレクトリ以下の1階層目のサブディレクトリに対して、</span>
+<span class="sd">    npKnown.npzファイルを作成します。</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        root_dir (str): ルートディレクトリのパス。</span>
+<span class="sd">        load_preset_image_obj (LoadPresetImage): 画像読み込み用のオブジェクト。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># os.walkでディレクトリツリーを走査</span>
+    <span class="k">for</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>          <span class="c1"># ディレクトリを再帰的に探索</span>
+        <span class="c1"># 各サブディレクトリに対して</span>
+        <span class="k">for</span> <span class="n">subdir</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>                                    <span class="c1"># サブディレクトリごとに処理</span>
+            <span class="c1"># 除外サブディレクトリ一覧</span>
+            <span class="k">if</span> <span class="n">subdir</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;not_me&quot;</span><span class="p">,</span> <span class="s2">&quot;multipleFaces&quot;</span><span class="p">,</span> <span class="s2">&quot;noFace&quot;</span><span class="p">,</span> <span class="s2">&quot;same_default_files&quot;</span><span class="p">,</span> <span class="s2">&quot;same_face&quot;</span><span class="p">,</span> <span class="s2">&quot;目視_not_me&quot;</span><span class="p">,</span> <span class="s2">&quot;modified_faice&quot;</span><span class="p">]:</span>
+                <span class="c1"># このサブディレクトリはスキップ</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># npKnown.npz ファイルパスを生成</span>
+                <span class="n">npz_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">subdir</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">)</span>  <span class="c1"># npKnown.npzファイルのパス</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">npz_file_path</span><span class="p">):</span>                 <span class="c1"># npKnown.npzが既に存在する場合</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> は既に存在します。処理をスキップします。&quot;</span><span class="p">)</span>  <span class="c1"># 存在する旨を表示</span>
+                    <span class="k">continue</span>                                      <span class="c1"># スキップ</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># ディレクトリ内に画像ファイルが存在するか確認</span>
+                    <span class="n">image_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">subdir</span><span class="p">)</span>  <span class="c1"># subdir側を指定 # 追加; subdirを含めたパスを指定することで正しい場所にnpKnown.npzを作成する</span>
+                    <span class="n">image_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">image_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">)]</span>  <span class="c1"># subdir配下を確認</span>
+
+                    <span class="k">if</span> <span class="n">image_files</span><span class="p">:</span>
+                        <span class="n">npz_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">subdir</span><span class="p">,</span> <span class="s1">&#39;npKnown.npz&#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> を作成します...&quot;</span><span class="p">)</span>
+                        <span class="n">load_preset_image_obj</span><span class="o">.</span><span class="n">load_preset_image</span><span class="p">(</span>
+                            <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">RootDir</span><span class="o">=</span><span class="n">image_dir</span><span class="p">,</span>                <span class="c1"># subdir配下をRootDirとして指定 # 追加; 正しいディレクトリにnpKnown.npzが生成されるようにする</span>
+                            <span class="n">preset_face_imagesDir</span><span class="o">=</span><span class="n">image_dir</span>   <span class="c1"># 顔画像が含まれるsubdir配下を指定 # 追加; npKnown.npzと画像ファイルのディレクトリ整合性を確保</span>
+                        <span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">npz_file_path</span><span class="si">}</span><span class="s2"> を作成しました。&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span><span class="w"> </span><span class="n">subdir</span><span class="p">)</span><span class="si">}</span><span class="s2"> に画像ファイルが見つかりませんでした。処理をスキップします。&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># LoadPresetImageオブジェクトを生成</span>
+    <span class="n">load_preset_image_obj</span> <span class="o">=</span> <span class="n">LoadPresetImage</span><span class="p">()</span>  <span class="c1"># 画像読み込みオブジェクト作成 # 追加; 画像読み込み処理用オブジェクト</span>
+
+    <span class="c1"># GUIによるディレクトリ選択を廃止し、コード内で指定</span>
+    <span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;/media/terms/2TB_Movie/face_data_backup/data&quot;</span>  <span class="c1"># 対象ディレクトリを指定 # 追加; 固定パスからnpKnown.npzを作成する</span>
+
+    <span class="c1"># root_dirが存在するかチェック</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>  <span class="c1"># ディレクトリが存在しない場合</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;指定されたディレクトリ </span><span class="si">{</span><span class="n">root_dir</span><span class="si">}</span><span class="s2"> が存在しません。プログラムを終了します。&quot;</span><span class="p">)</span>  <span class="c1"># エラーメッセージ表示</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># スクリプト終了</span>
+
+    <span class="c1"># サブディレクトリごとにnpKnown.npzを作成</span>
+    <span class="n">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">)</span>  <span class="c1"># npKnown.npzファイルを作成 # 追加; 指定ディレクトリ以下でnpKnown.npzを一括作成</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, yKesamaru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
