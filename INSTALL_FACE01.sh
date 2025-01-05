@@ -58,8 +58,8 @@ git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
 
 cd ./FACE01_SAMPLE
 
-python3 -m venv ./
-source bin/activate
+# python3 -m venv ./
+# source bin/activate
 
 pip cache remove dlib
 pip install -U pip

@@ -6,15 +6,12 @@ set -x
 # THIS IS *ONLY* USE FOR UBUNTU *20.04*
 # -----------------------------------------------------------------
 
-python3 -m venv ./
-source bin/activate
+# pipのアップグレード
+pip install -U pip wheel setuptools
 
-pip cache remove dlib
-pip install -U pip
-pip install -U wheel
-pip install -U setuptools
-pip install .
-pip install -r requirements_dev.txt
+# pyproject.tomlのインストール
+pip install -e .
+
 pip install dlib
 
 cd ../

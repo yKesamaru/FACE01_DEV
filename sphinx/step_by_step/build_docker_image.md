@@ -148,8 +148,6 @@ docker@02926f2467b4:~/FACE01_DEV$ . bin/activate
 動作確認のためにエグザンプルコードを実行してみましょう。
 ```bash
 (FACE01_DEV) docker@02926f2467b4:~/FACE01_DEV$ python3 example/lightweight_GUI.py
-Copyright Owner: Yoshitsugu Kesamaru
-Copyright Owner: Yoshitsugu Kesamaru
 [2024-08-15 11:26:42,563] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz
 ```
 ![](assets/2024-08-15-11-28-20.png)

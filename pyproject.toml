@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel", "build"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "FACE01"
-version = "3.04.01"
+version = "3.04.02"
 requires-python = ">=3.8"
 dependencies = [
     "Pillow",
@@ -28,11 +28,11 @@ dependencies = [
     "typing_extensions",
     "urllib3",
 ]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 readme = "README.md"
 description = "顔認証学習モデルとユーティリティプログラム"
 authors = [
-    { name="Yoshitsugu Kesamaru", email="y.kesamaru@tokai-kaoninsho.com" }
+    { name = "Yoshitsugu Kesamaru", email = "y.kesamaru@tokai-kaoninsho.com" }
 ]
 keywords = ["face recognition"]
 
@@ -41,7 +41,13 @@ Homepage = "https://tokai-kaoninsho.com/"
 Documentation = "https://ykesamaru.github.io/FACE01_DEV/"
 Repository = "https://github.com/yKesamaru/FACE01_DEV"
 
+[tool.setuptools]
+include-package-data = true  # MANIFEST.inを反映させるために必要
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["face01lib*"]
 
+# ここから追加: v3.04.02
+[project.scripts]
+verify = "face01lib.verify:main"
