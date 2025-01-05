@@ -54,9 +54,9 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PAT
 EOS
 source ~/.bashrc
 
-git clone https://github.com/yKesamaru/FACE01_SAMPLE.git
+git clone https://github.com/yKesamaru/FACE01_DEV.git
 
-cd ./FACE01_SAMPLE
+cd ./FACE01_DEV
 
 # python3 -m venv ./
 # source bin/activate

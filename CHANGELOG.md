@@ -3,10 +3,10 @@
 - `verify`コマンド: face01libディレクトリ内
 ### 変更
 - pyproject.toml: verifyコマンドのため。
-- Python仮想環境作成を廃止: 煩雑なため。
+- ~~Python仮想環境作成を廃止: 煩雑なため。~~
   - INSTALL_FACE01.sh
-  - Docker_INSTALL_FACE01.sh
-  - Docker_INSTALL_FACE01_CPU.sh
+  - ~~Docker_INSTALL_FACE01.sh~~
+  - ~~Docker_INSTALL_FACE01_CPU.sh~~
 - Docker_INSTALL_FACE01.sh
   - GPU用の設定のところ。
 - README.md

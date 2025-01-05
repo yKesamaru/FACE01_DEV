@@ -156,26 +156,41 @@ bash -c ./INSTALL_FACE01.sh
 
 ---
 
-### pipを使ってPCにインストールする
+### git cloneとpipを使ってPCにインストールする
 > [!NOTE]
 > 
 > この方法はテストをしておりません。
 
-#### 方法①: venvを使ってPython仮想環境にインストールする
+#### venvを使ってPython仮想環境にインストールする（推奨）
+1. リポジトリをクローンします。
+```bash
+git clone https://github.com/yKesamaru/FACE01_DEV.git
+cd FACE01_DEV
+```
+2. 仮想環境を作成し、パッケージをインストールします
 ```bash
 $ python3 -m venv ./venv  # python3-venvがインストールされている前提
 $ source venv/bin/activate
 # 上記のように仮想環境構築後
-$ pip install git+https://github.com/yKesamaru/FACE01_DEV.git
+$ pip install .
 ```
-#### 方法②: ユーザーごとのローカルディレクトリにインストールする
-（例えば`~/.local/lib/python3.x/site-packages`など）
+3. インストールが成功したことを確認します。
 ```bash
-$ pip install --user git+https://github.com/yKesamaru/FACE01_DEV.git
+pip show FACE01
 ```
-#### 方法③: グローバルにインストールする
+以下のように出力されたら成功です。
 ```bash
-$ pip install git+https://github.com/yKesamaru/FACE01_DEV.git
+1$ pip show FACE01
+Name: FACE01
+Version: 3.4.2
+Summary: 顔認証学習モデルとユーティリティプログラム
+Home-page: https://tokai-kaoninsho.com/
+Author: 
+Author-email: Yoshitsugu Kesamaru <y.kesamaru@tokai-kaoninsho.com>
+License: 
+Location: ~/FACE01_DEV/venv/lib/python3.10/site-packages
+Requires: mediapipe, memory-profiler, mojimoji, nptyping, numpy, onnx, onnxruntime-gpu, opencv-python, Pillow, protobuf, psutil, pyqrcode, qrcode, requests, scipy, torch, torchvision, tqdm, typing_extensions, urllib3
+Required-by: 
 ```
 
 ---

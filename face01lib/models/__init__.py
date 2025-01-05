@@ -1,6 +1,6 @@
 __author__ = 'Original code written by Adam Geitgey, modified by YOSHITSUGU KESAMARU'
 __email__ = 'y.kesamaru@tokai-kaoninsho.com'
-__version__ = '3.04.01'
+__version__ = '3.04.02'
 
 import importlib.resources
 

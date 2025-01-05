@@ -79,4 +79,5 @@ COPY --chown=docker:docker pyproject.toml requirements_dev.txt config.ini dlib-1
 # スクリプトのコピーと実行
 # COPY --chmod=0755 docker/Docker_INSTALL_FACE01_CPU.sh ${USER_HOME}/FACE01_DEV/
 RUN /bin/bash -c "${USER_HOME}/FACE01_DEV/docker/Docker_INSTALL_FACE01_CPU.sh"
-RUN pip uninstall -y onnxruntime-gpu && pip install onnxruntime
+# RUN pip uninstall -y onnxruntime-gpu && pip install onnxruntime
+RUN pip install onnxruntime

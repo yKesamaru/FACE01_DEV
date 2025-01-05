@@ -9,11 +9,11 @@ See [here](Install_docker.md).
 
 ***NOTE***
 > [!IMPORTANT]
-> If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is `face01_gpu:3.3.03`.
-> If not, the Docker Image you should pull is `face01_no_gpu:3.3.03`.
+> If you are using a PC with NVIDIA GPU installed, the Docker Image you should pull is `face01_gpu:3.04.02`.
+> If not, the Docker Image you should pull is `face01_no_gpu:3.04.02`.
 
 
-## When using `face01_gpu:3.3.03`
+## When using `face01_gpu:3.04.02`
 First, Check if GPU is available.
 ```bash
 lspci | grep -i nvidia
@@ -32,7 +32,7 @@ See https://www.tensorflow.org/install/docker#gpu_support [ja])
 
 ```bash
 # Download Docker Image
-docker pull tokaikaoninsho/face01_gpu:3.3.03
+docker pull tokaikaoninsho/face01_gpu:3.04.02
 
 # Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)
 docker images
@@ -40,7 +40,7 @@ docker images
 # Run Docker
 docker run --rm -it \
   --gpus all -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:3.3.03
+  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:3.04.02
 ```
 
 
@@ -51,7 +51,7 @@ If you get an error as a result of entering the above command, try the following
 docker run --rm -it \
   --gpus all -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:3.3.03
+  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_gpu:3.04.02
 ```
 
 ***Don't forget activate*** the Python virtual environment (activate venv).
@@ -67,16 +67,16 @@ python example/simple.py
 ```
 
 
-## When using `face01_no_gpu:3.3.03`
+## When using `face01_no_gpu:3.04.02`
 ```bash
 # Download Docker Image
-docker pull tokaikaoninsho/face01_no_gpu:3.3.03
+docker pull tokaikaoninsho/face01_no_gpu:3.04.02
 
 # Check `REPOSITORY`, `TAG`, and `IMAGE ID` of the downloaded Docker Image. (IMPORTANT!)
 docker images
 
 # Run Docker
-docker run --rm -it -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_no_gpu:3.3.03
+docker run --rm -it -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_no_gpu:3.04.02
 ```
 
 
@@ -86,7 +86,7 @@ If you get an error as a result of entering the above command, try the following
 docker run --rm -it \
   -e DISPLAY=$DISPLAY \
   --device /dev/video0:/dev/video0:mwr \
-  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_no_gpu:3.3.03
+  -v /tmp/.X11-unix/:/tmp/.X11-unix: tokaikaoninsho/face01_no_gpu:3.04.02
 ```
 
 ***Don't forget activate*** the Python virtual environment (activate venv).
