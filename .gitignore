@@ -12,3 +12,6 @@ qrcode.svg
 build
 venv
 version_control.py
+dist/
+*.whl
+*.tar.gz

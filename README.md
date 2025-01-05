@@ -18,7 +18,7 @@ FACE01 -- さあ、始めましょう！
 ___
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
-![](https://img.shields.io/badge/Release-v3.04.01-green)
+![](https://img.shields.io/badge/Release-v3.04.02-green)
 ![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
@@ -156,15 +156,73 @@ bash -c ./INSTALL_FACE01.sh
 
 ---
 
-### 実働環境のPC（Python仮想環境）にインストールする
+### pipを使ってPCにインストールする
 > [!NOTE]
 > 
 > この方法はテストをしておりません。
 
-```python
-# 仮想環境構築後
-pip install git+https://github.com/yKesamaru/FACE01_DEV.git
+#### 方法①: venvを使ってPython仮想環境にインストールする
+```bash
+$ python3 -m venv ./venv  # python3-venvがインストールされている前提
+$ source venv/bin/activate
+# 上記のように仮想環境構築後
+$ pip install git+https://github.com/yKesamaru/FACE01_DEV.git
 ```
+#### 方法②: ユーザーごとのローカルディレクトリにインストールする
+（例えば`~/.local/lib/python3.x/site-packages`など）
+```bash
+$ pip install --user git+https://github.com/yKesamaru/FACE01_DEV.git
+```
+#### 方法③: グローバルにインストールする
+```bash
+$ pip install git+https://github.com/yKesamaru/FACE01_DEV.git
+```
+
+---
+
+## すぐに試せるverifyコマンド
+<style>
+  figure {
+    display: inline-block; /* 横並びにする */
+    margin: 0 10px;        /* 画像間の余白を設定 */
+    text-align: center;    /* キャプションを中央揃え */
+  }
+</style>
+
+<div>
+  <figure>
+    <img src="assets/data/c/c045.png" width="224px" />
+    <figcaption>c045.png</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/data/c/c006.png" width="224px" />
+    <figcaption>c006.png</figcaption>
+  </figure>
+</div>
+
+```bash
+$ verify assets/data/c/c045.png assets/data/c/c006.png
+
+2枚の画像は同一人物と判定しました。cos_sim=0.318
+結果: True
+```
+ヘルプを参照する
+```bash
+$ verify -h
+usage: verify [-h] [--threshold THRESHOLD] image1 image2
+
+2枚の画像から同一人物かを判定します。
+
+positional arguments:
+  image1                1枚目の画像パス (png, jpg, jpeg)
+  image2                2枚目の画像パス (png, jpg, jpeg)
+
+options:
+  -h, --help            show this help message and exit
+  --threshold THRESHOLD
+                        同一人物判定のコサイン類似度のしきい値 (0~1, default=0.25)
+```
+
 ---
 
 ## 豊富なエグザンプルコード
@@ -201,9 +259,12 @@ pip install git+https://github.com/yKesamaru/FACE01_DEV.git
 
 ## Update
 
+- 🔖 v3.04.2
+  - 設定なしですぐ試せるverifyコマンドを追加しました。
 - 🔖 v3.0
   - オープンソースとして公開しました。
-  - `LICENSE`を必ずご確認ください。
+    - `LICENSE`を必ずご確認ください。
+  - 使用期限が廃止されました。（コメントアウトを外すことで機能は使えます）
 - 🔖 v2.2.02
   - `pyproject.toml`を追加。
   - `./example/*.py`について修正の追加。

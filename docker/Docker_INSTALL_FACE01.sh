@@ -7,28 +7,19 @@
 set -x
 set -e  # エラーで停止
 
-python3 -m venv ./
-# shellcheck disable=SC1091
-source bin/activate
-
 # pipのアップグレード
 pip install -U pip wheel setuptools
 
 # pyproject.tomlのインストール
-pip install .
+pip install -e .
 
 # GPU用の設定 (dlibをソースからインストール)
-if [[ "${USE_GPU}" == "1" ]]; then
-  echo "Installing dlib from source for GPU support..."
-  tar -jxvf dlib-19.24.tar.bz2
-  cd dlib-19.24
-  python3 setup.py install --clean
-  cd ../
-else
-  # CPU用の設定 (dlibをpipからインストール)
-  echo "Installing dlib from pip for CPU-only support..."
-  pip install dlib
-fi
+echo "Installing dlib from source for GPU support..."
+tar -jxvf dlib-19.24.tar.bz2
+cd dlib-19.24
+python3 setup.py install --clean
+cd ../
+
 
 # ---------
 # `--clean` see bellow

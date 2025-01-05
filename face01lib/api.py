@@ -59,23 +59,23 @@ See bellow:
 
 from typing import List, Tuple
 
+import cv2
 import dlib
 import numpy as np
 import numpy.typing as npt  # See [Typing (numpy.typing)](https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing)
-from PIL import ImageFile
-from PIL import Image
-import cv2
+from PIL import Image, ImageFile
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 from sys import exit
 from traceback import format_exc
 
-from face01lib.Calc import Cal
-from face01lib.logger import Logger
 # from face01lib.video_capture import VidCap
 import onnx
 import onnxruntime as ort
 import torchvision.transforms as transforms
+
+from face01lib.Calc import Cal
+from face01lib.logger import Logger
 
 
 class Dlib_api:
@@ -644,3 +644,80 @@ class Dlib_api:
                 self.cosine_similarity(
                     self.known_face_encodings, self.face_encoding_to_check, self.threshold)
             return np.array(results), max_cos_sim
+
+    def verify(
+        self,
+        image_path1: str,
+        image_path2: str,
+        threshold: float = 0.5
+    ) -> bool:
+        """
+        verify()メソッドは、入力された2枚の画像が同一人物かどうかを判定します。
+        dlibの学習モデルは使わず、JAPANESE_FACE_V1モデルのみ使用します。
+
+        Args:
+            image_path1 (str): 1枚目の画像ファイルパス
+            image_path2 (str): 2枚目の画像ファイルパス
+            threshold (float): 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.5)
+
+        Returns:
+            bool: True なら同一人物、False なら別人
+        """
+
+        # 1. 画像の読み込み 1枚目を読み込む
+        frame1: npt.NDArray[np.uint8] = self.load_image_file(image_path1)
+        # 2. 顔の検出 face_locations()で位置情報を取得
+        face_locations1 = self.face_locations(frame1, number_of_times_to_upsample=0, mode='hog')
+        if len(face_locations1) == 0:
+            # 顔が見つからなかった場合は例外などを投げてもよい
+            print(f"画像1({image_path1})から顔が検出できませんでした。")
+            return False
+
+        # 3. JAPANESE_FACE_V1モデルを使用して顔の特徴量を抽出
+        encodings1 = self.face_encodings(
+            deep_learning_model=1,  # 1ならJAPANESE_FACE_V1モデルを使用
+            resized_frame=frame1,
+            face_location_list=face_locations1
+        )
+        if len(encodings1) == 0:
+            print(f"画像1({image_path1})の特徴量を抽出できませんでした。")
+            return False
+
+        # 4. 同様に2枚目の画像でも同じ処理を行う
+        frame2: npt.NDArray[np.uint8] = self.load_image_file(image_path2)
+        face_locations2 = self.face_locations(frame2, number_of_times_to_upsample=0, mode='cnn')
+        if len(face_locations2) == 0:
+            print(f"画像2({image_path2})から顔が検出できませんでした。")
+            return False
+
+        encodings2 = self.face_encodings(
+            deep_learning_model=1,
+            resized_frame=frame2,
+            face_location_list=face_locations2
+        )
+        if len(encodings2) == 0:
+            print(f"画像2({image_path2})の特徴量を抽出できませんでした。")
+            return False
+
+        # 5. 2枚の画像は「1人ずつだけ」写っていることを想定
+        embedding1 = encodings1[0]
+        embedding2 = encodings2[0]
+
+        # 6. compare_faces()ではなく、cosine_similarity()を直接呼び出しても良い
+        #    今回は compare_faces() を使わずに、直接 cos_sim を算出して閾値と比較する例を示す
+        #    (compare_faces() を使う場合は deep_learning_model=1 を指定し、known_face_encodings=[embedding1], face_encoding_to_check=embedding2 で呼び出せます。)
+        emb_list = np.array([embedding1])  # shape=(1,512)
+        sim_result, max_cos_sim = self.cosine_similarity(emb_list, embedding2, threshold=threshold)
+        # sim_result は [(bool, float)] のリスト
+        # bool は cos_sim >= threshold かどうか
+        # float は cos_sim の値
+
+        # 7. 判定結果を返す
+        #    ここでは1枚目と2枚目に映る人物が同一かどうかだけを判定すればよいので、
+        #    sim_result[0][0] が True かどうかを返せば OK。
+        is_same_person = sim_result[0][0]
+        if is_same_person:
+            print(f"2枚の画像は同一人物と判定しました。cos_sim={sim_result[0][1]:.3f}")
+        else:
+            print(f"2枚の画像は別人と判定しました。cos_sim={sim_result[0][1]:.3f}")
+        return is_same_person

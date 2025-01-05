@@ -1,3 +1,19 @@
+## [v3.04.02] - 2025-01-03
+### 追加
+- `verify`コマンド: face01libディレクトリ内
+### 変更
+- pyproject.toml: verifyコマンドのため。
+- Python仮想環境作成を廃止: 煩雑なため。
+  - INSTALL_FACE01.sh
+  - Docker_INSTALL_FACE01.sh
+  - Docker_INSTALL_FACE01_CPU.sh
+- Docker_INSTALL_FACE01.sh
+  - GPU用の設定のところ。
+- README.md
+- MANIFEST.in
+
+---
+
 ## [v3.04.01] - 2024-12-21
 ### 追加
 - `tests`ディレクトリを作成し、`pytest`によるテストコードを追加
