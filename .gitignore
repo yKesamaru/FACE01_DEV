@@ -3,7 +3,7 @@ lib*
 include
 bin
 .vscode
-dlib-19*
+dlib-19.24/
 output/*
 __pycache__
 pyvenv.cfg
@@ -15,3 +15,4 @@ version_control.py
 dist/
 *.whl
 *.tar.gz
+sphinx/

@@ -83,14 +83,61 @@
              
   <section id="id1">
 <h1>シンプルに顔認識だけしたい場合<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしてから、<code class="docutils literal notranslate"><span class="pre">example/simple.py</span></code>を起動してみましょう。</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># activate virtual environment</span>
-<span class="nb">source</span><span class="w"> </span>bin/activate
-
-<span class="c1"># run script</span>
-python<span class="w"> </span>example/simple.py
+<p><code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしておきましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>bin/activate<span class="w">  </span><span class="c1"># . venv/bin/activateなど</span>
 </pre></div>
 </div>
+<section id="verify">
+<h2>その①: verifyコマンドを使う<a class="headerlink" href="#verify" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">v3.04.02</span></code>から便利な<code class="docutils literal notranslate"><span class="pre">verify</span></code>コマンドが使えるようになりました！⭐️</p>
+<style>
+  figure {
+    display: inline-block; /* 横並びにする */
+    margin: 0 10px;        /* 画像間の余白を設定 */
+    text-align: center;    /* キャプションを中央揃え */
+  }
+</style>
+<div>
+  <figure>
+    <img src="../../assets/data/c/c045.png" width="150px" />
+    <figcaption>c045.png</figcaption>
+  </figure>
+  <figure>
+    <img src="../../assets/data/c/c006.png" width="150px" />
+    <figcaption>c006.png</figcaption>
+  </figure>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># プロジェクトルートで。</span>
+$<span class="w"> </span>verify<span class="w"> </span>assets/data/c/c045.png<span class="w"> </span>assets/data/c/c006.png
+
+2枚の画像は同一人物と判定しました。cos_sim<span class="o">=</span><span class="m">0</span>.318
+結果:<span class="w"> </span>True
+</pre></div>
+</div>
+<p>ヘルプを参照する</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>verify<span class="w"> </span>-h
+usage:<span class="w"> </span>verify<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--threshold<span class="w"> </span>THRESHOLD<span class="o">]</span><span class="w"> </span>image1<span class="w"> </span>image2
+
+2枚の画像から同一人物かを判定します。
+
+positional<span class="w"> </span>arguments:
+<span class="w">  </span>image1<span class="w">                </span>1枚目の画像パス<span class="w"> </span><span class="o">(</span>png,<span class="w"> </span>jpg,<span class="w"> </span>jpeg<span class="o">)</span>
+<span class="w">  </span>image2<span class="w">                </span>2枚目の画像パス<span class="w"> </span><span class="o">(</span>png,<span class="w"> </span>jpg,<span class="w"> </span>jpeg<span class="o">)</span>
+
+options:
+<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span>--threshold<span class="w"> </span>THRESHOLD
+<span class="w">                        </span>同一人物判定のコサイン類似度のしきい値<span class="w"> </span><span class="o">(</span><span class="m">0</span>~1,<span class="w"> </span><span class="nv">default</span><span class="o">=</span><span class="m">0</span>.25<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-simple-py">
+<h2>その②: <code class="docutils literal notranslate"><span class="pre">example/simple.py</span></code>を触ってみる<a class="headerlink" href="#example-simple-py" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Python仮想環境</span></code>をアクティベートしてから、<code class="docutils literal notranslate"><span class="pre">example/simple.py</span></code>を起動してみましょう。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/simple.py
+</pre></div>
+</div>
+</section>
 <section id="id2">
 <h2>結果<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2022</span>-09-27<span class="w"> </span><span class="m">19</span>:20:48,174<span class="o">]</span><span class="w"> </span><span class="o">[</span>face01lib.load_preset_image<span class="o">]</span><span class="w"> </span><span class="o">[</span>simple.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Loading<span class="w"> </span>npKnown.npz

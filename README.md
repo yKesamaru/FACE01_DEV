@@ -133,7 +133,7 @@ AIコアが外国産である場合、肝心なところで「**偽陽性**」�
 
 FACE01開発環境のセッティングは本当に簡単です！
 
-### Dockerイメージを使用する
+### Dockerイメージを使用する（推奨）
 
 🐳 一番簡単で環境を汚さない方法は、`Docker`を使用することです。
 
@@ -156,12 +156,7 @@ bash -c ./INSTALL_FACE01.sh
 
 ---
 
-### git cloneとpipを使ってPCにインストールする
-> [!NOTE]
-> 
-> この方法はテストをしておりません。
-
-#### venvを使ってPython仮想環境にインストールする（推奨）
+### Python仮想環境にインストールする
 1. リポジトリをクローンします。
 ```bash
 git clone https://github.com/yKesamaru/FACE01_DEV.git
@@ -192,6 +187,58 @@ Location: ~/FACE01_DEV/venv/lib/python3.10/site-packages
 Requires: mediapipe, memory-profiler, mojimoji, nptyping, numpy, onnx, onnxruntime-gpu, opencv-python, Pillow, protobuf, psutil, pyqrcode, qrcode, requests, scipy, torch, torchvision, tqdm, typing_extensions, urllib3
 Required-by: 
 ```
+4. `dlib`を手動インストールする
+```bash
+# GPU用の設定 (dlibをソースからインストール)
+tar -jxvf dlib-19.24.tar.bz2
+cd dlib-19.24
+python3 setup.py install --clean
+```
+#### 手動インストールの成否確認方法
+もしビルド中に以下のような記述が出力されていたらGPUを利用できません。この場合はドキュメントを参考にしてGPUが使えるビルドができるようにしてください。
+```bash
+*****************************************************************************
+ *** No BLAS library found so using dlib's built in BLAS.  However, if you ***
+ *** install an optimized BLAS such as OpenBLAS or the Intel MKL your code ***
+ *** will run faster.  On Ubuntu you can install OpenBLAS by executing:    ***
+ ***    sudo apt-get install libopenblas-dev liblapack-dev                 ***
+ *** Or you can easily install OpenBLAS from source by downloading the     ***
+ *** source tar file from http://www.openblas.net, extracting it, and      ***
+ *** running:                                                              ***
+ ***    make; sudo make install                                            ***
+ *****************************************************************************
+CUDA_TOOLKIT_ROOT_DIR not found or specified
+-- Could NOT find CUDA (missing: CUDA_TOOLKIT_ROOT_DIR) (found suitable version "11.5", minimum required is "7.5")
+-- DID NOT FIND CUDA
+-- Disabling CUDA support for dlib.  DLIB WILL NOT USE CUDA
+-- C++11 activated.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/terms/ドキュメント/test_face01/FACE01_DEV/dlib-19.24/build/temp.linux-x86_64-3.10
+Invoking CMake build: 'cmake --build . --config Release -- -j8'
+```
+
+本来はビルド中に以下のように出力されます。
+```bash
+-- Found CUDA: /usr/local/cuda (found suitable version "12.3", minimum required is "7.5") 
+-- Looking for cuDNN install...
+-- Found cuDNN: /usr/lib/x86_64-linux-gnu/libcudnn.so
+-- Building a CUDA test project to see if your compiler is compatible with CUDA...
+-- Building a cuDNN test project to check if you have the right version of cuDNN installed...
+-- Enabling CUDA support for dlib.  DLIB WILL USE CUDA, compute capabilities: 50
+```
+
+ビルドが終わったら次のようにして確認をしてください。
+```bash
+$ python
+Python 3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import dlib
+>>> dlib.DLIB_USE_CUDA
+True
+>>> 
+```
+`True`と表示されていれば成功です。
 
 ---
 

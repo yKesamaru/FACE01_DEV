@@ -15,6 +15,7 @@ dependencies = [
     "numpy",
     "onnx",
     "onnxruntime-gpu",
+    "onnxruntime",
     "opencv-python",
     "protobuf",
     "psutil",

@@ -242,8 +242,37 @@ which<span class="w"> </span>vim
 </section>
 <section id="id8">
 <h2><a class="reference internal" href="simple.html"><span class="std std-doc">簡単な顔認識</span></a><a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">simple.py</span></code>を試してみましょう。
-simple.pyはCUI動作のためのエグザンプルのスクリプトです。</p>
+<p><code class="docutils literal notranslate"><span class="pre">verifyコマンド</span></code>や<code class="docutils literal notranslate"><span class="pre">simple.py</span></code>を試してみましょう。</p>
+<style>
+  figure {
+    display: inline-block; /* 横並びにする */
+    margin: 0 10px;        /* 画像間の余白を設定 */
+    text-align: center;    /* キャプションを中央揃え */
+  }
+</style>
+<div>
+  <figure>
+    <img src="../../assets/data/c/c045.png" width="150px" />
+    <figcaption>c045.png</figcaption>
+  </figure>
+  <figure>
+    <img src="../../assets/data/c/c006.png" width="150px" />
+    <figcaption>c006.png</figcaption>
+  </figure>
+</div>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verifyコマンド</span></code></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># プロジェクトルートで。</span>
+$<span class="w"> </span>verify<span class="w"> </span>assets/data/c/c045.png<span class="w"> </span>assets/data/c/c006.png
+
+2枚の画像は同一人物と判定しました。cos_sim<span class="o">=</span><span class="m">0</span>.318
+結果:<span class="w"> </span>True
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">example/simple.py</span></code></p></li>
+</ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">simple</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>

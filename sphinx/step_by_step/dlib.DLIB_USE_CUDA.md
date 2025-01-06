@@ -60,8 +60,32 @@ FACE01/dlib-19.24 $ export CXX=/usr/bin/g++-8
 FACE01/dlib-19.24 $ python setup.py install
 ```
 
-## インストールの確認
+## `~/.bashrc`
+パスの記述をしましょう。
+```bash
+# CUDA paths
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-12.3/targets/x86_64-linux/lib:$LD_LIBRARY_PATH
+```
 
+## 確認ポイント⭐️
+1. BLAS・LAPACKなど必要ライブラリはインストールされているか。
+2. CUDA Toolkitをインストールし、PATHとLD_LIBRARY_PATHを設定
+3. nvcc --versionでバージョン確認
+4. python3 setup.py install --cleanでビルドし、ログにGPUが有効化されたメッセージが出ることを確認
+
+<br />
+<div style="display: flex; align-items: center;">
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00103-1322935144.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
+    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
+        <p style="margin: 10;">失敗しているときはだいたい<span style="background-color: yellow;">エラーメッセージ</span>が出力されています。</p>
+        <p style="margin: 10;">落ち着いてエラーを読み、ドキュメントから解決策を探ってくださいね⭐️</p>
+        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
+    </div>
+</div>
+<br />
+
+## インストールの確認
 以下のコマンドでインストールが成功したか確認します。
 ```bash
 (FACE01)

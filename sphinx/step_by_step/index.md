@@ -126,9 +126,35 @@ FACE01の使い方の一例ですが、簡単なフローを見てみましょ�
 `FACE01`を試用する上での基本的なファンクションについて[こちら](functions.md)で確認しましょう。
 
 ## [簡単な顔認識](simple.md)
-`simple.py`を試してみましょう。
-simple.pyはCUI動作のためのエグザンプルのスクリプトです。
+`verifyコマンド`や`simple.py`を試してみましょう。
+<style>
+  figure {
+    display: inline-block; /* 横並びにする */
+    margin: 0 10px;        /* 画像間の余白を設定 */
+    text-align: center;    /* キャプションを中央揃え */
+  }
+</style>
 
+<div>
+  <figure>
+    <img src="../../assets/data/c/c045.png" width="150px" />
+    <figcaption>c045.png</figcaption>
+  </figure>
+  <figure>
+    <img src="../../assets/data/c/c006.png" width="150px" />
+    <figcaption>c006.png</figcaption>
+  </figure>
+</div>
+
+1. `verifyコマンド`
+```bash
+# プロジェクトルートで。
+$ verify assets/data/c/c045.png assets/data/c/c006.png
+
+2枚の画像は同一人物と判定しました。cos_sim=0.318
+結果: True
+```
+2. `example/simple.py`
 ```python
 python example/simple.py
 ```

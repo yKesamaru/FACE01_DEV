@@ -129,6 +129,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.face_locations"><code class="docutils literal notranslate"><span class="pre">Dlib_api.face_locations()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.load_image_file"><code class="docutils literal notranslate"><span class="pre">Dlib_api.load_image_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.percentage"><code class="docutils literal notranslate"><span class="pre">Dlib_api.percentage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face01lib.api.Dlib_api.verify"><code class="docutils literal notranslate"><span class="pre">Dlib_api.verify()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -191,6 +192,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.temp_sleep"><code class="docutils literal notranslate"><span class="pre">Utils.temp_sleep()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.verify">face01lib.verify module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.check_image_path"><code class="docutils literal notranslate"><span class="pre">check_image_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.check_threshold"><code class="docutils literal notranslate"><span class="pre">check_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.video_capture">face01lib.video_capture module</a><ul>
@@ -1571,6 +1578,28 @@ That is, centered and scaled essentially the same way.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="face01lib.api.Dlib_api.verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.verify"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.verify" title="Link to this definition"></a></dt>
+<dd><p>verify()メソッドは、入力された2枚の画像が同一人物かどうかを判定します。
+dlibの学習モデルは使わず、JAPANESE_FACE_V1モデルのみ使用します。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_path1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 1枚目の画像ファイルパス</p></li>
+<li><p><strong>image_path2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 2枚目の画像ファイルパス</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) -- 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.5)</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値<span class="colon">:</span></dt>
+<dd class="field-even"><p>True なら同一人物、False なら別人</p>
+</dd>
+<dt class="field-odd">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -2139,6 +2168,79 @@ The <cite>notify-send</cite> command is included in the <cite>libnotify-bin</cit
 </div>
 </dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="module-face01lib.verify">
+<span id="face01lib-verify-module"></span><h2>face01lib.verify module<a class="headerlink" href="#module-face01lib.verify" title="Link to this heading"></a></h2>
+<p>verify.py.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このスクリプトは、2枚の画像を読み込み、JAPANESE_FACE_V1モデルを用いて
+同一人物かどうかを判定するためのコマンドラインツールです。</p>
+</dd>
+<dt>Usage:</dt><dd><p>$ python verify.py &lt;image1&gt; &lt;image2&gt; [--threshold THRESHOLD]</p>
+</dd>
+<dt>Options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>このヘルプメッセージを表示し、プログラムを終了します。</p>
+</dd>
+<dt><kbd><span class="option">--threshold <var>THRESHOLD</var></span></kbd></dt>
+<dd><p>0以上1以下の範囲のfloat値。同一人物と判断するためのコサイン類似度のしきい値を指定します。
+指定しない場合のデフォルトは 0.25 です。
+例: --threshold 0.4</p>
+</dd>
+</dl>
+</dd>
+<dt>License:</dt><dd><p>This script is licensed under the terms provided by yKesamaru, the original author.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.verify.check_image_path">
+<span class="sig-name descname"><span class="pre">check_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="_modules/face01lib/verify.html#check_image_path"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.check_image_path" title="Link to this definition"></a></dt>
+<dd><p>画像ファイルのパスがpng,jpg,jpegのいずれかであるかをチェックし、
+不適切な場合はエラーを投げる。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 画像ファイルのパス</p>
+</dd>
+<dt class="field-even">例外<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- 拡張子がpng,jpg,jpeg以外の場合に発生</p>
+</dd>
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>検証済みの画像パス</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.verify.check_threshold">
+<span class="sig-name descname"><span class="pre">check_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="reference internal" href="_modules/face01lib/verify.html#check_threshold"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.check_threshold" title="Link to this definition"></a></dt>
+<dd><p>0~1の範囲内のfloat値であるかをチェックし、範囲外の場合はエラーを投げる。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- コマンドライン引数として入力された文字列</p>
+</dd>
+<dt class="field-even">例外<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- floatに変換できない場合、または0~1の範囲外の場合に発生</p>
+</dd>
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0~1の範囲内のfloat値</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="face01lib.verify.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/verify.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.main" title="Link to this definition"></a></dt>
+<dd><p>メイン関数。
+コマンドライン引数から画像ファイルのパス2つと、閾値を受け取り、
+Dlib_api().verify() メソッドを使って同一人物かを判定する。</p>
 </dd></dl>
 
 </section>

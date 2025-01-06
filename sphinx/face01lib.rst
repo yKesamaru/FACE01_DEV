@@ -109,6 +109,14 @@ face01lib.utils module
    :undoc-members:
    :show-inheritance:
 
+face01lib.verify module
+-----------------------
+
+.. automodule:: face01lib.verify
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 face01lib.video\_capture module
 -------------------------------
 

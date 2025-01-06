@@ -6,7 +6,7 @@
   <title>face01lib.api &mdash; FACE01 3.0.03 ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=af2ec751" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
@@ -143,23 +143,23 @@
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
+<span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">dlib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">numpy.typing</span> <span class="k">as</span> <span class="nn">npt</span>  <span class="c1"># See [Typing (numpy.typing)](https://numpy.org/doc/stable/reference/typing.html#typing-numpy-typing)</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageFile</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFile</span>
 
 <span class="n">ImageFile</span><span class="o">.</span><span class="n">LOAD_TRUNCATED_IMAGES</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">exit</span>
 <span class="kn">from</span> <span class="nn">traceback</span> <span class="kn">import</span> <span class="n">format_exc</span>
 
-<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
-<span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 <span class="c1"># from face01lib.video_capture import VidCap</span>
 <span class="kn">import</span> <span class="nn">onnx</span>
 <span class="kn">import</span> <span class="nn">onnxruntime</span> <span class="k">as</span> <span class="nn">ort</span>
 <span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+
+<span class="kn">from</span> <span class="nn">face01lib.Calc</span> <span class="kn">import</span> <span class="n">Cal</span>
+<span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
 
 
 <div class="viewcode-block" id="Dlib_api">
@@ -753,6 +753,86 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">cosine_similarity</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">known_face_encodings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_encoding_to_check</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="n">max_cos_sim</span></div>
+
+
+<div class="viewcode-block" id="Dlib_api.verify">
+<a class="viewcode-back" href="../../face01lib.html#face01lib.api.Dlib_api.verify">[ドキュメント]</a>
+    <span class="k">def</span> <span class="nf">verify</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">image_path1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">image_path2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        verify()メソッドは、入力された2枚の画像が同一人物かどうかを判定します。</span>
+<span class="sd">        dlibの学習モデルは使わず、JAPANESE_FACE_V1モデルのみ使用します。</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image_path1 (str): 1枚目の画像ファイルパス</span>
+<span class="sd">            image_path2 (str): 2枚目の画像ファイルパス</span>
+<span class="sd">            threshold (float): 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.5)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True なら同一人物、False なら別人</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># 1. 画像の読み込み 1枚目を読み込む</span>
+        <span class="n">frame1</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="n">image_path1</span><span class="p">)</span>
+        <span class="c1"># 2. 顔の検出 face_locations()で位置情報を取得</span>
+        <span class="n">face_locations1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">frame1</span><span class="p">,</span> <span class="n">number_of_times_to_upsample</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;hog&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_locations1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 顔が見つからなかった場合は例外などを投げてもよい</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;画像1(</span><span class="si">{</span><span class="n">image_path1</span><span class="si">}</span><span class="s2">)から顔が検出できませんでした。&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># 3. JAPANESE_FACE_V1モデルを使用して顔の特徴量を抽出</span>
+        <span class="n">encodings1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span>
+            <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># 1ならJAPANESE_FACE_V1モデルを使用</span>
+            <span class="n">resized_frame</span><span class="o">=</span><span class="n">frame1</span><span class="p">,</span>
+            <span class="n">face_location_list</span><span class="o">=</span><span class="n">face_locations1</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">encodings1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;画像1(</span><span class="si">{</span><span class="n">image_path1</span><span class="si">}</span><span class="s2">)の特徴量を抽出できませんでした。&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># 4. 同様に2枚目の画像でも同じ処理を行う</span>
+        <span class="n">frame2</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="n">image_path2</span><span class="p">)</span>
+        <span class="n">face_locations2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">frame2</span><span class="p">,</span> <span class="n">number_of_times_to_upsample</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_locations2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;画像2(</span><span class="si">{</span><span class="n">image_path2</span><span class="si">}</span><span class="s2">)から顔が検出できませんでした。&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">encodings2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span>
+            <span class="n">deep_learning_model</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">resized_frame</span><span class="o">=</span><span class="n">frame2</span><span class="p">,</span>
+            <span class="n">face_location_list</span><span class="o">=</span><span class="n">face_locations2</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">encodings2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;画像2(</span><span class="si">{</span><span class="n">image_path2</span><span class="si">}</span><span class="s2">)の特徴量を抽出できませんでした。&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># 5. 2枚の画像は「1人ずつだけ」写っていることを想定</span>
+        <span class="n">embedding1</span> <span class="o">=</span> <span class="n">encodings1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">embedding2</span> <span class="o">=</span> <span class="n">encodings2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># 6. compare_faces()ではなく、cosine_similarity()を直接呼び出しても良い</span>
+        <span class="c1">#    今回は compare_faces() を使わずに、直接 cos_sim を算出して閾値と比較する例を示す</span>
+        <span class="c1">#    (compare_faces() を使う場合は deep_learning_model=1 を指定し、known_face_encodings=[embedding1], face_encoding_to_check=embedding2 で呼び出せます。)</span>
+        <span class="n">emb_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">embedding1</span><span class="p">])</span>  <span class="c1"># shape=(1,512)</span>
+        <span class="n">sim_result</span><span class="p">,</span> <span class="n">max_cos_sim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">emb_list</span><span class="p">,</span> <span class="n">embedding2</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+        <span class="c1"># sim_result は [(bool, float)] のリスト</span>
+        <span class="c1"># bool は cos_sim &gt;= threshold かどうか</span>
+        <span class="c1"># float は cos_sim の値</span>
+
+        <span class="c1"># 7. 判定結果を返す</span>
+        <span class="c1">#    ここでは1枚目と2枚目に映る人物が同一かどうかだけを判定すればよいので、</span>
+        <span class="c1">#    sim_result[0][0] が True かどうかを返せば OK。</span>
+        <span class="n">is_same_person</span> <span class="o">=</span> <span class="n">sim_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">is_same_person</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2枚の画像は同一人物と判定しました。cos_sim=</span><span class="si">{</span><span class="n">sim_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2枚の画像は別人と判定しました。cos_sim=</span><span class="si">{</span><span class="n">sim_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">is_same_person</span></div>
 </div>
 
 </pre></div>
