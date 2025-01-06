@@ -175,7 +175,7 @@ pip show FACE01
 ```
 以下のように出力されたら成功です。
 ```bash
-1$ pip show FACE01
+$ pip show FACE01
 Name: FACE01
 Version: 3.4.2
 Summary: 顔認証学習モデルとユーティリティプログラム
@@ -253,11 +253,11 @@ True
 
 <div>
   <figure>
-    <img src="assets/data/c/c045.png" width="224px" />
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" width="150px" />
     <figcaption>c045.png</figcaption>
   </figure>
   <figure>
-    <img src="assets/data/c/c006.png" width="224px" />
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" width="150px" />
     <figcaption>c006.png</figcaption>
   </figure>
 </div>
