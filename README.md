@@ -17,11 +17,21 @@ FACE01 -- さあ、始めましょう！
 
 ___
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV)
-![](https://img.shields.io/badge/Release-v3.04.02-green)
-![](https://img.shields.io/badge/Python-%3E%3D3.8-blue)
+![GitHub Commit Activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%20Commits⭐️&color=181717&labelColor=white&style=flat)
+
+
+![Release Version](https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=white&labelColor=white&style=flat)
+![Python Version](https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=white&labelColor=white&style=flat)
+
+
+![Face01 No GPU Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerfile:face01_no_gpu⭐️&color=2496ED&labelColor=white&style=flat)
+![Face01 GPU Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerfile:face01_gpu⭐️&color=2496ED&labelColor=white&style=flat)
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
+
+
+
+
 
 </div>
 
