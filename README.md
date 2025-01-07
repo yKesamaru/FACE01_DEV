@@ -28,15 +28,15 @@ ___
   <tr>
     <td style="border: 0;">
       <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat">
-      <br>
+      <br />
       <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
-      <br>
+      <br />
       <img src="https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=FFD43B&labelColor=white&style=flat">
     </td>
     <td style="border: 0;">
-      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数CPU版&color=2496ED&labelColor=white&style=flat"></a>
-      <br>
-      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数GPU版&color=2496ED&labelColor=white&style=flat"></a>
+      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:CPU版&color=2496ED&labelColor=white&style=flat"></a>
+      <br />
+      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:GPU版&color=2496ED&labelColor=white&style=flat"></a>
     </td>
     <td style="border: 0;">
       <a href="https://ykesamaru.github.io/FACE01_DEV/index.html"><img src="https://img.shields.io/badge/ドキュメント-4B275F?style=for-the-badge&logo=elixir&logoColor=white"></a>
