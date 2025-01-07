@@ -48,10 +48,8 @@ ___
   </tr>
 </table>
 
-![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3AGPU%E7%89%88&labelColor=white&link=https%3A%2F%2Fhub.docker.com%2Fr%2Ftokaikaoninsho%2Fface01_gpu)
-
-![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3ACPU%E7%89%88&labelColor=white&link=https%3A%2F%2Fhub.docker.com%2Fr%2Ftokaikaoninsho%2Fface01_no_gpu)
-
+![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%20pull%E6%95%B0%3A%20GPU%E7%89%88&labelColor=white)
+![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%20pull%E6%95%B0%3A%20CPU%E7%89%88&labelColor=white)
 
 <div>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
