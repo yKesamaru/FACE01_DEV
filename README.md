@@ -284,24 +284,32 @@ True
 ---
 
 ## すぐに試せるverifyコマンド
-<style>
-  figure {
-    display: inline-block; /* 横並びにする */
-    margin: 0 10px;        /* 画像間の余白を設定 */
-    text-align: center;    /* キャプションを中央揃え */
-  }
-</style>
 
-<div>
-  <figure>
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" width="150px" />
-    <figcaption>c045.png</figcaption>
-  </figure>
-  <figure>
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" width="150px" />
-    <figcaption>c006.png</figcaption>
-  </figure>
-</div>
+<table>
+  <tr>
+    <td>
+      <!-- figure要素は画像とキャプションをまとめて表現する際に使う -->
+      <figure>
+        <img 
+          src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" 
+          width="150px" 
+        />
+        <!-- 画像の説明として figcaption を使う -->
+        <figcaption>c045.png</figcaption>
+      </figure>
+    </td>
+    <td>
+      <figure>
+        <img 
+          src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" 
+          width="150px" 
+        />
+        <figcaption>c006.png</figcaption>
+      </figure>
+    </td>
+  </tr>
+</table>
+
 
 ```bash
 $ verify assets/data/c/c045.png assets/data/c/c006.png
