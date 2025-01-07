@@ -27,7 +27,7 @@ ___
   <!-- ボディ -->
   <tr>
     <td style="border: 0;">
-      <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat"> 
+      <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat">
       <!-- GitHubのcommit-activityバッジ -->
       <br />
       <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
@@ -55,12 +55,7 @@ ___
     </td>
   </tr>
 </table>
-<a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-CPU版&color=2496ED&labelColor=white&style=flat">
 
-<a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-GPU版&color=2496ED&labelColor=white&style=flat">
-        
 <div>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
   <img src="https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white">
