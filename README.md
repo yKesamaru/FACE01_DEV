@@ -38,12 +38,12 @@ ___
     </td>
     <td style="border: 0;">
       <a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:CPU版&color=2496ED&labelColor=white&style=flat">
+        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-CPU版&color=2496ED&labelColor=white&style=flat">
         <!-- Docker CPU版 pull数バッジ -->
       </a>
       <br />
       <a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:GPU版&color=2496ED&labelColor=white&style=flat">
+        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-GPU版&color=2496ED&labelColor=white&style=flat">
         <!-- Docker GPU版 pull数バッジ -->
       </a>
     </td>
