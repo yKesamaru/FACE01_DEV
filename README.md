@@ -17,17 +17,46 @@ FACE01 -- さあ、始めましょう！
 
 ___
 
-![GitHub Commit Activity](https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat)
+<table style="border-collapse: collapse; border: 0;">
+  <!-- ヘッダ -->
+  <tr>
+    <td style="border: 0;">Project Info</td>
+    <td style="border: 0;">Docker Images</td>
+    <td style="border: 0;">Document
+  </tr>
+  <!-- ボディ -->
+  <tr>
+    <td style="border: 0;">
+      <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat">
+      <br>
+      <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
+      <br>
+      <img src="https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=FFD43B&labelColor=white&style=flat">
+    </td>
+    <td style="border: 0;">
+      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu" target="blank"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:CPU版&color=2496ED&labelColor=white&style=flat"></a>
+      <br>
+      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu" target="blank"><img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数:GPU版&color=2496ED&labelColor=white&style=flat"></a>
+    </td>
+    <td style="border: 0;">
+      <a href="https://ykesamaru.github.io/FACE01_DEV/index.html"><img src="https://img.shields.io/badge/ドキュメント-4B275F?style=for-the-badge&logo=elixir&logoColor=white"></a>
+  </tr>
+</table>
 
-![Release Version](https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat)
-![Python Version](https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=FFD43B&labelColor=white&style=flat)
 
-![Face01 No GPU Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerfile:face01_no_gpu⭐️&color=2496ED&labelColor=white&style=flat)
-![Face01 GPU Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerfile:face01_gpu⭐️&color=2496ED&labelColor=white&style=flat)
+<div>
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+  <img src="https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue">
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
+</div>
 
-![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true)
 
 
+
+
+<img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/docs/img/ROMAN_HOLIDAY.GIF?raw=true">
 
 
 
