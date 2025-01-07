@@ -61,6 +61,9 @@ ___
 ">
 </a>
 
+![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3AGPU%E7%89%88&labelColor=white)
+
+
 <div>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
   <img src="https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white">
