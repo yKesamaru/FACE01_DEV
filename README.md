@@ -21,13 +21,13 @@ ___
   <!-- ヘッダ -->
   <tr>
     <td style="border: 0;">Project Info</td>
-    <td style="border: 0;">GPU Acceleration</td>
+    <td style="border: 0;">Realtime Processing</td>
     <td style="border: 0;">Document</td> <!-- Documentの後に</td>を閉じる -->
   </tr>
   <!-- ボディ -->
   <tr>
     <td style="border: 0;">
-      <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub%&color=181717&labelColor=white&style=flat">
+      <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub Commit&color=181717&labelColor=white&style=flat">
       <!-- GitHubのcommit-activityバッジ -->
       <br />
       <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
@@ -53,7 +53,7 @@ ___
 
 <div>
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
-  <img src="https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white">
+  <img src="https://img.shields.io/badge/ONNXRUNTIME GPU-27338e?style=for-the-badge&logoColor=white">
   <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
   <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue">
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
