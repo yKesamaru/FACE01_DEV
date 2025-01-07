@@ -21,7 +21,7 @@ ___
   <!-- ヘッダ -->
   <tr>
     <td style="border: 0;">Project Info</td>
-    <td style="border: 0;">Docker Images</td>
+    <td style="border: 0;">GPU Acceleration</td>
     <td style="border: 0;">Document</td> <!-- Documentの後に</td>を閉じる -->
   </tr>
   <!-- ボディ -->
@@ -37,15 +37,7 @@ ___
       <!-- Pythonバージョンバッジ -->
     </td>
     <td style="border: 0;">
-      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_no_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-CPU版&color=2496ED&labelColor=white&style=flat">
-        <!-- Docker CPU版 pull数バッジ -->
-      </a>
-      <br />
-      <a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu">
-        <img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?logo=docker&logoColor=2496ED&label=Dockerイメージpull数-GPU版&color=2496ED&labelColor=white&style=flat">
-        <!-- Docker GPU版 pull数バッジ -->
-      </a>
+       	<img src="https://img.shields.io/badge/NVIDIA-GPU Boost-76B900?style=for-the-badge&logo=nvidia&logoColor=white">
     </td>
     <td style="border: 0;">
       <a href="https://ykesamaru.github.io/FACE01_DEV/index.html">
@@ -56,12 +48,9 @@ ___
   </tr>
 </table>
 
-<a href="https://hub.docker.com/r/tokaikaoninsho/face01_gpu">
-<img src="https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3AGPU%E7%89%88&labelColor=white
-">
-</a>
+![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3AGPU%E7%89%88&labelColor=white&link=https%3A%2F%2Fhub.docker.com%2Fr%2Ftokaikaoninsho%2Fface01_gpu)
 
-![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3AGPU%E7%89%88&labelColor=white)
+![Docker Pulls](https://img.shields.io/docker/pulls/tokaikaoninsho/face01_no_gpu?style=flat&logo=docker&logoColor=blue&label=Docker%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%3ACPU%E7%89%88&labelColor=white&link=https%3A%2F%2Fhub.docker.com%2Fr%2Ftokaikaoninsho%2Fface01_no_gpu)
 
 
 <div>
