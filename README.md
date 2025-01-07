@@ -255,7 +255,7 @@ CUDA_TOOLKIT_ROOT_DIR not found or specified
 -- C++11 activated.
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/terms/ドキュメント/test_face01/FACE01_DEV/dlib-19.24/build/temp.linux-x86_64-3.10
+-- Build files have been written to: /home/user/ドキュメント/test_face01/FACE01_DEV/dlib-19.24/build/temp.linux-x86_64-3.10
 Invoking CMake build: 'cmake --build . --config Release -- -j8'
 ```
 
