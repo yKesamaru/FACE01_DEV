@@ -143,21 +143,9 @@ Core().common_process(CONFIG).__next__()
 
 AIコアが外国産である場合、肝心なところで「**偽陽性**」、つまり誤判定が発生することがあります。この問題は発生頻度が少ないこともあり、再現性が取りづらく、その反面、発生した場合は重大なアクシデントとなり得ます。
 
-<!-- <br />
-<div style="display: flex; align-items: center;">
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
-    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
-        <p style="margin: 10;">東アジアだけに絞っても<span style="background-color: yellow;">日本人、漢民族、満州族、回族、ウイグル人、チベット人、モンゴル人、チワン族、チャン族、ミャオ族、トゥチャ族、韓民族、カザフ人、ザイ族</span>が存在します⭐️''</p>
-        <p style="margin: 10;">日本人以外の顔データで学習されたモデルを日本人だけに使うのは想定されてないはずです⭐️''</p>
-        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
-    </div>
-</div>
-<br /> -->
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-13-52-23.png)
 
 このため**日本人だけの大規模顔顔データセット**から学習した「JAPANESE FACE V1」を開発し、顔認証アプリケーションに必要なクラスを揃えました。
-
-
 
 ---
 
