@@ -10,12 +10,12 @@ set -e  # エラーで停止
 # pipのアップグレード
 pip install -U pip wheel setuptools
 
-python3 -m venv ./
+python3 -m venv ./venv
 # shellcheck disable=SC1091
-source bin/activate
+source venv/bin/activate
 
-# pyproject.tomlのインストール
-pip install --no-cache-dir .
+# requirements_GPU.txtのインストール
+pip install -r requirements_GPU.txt
 
 # GPU用の設定 (dlibをソースからインストール)
 echo "Installing dlib from source for GPU support..."

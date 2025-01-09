@@ -21,7 +21,7 @@ IFS=$'\n\t'
 # 定数設定
 WORKDIR=~/bin/FACE01_DEV  # 作業ディレクトリ
 DOCKER_REPO=tokaikaoninsho
-TAG=3.04.02
+TAG=3.04.03
 
 # Dockerイメージをビルドしてプッシュする関数
 build_and_push_image() {

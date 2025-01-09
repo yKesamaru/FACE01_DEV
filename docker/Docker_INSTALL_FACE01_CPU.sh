@@ -9,13 +9,11 @@ set -x
 # pipのアップグレード
 pip install -U pip wheel setuptools
 
-python3 -m venv ./
+python3 -m venv ./venv
 # shellcheck disable=SC1091
-source bin/activate
+source venv/bin/activate
 
-# pyproject.tomlのインストール
-pip install --no-cache-dir .
-
-pip install dlib
+# requirements_CPU.txtのインストール
+pip install -r requirements_CPU.txt
 
 cd ../

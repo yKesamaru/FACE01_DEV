@@ -30,7 +30,7 @@ ___
       <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub Commit&color=181717&labelColor=white&style=flat">
       <!-- GitHubのcommit-activityバッジ -->
       <br />
-      <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
+      <img src="https://img.shields.io/badge/Release-v3.04.03-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
       <!-- リリースバッジ -->
       <br />
       <img src="https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=FFD43B&labelColor=white&style=flat">
@@ -122,6 +122,19 @@ Core().common_process(CONFIG).__next__()
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-24_16-42.png)
 
+#### その他の有用なサンプルコード
+[Zenn](https://zenn.dev/ykesamaru)にて新しいサンプルコードとその解説を紹介しています。
+##### 例
+- [フリーの事前顔学習済みモデル11種の精度評価](https://zenn.dev/ykesamaru/articles/40f9e964539e31)
+- [防犯カメラの動体検知を実装する③: なりすまし防止機能の実装](https://zenn.dev/ykesamaru/articles/d69251cd25c7aa)
+- [コサイン類似度データの中の外れ値をもつファイルを見つける方法](https://zenn.dev/ykesamaru/articles/bc10aa51772130)
+- [インタビュー形式の動画から顔画像データを抽出する方法](https://zenn.dev/ykesamaru/articles/9ec4cec236f795)
+- [[Docker] MongoDBとFaissを使って類似画像を検索する](https://zenn.dev/ykesamaru/articles/daf1ea9def85f4)
+- [頭部姿勢推定を簡易実装する](https://zenn.dev/ykesamaru/articles/025b0eabf24e20)
+- [スマホの画面注視認識機能を簡易実装する](https://zenn.dev/ykesamaru/articles/6e2098dbef148e)
+- [【faiss】なにこれすごい。顔データセットの間違い探し　成功編③](https://zenn.dev/ykesamaru/articles/4e40e0285b0b66)
+- [まばたきを検知するPythonコードの解説](https://zenn.dev/ykesamaru/articles/f10804a8fcc81d)
+
 ---
 
 ## なぜFACE01を開発したの？
@@ -130,21 +143,9 @@ Core().common_process(CONFIG).__next__()
 
 AIコアが外国産である場合、肝心なところで「**偽陽性**」、つまり誤判定が発生することがあります。この問題は発生頻度が少ないこともあり、再現性が取りづらく、その反面、発生した場合は重大なアクシデントとなり得ます。
 
-<!-- <br />
-<div style="display: flex; align-items: center;">
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/00080-2065252.png" alt="説明文" width="200" style="margin-right: 10px; border-radius: 50%; object-fit: cover;">
-    <div style="background-color: white; padding: 10px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); position: relative;">
-        <p style="margin: 10;">東アジアだけに絞っても<span style="background-color: yellow;">日本人、漢民族、満州族、回族、ウイグル人、チベット人、モンゴル人、チワン族、チャン族、ミャオ族、トゥチャ族、韓民族、カザフ人、ザイ族</span>が存在します⭐️''</p>
-        <p style="margin: 10;">日本人以外の顔データで学習されたモデルを日本人だけに使うのは想定されてないはずです⭐️''</p>
-        <div style="position: absolute; top: 50%; left: -15px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 15px solid white; transform: translateY(-50%);"></div>
-    </div>
-</div>
-<br /> -->
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/2024-08-25-13-52-23.png)
 
 このため**日本人だけの大規模顔顔データセット**から学習した「JAPANESE FACE V1」を開発し、顔認証アプリケーションに必要なクラスを揃えました。
-
-
 
 ---
 
@@ -207,33 +208,19 @@ cd FACE01_DEV
 ```bash
 $ python3 -m venv ./venv  # python3-venvがインストールされている前提
 $ source venv/bin/activate
-# 上記のように仮想環境構築後
-$ pip install .
+$ pip install -U pip setuptools wheel
+# GPUを使用する場合
+$ pip install -r requirements_GPU.txt
+# CPUを使用する場合
+$ pip install -r requirements_CPU.txt
 ```
-3. インストールが成功したことを確認します。
-```bash
-pip show FACE01
-```
-以下のように出力されたら成功です。
-```bash
-$ pip show FACE01
-Name: FACE01
-Version: 3.4.2
-Summary: 顔認証学習モデルとユーティリティプログラム
-Home-page: https://tokai-kaoninsho.com/
-Author: 
-Author-email: Yoshitsugu Kesamaru <y.kesamaru@tokai-kaoninsho.com>
-License: 
-Location: ~/FACE01_DEV/venv/lib/python3.10/site-packages
-Requires: mediapipe, memory-profiler, mojimoji, nptyping, numpy, onnx, onnxruntime-gpu, opencv-python, Pillow, protobuf, psutil, pyqrcode, qrcode, requests, scipy, torch, torchvision, tqdm, typing_extensions, urllib3
-Required-by: 
-```
-4. `dlib`を手動インストールする
+3. GPUを使用する場合`dlib`を手動インストールする
 ```bash
 # GPU用の設定 (dlibをソースからインストール)
 tar -jxvf dlib-19.24.tar.bz2
 cd dlib-19.24
 python3 setup.py install --clean
+
 ```
 #### 手動インストールの成否確認方法
 もしビルド中に以下のような記述が出力されていたらGPUを利用できません。この場合はドキュメントを参考にしてGPUが使えるビルドができるようにしてください。
@@ -283,7 +270,7 @@ True
 
 ---
 
-## すぐに試せるverifyコマンド
+## すぐに試せるverifyスクリプト
 
 <table>
   <tr>
@@ -312,14 +299,14 @@ True
 
 
 ```bash
-$ verify assets/data/c/c045.png assets/data/c/c006.png
+$ python example/verify.py assets/data/c/c045.png assets/data/c/c006.png
 
 2枚の画像は同一人物と判定しました。cos_sim=0.318
 結果: True
 ```
 ヘルプを参照する
 ```bash
-$ verify -h
+$ python example/verify.py -h
 usage: verify [-h] [--threshold THRESHOLD] image1 image2
 
 2枚の画像から同一人物かを判定します。

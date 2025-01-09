@@ -1,12 +1,34 @@
+## [v3.04.03] - 2025-01-09
+v3.04.02における動作不具合により、pyproject.toml使用以前の仕様に戻す
+
+### 変更
+- `pip install .`による不具合の修正
+  - `pip uninstall FACE01`の実行
+  - INSTALL_FACE01.sh
+  - Docker_INSTALL_FACE01.sh
+  - Docker_INSTALL_FACE01_CPU.sh
+  - pyproject.tomlからrequirements_GPU.txt, requirements_CPU.txtへの変更
+- Dockerfileに`tree`を追加
+- outputディレクトリの中などを整理
+  - 要らないpngファイルを除去
+- README.md
+- make_DockerImages.sh: v3.04.03
+- verify.pyをface01lib/からexample/へ移動
+- Dockerfile_gpu, Dockerfile_cpuにrequirements_GPU.txt、requirements_CPU.txtをコンテナにコピーするように変更
+### 追加
+- requirements_GPU, requirements_CPU
+
+---
+
 ## [v3.04.02] - 2025-01-03
 ### 追加
 - `verify`コマンド: face01libディレクトリ内
 ### 変更
 - pyproject.toml: verifyコマンドのため。
-- ~~Python仮想環境作成を廃止: 煩雑なため。~~
+- Python仮想環境作成を廃止: 煩雑なため。
   - INSTALL_FACE01.sh
-  - ~~Docker_INSTALL_FACE01.sh~~
-  - ~~Docker_INSTALL_FACE01_CPU.sh~~
+  - Docker_INSTALL_FACE01.sh
+  - Docker_INSTALL_FACE01_CPU.sh
 - Docker_INSTALL_FACE01.sh
   - GPU用の設定のところ。
 - README.md

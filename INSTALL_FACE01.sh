@@ -58,14 +58,14 @@ git clone https://github.com/yKesamaru/FACE01_DEV.git
 
 cd ./FACE01_DEV
 
-# python3 -m venv ./
-# source bin/activate
+python3 -m venv ./venv
+source venv/bin/activate
 
 pip cache remove dlib
 pip install -U pip
 pip install -U wheel
 pip install -U setuptools
-pip install .
+pip install -r requirements_GPU.txt
 
 tar -jxvf dlib-19.24.tar.bz2
 cd dlib-19.24
