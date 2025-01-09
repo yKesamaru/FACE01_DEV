@@ -55,6 +55,7 @@ RUN apt-get update && apt-get install -y \
 
 # ユーザー追加
 ARG DOCKER_UID=1000
+# 実稼働時はSecrets Manager等を使ってください
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
 RUN useradd -m --uid ${DOCKER_UID} --home-dir ${USER_HOME} --groups sudo,video --shell /bin/bash ${DOCKER_USER} \

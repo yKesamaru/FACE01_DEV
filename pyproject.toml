@@ -45,6 +45,9 @@ Repository = "https://github.com/yKesamaru/FACE01_DEV"
 [tool.setuptools]
 include-package-data = true  # MANIFEST.inを反映させるために必要
 
+[tool.setuptools.package-data]
+"face01lib.models" = ["*.onnx", "*.dat"]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["face01lib*"]
