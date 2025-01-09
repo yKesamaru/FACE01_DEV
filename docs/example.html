@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="./">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>example package &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=91613774"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -213,6 +211,12 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-example.verify">example.verify module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example.verify.check_image_path"><code class="docutils literal notranslate"><span class="pre">check_image_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.verify.check_threshold"><code class="docutils literal notranslate"><span class="pre">check_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example.verify.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-example">Module contents</a></li>
 </ul>
 </li>
@@ -270,7 +274,8 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 </div>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/ctktest.png"><img alt="ctktest" src="_images/ctktest.png" style="width: 560.0px; height: 317.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/ctktest.png"><img alt="ctktest" src="_images/ctktest.png" style="width: 560.0px; height: 317.5px;" />
+</a>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/CTKtest.py">CTKtest.py</a></p>
 </dd>
@@ -315,9 +320,11 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 <p>詳しくは上記記事をご参照ください。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/faces.png"><img alt="faces" src="_images/faces.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/faces.png"><img alt="faces" src="_images/faces.png" style="width: 100%;" />
+</a>
 <p>すべての顔画像ファイル</p>
-<a class="reference internal image-reference" href="_images/faiss.png"><img alt="faiss" src="_images/faiss.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/faiss.png"><img alt="faiss" src="_images/faiss.png" style="width: 100%;" />
+</a>
 <p>外れ値の顔画像ファイル</p>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
@@ -348,9 +355,11 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 <p>詳しくは上記記事をご参照ください。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/faces.png"><img alt="faces" src="_images/faces.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/faces.png"><img alt="faces" src="_images/faces.png" style="width: 100%;" />
+</a>
 <p>すべての顔画像ファイル</p>
-<a class="reference internal image-reference" href="_images/lof.png"><img alt="lof" src="_images/lof.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/lof.png"><img alt="lof" src="_images/lof.png" style="width: 100%;" />
+</a>
 <p>外れ値の顔画像ファイル</p>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
@@ -394,7 +403,8 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 </pre></div>
 </div>
 </dd>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" />
+</a>
 </dd>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize</span>
@@ -403,7 +413,8 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>初期化とloggerのセットアップ.
 FACE01を使用してコーディングするときは、'initialize'と'logger'を最初にコードします。
 これにより、設定ファイルであるconfig.iniファイルを読み込み、ログレベルなどを決定します⭐️''</p>
@@ -450,7 +461,8 @@ FACE01を使用してコーディングするときは、'initialize'と'logger'
 </div>
 <dl>
 <dt>Results:</dt><dd><p>スクリーンショットは作成されるQRコードを示しています。</p>
-<a class="reference internal image-reference" href="_images/anti_spoof.png"><img alt="Screenshot of the lightweight GUI output" src="_images/anti_spoof.png" style="width: 316.0px; height: 239.0px;" /></a>
+<a class="reference internal image-reference" href="_images/anti_spoof.png"><img alt="Screenshot of the lightweight GUI output" src="_images/anti_spoof.png" style="width: 316.0px; height: 239.0px;" />
+</a>
 </dd>
 </dl>
 </section>
@@ -493,7 +505,8 @@ FACE01を使用してコーディングするときは、'initialize'と'logger'
 終了するには、このエグザンプルが実行されているターミナル（またはコンソール）で「Ctrl + C」を押してください。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/benchmark_CUI_restats.png"><img alt="SnakeVizによるベンチマークテスト画像" src="_images/benchmark_CUI_restats.png" style="width: 608.5px; height: 646.5px;" /></a>
+<a class="reference internal image-reference" href="_images/benchmark_CUI_restats.png"><img alt="SnakeVizによるベンチマークテスト画像" src="_images/benchmark_CUI_restats.png" style="width: 608.5px; height: 646.5px;" />
+</a>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>benchmark_CUI.py
@@ -540,8 +553,10 @@ FACE01を使用してコーディングするときは、'initialize'と'logger'
 </div>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" /></a>
-<a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/benchmark_GUI_window.png"><img alt="benchmark_GUI_window" src="_images/benchmark_GUI_window.png" style="width: 384.5px; height: 389.0px;" />
+</a>
+<a class="reference internal image-reference" href="_images/benchmark_GUI.png"><img alt="benchmark_GUI" src="_images/benchmark_GUI.png" style="width: 545.5px; height: 357.0px;" />
+</a>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/benchmark_GUI_window.py">benchmark_GUI_window.py</a></p>
 </dd>
@@ -604,14 +619,16 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 このコード例では組み合わせパターンが爆発的に大きくなると処理時間もそれに応じて爆発的に大きくなるコード例を示しています。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/2024-08-27-16-33-10.png"><img alt="Cosine Similarity Results" src="_images/2024-08-27-16-33-10.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/2024-08-27-16-33-10.png"><img alt="Cosine Similarity Results" src="_images/2024-08-27-16-33-10.png" style="width: 70%;" />
+</a>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/combination_similarity.py
 </pre></div>
 </div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>データセットの外れ値などを探す場合に有用なコード例です⭐️''</p>
 <p>しかしデータセットが大きくなると、リンク先のように'faiss'を使う必要が出てきます。</p>
 <dl class="simple">
@@ -634,7 +651,8 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </div>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/data_augmentation.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/data_augmentation.png" style="width: 996.0px; height: 500.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/data_augmentation.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/data_augmentation.png" style="width: 996.0px; height: 500.5px;" />
+</a>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/data_augmentation.py">data_augmentation.py</a></p>
 </dd>
@@ -668,7 +686,8 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 データ拡張したファイルを保存します。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" />
+</a>
 <p>樽型歪みをデータセットに加えることで、カメラのキャリブレーションが出来ない環境への耐性を高めます⭐️''
 <a class="reference external" href="https://tokai-kaoninsho.com/%e3%82%b3%e3%83%a9%e3%83%a0/%e3%83%ac%e3%83%b3%e3%82%ba%e3%81%ae%e6%ad%aa%e6%9b%b2%e5%8f%8e%e5%b7%ae%e3%81%a8%e5%af%be%e5%bf%9c%e6%96%b9%e6%b3%95/">レンズの歪曲収差と対応方法</a>
 をご参照ください。</p>
@@ -786,7 +805,8 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" />
+</a>
 <p>1行目の'headless'が'True'なら、CUIで動作します⭐️''</p>
 <dl>
 <dt>Result:</dt><dd><p>以下に示す出力が得られます。
@@ -888,8 +908,10 @@ This will read the configuration file <cite>config.ini</cite> and log errors etc
 <p>このコードを実行する際、入力されるソースには必ず1人だけのものを選ばなくてはいけません。
 複数人を対象とすることはできません。</p>
 </div>
-<a class="reference internal image-reference" href="_images/2024-08-27_20-02.png"><img alt="eye blink" src="_images/2024-08-27_20-02.png" style="width: 100%;" /></a>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/2024-08-27_20-02.png"><img alt="eye blink" src="_images/2024-08-27_20-02.png" style="width: 100%;" />
+</a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>注目すべきは瞬きの検出が1行で済んでいるところです！⭐️''</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blink_detected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spoof</span><span class="o">.</span><span class="n">detect_eye_blinks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_frame_datas_array</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">)</span>
 </pre></div>
@@ -930,8 +952,10 @@ face recognition.</p>
 </div>
 </div>
 <p>Results:</p>
-<a class="reference internal image-reference" href="_images/2024-08-27_20-16.png"><img alt="Screenshot of the GUI output" src="_images/2024-08-27_20-16.png" style="width: 557.9px; height: 575.4px;" /></a>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/2024-08-27_20-16.png"><img alt="Screenshot of the GUI output" src="_images/2024-08-27_20-16.png" style="width: 557.9px; height: 575.4px;" />
+</a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>'Core().common_process(self.CONFIG)'で得られたジェネレーターを'for'で回すだけで全ての情報が取得できるんです！⭐️''</p>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/display_GUI_window.py">display_GUI_window.py</a></p>
@@ -1055,7 +1079,8 @@ face recognition.</p>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;log_level&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;RootDir&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>この2行はお約束ですね⭐️''</p>
 <p>1行目は設定ファイルを読み込み、2行目でロガーを指定しています💗</p>
 <dl class="simple">
@@ -1091,7 +1116,8 @@ face recognition.</p>
 </ul>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="distort_barrel" src="_images/distort_barrel.png" style="width: 527.1px; height: 226.1px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="distort_barrel" src="_images/distort_barrel.png" style="width: 527.1px; height: 226.1px;" />
+</a>
 </dd>
 <dt>Image:</dt><dd><p><a class="reference external" href="https://www.pakutaso.com/20220158028post-38602.html">Pakutasoハート型のチョコと指ハートの無料写真素材</a></p>
 </dd>
@@ -1113,8 +1139,10 @@ face recognition.</p>
 </div>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/4_times.png"><img alt="4 times" src="_images/4_times.png" style="width: 614.5px; height: 371.5px;" /></a>
-<a class="reference internal image-reference" href="_images/20_times.png"><img alt="20 times" src="_images/20_times.png" style="width: 598.0px; height: 377.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/4_times.png"><img alt="4 times" src="_images/4_times.png" style="width: 614.5px; height: 371.5px;" />
+</a>
+<a class="reference internal image-reference" href="_images/20_times.png"><img alt="20 times" src="_images/20_times.png" style="width: 598.0px; height: 377.5px;" />
+</a>
 </dd>
 </dl>
 <div class="admonition note">
@@ -1207,7 +1235,8 @@ face recognition.</p>
 <span class="o">[</span><span class="m">2024</span>-08-27<span class="w"> </span><span class="m">21</span>:18:34,678<span class="o">]</span><span class="w"> </span><span class="o">[</span>/home/terms/bin/FACE01_DEV/example/example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>example_logging.py<span class="o">]</span><span class="w"> </span><span class="o">[</span>DEBUG<span class="o">]</span><span class="w"> </span>-----------------
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>ログとして出力させたい場合に使うと良いですね⭐️''</p>
 <p>ログとして出力すると、どのPythonファイルがどのログレベルで出力したのか一目瞭然です！💗</p>
 </dd></dl>
@@ -1243,7 +1272,8 @@ face recognition.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" />
+</a>
 <p>顔画像の保存はデータセットを作成する時、役立ちます⭐️''</p>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/face_coordinates.py">face_coordinates.py</a></p>
@@ -1279,7 +1309,8 @@ face recognition.</p>
 </pre></div>
 </div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" />
+</a>
 <p>この例では扱う顔画像ファイル数が非常に少ないためfaissには向いていないです💦</p>
 <p>学習モデルの大規模データセットに用いると良いでしょう⭐️'' （その場合はnlistの値を変えてくださいね💗）</p>
 <dl class="simple">
@@ -1331,7 +1362,8 @@ pip install faiss-cpu</p></li>
 </dl>
 </li>
 </ul>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>このテストをパスしてもなお`faiss-gpu`が機能しない場合があります。その場合はfaiss-cpuを試してください。⭐️''</p>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/faiss_gpu_test.py">faiss_gpu_test.py</a></p>
@@ -1373,7 +1405,8 @@ pip install faiss-cpu</p></li>
 <span class="m">0</span>.03513885<span class="w">  </span><span class="m">0</span>.15748617<span class="w">  </span><span class="m">0</span>.05288177<span class="w">  </span><span class="m">0</span>.03470919<span class="w">  </span><span class="m">0</span>.0150839<span class="w">   </span><span class="m">0</span>.04732724
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_R.png"><img alt="one point" src="_images/one_point_R.png" style="width: 70%;" />
+</a>
 <p>dlibでは128次元、JAPANESE FACE V1では512次元のNDArrayデータが取得されます⭐️''</p>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/get_encoded_data.py">get_encoded_data.py</a></p>
@@ -1443,7 +1476,8 @@ disturb_color (bool, optional): Disturb the color. Defaults to True.</p>
 </div>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/jitter.png"><img alt="jitter_image" src="_images/jitter.png" style="width: 990.0px; height: 503.0px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/jitter.png"><img alt="jitter_image" src="_images/jitter.png" style="width: 990.0px; height: 503.0px;" />
+</a>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/jitter.py">jitter.py</a></p>
 </dd>
@@ -1490,7 +1524,8 @@ jitter and saves them.</p>
 </div>
 <dl>
 <dt>Results:</dt><dd><p>スクリーンショットは作成されるウィンドウを示しています。</p>
-<a class="reference internal image-reference" href="_images/lightweight_GUI.png"><img alt="Screenshot of the lightweight GUI output" src="_images/lightweight_GUI.png" style="width: 386.0px; height: 269.0px;" /></a>
+<a class="reference internal image-reference" href="_images/lightweight_GUI.png"><img alt="Screenshot of the lightweight GUI output" src="_images/lightweight_GUI.png" style="width: 386.0px; height: 269.0px;" />
+</a>
 <p>コンソール出力は以下のようになります。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[2023-01-23 22:33:18,752] [face01lib.load_preset_image] [load_preset_image.py] [INFO] Loading npKnown.npz</span>
 <span class="go">安倍晋三</span>
@@ -1540,7 +1575,8 @@ Spoof().make_qr_code()
 </div>
 </div>
 <dl>
-<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/ID_card_sample.png"><img alt="_images/ID_card_sample.png" src="_images/ID_card_sample.png" style="width: 366.5px; height: 519.5px;" /></a>
+<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/ID_card_sample.png"><img alt="_images/ID_card_sample.png" src="_images/ID_card_sample.png" style="width: 366.5px; height: 519.5px;" />
+</a>
 </dd>
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_ID_card.py">make_ID_card.py</a></p>
 </dd>
@@ -1609,7 +1645,8 @@ Spoof().make_qr_code()
 </pre></div>
 </div>
 </div>
-<a class="reference internal image-reference" href="_images/npKnown.png"><img alt="npKnown.npz" src="_images/npKnown.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="_images/npKnown.png"><img alt="npKnown.npz" src="_images/npKnown.png" style="width: 50%;" />
+</a>
 <p>コードを実行するとnpKnown.npzファイルが作成されます⭐️''</p>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_file.py">make_npKnown_file.py</a></p>
@@ -1647,9 +1684,11 @@ Spoof().make_qr_code()
 <p>実行後、ディレクトリ選択ダイアログが表示され、処理対象のディレクトリを選択できます。
 選択したディレクトリ内のサブディレクトリごとにnpKnown.npzファイルが作成されます。</p>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>ディレクトリを再帰的に捜査してnpKnown.npzを作成します⭐️''</p>
-<a class="reference internal image-reference" href="_images/npKnown.png"><img alt="npKnown.npz" src="_images/npKnown.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="_images/npKnown.png"><img alt="npKnown.npz" src="_images/npKnown.png" style="width: 50%;" />
+</a>
 <dl class="simple">
 <dt>Source code:</dt><dd><p><a class="reference external" href="https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_npKnown_for_subdirs.py">make_npKnown_for_subdirs.py</a></p>
 </dd>
@@ -1909,6 +1948,79 @@ Please refer to the separate license file for the license of the code.</p>
 <span class="sig-name descname"><span class="pre">show_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/simple_file_browser.html#ImageBrowser.show_image"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.simple_file_browser.ImageBrowser.show_image" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="module-example.verify">
+<span id="example-verify-module"></span><h2>example.verify module<a class="headerlink" href="#module-example.verify" title="Link to this heading"></a></h2>
+<p>verify.py.</p>
+<dl>
+<dt>Summary:</dt><dd><p>このスクリプトは、2枚の画像を読み込み、JAPANESE_FACE_V1モデルを用いて
+同一人物かどうかを判定するためのコマンドラインツールです。</p>
+</dd>
+<dt>Usage:</dt><dd><p>$ python verify.py &lt;image1&gt; &lt;image2&gt; [--threshold THRESHOLD]</p>
+</dd>
+<dt>Options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>このヘルプメッセージを表示し、プログラムを終了します。</p>
+</dd>
+<dt><kbd><span class="option">--threshold <var>THRESHOLD</var></span></kbd></dt>
+<dd><p>0以上1以下の範囲のfloat値。同一人物と判断するためのコサイン類似度のしきい値を指定します。
+指定しない場合のデフォルトは 0.25 です。
+例: --threshold 0.4</p>
+</dd>
+</dl>
+</dd>
+<dt>License:</dt><dd><p>This script is licensed under the terms provided by yKesamaru, the original author.</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="example.verify.check_image_path">
+<span class="sig-name descname"><span class="pre">check_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="_modules/example/verify.html#check_image_path"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.verify.check_image_path" title="Link to this definition"></a></dt>
+<dd><p>画像ファイルのパスがpng,jpg,jpegのいずれかであるかをチェックし、
+不適切な場合はエラーを投げる。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 画像ファイルのパス</p>
+</dd>
+<dt class="field-even">例外<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- 拡張子がpng,jpg,jpeg以外の場合に発生</p>
+</dd>
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>検証済みの画像パス</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.verify.check_threshold">
+<span class="sig-name descname"><span class="pre">check_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="reference internal" href="_modules/example/verify.html#check_threshold"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.verify.check_threshold" title="Link to this definition"></a></dt>
+<dd><p>0~1の範囲内のfloat値であるかをチェックし、範囲外の場合はエラーを投げる。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- コマンドライン引数として入力された文字列</p>
+</dd>
+<dt class="field-even">例外<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- floatに変換できない場合、または0~1の範囲外の場合に発生</p>
+</dd>
+<dt class="field-odd">戻り値<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0~1の範囲内のfloat値</p>
+</dd>
+<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="example.verify.main">
+<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/example/verify.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#example.verify.main" title="Link to this definition"></a></dt>
+<dd><p>メイン関数。
+コマンドライン引数から画像ファイルのパス2つと、閾値を受け取り、
+Dlib_api().verify() メソッドを使って同一人物かを判定する。</p>
 </dd></dl>
 
 </section>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="../">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>追加の関数チュートリアル &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/translations.js?v=91613774"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=4755f45a"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -102,8 +100,8 @@
 <h3>Loggerの初期化と設定<a class="headerlink" href="#logger" title="Link to this heading"></a></h3>
 <p>FACE01を使用するプログラムをコーディングする際には、最初に<code class="docutils literal notranslate"><span class="pre">initialize</span></code>および<code class="docutils literal notranslate"><span class="pre">logger</span></code>をコードします。
 これにより、設定ファイル<code class="docutils literal notranslate"><span class="pre">config.ini</span></code>を読み込み、エラーなどをログに記録します。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
-<span class="kn">from</span> <span class="nn">face01lib.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.Initialize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Initialize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
 
 <span class="c1"># 初期化</span>
 <span class="n">CONFIG</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span>  <span class="n">Initialize</span><span class="p">(</span><span class="s1">&#39;LIGHTWEIGHT_GUI&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
@@ -117,7 +115,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">Dlib_api</span></code>クラス<a class="headerlink" href="#dlib-api" title="Link to this heading"></a></h2>
 <p>このクラスは、ageitgeyによる<a class="reference external" href="https://github.com/ageitgey/face_recognition">face_recognition</a>を元に修正されており、モデルデータはdaviskingによる<a class="reference external" href="https://github.com/davisking/dlib">dlib</a>から取得しています。68点のフェイスモデルだけでなく、5点のフェイスモデルも使用します。
 例については<code class="docutils literal notranslate"><span class="pre">Core.return_face_location_list</span></code>を参照してください。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.api</span> <span class="kn">import</span> <span class="n">Dlib_api</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dlib_api</span>
 <span class="n">Dlib_api_obj</span> <span class="o">=</span> <span class="n">Dlib_api</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -155,7 +153,7 @@
 <section id="core">
 <h2><code class="docutils literal notranslate"><span class="pre">Core</span></code>クラス<a class="headerlink" href="#core" title="Link to this heading"></a></h2>
 <p>Coreクラスをインポートします。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.Core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
 <section id="return-face-location-list">
@@ -189,7 +187,7 @@ face<span class="w"> </span>coordinates:<span class="w"> </span><span class="o">
 <p>一般に、トレーニングされたモデルから推測される結果は、1と0に明確に分かれるわけではありません。このため、FACE01では<code class="docutils literal notranslate"><span class="pre">ELE:</span> <span class="pre">Equally</span> <span class="pre">Likely</span> <span class="pre">Events</span></code>という概念を取り入れています。<code class="docutils literal notranslate"><span class="pre">score</span></code>は元々0〜1の間の2つの数字を示します。このとき、2つの数字の差が<code class="docutils literal notranslate"><span class="pre">0.4</span></code>に設定され、その差が<code class="docutils literal notranslate"><span class="pre">0.4以下</span></code>の組み合わせは「同じくらい確度」であると見なされます（<code class="docutils literal notranslate"><span class="pre">=Equally</span> <span class="pre">Likely</span> <span class="pre">Events</span></code>）。FACE01ではこれを<code class="docutils literal notranslate"><span class="pre">ELE</span></code>として表現しています。つまり、2つの数字の差が<code class="docutils literal notranslate"><span class="pre">0.4未満</span></code>の場合、それが<code class="docutils literal notranslate"><span class="pre">spoof</span></code>か<code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">spoof</span></code>かを判断することはできません。</p>
 <section id="id6">
 <h3>例<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.Core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Core</span>
 <span class="n">spoof_or_real</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">ELE</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span><span class="o">.</span><span class="n">return_anti_spoof</span><span class="p">(</span><span class="n">frame_datas</span><span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">],</span> <span class="n">person_data</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">])</span>
 <span class="k">if</span> <span class="n">ELE</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span>
@@ -210,7 +208,7 @@ face<span class="w"> </span>coordinates:<span class="w"> </span><span class="o">
 <h2><code class="docutils literal notranslate"><span class="pre">VidCap</span></code>クラス<a class="headerlink" href="#vidcap" title="Link to this heading"></a></h2>
 <p>このクラスは<code class="docutils literal notranslate"><span class="pre">video_capture</span></code>に含まれています。
 インポートするには、以下を参照してください。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">face01lib.video_capture</span> <span class="kn">import</span> <span class="n">VidCap</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.video_capture</span><span class="w"> </span><span class="kn">import</span> <span class="n">VidCap</span>
 </pre></div>
 </div>
 <section id="resize-frame">

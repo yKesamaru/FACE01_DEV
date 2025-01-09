@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 仮想環境を有効化
-source /home/terms/bin/FACE01_DEV/bin/activate
+source venv/bin/activate
 
 # sphinx-apidocコマンドを実行
 sphinx-apidoc -f -o sphinx/ ./

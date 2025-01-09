@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="./">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>face01lib package &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=91613774"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -192,12 +190,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#face01lib.utils.Utils.temp_sleep"><code class="docutils literal notranslate"><span class="pre">Utils.temp_sleep()</span></code></a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-face01lib.verify">face01lib.verify module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.check_image_path"><code class="docutils literal notranslate"><span class="pre">check_image_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.check_threshold"><code class="docutils literal notranslate"><span class="pre">check_threshold()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#face01lib.verify.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-face01lib.video_capture">face01lib.video_capture module</a><ul>
@@ -418,7 +410,8 @@
 アプリケーションを期限付きで運用する場合に有用です。</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>このメソッドを使用する場合は'Cython'でバイナリ化しておくと良いですね⭐️''</p>
 </dd></dl>
 
@@ -1189,7 +1182,8 @@ It might occur side effects.</p>
 <p>'config.ini' を修正する前に、ConfigParser モジュールに精通している必要があります。ConfigParser モジュールについては <a class="reference external" href="https://docs.python.org/3/library/configparser.html">ConfigParser module documentation</a> を参照してください。</p>
 <p>各セクションは [DEFAULT] セクションから継承されます。したがって、各セクションでは [DEFAULT] を上書きする項目（キーと値）のみを指定してください。</p>
 </div>
-<a class="reference internal image-reference" href="_images/About_config_ini_file.png"><img alt="config_ini.md" src="_images/About_config_ini_file.png" style="width: 626.0px; height: 364.0px;" /></a>
+<a class="reference internal image-reference" href="_images/About_config_ini_file.png"><img alt="config_ini.md" src="_images/About_config_ini_file.png" style="width: 626.0px; height: 364.0px;" />
+</a>
 <dl class="py class">
 <dt class="sig sig-object py" id="face01lib.Initialize.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DEFAULT'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'info'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/Initialize.html#Initialize"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.Initialize.Initialize" title="Link to this definition"></a></dt>
@@ -1387,7 +1381,7 @@ and modified by Yoshitsugu Kesamaru (yKesamaru).</p>
 <a class="reference external" href="https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py">https://github.com/davisking/dlib/blob/master/python_examples/face_recognition.py</a></p>
 </div>
 <dl>
-<dt>DEBUG: MEMORY LEAK</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.memory_leak</span> <span class="kn">import</span> <span class="n">Memory_leak</span>
+<dt>DEBUG: MEMORY LEAK</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.memory_leak</span><span class="w"> </span><span class="kn">import</span> <span class="n">Memory_leak</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">Memory_leak</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">key_type</span><span class="o">=</span><span class="s1">&#39;traceback&#39;</span><span class="p">,</span> <span class="n">nframe</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">memory_leak_analyze_start</span><span class="p">()</span>
 </pre></div>
@@ -1580,7 +1574,7 @@ That is, centered and scaled essentially the same way.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="face01lib.api.Dlib_api.verify">
-<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.verify"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.verify" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/face01lib/api.html#Dlib_api.verify"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.api.Dlib_api.verify" title="Link to this definition"></a></dt>
 <dd><p>verify()メソッドは、入力された2枚の画像が同一人物かどうかを判定します。
 dlibの学習モデルは使わず、JAPANESE_FACE_V1モデルのみ使用します。</p>
 <dl class="field-list simple">
@@ -1588,7 +1582,7 @@ dlibの学習モデルは使わず、JAPANESE_FACE_V1モデルのみ使用しま
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image_path1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 1枚目の画像ファイルパス</p></li>
 <li><p><strong>image_path2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 2枚目の画像ファイルパス</p></li>
-<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) -- 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.5)</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) -- 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.3)</p></li>
 </ul>
 </dd>
 <dt class="field-even">戻り値<span class="colon">:</span></dt>
@@ -1890,7 +1884,8 @@ spoof_obj.make_qr_code()</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>以下のリンクに論文と数式をまとめました⭐️''</p>
 <p><a class="reference external" href="https://zenn.dev/ykesamaru/articles/f10804a8fcc81d">まばたきを検知するPythonコードの解説</a></p>
 </dd></dl>
@@ -1908,7 +1903,8 @@ Summary:</p>
 <p>入力される映像には1人のみ映っているようにしてください。
 preset_face_imagesにデフォルト顔画像が登録されていない場合、正常に動作しません。</p>
 </div>
-<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/one_point_L.png"><img alt="one point" src="_images/one_point_L.png" style="width: 70%;" />
+</a>
 <p>exampleディレクトリの'make_ID_card.py'も参考にしてください⭐️''</p>
 </dd></dl>
 
@@ -1928,13 +1924,17 @@ preset_face_imagesにデフォルト顔画像が登録されていない場合�
 <p>When creating a deep learning model, we usually perform data augmentation processing to increase the base data.
 In general, multiple aberrations that occur are mainly corrected by calibration. However, as far as I have seen, heard and experienced, it is &quot;common way&quot; that it is not calibrated (except for strong face recognition). As long as we use the normal model, this leads to a large accuracy loss.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion. Image taken from https://imgur.com/VdKIQqF" src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" /></a>
-<a class="reference internal image-reference" href="_images/face_distort_and_model.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_distort_and_model.png" style="width: 223.5px; height: 303.0px;" /></a>
+<div><a class="reference internal image-reference" href="_images/face_distortion.gif"><img alt="Face distortion. Image taken from https://imgur.com/VdKIQqF" src="_images/face_distortion.gif" style="width: 240.0px; height: 133.0px;" />
+</a>
+<a class="reference internal image-reference" href="_images/face_distort_and_model.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_distort_and_model.png" style="width: 223.5px; height: 303.0px;" />
+</a>
 </div></blockquote>
 <p>By using the utils.distort_barrel() method, we believe that we can greatly ensure the robustness of distortion caused by the camera lens.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/woman-1.gif"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/woman-1.gif" style="width: 251.0px; height: 267.5px;" /></a>
-<a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>
+<div><a class="reference internal image-reference" href="_images/woman-1.gif"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/woman-1.gif" style="width: 251.0px; height: 267.5px;" />
+</a>
+<a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" />
+</a>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
@@ -1969,7 +1969,8 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 </dd>
 </dl>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" />
+</a>
 </dd>
 </dl>
 <div class="admonition note">
@@ -1991,8 +1992,10 @@ In general, multiple aberrations that occur are mainly corrected by calibration.
 </dd>
 </dl>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/make_concat_image.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/make_concat_image.png" style="width: 512.0px; height: 161.5px;" /></a>
-<a class="reference internal image-reference" href="_images/distort_concat_images.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_concat_images.png" style="width: 512.0px; height: 161.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/make_concat_image.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/make_concat_image.png" style="width: 512.0px; height: 161.5px;" />
+</a>
+<a class="reference internal image-reference" href="_images/distort_concat_images.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_concat_images.png" style="width: 512.0px; height: 161.5px;" />
+</a>
 </dd>
 </dl>
 </dd></dl>
@@ -2025,7 +2028,8 @@ distort barrel and saves them.</p>
 - See ImageMagick <a class="reference external" href="https://imagemagick.org/script/download.php">https://imagemagick.org/script/download.php</a></p>
 </div>
 <dl>
-<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" /></a>
+<dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/distort_barrel.png"><img alt="Image taken from https://tokai-kaoninsho.com" src="_images/distort_barrel.png" style="width: 376.5px; height: 161.5px;" />
+</a>
 </dd>
 </dl>
 </dd></dl>
@@ -2138,7 +2142,8 @@ This method is based on davisking/dlib/python_example/face_jitter.py.
 <p>example/make_ID_card.py</p>
 </div>
 <dl>
-<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/ID_card_sample.png"><img alt="_images/ID_card_sample.png" src="_images/ID_card_sample.png" style="width: 366.5px; height: 519.5px;" /></a>
+<dt>Results:</dt><dd><a class="reference internal image-reference" href="_images/ID_card_sample.png"><img alt="_images/ID_card_sample.png" src="_images/ID_card_sample.png" style="width: 366.5px; height: 519.5px;" />
+</a>
 </dd>
 </dl>
 </dd></dl>
@@ -2168,79 +2173,6 @@ The <cite>notify-send</cite> command is included in the <cite>libnotify-bin</cit
 </div>
 </dd></dl>
 
-</dd></dl>
-
-</section>
-<section id="module-face01lib.verify">
-<span id="face01lib-verify-module"></span><h2>face01lib.verify module<a class="headerlink" href="#module-face01lib.verify" title="Link to this heading"></a></h2>
-<p>verify.py.</p>
-<dl>
-<dt>Summary:</dt><dd><p>このスクリプトは、2枚の画像を読み込み、JAPANESE_FACE_V1モデルを用いて
-同一人物かどうかを判定するためのコマンドラインツールです。</p>
-</dd>
-<dt>Usage:</dt><dd><p>$ python verify.py &lt;image1&gt; &lt;image2&gt; [--threshold THRESHOLD]</p>
-</dd>
-<dt>Options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>このヘルプメッセージを表示し、プログラムを終了します。</p>
-</dd>
-<dt><kbd><span class="option">--threshold <var>THRESHOLD</var></span></kbd></dt>
-<dd><p>0以上1以下の範囲のfloat値。同一人物と判断するためのコサイン類似度のしきい値を指定します。
-指定しない場合のデフォルトは 0.25 です。
-例: --threshold 0.4</p>
-</dd>
-</dl>
-</dd>
-<dt>License:</dt><dd><p>This script is licensed under the terms provided by yKesamaru, the original author.</p>
-</dd>
-</dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.verify.check_image_path">
-<span class="sig-name descname"><span class="pre">check_image_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="_modules/face01lib/verify.html#check_image_path"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.check_image_path" title="Link to this definition"></a></dt>
-<dd><p>画像ファイルのパスがpng,jpg,jpegのいずれかであるかをチェックし、
-不適切な場合はエラーを投げる。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- 画像ファイルのパス</p>
-</dd>
-<dt class="field-even">例外<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- 拡張子がpng,jpg,jpeg以外の場合に発生</p>
-</dd>
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>検証済みの画像パス</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.verify.check_threshold">
-<span class="sig-name descname"><span class="pre">check_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="reference internal" href="_modules/face01lib/verify.html#check_threshold"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.check_threshold" title="Link to this definition"></a></dt>
-<dd><p>0~1の範囲内のfloat値であるかをチェックし、範囲外の場合はエラーを投げる。</p>
-<dl class="field-list simple">
-<dt class="field-odd">パラメータ<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) -- コマンドライン引数として入力された文字列</p>
-</dd>
-<dt class="field-even">例外<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentTypeError" title="(in Python v3.13)"><strong>argparse.ArgumentTypeError</strong></a> -- floatに変換できない場合、または0~1の範囲外の場合に発生</p>
-</dd>
-<dt class="field-odd">戻り値<span class="colon">:</span></dt>
-<dd class="field-odd"><p>0~1の範囲内のfloat値</p>
-</dd>
-<dt class="field-even">戻り値の型<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="face01lib.verify.main">
-<span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/face01lib/verify.html#main"><span class="viewcode-link"><span class="pre">[ソース]</span></span></a><a class="headerlink" href="#face01lib.verify.main" title="Link to this definition"></a></dt>
-<dd><p>メイン関数。
-コマンドライン引数から画像ファイルのパス2つと、閾値を受け取り、
-Dlib_api().verify() メソッドを使って同一人物かを判定する。</p>
 </dd></dl>
 
 </section>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="../">
 <head>
@@ -5,22 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>関数のチュートリアル &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/translations.js?v=91613774"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=4755f45a"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -98,14 +96,14 @@ FACE01を使用するためには、このチュートリアルを読むだけ�
 </div>
 <br />
 <p>まず、FACE01をインポートする必要があります。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">FACE01</span> <span class="k">as</span> <span class="nn">fg</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">FACE01</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fg</span>
 </pre></div>
 </div>
 <section id="main-process">
 <h2><code class="docutils literal notranslate"><span class="pre">main_process</span></code><a class="headerlink" href="#main-process" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">FACE01.py</span></code>ファイル内で以下のように定義されています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Core_obj</span><span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">main_process</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main_process</span><span class="p">():</span>
     <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_pre_processing</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">,</span> <span class="n">frame_generator_obj</span><span class="o">.</span><span class="fm">__next__</span><span class="p">())</span>
     <span class="n">face_encodings</span><span class="p">,</span> <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">face_encoding_process</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">)</span>
     <span class="n">frame_datas_array</span> <span class="o">=</span> <span class="n">Core_obj</span><span class="o">.</span><span class="n">frame_post_processing</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="n">args_dict</span><span class="p">,</span> <span class="n">face_encodings</span><span class="p">,</span> <span class="n">frame_datas_array</span><span class="p">,</span> <span class="n">GLOBAL_MEMORY</span><span class="p">)</span>

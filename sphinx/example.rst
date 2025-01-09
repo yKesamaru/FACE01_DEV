@@ -300,6 +300,14 @@ example.simple\_file\_browser module
    :undoc-members:
    :show-inheritance:
 
+example.verify module
+---------------------
+
+.. automodule:: example.verify
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
