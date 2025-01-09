@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     gedit \
+    tree \
     # Python関連
     python3-tk \
     python3-pip \

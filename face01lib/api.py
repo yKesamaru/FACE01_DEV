@@ -649,7 +649,7 @@ class Dlib_api:
         self,
         image_path1: str,
         image_path2: str,
-        threshold: float = 0.5
+        threshold: float = 0.3
     ) -> bool:
         """
         verify()メソッドは、入力された2枚の画像が同一人物かどうかを判定します。
@@ -658,7 +658,7 @@ class Dlib_api:
         Args:
             image_path1 (str): 1枚目の画像ファイルパス
             image_path2 (str): 2枚目の画像ファイルパス
-            threshold (float): 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.5)
+            threshold (float): 0 ~ 1 の範囲で指定するコサイン類似度のしきい値(デフォルト0.3)
 
         Returns:
             bool: True なら同一人物、False なら別人

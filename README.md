@@ -30,7 +30,7 @@ ___
       <img src="https://img.shields.io/github/commit-activity/y/yKesamaru/FACE01_DEV?logo=github&logoColor=000000&label=GitHub Commit&color=181717&labelColor=white&style=flat">
       <!-- GitHubのcommit-activityバッジ -->
       <br />
-      <img src="https://img.shields.io/badge/Release-v3.04.02-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
+      <img src="https://img.shields.io/badge/Release-v3.04.03-239120?logo=github&logoColor=000000&labelColor=white&style=flat">
       <!-- リリースバッジ -->
       <br />
       <img src="https://img.shields.io/badge/Python->=3.8-3776AB?logo=python&logoColor=FFD43B&labelColor=white&style=flat">
@@ -207,33 +207,19 @@ cd FACE01_DEV
 ```bash
 $ python3 -m venv ./venv  # python3-venvがインストールされている前提
 $ source venv/bin/activate
-# 上記のように仮想環境構築後
-$ pip install .
+$ pip install -U pip setuptools wheel
+# GPUを使用する場合
+$ pip install -r requirements_GPU.txt
+# CPUを使用する場合
+$ pip install -r requirements_CPU.txt
 ```
-3. インストールが成功したことを確認します。
-```bash
-pip show FACE01
-```
-以下のように出力されたら成功です。
-```bash
-$ pip show FACE01
-Name: FACE01
-Version: 3.4.2
-Summary: 顔認証学習モデルとユーティリティプログラム
-Home-page: https://tokai-kaoninsho.com/
-Author: 
-Author-email: Yoshitsugu Kesamaru <y.kesamaru@tokai-kaoninsho.com>
-License: 
-Location: ~/FACE01_DEV/venv/lib/python3.10/site-packages
-Requires: mediapipe, memory-profiler, mojimoji, nptyping, numpy, onnx, onnxruntime-gpu, opencv-python, Pillow, protobuf, psutil, pyqrcode, qrcode, requests, scipy, torch, torchvision, tqdm, typing_extensions, urllib3
-Required-by: 
-```
-4. `dlib`を手動インストールする
+3. GPUを使用する場合`dlib`を手動インストールする
 ```bash
 # GPU用の設定 (dlibをソースからインストール)
 tar -jxvf dlib-19.24.tar.bz2
 cd dlib-19.24
 python3 setup.py install --clean
+
 ```
 #### 手動インストールの成否確認方法
 もしビルド中に以下のような記述が出力されていたらGPUを利用できません。この場合はドキュメントを参考にしてGPUが使えるビルドができるようにしてください。
@@ -283,7 +269,7 @@ True
 
 ---
 
-## すぐに試せるverifyコマンド
+## すぐに試せるverifyスクリプト
 
 <table>
   <tr>
@@ -312,14 +298,14 @@ True
 
 
 ```bash
-$ verify assets/data/c/c045.png assets/data/c/c006.png
+$ python example/verify.py assets/data/c/c045.png assets/data/c/c006.png
 
 2枚の画像は同一人物と判定しました。cos_sim=0.318
 結果: True
 ```
 ヘルプを参照する
 ```bash
-$ verify -h
+$ python example/verify.py -h
 usage: verify [-h] [--threshold THRESHOLD] image1 image2
 
 2枚の画像から同一人物かを判定します。

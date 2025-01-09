@@ -1,3 +1,8 @@
+# ===========================
+# v.3.04.02にて不具合発生のため
+# v.3.04.03にて使用を停止
+# ===========================
+
 [build-system]
 requires = ["setuptools>=42", "wheel", "build"]
 build-backend = "setuptools.build_meta"
