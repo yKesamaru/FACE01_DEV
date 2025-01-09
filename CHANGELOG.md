@@ -14,6 +14,7 @@ v3.04.02における動作不具合により、pyproject.toml使用以前の仕�
 - README.md
 - make_DockerImages.sh: v3.04.03
 - verify.pyをface01lib/からexample/へ移動
+- Dockerfile_gpu, Dockerfile_cpuにrequirements_GPU.txt、requirements_CPU.txtをコンテナにコピーするように変更
 ### 追加
 - requirements_GPU, requirements_CPU
 

@@ -122,6 +122,19 @@ Core().common_process(CONFIG).__next__()
 
 ![](https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/2024-08-24_16-42.png)
 
+#### その他の有用なサンプルコード
+[Zenn](https://zenn.dev/ykesamaru)にて新しいサンプルコードとその解説を紹介しています。
+##### 例
+- [フリーの事前顔学習済みモデル11種の精度評価](https://zenn.dev/ykesamaru/articles/40f9e964539e31)
+- [防犯カメラの動体検知を実装する③: なりすまし防止機能の実装](https://zenn.dev/ykesamaru/articles/d69251cd25c7aa)
+- [コサイン類似度データの中の外れ値をもつファイルを見つける方法](https://zenn.dev/ykesamaru/articles/bc10aa51772130)
+- [インタビュー形式の動画から顔画像データを抽出する方法](https://zenn.dev/ykesamaru/articles/9ec4cec236f795)
+- [[Docker] MongoDBとFaissを使って類似画像を検索する](https://zenn.dev/ykesamaru/articles/daf1ea9def85f4)
+- [頭部姿勢推定を簡易実装する](https://zenn.dev/ykesamaru/articles/025b0eabf24e20)
+- [スマホの画面注視認識機能を簡易実装する](https://zenn.dev/ykesamaru/articles/6e2098dbef148e)
+- [【faiss】なにこれすごい。顔データセットの間違い探し　成功編③](https://zenn.dev/ykesamaru/articles/4e40e0285b0b66)
+- [まばたきを検知するPythonコードの解説](https://zenn.dev/ykesamaru/articles/f10804a8fcc81d)
+
 ---
 
 ## なぜFACE01を開発したの？

@@ -76,7 +76,7 @@ COPY --chown=docker:docker example /home/docker/FACE01_DEV/example
 COPY --chown=docker:docker assets /home/docker/FACE01_DEV/assets
 COPY --chown=docker:docker preset_face_images /home/docker/FACE01_DEV/preset_face_images
 COPY --chown=docker:docker --chmod=0755 docker /home/docker/FACE01_DEV/docker
-COPY --chown=docker:docker pyproject.toml requirements_dev.txt config.ini dlib-19.24.tar.bz2 /home/docker/FACE01_DEV/
+COPY --chown=docker:docker pyproject.toml requirements_dev.txt requirements_GPU.txt requirements_CPU.txt config.ini dlib-19.24.tar.bz2 /home/docker/FACE01_DEV/
 
 # スクリプトのコピーと実行
 # COPY --chmod=0755 docker/Docker_INSTALL_FACE01_CPU.sh ${USER_HOME}/FACE01_DEV/
