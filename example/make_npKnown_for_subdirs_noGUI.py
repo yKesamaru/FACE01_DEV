@@ -69,7 +69,8 @@ if __name__ == '__main__':
     load_preset_image_obj = LoadPresetImage()  # 画像読み込みオブジェクト作成 # 追加; 画像読み込み処理用オブジェクト
 
     # GUIによるディレクトリ選択を廃止し、コード内で指定
-    root_dir = "/media/terms/2TB_Movie/face_data_backup/data"  # 対象ディレクトリを指定 # 追加; 固定パスからnpKnown.npzを作成する
+    # root_dir = "/media/terms/2TB_Movie/face_data_backup/data"
+    root_dir = "/media/terms/2TB_Movie/face_data_backup/woman"
 
     # root_dirが存在するかチェック
     if not os.path.exists(root_dir):  # ディレクトリが存在しない場合
