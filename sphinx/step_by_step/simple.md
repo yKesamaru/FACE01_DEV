@@ -3,38 +3,44 @@
 ```bash
 source bin/activate  # . venv/bin/activateなど
 ```
-## その①: verifyコマンドを使う
-`v3.04.02`から便利な`verify`コマンドが使えるようになりました！⭐️
+## その①: verifyスクリプトを使う
+`v3.04.02`から便利な`verify`スクリプトが使えるようになりました！⭐️
 
-<style>
-  figure {
-    display: inline-block; /* 横並びにする */
-    margin: 0 10px;        /* 画像間の余白を設定 */
-    text-align: center;    /* キャプションを中央揃え */
-  }
-</style>
-
-<div>
-  <figure>
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" width="150px" />
-    <figcaption>c045.png</figcaption>
-  </figure>
-  <figure>
-    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" width="150px" />
-    <figcaption>c006.png</figcaption>
-  </figure>
-</div>
+<table>
+  <tr>
+    <td>
+      <!-- figure要素は画像とキャプションをまとめて表現する際に使う -->
+      <figure>
+        <img 
+          src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" 
+          width="150px" 
+        />
+        <!-- 画像の説明として figcaption を使う -->
+        <figcaption>c045.png</figcaption>
+      </figure>
+    </td>
+    <td>
+      <figure>
+        <img 
+          src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" 
+          width="150px" 
+        />
+        <figcaption>c006.png</figcaption>
+      </figure>
+    </td>
+  </tr>
+</table>
 
 ```bash
 # プロジェクトルートで。
-$ verify assets/data/c/c045.png assets/data/c/c006.png
+$ python example/verify.py assets/data/c/c045.png assets/data/c/c006.png
 
 2枚の画像は同一人物と判定しました。cos_sim=0.318
 結果: True
 ```
 ヘルプを参照する
 ```bash
-$ verify -h
+$ python example/verify.py -h
 usage: verify [-h] [--threshold THRESHOLD] image1 image2
 
 2枚の画像から同一人物かを判定します。

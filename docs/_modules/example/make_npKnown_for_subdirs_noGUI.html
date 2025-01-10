@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>example.make_npKnown_for_subdirs_noGUI &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/translations.js?v=91613774"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=4755f45a"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -96,20 +94,20 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os</span>  <span class="c1"># osモジュールをインポート</span>
-<span class="kn">import</span> <span class="nn">sys</span>  <span class="c1"># sysモジュールをインポート</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># osモジュールをインポート</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># sysモジュールをインポート</span>
 
 <span class="c1"># 現在のスクリプトファイルがあるディレクトリを取得</span>
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>  <span class="c1"># 現在のファイルのディレクトリ</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>    <span class="c1"># 親ディレクトリを取得</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>           <span class="c1"># 親ディレクトリをパスに追加</span>
 
-<span class="kn">from</span> <span class="nn">face01lib.load_preset_image</span> <span class="kn">import</span> <span class="n">LoadPresetImage</span>  <span class="c1"># LoadPresetImageクラスのインポート</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.load_preset_image</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoadPresetImage</span>  <span class="c1"># LoadPresetImageクラスのインポート</span>
 
 
 <div class="viewcode-block" id="create_npz_for_all_subdirs">
 <a class="viewcode-back" href="../../example.html#example.make_npKnown_for_subdirs_noGUI.create_npz_for_all_subdirs">[ドキュメント]</a>
-<span class="k">def</span> <span class="nf">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_npz_for_all_subdirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">load_preset_image_obj</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    指定したディレクトリ以下の1階層目のサブディレクトリに対して、</span>
 <span class="sd">    npKnown.npzファイルを作成します。</span>
@@ -156,7 +154,8 @@
     <span class="n">load_preset_image_obj</span> <span class="o">=</span> <span class="n">LoadPresetImage</span><span class="p">()</span>  <span class="c1"># 画像読み込みオブジェクト作成 # 追加; 画像読み込み処理用オブジェクト</span>
 
     <span class="c1"># GUIによるディレクトリ選択を廃止し、コード内で指定</span>
-    <span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;/media/terms/2TB_Movie/face_data_backup/data&quot;</span>  <span class="c1"># 対象ディレクトリを指定 # 追加; 固定パスからnpKnown.npzを作成する</span>
+    <span class="c1"># root_dir = &quot;/media/terms/2TB_Movie/face_data_backup/data&quot;</span>
+    <span class="n">root_dir</span> <span class="o">=</span> <span class="s2">&quot;/media/terms/2TB_Movie/face_data_backup/woman&quot;</span>
 
     <span class="c1"># root_dirが存在するかチェック</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>  <span class="c1"># ディレクトリが存在しない場合</span>
