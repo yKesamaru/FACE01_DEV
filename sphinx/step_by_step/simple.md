@@ -16,11 +16,11 @@ source bin/activate  # . venv/bin/activateなど
 
 <div>
   <figure>
-    <img src="../../assets/data/c/c045.png" width="150px" />
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c045.png" width="150px" />
     <figcaption>c045.png</figcaption>
   </figure>
   <figure>
-    <img src="../../assets/data/c/c006.png" width="150px" />
+    <img src="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/refs/heads/master/assets/data/c/c006.png" width="150px" />
     <figcaption>c006.png</figcaption>
   </figure>
 </div>
