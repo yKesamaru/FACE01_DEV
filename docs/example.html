@@ -398,11 +398,13 @@ TkinterよりリッチなGUIを使用したい場合に検討してください�
 <dd class="field-even"><p>int, optional</p>
 </dd>
 </dl>
-<dl>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/aligned_crop_face.py<span class="w"> </span>&lt;path&gt;<span class="w"> </span>&lt;size&gt;
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/aligned_crop_face.py<span class="w"> </span>&lt;path&gt;<span class="w"> </span>&lt;size&gt;
 </pre></div>
 </div>
-</dd>
+</div>
+<dl>
 <dt>Result:</dt><dd><a class="reference internal image-reference" href="_images/face_alignment.png"><img alt="face_alignment" src="_images/face_alignment.png" style="width: 371.5px; height: 428.5px;" />
 </a>
 </dd>
@@ -1005,15 +1007,19 @@ face recognition.</p>
 <section id="module-example.display_GUI_window_JAPANESE_FACE_V1">
 <span id="example-display-gui-window-japanese-face-v1-module"></span><h2>example.display_GUI_window_JAPANESE_FACE_V1 module<a class="headerlink" href="#module-example.display_GUI_window_JAPANESE_FACE_V1" title="Link to this heading"></a></h2>
 <p>顔画像を検出し、回転・クロップ・表示するウィンドウアプリケーション.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>このプログラムは、顔認識モデルを使用して動画フレーム内の顔を検出し、
 データを解析、ウィンドウにリアルタイムで表示します。
 また、指定された回数分フレームを処理します。</p>
 </dd>
-<dt>Usage:</dt><dd><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py<span class="w"> </span>&lt;exec_times&gt;
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py<span class="w"> </span>&lt;exec_times&gt;
 </pre></div>
 </div>
-</dd>
+</div>
+<dl class="simple">
 <dt>Features:</dt><dd><ul class="simple">
 <li><p>顔認識モデルを使用して顔をリアルタイムで検出</p></li>
 <li><p>検出結果をターミナルに表示 (類似度、座標、時刻など)</p></li>
@@ -1024,7 +1030,7 @@ face recognition.</p>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/display_GUI_window_JAPANESE_FACE_V1.py
 </pre></div>
 </div>
 </div>
@@ -1298,7 +1304,9 @@ face recognition.</p>
 <span id="example-faiss-combination-similarity-module"></span><h2>example.faiss_combination_similarity module<a class="headerlink" href="#module-example.faiss_combination_similarity" title="Link to this heading"></a></h2>
 <p>指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出するコードの例.</p>
 <dl class="simple">
-<dt>Summary:</dt><dd><p>この例では、指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。</p>
+<dt>Summary:</dt><dd><p>クラス数が膨大になると同じ人物が別クラスに紛れることがあります。これを目視で確認するのは不可能です。また組み合わせ総数が膨大になるためすべての計算を順列に行えば現実的な時間で処理できなくなります。
+このスクリプトではfaissを用いて組み合わせ爆発を防ぎ、非常に短い時間で、すべてのクラスに対して類似度を計算し、任意の類似度以上の組み合わせを出力します。
+この例では、指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。</p>
 </dd>
 <dt>Results:</dt><dd><p>プロジェクトルートディレクトリにoutput.csvが作成されます。</p>
 </dd>
@@ -1471,7 +1479,7 @@ disturb_color (bool, optional): Disturb the color. Defaults to True.</p>
 </dl>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>example/jitter.py<span class="w"> </span>path<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>True
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>example/jitter.py<span class="w"> </span>path<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>True
 </pre></div>
 </div>
 </div>
@@ -1592,7 +1600,6 @@ Spoof().make_qr_code()
 <a href="#id18"><span class="problematic" id="id19">`</span></a>same_face`フォルダは各サブディレクトリに存在しない場合は自動で作成されます。</p>
 <p>各`npKnown.npz`ファイルには、人物名とその512次元の特徴量データが含まれており、このデータを基に
 類似性を評価します。類似度が閾値以上のものは同一とみなし、重複する顔画像を`same_face`フォルダに集約します。</p>
-<p>このコードを実行するには、numpyやshutilといったライブラリが必要です。</p>
 </dd>
 </dl>
 <div class="admonition- admonition">
@@ -1662,7 +1669,7 @@ Spoof().make_qr_code()
 <section id="module-example.make_npKnown_for_subdirs">
 <span id="example-make-npknown-for-subdirs-module"></span><h2>example.make_npKnown_for_subdirs module<a class="headerlink" href="#module-example.make_npKnown_for_subdirs" title="Link to this heading"></a></h2>
 <p>npKnown.npzファイルを指定したディレクトリとそのサブディレクトリごとに作成するスクリプト.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>このスクリプトは、ユーザーが指定したディレクトリとそのサブディレクトリ内にある顔画像ファイルに対して
 512次元特徴量データを用いたnpKnown.npzファイルを生成します。
 選択されたディレクトリ以下の各サブディレクトリについて、npKnown.npzファイルが既に存在する場合はスキップし、
@@ -1673,12 +1680,14 @@ Spoof().make_qr_code()
 <li><p>face01lib.load_preset_image</p></li>
 </ul>
 </dd>
-<dt>Usage:</dt><dd><p>ターミナルで以下のコマンドを実行してスクリプトを起動します。</p>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<p>ターミナルで以下のコマンドを実行してスクリプトを起動します。</p>
 <p><code class="docutils literal notranslate"><span class="pre">`bash</span>
 <span class="pre">python3</span> <span class="pre">example/make_npKnown_for_subdirs.py</span>
 <span class="pre">`</span></code></p>
-</dd>
-</dl>
+</div>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <p>実行後、ディレクトリ選択ダイアログが表示され、処理対象のディレクトリを選択できます。
@@ -1757,7 +1766,7 @@ npKnown.npzファイルを作成します。</p>
 <section id="module-example.make_npKnown_parallel">
 <span id="example-make-npknown-parallel-module"></span><h2>example.make_npKnown_parallel module<a class="headerlink" href="#module-example.make_npKnown_parallel" title="Link to this heading"></a></h2>
 <p>npKnown.npzファイルを並列処理で作成するスクリプト.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>このスクリプトは、指定されたディレクトリ以下のサブディレクトリを並列処理し、
 各サブディレクトリ内にnpKnown.npzファイルを効率的に作成します。
 並列処理を利用することで、従来の逐次処理よりも高速にファイルを生成できます。</p>
@@ -1774,12 +1783,14 @@ npKnown.npzファイルを作成します。</p>
 <li><p>face01lib.load_preset_image</p></li>
 </ul>
 </dd>
-<dt>Usage:</dt><dd><p>ターミナルで以下のコマンドを実行してスクリプトを起動します。</p>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<p>ターミナルで以下のコマンドを実行してスクリプトを起動します。</p>
 <p><code class="docutils literal notranslate"><span class="pre">`bash</span>
 <span class="pre">python3</span> <span class="pre">example/make_npKnown_parallel.py</span>
 <span class="pre">`</span></code></p>
-</dd>
-</dl>
+</div>
 <div class="admonition- admonition">
 <p class="admonition-title">サンプル</p>
 <p>実行後、ディレクトリ選択ダイアログが表示されます。
@@ -1954,12 +1965,16 @@ Please refer to the separate license file for the license of the code.</p>
 <section id="module-example.verify">
 <span id="example-verify-module"></span><h2>example.verify module<a class="headerlink" href="#module-example.verify" title="Link to this heading"></a></h2>
 <p>verify.py.</p>
-<dl>
+<dl class="simple">
 <dt>Summary:</dt><dd><p>このスクリプトは、2枚の画像を読み込み、JAPANESE_FACE_V1モデルを用いて
 同一人物かどうかを判定するためのコマンドラインツールです。</p>
 </dd>
-<dt>Usage:</dt><dd><p>$ python verify.py &lt;image1&gt; &lt;image2&gt; [--threshold THRESHOLD]</p>
-</dd>
+</dl>
+<div class="admonition- admonition">
+<p class="admonition-title">サンプル</p>
+<p>$ python verify.py &lt;image1&gt; &lt;image2&gt; [--threshold THRESHOLD]</p>
+</div>
+<dl>
 <dt>Options:</dt><dd><dl class="option-list">
 <dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
 <dd><p>このヘルプメッセージを表示し、プログラムを終了します。</p>

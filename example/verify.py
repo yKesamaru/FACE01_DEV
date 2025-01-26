@@ -4,7 +4,7 @@ Summary:
     このスクリプトは、2枚の画像を読み込み、JAPANESE_FACE_V1モデルを用いて
     同一人物かどうかを判定するためのコマンドラインツールです。
 
-Usage:
+Example:
     $ python verify.py <image1> <image2> [--threshold THRESHOLD]
 
 Options:

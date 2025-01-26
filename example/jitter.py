@@ -15,7 +15,7 @@ Returns:
 Example:
     .. code-block:: bash
     
-        python example/jitter.py path 100 200 True
+        python3 example/jitter.py path 100 200 True
 
 Result:
     .. image:: ../docs/img/jitter.png

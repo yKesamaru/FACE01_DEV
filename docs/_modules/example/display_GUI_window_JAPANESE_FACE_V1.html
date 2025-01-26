@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="ja" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>example.display_GUI_window_JAPANESE_FACE_V1 &mdash; FACE01 3.0.03 ドキュメント</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a40d5193" />
 
   
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/yKesamaru/FACE01_DEV/master/assets/images/Logo.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/translations.js?v=91613774"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8f0fc939"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=4755f45a"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
           title="FACE01 3.0.03 ドキュメント 内を検索"
@@ -89,10 +87,10 @@
 <span class="sd">    データを解析、ウィンドウにリアルタイムで表示します。</span>
 <span class="sd">    また、指定された回数分フレームを処理します。</span>
 
-<span class="sd">Usage:</span>
+<span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python example/display_GUI_window_JAPANESE_FACE_V1.py &lt;exec_times&gt;</span>
+<span class="sd">        python3 example/display_GUI_window_JAPANESE_FACE_V1.py &lt;exec_times&gt;</span>
 
 <span class="sd">Features:</span>
 <span class="sd">    - 顔認識モデルを使用して顔をリアルタイムで検出</span>
@@ -103,34 +101,34 @@
 <span class="sd">Example:</span>
 <span class="sd">    .. code-block:: bash</span>
 
-<span class="sd">        python example/display_GUI_window_JAPANESE_FACE_V1.py</span>
+<span class="sd">        python3 example/display_GUI_window_JAPANESE_FACE_V1.py</span>
 
 <span class="sd">Result:</span>
 <span class="sd">    - GUIウィンドウにリアルタイムで処理結果を表示</span>
 <span class="sd">    - ターミナルに検出データを詳細表示</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">os.path</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="nb">dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
 <span class="n">parent_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
-<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Label</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Label</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageTk</span>
 
-<span class="kn">from</span> <span class="nn">face01lib.Core</span> <span class="kn">import</span> <span class="n">Core</span>
-<span class="kn">from</span> <span class="nn">face01lib.Initialize</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.Core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">face01lib.Initialize</span><span class="w"> </span><span class="kn">import</span> <span class="n">Initialize</span>
 
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../example.html#example.display_GUI_window_JAPANESE_FACE_V1.main">[ドキュメント]</a>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">exec_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;ウィンドウを表示するメイン関数.</span>
 
 <span class="sd">    Args:</span>
@@ -152,7 +150,7 @@
     <span class="n">display_label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
 
     <span class="c1"># 終了ボタンの設定</span>
-    <span class="k">def</span> <span class="nf">terminate</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">terminate</span><span class="p">():</span>
         <span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
 
     <span class="n">terminate_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;terminate&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">terminate</span><span class="p">)</span>

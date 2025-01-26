@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     # GUIによるディレクトリ選択を廃止し、コード内で指定
     # root_dir = "/media/terms/2TB_Movie/face_data_backup/data"
-    root_dir = "/media/terms/2TB_Movie/face_data_backup/woman"
+    root_dir = "/media/terms/2TB_Movie/face_data_backup/woman2"
 
     # root_dirが存在するかチェック
     if not os.path.exists(root_dir):  # ディレクトリが存在しない場合

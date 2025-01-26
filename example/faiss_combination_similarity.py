@@ -1,6 +1,8 @@
 """指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出するコードの例.
 
 Summary:
+    クラス数が膨大になると同じ人物が別クラスに紛れることがあります。これを目視で確認するのは不可能です。また組み合わせ総数が膨大になるためすべての計算を順列に行えば現実的な時間で処理できなくなります。
+    このスクリプトではfaissを用いて組み合わせ爆発を防ぎ、非常に短い時間で、すべてのクラスに対して類似度を計算し、任意の類似度以上の組み合わせを出力します。
     この例では、指定されたディレクトリ内のすべてのnpKnown.npzファイルを読み込み、faissを使用して指定された組み合わせのコサイン類似度を検出する方法を学ぶことができます。
 
 Results:
@@ -49,8 +51,10 @@ if __name__ == '__main__':
     load_preset_image_obj = LoadPresetImage()
 
     # FAISSインデックスの設定
-    dimension = 512  # ベクトルの次元数
-    nlist = 4  # クラスタ数（Default: 100）
+    dimension: int = 512      # ベクトルの次元数
+    nlist: int = 4            # クラスタ数（Default: 100）
+    similarity: float = 0.95  # Default: 0.95
+    k_value: int = 10         # Default: 100
     # 量子化器を作成（内積を使用）
     quantizer = faiss.IndexFlatIP(dimension)
     # IVFフラットインデックスを作成
@@ -112,7 +116,7 @@ if __name__ == '__main__':
     index.add(all_model_data)  # type: ignore
 
     # 類似度が高い要素を検索
-    k = 10
+    k = k_value
     D, I = index.search(all_model_data, k)  # type: ignore
 
     # 結果を保存
@@ -122,8 +126,8 @@ if __name__ == '__main__':
             for j in range(D.shape[1]):
                 # ペアをアルファベット順にソートしてタプルとして保存
                 sorted_pair = tuple(sorted([all_name_list[i], all_name_list[I[i, j]]]))
-                # コサイン類似度が0.4以上で、同じディレクトリでない場合、かつ、まだ処理されていないペアの場合に出力
-                if D[i, j] >= 0.4 and all_dir_list[i] != all_dir_list[I[i, j]] and sorted_pair not in processed_pairs:
+                # コサイン類似度が変数similarity以上で、同じディレクトリでない場合、かつ、まだ処理されていないペアの場合に出力
+                if D[i, j] >= similarity and all_dir_list[i] != all_dir_list[I[i, j]] and sorted_pair not in processed_pairs:
                     f.write(f"{all_name_list[i]},{all_name_list[I[i, j]]},{D[i, j]}\n")
                     processed_pairs.add(sorted_pair)  # ペアを処理済みとしてセットに追加
 

@@ -5,10 +5,10 @@ Summary:
     データを解析、ウィンドウにリアルタイムで表示します。
     また、指定された回数分フレームを処理します。
 
-Usage:
+Example:
     .. code-block:: bash
 
-        python example/display_GUI_window_JAPANESE_FACE_V1.py <exec_times>
+        python3 example/display_GUI_window_JAPANESE_FACE_V1.py <exec_times>
 
 Features:
     - 顔認識モデルを使用して顔をリアルタイムで検出
@@ -19,7 +19,7 @@ Features:
 Example:
     .. code-block:: bash
 
-        python example/display_GUI_window_JAPANESE_FACE_V1.py
+        python3 example/display_GUI_window_JAPANESE_FACE_V1.py
 
 Result:
     - GUIウィンドウにリアルタイムで処理結果を表示

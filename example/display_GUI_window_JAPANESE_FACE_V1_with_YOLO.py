@@ -1,16 +1,10 @@
-"""
-顔画像と物体を検出し、回転・クロップ・表示するウィンドウアプリケーション.
+"""顔画像と物体を検出し、回転・クロップ・表示するウィンドウアプリケーション.
 
 Summary:
     このプログラムは、顔認識モデルとDAMO-YOLO物体検出モデルを使用して、
     動画フレーム内の顔と物体を検出し、それらの情報をリアルタイムで表示します。
     GUIウィンドウ上に処理結果を表示し、詳細情報をターミナルに出力します。
     これにより、例えばスマートフォンに表示された顔の映像であることを識別したり出来ます。
-
-Usage:
-    .. code-block:: bash
-
-        python display_GUI_window_JAPANESE_FACE_V1_with_YOLO.py <exec_times>
 
 Features:
     - 顔認識と物体検出をリアルタイムで実行
@@ -27,8 +21,8 @@ Result:
     - GUIウィンドウで処理結果をリアルタイム表示
     - ターミナルに検出データの詳細を出力
 """
-import sys
 import os
+import sys
 
 dir: str = os.path.dirname(__file__)
 parent_dir, _ = os.path.split(dir)
@@ -42,9 +36,9 @@ import cv2
 from PIL import Image, ImageTk
 
 from face01lib.Core import Core
-from face01lib.Initialize import Initialize
-from face01lib.damo_yolo.base import Infer, COCO_CLASSES  # base.pyをモジュールとして使用
+from face01lib.damo_yolo.base import COCO_CLASSES, Infer  # base.pyをモジュールとして使用
 from face01lib.damo_yolo.damo_internal.config.base import parse_config
+from face01lib.Initialize import Initialize
 
 
 def main(exec_times: int = 50) -> None:
@@ -151,5 +145,4 @@ def main(exec_times: int = 50) -> None:
 
 
 if __name__ == '__main__':
-    # メイン関数を呼び出す
     main(exec_times=200)

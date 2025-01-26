@@ -16,7 +16,7 @@ Requirements:
     - concurrent.futures
     - face01lib.load_preset_image
 
-Usage:
+Example:
     ターミナルで以下のコマンドを実行してスクリプトを起動します。
 
     ```bash
