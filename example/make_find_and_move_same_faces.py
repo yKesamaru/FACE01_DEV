@@ -12,7 +12,7 @@ Summary:
 Example:
     .. code-block:: bash
 
-        python3 example/make_find_and_move_same_faces.py /path/to/root_dir --threshold 0.95
+        python example/make_find_and_move_same_faces.py /path/to/root_dir --threshold 0.95
 
 Source code:
     `make_find_and_move_same_faces.py <https://github.com/yKesamaru/FACE01_DEV/blob/master/example/make_find_and_move_same_faces.py>`__
@@ -20,7 +20,7 @@ Source code:
 
 import argparse
 import os
-import shutil  # ファイル移動用ライブラリ
+import shutil
 import time
 
 import numpy as np

@@ -7,7 +7,7 @@ Args:
     path (str): 顔画像が存在するディレクトリパス
     size (int, optional): 抽出する顔画像のピクセル数を整数で指定します。デフォルトは400です。
 
-Example:
+Usage:
     .. code-block:: bash
 
         python3 example/aligned_crop_face.py <path> <size>
@@ -71,7 +71,7 @@ def main(path: str, padding: float = 0.4, size: int = 224) -> None:
         path,
         upper_limit_length=1024,
         padding=0.1,
-        size=400
+        size=224
     )
 
 
